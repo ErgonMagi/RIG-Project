@@ -1,1 +1,1 @@
-RIG-Project
+RIG Project
