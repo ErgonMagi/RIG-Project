@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMDbLib;
+using TMDbLib.Client;
+using TMDbLib.Objects.Movies;
 
 public class InputManager : MonoBehaviour
 {
@@ -15,10 +18,16 @@ public class InputManager : MonoBehaviour
     private Vector3 swipeVelocity;
     Vector3 swipeDir;
 
+    TMDbClient client;
+
     // Use this for initialization
     void Start()
     {
+        client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
 
+        Movie movie = client.GetMovieAsync(47964).Result;
+
+        Debug.Log(movie.Title);
     }
 
     // Update is called once per frame
@@ -41,7 +50,7 @@ public class InputManager : MonoBehaviour
 
         if(!Input.GetMouseButton(0))
         {
-            Debug.Log(swipeDir.magnitude);
+            //Debug.Log(swipeDir.magnitude);
             if(swipeDir.magnitude*100 > swipeNullPoint)
             {
                 Camera.main.transform.Rotate(new Vector3(swipeDir.y * scrollSpeed, -swipeDir.x * scrollSpeed, 0));
