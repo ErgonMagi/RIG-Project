@@ -105,10 +105,13 @@ public class CameraManager : MonoBehaviour {
 
     public void swapCams(Camera cam)
     {
-        currentCam.enabled = false;
-        currentCam = cam;
-        currentCam.enabled = true;
-        swapCam = cam;
+        if(cam != currentCam)
+        {
+            cam.enabled = true;
+            currentCam.enabled = false;
+            currentCam = cam;
+            swapCam = cam;
+        }
     }
 
     public void swapCamAfterLerp(Camera cam)

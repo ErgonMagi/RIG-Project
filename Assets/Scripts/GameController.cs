@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+    public Camera deskCam;
     public Camera computerCam;
 
     private enum Gamestate
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        gamestate = Gamestate.computer;
+        gamestate = Gamestate.desk;
         cam = FindObjectOfType<CameraManager>();
     }
 	
@@ -37,11 +38,26 @@ public class GameController : MonoBehaviour {
     public void toComputer()
     {
         cam.lerpToLoc(new Vector3(-5.85f, 1.343f, -3.447f), new Vector3(0, 90, 0), 1.0f);
-        //cam.swapCamAfterLerp(computerCam);
+        gamestate = Gamestate.computer;
+        cam.swapCamAfterLerp(computerCam);
     }
 
     public void fromComputer()
     {
-        cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 0, 0), 1.0f);
+        cam.swapCams(deskCam);
+        cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 90, 0), 1.0f);
+        gamestate = Gamestate.desk;
+    }
+
+    public bool canFreeLook()
+    {
+        switch(gamestate)
+        {
+            case Gamestate.desk:
+                return true;
+            case Gamestate.computer:
+                return false;
+        }
+        return false;
     }
 }

@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
     Vector2 swipeDir;
     private ClickableObject clickedObject;
     private CameraManager cameraManager;
+    private GameController gameController;
     private Vector2 mouseScreenPos;
     private float swipeLength;
 
@@ -42,6 +43,7 @@ public class InputManager : MonoBehaviour
 
 
         cameraManager = FindObjectOfType<CameraManager>();
+        gameController = FindObjectOfType<GameController>();
 
     }
 
@@ -56,9 +58,15 @@ public class InputManager : MonoBehaviour
             tapPosition = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
             swipeLength = 0;
 
-            //Draws a ray from the current camera through the mouse to check for interactable objects
-            Vector3 dirFromCam = tapPosition - cameraManager.getCam().transform.position;
+            //Draws Vector3 dirFromCam a ray from the current camera through the mouse to check for interactable objects
+            Vector3 dirFromCam = new Vector3(0, 0, 1);
+            if (!cameraManager.getCam().orthographic)
+            {
+                dirFromCam = tapPosition - cameraManager.getCam().transform.position;
+            }
+
             RaycastHit [] hit = Physics.RaycastAll(tapPosition, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("Clickable"));
+
 
             //For every object hit, check if it is interactables
             foreach(RaycastHit h in hit)
@@ -81,10 +89,13 @@ public class InputManager : MonoBehaviour
             //Sums the total swipe length to check if a player is tapping or swiping
             swipeLength += swipeDir.magnitude;
 
-            //Rotate the camera around itself in the direction of swiping
-            cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
-            cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
-
+            if(gameController.canFreeLook())
+            {
+                //Rotate the camera around itself in the direction of swiping
+                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+            }
+           
             //Update the mouse position to the new positon.
             mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
@@ -100,13 +111,16 @@ public class InputManager : MonoBehaviour
             }
 
             //Swipe deceleration.
-            if(swipeDir.magnitude*100 > swipeNullPoint)
+            if(gameController.canFreeLook())
             {
-                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
-                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+                if (swipeDir.magnitude * 100 > swipeNullPoint)
+                {
+                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
 
-                swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
-            }
+                    swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
+                }
+            }       
         }
 
     }
