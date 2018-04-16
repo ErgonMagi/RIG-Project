@@ -29,7 +29,7 @@ public class ActorManager : MonoBehaviour {
 
         client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
         actors = new List<Actor>();
-        List<SearchPerson> sp = client.SearchPersonAsync("Alicia Vikander").Result.Results;
+        List<SearchPerson> sp = client.SearchPersonAsync("Henry Cavill").Result.Results;
         List<KnownForBase> known = sp[0].KnownFor;
 
         for(int i = 0; i < known.Count; i++)
@@ -79,7 +79,14 @@ public class ActorManager : MonoBehaviour {
         scifi = (int)Mathf.Round((float)scifi / sumOfMovies * 20);
         other = (int)Mathf.Round((float)other / sumOfMovies * 20);
 
-        Actor tempActor = new Actor(comedy, romance, action, horror, scifi, other, sp[0].Name, tempSprite);
+        Sprite spriteSearch = Resources.Load<Sprite>("Actor images/" + sp[0].Name);
+
+        if(spriteSearch == null)
+        {
+            spriteSearch = tempSprite;
+        }
+
+        Actor tempActor = new Actor(comedy, romance, action, horror, scifi, other, sp[0].Name, spriteSearch);
 
         actors.Add(tempActor);
 
