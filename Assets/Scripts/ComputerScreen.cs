@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/************************
+ * The computer screen 
+ * interactable object
+ * *********************/
+
 public class ComputerScreen : MonoBehaviour, ClickableObject {
 
     GameController gameController;

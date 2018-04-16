@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/***************************
+ * Controls the state of the game,
+ * i.e. where the camera is and what 
+ * the player can interact with.
+ * *************************/
+
+
 public class GameController : MonoBehaviour {
 
     public Camera computerCam;
@@ -29,12 +36,12 @@ public class GameController : MonoBehaviour {
 
     public void toComputer()
     {
-        cam.lerpToLoc(new Vector3(0, 1, -5.2f), new Vector3(0, 0, 0), 1.0f);
-        cam.swapCamAfterLerp(computerCam);
+        cam.lerpToLoc(new Vector3(-5.85f, 1.343f, -3.447f), new Vector3(0, 90, 0), 1.0f);
+        //cam.swapCamAfterLerp(computerCam);
     }
 
     public void fromComputer()
     {
-        cam.lerpToLoc(new Vector3(0, 1, -10f), new Vector3(0, 0, 0), 1.0f);
+        cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 0, 0), 1.0f);
     }
 }
