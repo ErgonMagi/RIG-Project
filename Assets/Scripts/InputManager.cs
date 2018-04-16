@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMDbLib;
-using TMDbLib.Client;
-using TMDbLib.Objects.Movies;
-using TMDbLib.Objects.General;
 
 /*****************************
 The code in charge of getting the input
@@ -30,17 +26,9 @@ public class InputManager : MonoBehaviour
     private Vector2 mouseScreenPos;
     private float swipeLength;
 
-    TMDbClient client;
-
     // Use this for initialization
     void Start()
     {
-        //Testing the tmdb client. Will remove later.
-        client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
-
-        Movie movie = client.GetMovieAsync(47964).Result;
-        Debug.Log(movie.Title);
-
 
         cameraManager = FindObjectOfType<CameraManager>();
         gameController = FindObjectOfType<GameController>();
