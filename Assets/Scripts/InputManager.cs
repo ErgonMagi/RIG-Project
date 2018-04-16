@@ -7,6 +7,13 @@ using TMDbLib.Client;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.General;
 
+/*****************************
+The code in charge of getting the input
+from the player and calling the appropriate 
+objects
+******************************/
+
+
 public class InputManager : MonoBehaviour
 {
 
@@ -16,74 +23,88 @@ public class InputManager : MonoBehaviour
     public float maxClickDuration;
 
     private Vector3 tapPosition;
-    private Vector3 startTapPosition;
-    private Vector3 newMousePosition;
-    private Vector3 swipeVelocity;
-    Vector3 swipeDir;
+    Vector2 swipeDir;
     private ClickableObject clickedObject;
-    float clickTimer;
+    private CameraManager cameraManager;
+    private Vector2 mouseScreenPos;
+    private float swipeLength;
 
     TMDbClient client;
 
     // Use this for initialization
     void Start()
     {
+        //Testing the tmdb client. Will remove later.
         client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
 
         Movie movie = client.GetMovieAsync(47964).Result;
         Debug.Log(movie.Title);
+
+
+        cameraManager = FindObjectOfType<CameraManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-
+        //Called when lmb is clicked
         if(Input.GetMouseButtonDown(0))
         {
-            clickTimer = 0.0f;
+            //Finds the position of the mouse in pixels and in world coordinates
+            mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            tapPosition = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
+            swipeLength = 0;
 
-            tapPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-            startTapPosition = tapPosition;
-
-            Vector3 dirFromCam = tapPosition - Camera.main.transform.position;
-
-
+            //Draws a ray from the current camera through the mouse to check for interactable objects
+            Vector3 dirFromCam = tapPosition - cameraManager.getCam().transform.position;
             RaycastHit [] hit = Physics.RaycastAll(tapPosition, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("Clickable"));
+
+            //For every object hit, check if it is interactables
             foreach(RaycastHit h in hit)
             {
                 clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();
                 if(clickedObject != null)
-                {
-                    break;
-                }
+                {   
+                    break;                  //If an interactable object is found, it is "selected" and the loop ends.
+                }                           //The selectable object will be activated if the player does not swipe (See mouse release code)
             }
             
         }
 
+        //Runs on any frame the lmb is held down
         if(Input.GetMouseButton(0))
         {
-            clickTimer += Time.deltaTime;
+            //Calculates how far the player has swiped in this frame as pixels
+            swipeDir = mouseScreenPos - new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
-            newMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-            swipeDir = newMousePosition - tapPosition;
-            tapPosition = newMousePosition;
-            Camera.main.transform.Rotate(new Vector3(swipeDir.y * scrollSpeed, -swipeDir.x * scrollSpeed, 0));
+            //Sums the total swipe length to check if a player is tapping or swiping
+            swipeLength += swipeDir.magnitude;
+
+            //Rotate the camera around itself in the direction of swiping
+            cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+            cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+
+            //Update the mouse position to the new positon.
+            mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
 
+        //Runs on any frame the lmb is not held down.
         if(!Input.GetMouseButton(0))
         {
-            if(clickTimer < maxClickDuration && clickedObject != null)
+            //If there was an object selected by the last click and the player did not swipe, activate the object and then deselect it.
+            if (clickedObject != null && swipeLength < 10)
             {
                 clickedObject.onClick();
                 clickedObject = null;
             }
 
-            //Debug.Log(swipeDir.magnitude);
+            //Swipe deceleration.
             if(swipeDir.magnitude*100 > swipeNullPoint)
             {
-                Camera.main.transform.Rotate(new Vector3(swipeDir.y * scrollSpeed, -swipeDir.x * scrollSpeed, 0));
+                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+
                 swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
             }
         }

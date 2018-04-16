@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*********************
+ * Manages all the cameras in the game
+ * and any transitions between them
+ * *******************/
+
 public class CameraManager : MonoBehaviour {
 
     private float lerpTime;
@@ -28,7 +33,8 @@ public class CameraManager : MonoBehaviour {
 		
         if(lerping)
         {
-            if(t >= lerpTime)
+
+            if (t >= lerpTime)
             {
                 currentCam.transform.position = targetPosition;
                 //this.transform.rotation = Quaternion.Euler(targetRotation);
@@ -36,7 +42,7 @@ public class CameraManager : MonoBehaviour {
             }
 
             currentCam.transform.position = startPosition + (t / lerpTime) * (targetPosition - startPosition);
-            //this.transform.rotation = Quaternion.Euler(startRotation + (t / lerpTime) * (targetRotation - startRotation));
+            currentCam.transform.transform.rotation = Quaternion.Euler(startRotation + (t / lerpTime) * (targetRotation - startRotation));
 
             t += Time.deltaTime;
         }
@@ -53,7 +59,44 @@ public class CameraManager : MonoBehaviour {
         targetRotation = rot;
         lerpTime = time;
 
+        while (targetRotation.x > 90)
+        {
+            targetRotation.x -= 360;
+        }
+        while (targetRotation.x < -90)
+        {
+            targetRotation.x += 360;
+        }
+
+        while (targetRotation.y > 90)
+        {
+            targetRotation.y -= 360;
+        }
+        while (targetRotation.y < -90)
+        {
+            targetRotation.y += 360;
+        }
+
         startRotation = currentCam.transform.rotation.eulerAngles;
+
+        while (startRotation.x > 90)
+        {
+            startRotation.x -= 360;
+        }
+        while (startRotation.x < -90)
+        {
+            startRotation.x += 360;
+        }
+
+        while (startRotation.y > 90)
+        {
+            startRotation.y -= 360;
+        }
+        while (startRotation.y < -90)
+        {
+            startRotation.y += 360;
+        }
+
         startPosition = currentCam.transform.position;
         t = 0;
 
@@ -71,5 +114,10 @@ public class CameraManager : MonoBehaviour {
     public void swapCamAfterLerp(Camera cam)
     {
         swapCam = cam;
+    }
+
+    public Camera getCam()
+    {
+        return currentCam;
     }
 }
