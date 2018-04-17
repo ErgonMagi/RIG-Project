@@ -29,7 +29,7 @@ public class ActorManager : MonoBehaviour {
 
         client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
         actors = new List<Actor>();
-        List<SearchPerson> sp = client.SearchPersonAsync("Henry Cavill").Result.Results;
+        List<SearchPerson> sp = client.SearchPersonAsync("Alicia Vikander").Result.Results;
         List<KnownForBase> known = sp[0].KnownFor;
 
         for(int i = 0; i < known.Count; i++)
