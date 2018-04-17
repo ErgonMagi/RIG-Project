@@ -14,9 +14,11 @@ public class GameController : MonoBehaviour {
     public Camera deskCam;
     public Camera computerCam;
 
+    private ActorStatsMenu actorStatsMenu;
+
     private enum Gamestate
     {
-        desk, computer
+        desk, computer, statsMenu
     }
 
     private Gamestate gamestate;
@@ -27,6 +29,8 @@ public class GameController : MonoBehaviour {
     void Start () {
         gamestate = Gamestate.desk;
         cam = FindObjectOfType<CameraManager>();
+        actorStatsMenu = FindObjectOfType<ActorStatsMenu>();
+        actorStatsMenu.gameObject.transform.position += new Vector3(0, 100, 0);
     }
 	
 	// Update is called once per frame
@@ -49,6 +53,19 @@ public class GameController : MonoBehaviour {
         gamestate = Gamestate.desk;
     }
 
+    public void openStatsMenu()
+    {
+        gamestate = Gamestate.statsMenu;
+        actorStatsMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+    }
+
+    public void closeStatesMenu()
+    {
+        gamestate = Gamestate.computer;
+        actorStatsMenu.gameObject.transform.position += new Vector3(0, 100, 0);
+
+    }
+
     public bool canFreeLook()
     {
         switch(gamestate)
@@ -60,4 +77,10 @@ public class GameController : MonoBehaviour {
         }
         return false;
     }
+
+    public bool isInStatsMenu()
+    {
+        return gamestate == Gamestate.statsMenu;
+    }
+
 }

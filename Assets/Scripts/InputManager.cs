@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     private ClickableObject clickedObject;
     private CameraManager cameraManager;
     private GameController gameController;
+    private ActorStatsMenu actorStatsMenu;
     private Vector2 mouseScreenPos;
     private float swipeLength;
 
@@ -32,7 +33,7 @@ public class InputManager : MonoBehaviour
 
         cameraManager = FindObjectOfType<CameraManager>();
         gameController = FindObjectOfType<GameController>();
-
+        actorStatsMenu = FindObjectOfType<ActorStatsMenu>();
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class InputManager : MonoBehaviour
 
 
             //For every object hit, check if it is interactables
-            foreach(RaycastHit h in hit)
+            foreach (RaycastHit h in hit)
             {
                 clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();
                 if(clickedObject != null)
@@ -82,6 +83,10 @@ public class InputManager : MonoBehaviour
                 //Rotate the camera around itself in the direction of swiping
                 cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
                 cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+            }
+            else if(gameController.isInStatsMenu())
+            {
+                actorStatsMenu.scroll(swipeDir.x);
             }
            
             //Update the mouse position to the new positon.

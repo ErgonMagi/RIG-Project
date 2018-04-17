@@ -16,11 +16,18 @@ public class MovieManager : MonoBehaviour {
 	void Start () {
         client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
 
-        ImagesWithId img = client.GetMovieImagesAsync(100).Result;
+        int rand = (int)Random.Range(0, 10000);
+
+        ImagesWithId img = client.GetMovieImagesAsync(rand).Result;
+        while(img == null || img.Posters == null || img.Posters.Count == 0)
+        {
+            rand = (int)Random.Range(0, 10000);
+            img = client.GetMovieImagesAsync(rand).Result;
+        }
 
         client.GetConfig();
 
-        string path = client.GetImageUrl("w92", img.Posters[0].FilePath).ToString();
+        string path = client.GetImageUrl("w154", img.Posters[0].FilePath).ToString();
 
         www = new WWW(path);
 

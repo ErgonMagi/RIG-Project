@@ -7,6 +7,7 @@ using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.People;
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.General;
+using System.IO;
 
 public class ActorManager : MonoBehaviour {
 
@@ -16,10 +17,40 @@ public class ActorManager : MonoBehaviour {
     public Sprite tempSprite;
     public ActorProfile ap;
 
-    private int action, comedy, romance, scifi, horror, other;
+    private float action, comedy, romance, scifi, horror, other;
+    private List<string> actorNames;
 
 	// Use this for initialization
 	void Start () {
+        
+        client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
+        actorNames = new List<string>();
+
+
+        string filePath = Path.GetFullPath("Assets/ActorNames.txt");
+
+        StreamReader reader = new StreamReader(filePath);
+
+        while(!reader.EndOfStream)
+        {
+            actorNames.Add(reader.ReadLine());
+        }
+
+        reader.Close();
+       
+    }
+	
+    public Actor generateActor(int actorNum = -1)
+    {
+        if(actorNum == -1)
+        {
+            actorNum = (int)Random.Range(0, actorNames.Count);
+            if(actorNum == actorNames.Count)
+            {
+                actorNum--;
+            }
+        }
+
         action = 1;
         comedy = 1;
         romance = 1;
@@ -27,12 +58,11 @@ public class ActorManager : MonoBehaviour {
         horror = 1;
         other = 1;
 
-        client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
         actors = new List<Actor>();
-        List<SearchPerson> sp = client.SearchPersonAsync("Alicia Vikander").Result.Results;
+        List<SearchPerson> sp = client.SearchPersonAsync(actorNames[actorNum]).Result.Results;
         List<KnownForBase> known = sp[0].KnownFor;
 
-        for(int i = 0; i < known.Count; i++)
+        for (int i = 0; i < known.Count; i++)
         {
             List<Genre> genres = client.GetMovieAsync(known[i].Id).Result.Genres;
             bool noMatch = true;
@@ -64,24 +94,24 @@ public class ActorManager : MonoBehaviour {
                     noMatch = false;
                 }
             }
-            if(noMatch)
+            if (noMatch)
             {
                 other++;
             }
-                
+
         }
 
-        int sumOfMovies = action + comedy + romance + horror + scifi + other;
-        action = (int)Mathf.Round((float)action / sumOfMovies * 20);
-        comedy = (int)Mathf.Round((float)comedy / sumOfMovies * 20);
-        romance = (int)Mathf.Round((float)romance / sumOfMovies * 20);
-        horror = (int)Mathf.Round((float)horror / sumOfMovies * 20);
-        scifi = (int)Mathf.Round((float)scifi / sumOfMovies * 20);
-        other = (int)Mathf.Round((float)other / sumOfMovies * 20);
+        float sumOfMovies = action + comedy + romance + horror + scifi + other;
+        action = (float)action / sumOfMovies * 20;
+        comedy = (float)comedy / sumOfMovies * 20;
+        romance = (float)romance / sumOfMovies * 20;
+        horror = (float)horror / sumOfMovies * 20;
+        scifi = (float)scifi / sumOfMovies * 20;
+        other = (float)other / sumOfMovies * 20;
 
         Sprite spriteSearch = Resources.Load<Sprite>("Actor images/" + sp[0].Name);
 
-        if(spriteSearch == null)
+        if (spriteSearch == null)
         {
             spriteSearch = tempSprite;
         }
@@ -90,11 +120,7 @@ public class ActorManager : MonoBehaviour {
 
         actors.Add(tempActor);
 
-        ap.setActor(actors[0]);
+        return tempActor;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

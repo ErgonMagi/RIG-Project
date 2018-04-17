@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Actor {
 
-    private int comedy, action, romance, horror, scifi, other;
+    private float comedy, action, romance, horror, scifi, other;
     private string actorName;
     private Sprite actorPicture;
 
-    public Actor(int com, int rom, int act, int hor, int sci, int oth, string name, Sprite picture)
+    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture)
     {
         comedy = com;
         romance = rom;
@@ -20,28 +20,28 @@ public class Actor {
         actorPicture = picture;
     }
 
-    public void setComedy(int com)
+    public void setComedy(float com)
     {
         comedy = com;
     }
-    public void setRomance(int rom)
+    public void setRomance(float rom)
     {
         romance = rom;
     }
-    public void setAction(int act)
+    public void setAction(float act)
     {
         action = act;
     }
-    public void setHorror(int hor)
+    public void setHorror(float hor)
     {
         horror = hor;
     }
 
-    public void setScifi(int sci)
+    public void setScifi(float sci)
     {
         scifi = sci;
     }
-    public void setOther(int oth)
+    public void setOther(float oth)
     {
         other = oth;
     }
@@ -56,32 +56,32 @@ public class Actor {
         actorPicture = picture;
     }
 
-    public int getComedy()
+    public float getComedy()
     {
         return comedy;
     }
 
-    public int getRomance()
+    public float getRomance()
     {
         return romance;
     }
 
-    public int getHorror()
+    public float getHorror()
     {
         return horror;
     }
 
-    public int getScifi()
+    public float getScifi()
     {
         return scifi;
     }
 
-    public int getAction()
+    public float getAction()
     {
         return action;
     }
 
-    public int getOther()
+    public float getOther()
     {
         return other;
     }
