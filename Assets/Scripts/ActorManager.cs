@@ -10,7 +10,6 @@ public class Results
     public ActorData [] results { get; set; }
 }
 
-
 public class Known_for
 {
     public int[] genre_ids { get; set; }
@@ -27,9 +26,7 @@ public class ActorManager : MonoBehaviour {
     List<Actor> actors;
 
     public Sprite tempSprite;
-    public ActorProfile ap;
 
-    private float action, comedy, romance, scifi, horror, other;
     private List<string> actorNames;
 
 	// Use this for initialization
@@ -51,7 +48,7 @@ public class ActorManager : MonoBehaviour {
        
     }
 	
-    public Actor generateActor(int actorNum = -1)
+    public void generateActor(ActorProfile requestingObject, int actorNum = -1)
     {
         if(actorNum == -1)
         {
@@ -62,28 +59,32 @@ public class ActorManager : MonoBehaviour {
             }
         }
 
+        actors = new List<Actor>();
+        string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
+        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false");
+
+        StartCoroutine(downloadActorData(www, requestingObject));
+
+    }
+
+    IEnumerator downloadActorData(WWW actorDownload, ActorProfile requestingProfile)
+    {
+        while (!actorDownload.isDone)
+        {
+            yield return null;
+        }
+        Results result = JsonConvert.DeserializeObject<Results>(actorDownload.text);
+        ActorData[] actorData = result.results;
+        float action, comedy, romance, scifi, horror, other;
         action = 1;
         comedy = 1;
         romance = 1;
         scifi = 1;
         horror = 1;
         other = 1;
-
-        actors = new List<Actor>();
-        string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
-        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false");
-
-        while(!www.isDone)
-        {
-            Debug.Log("loading");
-        }
-
-        Results result = JsonConvert.DeserializeObject<Results>(www.text);
-        ActorData [] actorData = result.results;
-
         for (int i = 0; i < actorData[0].known_for.Length; i++)
         {
-            int [] genres = actorData[0].known_for[i].genre_ids;
+            int[] genres = actorData[0].known_for[i].genre_ids;
             bool noMatch = true;
             for (int j = 0; j < genres.Length; j++)
             {
@@ -144,7 +145,8 @@ public class ActorManager : MonoBehaviour {
 
         actors.Add(tempActor);
 
-        return tempActor;
+        requestingProfile.setActor(tempActor);
+        yield break;
     }
 
 }

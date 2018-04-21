@@ -36,12 +36,12 @@ public class ActorProfile : MonoBehaviour {
 
     public void getActor()
     {
-        setActor(actorManager.generateActor());
+        actorManager.generateActor(this);
     }
 
     public void getActor(int actorNum)
     {
-        setActor(actorManager.generateActor(actorNum));
+        actorManager.generateActor(this, actorNum);
     }
 
     public void setActor(Actor actor)
