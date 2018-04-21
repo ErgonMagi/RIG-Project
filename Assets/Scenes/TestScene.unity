@@ -517,10 +517,6 @@ Prefab:
       propertyPath: m_Name
       value: Actor Profile (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4310332247321252, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
   m_IsPrefabParent: 0
@@ -2066,10 +2062,6 @@ Prefab:
       propertyPath: m_Name
       value: Actor Profile (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 4310332247321252, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
   m_IsPrefabParent: 0
@@ -2761,11 +2753,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorPages:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 116425367}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 901535216}
+  - {fileID: 1289678100}
+  - {fileID: 1580274540}
+  - {fileID: 1599313945}
   swipeSpeed: 0.03
 --- !u!4 &748149885
 Transform:
@@ -3075,6 +3067,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: d473c2582ffec42429904e09c97d4646, type: 3}
   m_PrefabInternal: {fileID: 896729089}
+--- !u!1 &901535216 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1079405106035856, guid: 1e79bb59154576a4caec5d91130aa6b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 140090572}
 --- !u!1001 &902471831
 Prefab:
   m_ObjectHideFlags: 0
@@ -3221,10 +3218,6 @@ Prefab:
     - target: {fileID: 1079405106035856, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
       propertyPath: m_Name
       value: Actor Profile (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310332247321252, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
@@ -4018,10 +4011,6 @@ Prefab:
       propertyPath: m_Name
       value: Actor Profile (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4310332247321252, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
   m_IsPrefabParent: 0
@@ -4412,6 +4401,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 533eb91b37077c941ab74e5c22d45d54, type: 3}
   m_PrefabInternal: {fileID: 1278253841}
+--- !u!1 &1289678100 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1079405106035856, guid: 1e79bb59154576a4caec5d91130aa6b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 966610148}
 --- !u!1001 &1301252292
 Prefab:
   m_ObjectHideFlags: 0
@@ -4790,10 +4784,6 @@ Prefab:
     - target: {fileID: 4310332247321252, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310332247321252, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e79bb59154576a4caec5d91130aa6b1, type: 2}
@@ -5619,6 +5609,16 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: fb452a2169bb3814e8397e412bf49fc8, type: 3}
   m_PrefabInternal: {fileID: 1574706810}
+--- !u!1 &1580274540 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1079405106035856, guid: 1e79bb59154576a4caec5d91130aa6b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1176912747}
+--- !u!1 &1599313945 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1079405106035856, guid: 1e79bb59154576a4caec5d91130aa6b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 529020528}
 --- !u!1001 &1618887453
 Prefab:
   m_ObjectHideFlags: 0
