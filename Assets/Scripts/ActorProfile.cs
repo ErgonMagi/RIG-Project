@@ -16,6 +16,7 @@ public class ActorProfile : MonoBehaviour {
     private ActorManager actorManager;
     private float t = 0;
     private bool init;
+    private Actor actor;
 
     private void Start()
     {
@@ -54,6 +55,7 @@ public class ActorProfile : MonoBehaviour {
         other = actor.getOther();
         actorName = actor.getName();
         actorPicture = actor.getPicture();
+        this.actor = actor;
 
         updateProfile();
     }
