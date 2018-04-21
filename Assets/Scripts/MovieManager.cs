@@ -1,60 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMDbLib;
-using TMDbLib.Client;
-using TMDbLib.Objects.Movies;
-using TMDbLib.Objects.General;
 using System.IO;
+using Newtonsoft.Json;
+
+public class Genres
+{
+    public int id { get; set; }
+    public string name { get; set; }
+}
+
+public class MovieData
+{
+    public bool adult { get; set; }
+    string backdrop_path { get; set; }
+    public string belongs_to_collection { get; set; }
+    public int budget { get; set; }
+    public Genres[] genres { get; set; }
+    public string poster_path { get; set; }
+}
 
 public class MovieManager : MonoBehaviour {
 
-    TMDbClient client;
     WWW www;
+    WWW img;
+    MovieData j;
+    private bool downloadStarted = true;
 
-	// Use this for initialization
-	void Start () {
-        client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
-
-        int rand = (int)Random.Range(0, 10000);
-
-        ImagesWithId img = client.GetMovieImagesAsync(rand).Result;
-        while(img == null || img.Posters == null || img.Posters.Count == 0)
-        {
-            rand = (int)Random.Range(0, 10000);
-            img = client.GetMovieImagesAsync(rand).Result;
-        }
-
-        client.GetConfig();
-
-        string path = client.GetImageUrl("w154", img.Posters[0].FilePath).ToString();
-
-        www = new WWW(path);
-
-        StreamWriter sw = new StreamWriter("url.txt");
-
-        sw.Write(path);
-
-        sw.Close();
+    // Use this for initialization
+    void Start () {
+        getMovie();
     }
 	
+    public MovieData getMovie()
+    {
+        bool findMovieWithPoster = true;
+        while (findMovieWithPoster)
+        {
+           
+            int rand = (int)Random.Range(0, 10000);
+            www = new WWW("https://api.themoviedb.org/3/movie/" + rand + "?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US");
+            while (!www.isDone)
+            {
+                Debug.Log("loading");
+            }
+            var json = www.text;
+            j = JsonConvert.DeserializeObject<MovieData>(json);
+            if(j.poster_path != null)
+            {
+                findMovieWithPoster = false;
+            }
+        }
+        
+
+        downloadStarted = false;
+        return j;
+    }
+
 	// Update is called once per frame
 	void Update () {
-		
 
-        if(www.isDone)
+        if(downloadStarted == false)
         {
-            Sprite sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+            img = new WWW("https://image.tmdb.org/t/p/w92" + j.poster_path);
+            downloadStarted = true;
+        }
+        
+        if (img != null && img.isDone)
+        {
+            Sprite sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
 
             this.GetComponent<SpriteRenderer>().sprite = sprite;
-
-            /*while(this.GetComponent<SpriteRenderer>().sprite.bounds.size.y > 1)
-            {
-                this.transform.localScale = new Vector3(this.transform.localScale.x*0.9f, this.transform.localScale.y * 0.9f, 1.0f);
-            }*/
-
-
-
         }
-	}
+
+    }
 }

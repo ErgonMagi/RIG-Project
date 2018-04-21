@@ -1,17 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMDbLib;
-using TMDbLib.Client;
-using TMDbLib.Objects.Movies;
-using TMDbLib.Objects.People;
-using TMDbLib.Objects.Search;
+using Newtonsoft.Json;
 using TMDbLib.Objects.General;
 using System.IO;
 
+public class Results
+{
+    public ActorData [] results { get; set; }
+}
+
+
+public class Known_for
+{
+    public int[] genre_ids { get; set; }
+}
+
+public class ActorData
+{
+    public string name { get; set; }
+    public Known_for [] known_for { get; set; }
+}
+
 public class ActorManager : MonoBehaviour {
 
-    TMDbClient client;
     List<Actor> actors;
 
     public Sprite tempSprite;
@@ -23,7 +35,6 @@ public class ActorManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         
-        client = new TMDbClient("e2ffb845e5d5fca810eaf5054914f41b");
         actorNames = new List<string>();
 
 
@@ -59,36 +70,49 @@ public class ActorManager : MonoBehaviour {
         other = 1;
 
         actors = new List<Actor>();
-        List<SearchPerson> sp = client.SearchPersonAsync(actorNames[actorNum]).Result.Results;
-        List<KnownForBase> known = sp[0].KnownFor;
+        string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
+        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false");
 
-        for (int i = 0; i < known.Count; i++)
+        while(!www.isDone)
         {
-            List<Genre> genres = client.GetMovieAsync(known[i].Id).Result.Genres;
+            Debug.Log("loading");
+        }
+
+        Results result = JsonConvert.DeserializeObject<Results>(www.text);
+        ActorData [] actorData = result.results;
+
+        for (int i = 0; i < actorData[0].known_for.Length; i++)
+        {
+            int [] genres = actorData[0].known_for[i].genre_ids;
             bool noMatch = true;
-            for (int j = 0; j < genres.Count; j++)
+            for (int j = 0; j < genres.Length; j++)
             {
-                if (genres[j].Name == "Action")
+                //Action
+                if (genres[j] == 28)
                 {
                     action++;
                     noMatch = false;
                 }
-                if (genres[j].Name == "Comedy")
+                //Comedy
+                if (genres[j] == 35)
                 {
                     comedy++;
                     noMatch = false;
                 }
-                if (genres[j].Name == "Romance")
+                //Romance
+                if (genres[j] == 10749)
                 {
                     romance++;
                     noMatch = false;
                 }
-                if (genres[j].Name == "Science Fiction")
+                //Scifi
+                if (genres[j] == 878)
                 {
                     scifi++;
                     noMatch = false;
                 }
-                if (genres[j].Name == "Horror")
+                //Horror
+                if (genres[j] == 27)
                 {
                     horror++;
                     noMatch = false;
@@ -109,14 +133,14 @@ public class ActorManager : MonoBehaviour {
         scifi = (float)scifi / sumOfMovies * 20;
         other = (float)other / sumOfMovies * 20;
 
-        Sprite spriteSearch = Resources.Load<Sprite>("Actor images/" + sp[0].Name);
+        Sprite spriteSearch = Resources.Load<Sprite>("Actor images/" + actorData[0].name);
 
         if (spriteSearch == null)
         {
             spriteSearch = tempSprite;
         }
 
-        Actor tempActor = new Actor(comedy, romance, action, horror, scifi, other, sp[0].Name, spriteSearch);
+        Actor tempActor = new Actor(comedy, romance, action, horror, scifi, other, actorData[0].name, spriteSearch);
 
         actors.Add(tempActor);
 
