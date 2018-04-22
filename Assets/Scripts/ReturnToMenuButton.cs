@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsMenuButton : MonoBehaviour, ClickableObject {
+public class ReturnToMenuButton : MonoBehaviour, ClickableObject {
 
     GameController gameController;
 
@@ -12,14 +12,10 @@ public class StatsMenuButton : MonoBehaviour, ClickableObject {
         gameController = FindObjectOfType<GameController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void onClick()
     {
-        gameController.openStatsMenu();
+        gameController.closeMenu();
     }
 }
+

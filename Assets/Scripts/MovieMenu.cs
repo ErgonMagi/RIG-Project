@@ -7,32 +7,46 @@ public class MovieMenu : MonoBehaviour {
     [SerializeField]
     public GameObject[] movieProfiles;
 
+    [SerializeField]
+    public GameObject[] actorProfiles;
+
     public float swipeSpeed;
+
+    private Player player;
 
     // Use this for initialization
     void Start()
     {
-
+        player = FindObjectOfType<Player>();
+        StartCoroutine(allocateActors());
     }
 
-    // Update is called once per frame
-    void Update()
+
+    IEnumerator allocateActors()
     {
-
+        for (int i = 0; i < actorProfiles.Length; i++)
+        {
+            while(player.getActor(i) == null)
+            {
+                yield return null;
+            }
+            actorProfiles[i].GetComponent<ActorPicture>().setActor(player.getActor(i));
+        }
     }
+
 
     public void scroll(float scrollLength)
     {
         for (int i = 0; i < movieProfiles.Length; i++)
         {
             movieProfiles[i].transform.localPosition -= new Vector3(scrollLength * swipeSpeed, 0, 0);
-            if (movieProfiles[i].transform.localPosition.x >= 11)
+            if (movieProfiles[i].transform.localPosition.x >= 12)
             {
-                movieProfiles[i].transform.localPosition -= new Vector3(31.2f, 0, 0);
+                movieProfiles[i].transform.localPosition -= new Vector3(33f, 0, 0);
             }
-            else if (movieProfiles[i].transform.localPosition.x <= -15)
+            else if (movieProfiles[i].transform.localPosition.x <= -17)
             {
-                movieProfiles[i].transform.localPosition += new Vector3(31.2f, 0, 0);
+                movieProfiles[i].transform.localPosition += new Vector3(33f, 0, 0);
             }
         }
     }

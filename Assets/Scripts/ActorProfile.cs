@@ -9,40 +9,38 @@ public class ActorProfile : MonoBehaviour {
     public Text comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
     public Text actorNameText;
     public SpriteRenderer actorPictureSprite;
+    public int actorNum;
 
     private float comedy, action, romance, horror, scifi, other;
     private string actorName;
     private Sprite actorPicture;
-    private ActorManager actorManager;
-    private float t = 0;
-    private bool init;
     private Actor actor;
+    private Player player;
 
     private void Start()
     {
-        actorManager = FindObjectOfType<ActorManager>();
-        init = true;
+        player = FindObjectOfType<Player>();
+        actor = null;
     }
 
     private void Update()
     {
-        t += Time.deltaTime;
-
-        if(t > 1 && init)
+        if(actor == null)
         {
-            init = false;
-            getActor();           
+            getActorFromPlayer();
         }
     }
 
-    public void getActor()
+    public Actor getActor()
     {
-        actorManager.generateActor(this);
+        return actor;
     }
 
-    public void getActor(int actorNum)
+    public void getActorFromPlayer()
     {
-        actorManager.generateActor(this, actorNum);
+        Actor temp = player.getActor(actorNum);
+        if(temp != null)
+            setActor(temp);
     }
 
     public void setActor(Actor actor)

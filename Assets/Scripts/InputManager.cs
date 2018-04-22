@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour
     private MovieMenu movieMenu;
     private Vector2 mouseScreenPos;
     private float swipeLength;
+    private bool objectSelected;
 
     // Use this for initialization
     void Start()
@@ -36,6 +37,7 @@ public class InputManager : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         actorStatsMenu = FindObjectOfType<ActorStatsMenu>();
         movieMenu = FindObjectOfType<MovieMenu>();
+        objectSelected = false;
     }
 
     // Update is called once per frame
@@ -62,7 +64,12 @@ public class InputManager : MonoBehaviour
             //For every object hit, check if it is interactables
             foreach (RaycastHit h in hit)
             {
-                clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();
+                clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();          
+                if(h.collider.gameObject.GetComponent<ActorPicture>() != null)
+                {
+                    objectSelected = true;
+                    clickedObject.onClick();
+                }
                 if(clickedObject != null)
                 {   
                     break;                  //If an interactable object is found, it is "selected" and the loop ends.
@@ -79,22 +86,23 @@ public class InputManager : MonoBehaviour
 
             //Sums the total swipe length to check if a player is tapping or swiping
             swipeLength += swipeDir.magnitude;
-
-            if(gameController.canFreeLook())
+            if (!objectSelected)
             {
-                //Rotate the camera around itself in the direction of swiping
-                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
-                cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+                if (gameController.canFreeLook())
+                {
+                    //Rotate the camera around itself in the direction of swiping
+                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+                }
+                else if (gameController.isInStatsMenu())
+                {
+                    actorStatsMenu.scroll(swipeDir.x);
+                }
+                else if (gameController.isInMovieMenu())
+                {
+                    movieMenu.scroll(swipeDir.x);
+                }
             }
-            else if(gameController.isInStatsMenu())
-            {
-                actorStatsMenu.scroll(swipeDir.x);
-            }
-            else if(gameController.isInMovieMenu())
-            {
-                movieMenu.scroll(swipeDir.x);
-            }
-           
             //Update the mouse position to the new positon.
             mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
@@ -102,24 +110,28 @@ public class InputManager : MonoBehaviour
         //Runs on any frame the lmb is not held down.
         if(!Input.GetMouseButton(0))
         {
-            //If there was an object selected by the last click and the player did not swipe, activate the object and then deselect it.
-            if (clickedObject != null && swipeLength < 10)
+            if (!objectSelected)
             {
-                clickedObject.onClick();
-                clickedObject = null;
-            }
-
-            //Swipe deceleration.
-            if(gameController.canFreeLook())
-            {
-                if (swipeDir.magnitude * 100 > swipeNullPoint)
+                //If there was an object selected by the last click and the player did not swipe, activate the object and then deselect it.
+                if (clickedObject != null && swipeLength < 10)
                 {
-                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
-                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
-
-                    swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
+                    clickedObject.onClick();
+                    clickedObject = null;
                 }
-            }       
+
+                //Swipe deceleration.
+                if (gameController.canFreeLook())
+                {
+                    if (swipeDir.magnitude * 100 > swipeNullPoint)
+                    {
+                        cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                        cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
+
+                        swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
+                    }
+                }
+            }
+            objectSelected = false;
         }
 
     }

@@ -24,7 +24,7 @@ public class MovieMenuButton : MonoBehaviour, ClickableObject {
     {
         if (isMenuOpen)
         {
-            gameController.closeMovieMenu();
+            gameController.closeMenu();
             isMenuOpen = false;
         }
         else

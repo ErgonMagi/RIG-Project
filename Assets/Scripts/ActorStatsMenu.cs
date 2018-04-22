@@ -24,13 +24,13 @@ public class ActorStatsMenu : MonoBehaviour {
         for(int i = 0; i < actorPages.Length; i++)
         {
             actorPages[i].transform.localPosition -= new Vector3(scrollLength*swipeSpeed, 0, 0);
-            if(actorPages[i].transform.localPosition.x >= 27)
+            if(actorPages[i].transform.localPosition.x >= 2.1)
             {
-                actorPages[i].transform.localPosition -= new Vector3(45, 0, 0);
+                actorPages[i].transform.localPosition -= new Vector3(5f, 0, 0);
             }
-            else if(actorPages[i].transform.localPosition.x <= -27)
+            else if(actorPages[i].transform.localPosition.x <= -2.1)
             {
-                actorPages[i].transform.localPosition += new Vector3(45, 0, 0);
+                actorPages[i].transform.localPosition += new Vector3(5f, 0, 0);
             }
         }
     }

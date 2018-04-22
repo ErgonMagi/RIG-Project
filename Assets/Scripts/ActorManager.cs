@@ -45,29 +45,31 @@ public class ActorManager : MonoBehaviour {
         }
 
         reader.Close();
+
+        Player p = FindObjectOfType<Player>();
+        p.init();
        
     }
 	
-    public void generateActor(ActorProfile requestingObject, int actorNum = -1)
+    public void generateActor(Player requestingObject, int arrayNum)
     {
-        if(actorNum == -1)
+        int actorNum = -1;
+        actorNum = (int)Random.Range(0, actorNames.Count);
+        if(actorNum == actorNames.Count)
         {
-            actorNum = (int)Random.Range(0, actorNames.Count);
-            if(actorNum == actorNames.Count)
-            {
-                actorNum--;
-            }
+            actorNum--;
         }
+
 
         actors = new List<Actor>();
         string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
         WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false");
 
-        StartCoroutine(downloadActorData(www, requestingObject));
+        StartCoroutine(downloadActorData(www, requestingObject, arrayNum));
 
     }
 
-    IEnumerator downloadActorData(WWW actorDownload, ActorProfile requestingProfile)
+    IEnumerator downloadActorData(WWW actorDownload, Player requestingProfile, int arrayNum)
     {
         while (!actorDownload.isDone)
         {
@@ -145,7 +147,7 @@ public class ActorManager : MonoBehaviour {
 
         actors.Add(tempActor);
 
-        requestingProfile.setActor(tempActor);
+        requestingProfile.setActor(tempActor, arrayNum);
         yield break;
     }
 
