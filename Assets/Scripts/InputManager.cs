@@ -132,6 +132,7 @@ public class InputManager : MonoBehaviour
                 }
             }
             objectSelected = false;
+            clickedObject = null;
         }
 
     }

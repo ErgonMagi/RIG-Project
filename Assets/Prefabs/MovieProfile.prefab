@@ -20,7 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4938967267957114}
   - component: {fileID: 212387670750228204}
-  m_Layer: 0
+  - component: {fileID: 65291094551100228}
+  - component: {fileID: 114509816403257926}
+  m_Layer: 10
   m_Name: ActorBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,6 +73,29 @@ Transform:
   m_Father: {fileID: 4588080539063796}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65291094551100228
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570580957827364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.1620426, y: 4.0622764, z: 0.20000002}
+  m_Center: {x: 0.07602113, y: -0.6735618, z: 0}
+--- !u!114 &114509816403257926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570580957827364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09aa9864f51d007449b54aef8a1b37f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114923162894937260
 MonoBehaviour:
   m_ObjectHideFlags: 1
