@@ -15,7 +15,7 @@ public class MovieData
     string backdrop_path { get; set; }
     public Genres[] genres { get; set; }
     public string poster_path { get; set; }
-    public string name { get; set; }
+    public string title { get; set; }
 }
 
 public class MovieManager : MonoBehaviour {
@@ -110,7 +110,7 @@ public class MovieManager : MonoBehaviour {
 
         Sprite sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
 
-        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j.name, sprite);
+        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j.title, sprite);
 
         requestingProfile.setMovie(tempMovie);
 

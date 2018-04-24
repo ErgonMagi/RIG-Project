@@ -6,7 +6,7 @@ public class Movie
 {
 
     private int comedy, action, romance, horror, scifi, other;
-    private string movieName;
+    private string title;
     private Sprite moviePicture;
 
     public Movie(int com, int rom, int act, int hor, int sci, int oth, string name, Sprite picture)
@@ -17,7 +17,7 @@ public class Movie
         horror = hor;
         scifi = sci;
         other = oth;
-        movieName = name;
+        title = name;
         moviePicture = picture;
     }
 
@@ -47,9 +47,9 @@ public class Movie
         other = oth;
     }
 
-    public void setName(string name)
+    public void setTitle(string title)
     {
-        movieName = name;
+        this.title = title;
     }
 
     public void setPicture(Sprite picture)
@@ -92,9 +92,9 @@ public class Movie
         return moviePicture;
     }
 
-    public string getName()
+    public string getTitle()
     {
-        return movieName;
+        return title;
     }
 
 }

@@ -13,15 +13,20 @@ public class MovieProfile : MonoBehaviour {
     private void Start()
     {
         movieManager = FindObjectOfType<MovieManager>();
-        getMovie();
+        generateMovie();
     }
 
-    public void getMovie()
+    public Movie getMovie()
+    {
+        return movie;
+    }
+
+    public void generateMovie()
     {
         movieManager.generateMovie(this);
     }
 
-    public void getMovie(int movieNum)
+    public void generateMovie(int movieNum)
     {
         movieManager.generateMovie(this, movieNum);
     }
@@ -29,6 +34,7 @@ public class MovieProfile : MonoBehaviour {
     public void setMovie(Movie movie)
     {
         moviePicture = movie.getPicture();
+        this.movie = movie;
 
         updateProfile();
     }

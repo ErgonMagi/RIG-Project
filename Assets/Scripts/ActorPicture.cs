@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     private Vector3 startPos;
     private CameraManager cameraManager;
     private GameObject lockedPosition;
+    private Tuple<Actor, Movie> actorMoviePair;
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +35,11 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     {
         actor = a;
         GetComponent<SpriteRenderer>().sprite = actor.getPicture();
+    }
+
+    public void submitActorMoviePair()
+    {
+        ScoreManager.setPair(actorMoviePair.Item1, actorMoviePair.Item2);
     }
 
     public void onClick()
@@ -61,6 +68,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
             if (h.collider.gameObject.layer == LayerMask.NameToLayer("ActorSlot"))
             {
                 lockedPosition = h.collider.gameObject;
+                actorMoviePair = Tuple.Create(actor, h.collider.gameObject.GetComponentInParent<MovieProfile>().getMovie());
             }
         }
         if(hit.Length == 0)

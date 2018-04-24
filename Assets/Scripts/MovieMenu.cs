@@ -34,6 +34,13 @@ public class MovieMenu : MonoBehaviour {
         }
     }
 
+    public void submitActors()
+    {
+        for(int i = 0; i < actorProfiles.Length; i++)
+        {
+            actorProfiles[i].GetComponent<ActorPicture>().submitActorMoviePair();
+        }
+    }
 
     public void scroll(float scrollLength)
     {
