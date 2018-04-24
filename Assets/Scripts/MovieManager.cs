@@ -20,11 +20,12 @@ public class MovieData
 
 public class MovieManager : MonoBehaviour {
 
-    
+
+    private List<int> usedMovies;
 
     // Use this for initialization
     void Start () {
-
+        
     }
 	
     public void generateMovie(MovieProfile requestingProfile, int movieNum = -1)
@@ -34,6 +35,12 @@ public class MovieManager : MonoBehaviour {
 
     IEnumerator selectMovieWithPoster(MovieProfile requestingProfile, int movieNum = -1)
     {
+
+        if(usedMovies == null)
+        {
+            usedMovies = new List<int>();
+        }
+
         WWW www;
         WWW img;
         MovieData j = new MovieData();
@@ -41,7 +48,21 @@ public class MovieManager : MonoBehaviour {
         bool findMovieWithPoster = true;
         while (findMovieWithPoster)
         {
-            int rand = (int)Random.Range(0, 10000);
+            int rand = 0;
+            bool pickingMovieNum = true;
+            while(pickingMovieNum)
+            {
+                pickingMovieNum = false;
+                rand = (int)Random.Range(0, 10000);
+                for(int i = 0; i < usedMovies.Count; i++)
+                {
+                    if(rand == usedMovies[i])
+                    {
+                        pickingMovieNum = true;
+                    }
+                }
+            }
+            
             www = new WWW("https://api.themoviedb.org/3/movie/" + rand + "?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US");
 
             while (!www.isDone)
@@ -53,8 +74,10 @@ public class MovieManager : MonoBehaviour {
             if (j.poster_path != null)
             {
                 findMovieWithPoster = false;
+                usedMovies.Add(rand);
             }
         }
+        
         bool noMatch = true;
         int action = 0;
         int comedy = 0;

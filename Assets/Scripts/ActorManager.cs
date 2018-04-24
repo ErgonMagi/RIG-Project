@@ -29,11 +29,14 @@ public class ActorManager : MonoBehaviour {
 
     private List<string> actorNames;
 
+    private List<int> takenActors;
+
 	// Use this for initialization
 	void Start () {
         
         actorNames = new List<string>();
-
+        takenActors = new List<int>();
+        actors = new List<Actor>();
 
         string filePath = Path.GetFullPath("Assets/ActorNames.txt");
 
@@ -54,14 +57,24 @@ public class ActorManager : MonoBehaviour {
     public void generateActor(Player requestingObject, int arrayNum)
     {
         int actorNum = -1;
-        actorNum = (int)Random.Range(0, actorNames.Count);
-        if(actorNum == actorNames.Count)
+        bool pickingActor = true;
+        while (pickingActor)
         {
-            actorNum--;
+            pickingActor = false;
+            actorNum = (int)Random.Range(0, actorNames.Count);
+            if (actorNum == actorNames.Count)
+            {
+                actorNum--;
+            }
+            for (int i = 0; i < takenActors.Count; i++)
+            {
+                if (actorNum == takenActors[i])
+                {
+                    pickingActor = true;
+                }
+            }
         }
-
-
-        actors = new List<Actor>();
+        takenActors.Add(actorNum);
         string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
         WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false");
 
