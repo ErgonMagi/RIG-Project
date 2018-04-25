@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ScoreManager {
+public class ScoreManager : MonoBehaviour {
 
     static List<Tuple <Actor, Movie>> actorMoviePair;
+    private Scoreboard scoreboard;
 
-    public static void Start()
+    public void Start()
     {
         actorMoviePair = new List<Tuple<Actor, Movie>>();
+        scoreboard = FindObjectOfType<Scoreboard>();
     }
 
-    public static void calculateScores()
+    public void calculateScores()
     {
         bool[] passList = new bool[actorMoviePair.Count];
         for(int i = 0; i < actorMoviePair.Count; i++)
@@ -57,18 +59,18 @@ public static class ScoreManager {
         {
             if(passList[i])
             {
-                Debug.Log(actorMoviePair[i].Item1.getName() + " was successful in their application for a role in " + actorMoviePair[i].Item2.getTitle());
-
+                scoreboard.auditionPassed(actorMoviePair[i]);
             }
             else
             {
-                Debug.Log(actorMoviePair[i].Item1.getName() + " was unsuccesful in their application for a role in " + actorMoviePair[i].Item2.getTitle());
+                scoreboard.auditionFailed(actorMoviePair[i]);
             }
         }
+        scoreboard.display();
 
     }
 
-    public static void setPair(Actor actor, Movie movie)
+    public void setPair(Actor actor, Movie movie)
     {
         actorMoviePair.Add(Tuple.Create(actor, movie));
     }

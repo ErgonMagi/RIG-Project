@@ -21,6 +21,17 @@ public class MovieMenu : MonoBehaviour {
         StartCoroutine(allocateActors());
     }
 
+    public void resetMovieMenu()
+    {
+        for(int i = 0; i < movieProfiles.Length; i++)
+        {
+            movieProfiles[i].GetComponent<MovieProfile>().generateMovie();
+        }
+        for (int i = 0; i < actorProfiles.Length; i++)
+        {
+            actorProfiles[i].GetComponent<ActorPicture>().Reset();
+        }
+    }
 
     IEnumerator allocateActors()
     {

@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class submitActorsButton : MonoBehaviour, ClickableObject {
 
-	public void onClick()
+    private ScoreManager scoreManager;
+
+    public void Start()
     {
-        Debug.Log("clicked");
+        scoreManager = FindObjectOfType<ScoreManager>();
+
+    }
+
+    public void onClick()
+    {
 
         MovieMenu mm = FindObjectOfType<MovieMenu>();
         mm.submitActors();
 
-        ScoreManager.calculateScores();
+        scoreManager.calculateScores();
     }
 }

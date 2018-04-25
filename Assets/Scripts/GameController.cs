@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
     private ActorStatsMenu actorStatsMenu;
     private MovieMenu movieMenu;
     private List<GameObject> menus;
- 
+    private ScoreManager scoreManager;
 
     private enum Gamestate
     {
@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour {
         cam = FindObjectOfType<CameraManager>();
         actorStatsMenu = FindObjectOfType<ActorStatsMenu>();
         movieMenu = FindObjectOfType<MovieMenu>();
+        scoreManager = FindObjectOfType<ScoreManager>();
 
         menus = new List<GameObject>();
 
@@ -63,7 +64,7 @@ public class GameController : MonoBehaviour {
             case Gamestate.movieMenu:
                 if (movieMenu.gameObject.transform.position.y > 75)
                     movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
-                ScoreManager.Start();
+                scoreManager.Start();
                 break;
             case Gamestate.statsMenu:
                 if (actorStatsMenu.gameObject.transform.position.y > 75)
@@ -143,6 +144,13 @@ public class GameController : MonoBehaviour {
     public bool isInMovieMenu()
     {
         return gamestate == Gamestate.movieMenu;
+    }
+
+    public void newWeek()
+    {
+        closeMenu();
+        fromComputer();
+        movieMenu.resetMovieMenu();
     }
 
 }

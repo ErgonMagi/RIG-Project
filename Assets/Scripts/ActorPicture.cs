@@ -11,12 +11,14 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     private CameraManager cameraManager;
     private GameObject lockedPosition;
     private Tuple<Actor, Movie> actorMoviePair;
+    private ScoreManager scoreManager;
 
 	// Use this for initialization
 	void Start () {
         selected = false;
         startPos = this.transform.position;
         cameraManager = FindObjectOfType<CameraManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
 	}
 	
 	// Update is called once per frame
@@ -39,7 +41,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
 
     public void submitActorMoviePair()
     {
-        ScoreManager.setPair(actorMoviePair.Item1, actorMoviePair.Item2);
+        scoreManager.setPair(actorMoviePair.Item1, actorMoviePair.Item2);
     }
 
     public void onClick()
@@ -77,5 +79,13 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         }
 
         this.transform.position = startPos;
+    }
+
+    public void Reset()
+    {
+        selected = false;
+        this.transform.position = startPos;
+        actorMoviePair = null;
+        lockedPosition = null;
     }
 }
