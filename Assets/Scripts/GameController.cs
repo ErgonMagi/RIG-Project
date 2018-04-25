@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour {
     private MovieMenu movieMenu;
     private List<GameObject> menus;
     private ScoreManager scoreManager;
+    public Vector3 mainCamStartPos = new Vector3(-6.581f, 1.23f, -3.388f);
+    public Vector3 mainCamLookingAtCompScreenPos = new Vector3(-6.581f, 1.23f, -3.388f);
 
     private enum Gamestate
     {
