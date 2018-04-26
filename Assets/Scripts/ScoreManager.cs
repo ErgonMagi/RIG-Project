@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour {
             }
         }
         scoreboard.display();
-
+        actorMoviePair = new List<Tuple<Actor, Movie>>();
     }
 
     public void setPair(Actor actor, Movie movie)

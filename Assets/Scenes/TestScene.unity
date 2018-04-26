@@ -6509,6 +6509,8 @@ MonoBehaviour:
   deskCam: {fileID: 1107970749}
   computerCam: {fileID: 1735620289}
   mainMenu: {fileID: 441578843}
+  mainCamStartPos: {x: -6.581, y: 1.23, z: -3.388}
+  mainCamLookingAtCompScreenPos: {x: -6.581, y: 1.23, z: -3.388}
 --- !u!4 &1386679272
 Transform:
   m_ObjectHideFlags: 0

@@ -67,6 +67,7 @@ public class Scoreboard : MonoBehaviour {
             yield return new WaitForSeconds(2.5f);
         }
         this.transform.position = hidePos;
+        auditionsList = new List<Tuple<Actor, Movie, bool>>();
         gc.newWeek();
 
     }

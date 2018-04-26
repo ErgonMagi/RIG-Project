@@ -16,7 +16,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
 	// Use this for initialization
 	void Start () {
         selected = false;
-        startPos = this.transform.position;
+        startPos = this.transform.localPosition;
         cameraManager = FindObjectOfType<CameraManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
 	}
@@ -30,6 +30,14 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         else if(lockedPosition != null)
         {
             this.transform.position = lockedPosition.transform.position;
+            this.GetComponent<BoxCollider>().size = new Vector3(59.3f, 84.8f, 4f);
+            this.GetComponent<BoxCollider>().center = new Vector3(1.11f, -13.61f, 0f);
+        }
+        else
+        {
+            this.transform.localPosition = startPos;
+            this.GetComponent<BoxCollider>().size = new Vector3(24.8f,35.08f, 4f);
+            this.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0f);
         }
 	}
 
@@ -51,8 +59,55 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
 
     private void OnMouseUp()
     {
+
+        if (selected)
+        {
+            Vector3 mousePos = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
+
+            Vector3 dirFromCam = new Vector3(0, 0, 1);
+            if (!cameraManager.getCam().orthographic)
+            {
+                dirFromCam = mousePos - cameraManager.getCam().transform.position;
+            }
+
+            RaycastHit[] hitactor = Physics.RaycastAll(mousePos, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("Clickable"));
+
+            foreach (RaycastHit h in hitactor)
+            {
+                if (h.collider.gameObject.GetComponent<ActorPicture>() != null)
+                {
+                    if (h.collider.gameObject != this.gameObject)
+                    {
+                        if (lockedPosition != null)
+                        {
+                            GameObject temp;
+                            temp = lockedPosition;
+                            lockedPosition = h.collider.gameObject.GetComponent<ActorPicture>().lockedPosition;
+                            h.collider.gameObject.GetComponent<ActorPicture>().lockedPosition = temp;
+                        }
+                        else
+                        {
+                            lockedPosition = h.collider.gameObject.GetComponent<ActorPicture>().lockedPosition;
+                            h.collider.gameObject.GetComponent<ActorPicture>().lockedPosition = null;
+                        }
+                    }
+                }
+            }
+            checkForLockPos();
+        }
         selected = false;
 
+
+        this.transform.localPosition = startPos;
+    }
+
+    public void unlockPos()
+    {
+        lockedPosition = null;
+    }
+
+    public void checkForLockPos()
+    {
         Vector3 mousePos = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
 
         Vector3 dirFromCam = new Vector3(0, 0, 1);
@@ -62,10 +117,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         }
 
         RaycastHit[] hit = Physics.RaycastAll(mousePos, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("ActorSlot"));
-
-        
-
-        foreach(RaycastHit h in hit)
+        foreach (RaycastHit h in hit)
         {
             if (h.collider.gameObject.layer == LayerMask.NameToLayer("ActorSlot"))
             {
@@ -73,12 +125,10 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
                 actorMoviePair = Tuple.Create(actor, h.collider.gameObject.GetComponentInParent<MovieProfile>().getMovie());
             }
         }
-        if(hit.Length == 0)
+        if (hit.Length == 0)
         {
             lockedPosition = null;
         }
-
-        this.transform.position = startPos;
     }
 
     public void Reset()
