@@ -96,36 +96,51 @@ public class GameController : MonoBehaviour {
 
     public void toComputer()
     {
-        cam.lerpToLoc(new Vector3(-5.85f, 1.343f, -3.447f), new Vector3(0, 90, 0), 1.0f);
-        gamestate = Gamestate.mainMenu;
-        cam.swapCamAfterLerp(computerCam);
+        if(!cam.isLerping())
+        {
+            cam.lerpToLoc(new Vector3(-5.85f, 1.343f, -3.447f), new Vector3(0, 90, 0), 1.0f);
+            gamestate = Gamestate.mainMenu;
+            cam.swapCamAfterLerp(computerCam);
+        }
     }
 
     public void fromComputer()
     {
-        cam.swapCams(deskCam);
-        cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 90, 0), 1.0f);
-        gamestate = Gamestate.desk;
+        if (!cam.isLerping())
+        {
+            cam.swapCams(deskCam);
+            cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 90, 0), 1.0f);
+            gamestate = Gamestate.desk;
+        }
     }
 
     public void openStatsMenu()
     {
-        gamestate = Gamestate.statsMenu;
-        compState = Gamestate.statsMenu;
-        actorStatsMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+        if (!cam.isLerping())
+        {
+            gamestate = Gamestate.statsMenu;
+            compState = Gamestate.statsMenu;
+            actorStatsMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+        }
     }
 
     public void closeMenu()
     {
-        gamestate = Gamestate.mainMenu;
-        compState = Gamestate.mainMenu;
+        if (!cam.isLerping())
+        {
+            gamestate = Gamestate.mainMenu;
+            compState = Gamestate.mainMenu;
+        }
     }
 
     public void openMovieMenu()
     {
-        gamestate = Gamestate.movieMenu;
-        compState = Gamestate.movieMenu;
-        movieMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+        if (!cam.isLerping())
+        {
+            gamestate = Gamestate.movieMenu;
+            compState = Gamestate.movieMenu;
+            movieMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+        }
     }
 
     public bool canFreeLook()
@@ -146,6 +161,11 @@ public class GameController : MonoBehaviour {
     public bool isInMovieMenu()
     {
         return gamestate == Gamestate.movieMenu;
+    }
+
+    public bool isAtDesk()
+    {
+        return gamestate == Gamestate.desk;
     }
 
     public void newWeek()

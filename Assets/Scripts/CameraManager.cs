@@ -37,12 +37,14 @@ public class CameraManager : MonoBehaviour {
             if (t >= lerpTime)
             {
                 currentCam.transform.position = targetPosition;
-                //this.transform.rotation = Quaternion.Euler(targetRotation);
+                currentCam.transform.rotation = Quaternion.Euler(targetRotation);
                 lerping = false;
             }
-
-            currentCam.transform.position = startPosition + (t / lerpTime) * (targetPosition - startPosition);
-            currentCam.transform.transform.rotation = Quaternion.Euler(startRotation + (t / lerpTime) * (targetRotation - startRotation));
+            else
+            {
+                currentCam.transform.position = startPosition + (t / lerpTime) * (targetPosition - startPosition);
+                currentCam.transform.rotation = Quaternion.Euler(startRotation + (t / lerpTime) * (targetRotation - startRotation));
+            }
 
             t += Time.deltaTime;
         }
@@ -122,5 +124,10 @@ public class CameraManager : MonoBehaviour {
     public Camera getCam()
     {
         return currentCam;
+    }
+
+    public bool isLerping()
+    {
+        return lerping;
     }
 }

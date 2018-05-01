@@ -29,6 +29,9 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
 	
     public void onClick()
     {
-        gameController.toComputer();
+        if(gameController.isAtDesk())
+        {
+            gameController.toComputer();
+        }
     }
 }
