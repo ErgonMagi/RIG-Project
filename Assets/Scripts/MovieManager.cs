@@ -16,6 +16,8 @@ public class MovieData
     public Genres[] genres { get; set; }
     public string poster_path { get; set; }
     public string title { get; set; }
+    public bool adult { get; set; }
+    public string original_language { get; set; }
 }
 
 public class MovieManager : MonoBehaviour {
@@ -45,8 +47,8 @@ public class MovieManager : MonoBehaviour {
         WWW img;
         MovieData j = new MovieData();
 
-        bool findMovieWithPoster = true;
-        while (findMovieWithPoster)
+        bool findMovieMatchingReqs = true;
+        while (findMovieMatchingReqs)
         {
             int rand = 0;
             bool pickingMovieNum = true;
@@ -71,9 +73,9 @@ public class MovieManager : MonoBehaviour {
             }
             var json = www.text;
             j = JsonConvert.DeserializeObject<MovieData>(json);
-            if (j.poster_path != null)
+            if (j.poster_path != null && j.adult == false && j.original_language == "en")
             {
-                findMovieWithPoster = false;
+                findMovieMatchingReqs = false;
                 usedMovies.Add(rand);
             }
         }

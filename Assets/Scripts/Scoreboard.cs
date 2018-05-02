@@ -25,7 +25,6 @@ public class Scoreboard : MonoBehaviour {
         gc = FindObjectOfType<GameController>();
 	}
 
-
     public void auditionPassed(Tuple<Actor, Movie> pair)
     {
         auditionsList.Add(new Tuple<Actor, Movie, bool>(pair.Item1, pair.Item2, true));
@@ -39,6 +38,7 @@ public class Scoreboard : MonoBehaviour {
     public void display()
     {
         StartCoroutine(scoreboardLoop());
+        gc.displayingScoreboard();
     }
 
     IEnumerator scoreboardLoop()
@@ -64,11 +64,24 @@ public class Scoreboard : MonoBehaviour {
                 successText.text = "unsuccesful";
             }
             movieText.text = "in their audition for a role in " + auditionsList[i].Item2.getTitle();
-            yield return new WaitForSeconds(2.5f);
+            t = 0;
+            while (t < 2.5f)
+            {
+                t += Time.deltaTime;
+
+                if (Input.GetMouseButtonDown(0))            //Change to make on mouse up but fix auto skipping first actor
+                {
+                    Debug.Log("skipping");
+                    t = 5;
+                }
+                yield return null;
+            }
         }
         this.transform.position = hidePos;
         auditionsList = new List<Tuple<Actor, Movie, bool>>();
+        gc.hideScoreboard();
         gc.newWeek();
 
     }
+
 }

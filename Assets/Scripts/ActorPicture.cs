@@ -49,7 +49,11 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
 
     public void submitActorMoviePair()
     {
-        scoreManager.setPair(actorMoviePair.Item1, actorMoviePair.Item2);
+        if(actorMoviePair != null)
+        {
+            scoreManager.setPair(actorMoviePair.Item1, actorMoviePair.Item2);
+        }
+        actorMoviePair = null;
     }
 
     public void onClick()

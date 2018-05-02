@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
         desk, mainMenu, statsMenu, movieMenu
     }
 
+    private bool displayScoreboard;
     private Gamestate gamestate;
     private CameraManager cam;
     private Gamestate compState;
@@ -47,6 +48,7 @@ public class GameController : MonoBehaviour {
         menus.Add(mainMenu);
 
         compState = Gamestate.mainMenu;
+        displayScoreboard = false;
     }
 	
 	// Update is called once per frame
@@ -143,6 +145,16 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void displayingScoreboard()
+    {
+        displayScoreboard = true;
+    }
+
+    public void hideScoreboard()
+    {
+        displayScoreboard = false;
+    }
+
     public bool canFreeLook()
     {
         switch(gamestate)
@@ -173,6 +185,11 @@ public class GameController : MonoBehaviour {
         closeMenu();
         fromComputer();
         movieMenu.resetMovieMenu();
+    }
+
+    public bool isScoreboardShowing()
+    {
+        return displayScoreboard;
     }
 
 }
