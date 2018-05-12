@@ -71,7 +71,6 @@ public class Scoreboard : MonoBehaviour {
 
                 if (Input.GetMouseButtonDown(0))            //Change to make on mouse up but fix auto skipping first actor
                 {
-                    Debug.Log("skipping");
                     t = 5;
                 }
                 yield return null;

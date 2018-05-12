@@ -11,7 +11,7 @@ public class ActorProfile : MonoBehaviour {
     public SpriteRenderer actorPictureSprite;
     public int actorNum;
 
-    private float comedy, action, romance, horror, scifi, other;
+    public float comedy, action, romance, horror, scifi, other;
     private string actorName;
     private Sprite actorPicture;
     private Actor actor;

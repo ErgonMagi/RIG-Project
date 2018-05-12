@@ -43,11 +43,11 @@ public class GameController : MonoBehaviour {
 
         menus = new List<GameObject>();
 
-        menus.Add(actorStatsMenu.gameObject);
+        //menus.Add(actorStatsMenu.gameObject);
         menus.Add(movieMenu.gameObject);
         menus.Add(mainMenu);
 
-        compState = Gamestate.mainMenu;
+        compState = Gamestate.movieMenu;
         displayScoreboard = false;
     }
 	
@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour {
         if(!cam.isLerping())
         {
             cam.lerpToLoc(new Vector3(-5.85f, 1.343f, -3.447f), new Vector3(0, 90, 0), 1.0f);
-            gamestate = Gamestate.mainMenu;
+            gamestate = Gamestate.movieMenu;
             cam.swapCamAfterLerp(computerCam);
         }
     }
@@ -130,8 +130,8 @@ public class GameController : MonoBehaviour {
     {
         if (!cam.isLerping())
         {
-            gamestate = Gamestate.mainMenu;
-            compState = Gamestate.mainMenu;
+            gamestate = Gamestate.movieMenu;
+            compState = Gamestate.movieMenu;
         }
     }
 

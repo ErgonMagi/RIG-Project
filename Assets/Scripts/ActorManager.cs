@@ -149,6 +149,7 @@ public class ActorManager : MonoBehaviour {
         scifi = (float)scifi / sumOfMovies * 20;
         other = (float)other / sumOfMovies * 20;
 
+
         Sprite spriteSearch = Resources.Load<Sprite>("Actor images/" + actorData[0].name);
 
         if (spriteSearch == null)
