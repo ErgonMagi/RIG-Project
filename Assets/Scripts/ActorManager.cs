@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using TMDbLib.Objects.General;
 using System.IO;
 
 public class Results
@@ -75,8 +74,10 @@ public class ActorManager : MonoBehaviour {
             }
         }
         takenActors.Add(actorNum);
-        string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
-        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false");
+
+        string[] names = actorNames[actorNum].Split(' ');
+        //string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
+        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + names[0] + "%20" + names[1] + "&page=1&include_adult=false");
 
         StartCoroutine(downloadActorData(www, requestingObject, arrayNum));
 

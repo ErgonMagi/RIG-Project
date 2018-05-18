@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +17,25 @@ public class ActorProfile : MonoBehaviour {
     private Sprite actorPicture;
     private Actor actor;
     private Player player;
+    private List<string> actorNames;
 
     private void Start()
     {
         player = FindObjectOfType<Player>();
         actor = null;
+
+        string filePath = Path.GetFullPath("Assets/ActorNames.txt");
+
+        StreamReader reader = new StreamReader(filePath);
+
+        while (!reader.EndOfStream)
+        {
+            actorNames.Add(reader.ReadLine());
+        }
+
+        reader.Close();
+
+        this.gameObject.GetComponent<Text>().text = actorNames[1];
     }
 
     private void Update()
