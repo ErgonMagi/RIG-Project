@@ -97,6 +97,12 @@ ModelImporter:
     100178: transform7
     100180: transform8
     100182: transform9
+    100184: pCylinder13
+    100186: pCylinder14
+    100188: pCylinder15
+    100190: pCylinder16
+    100192: transform46
+    100194: transform47
     400000: //RootNode
     400002: pCube1
     400004: pCube2
@@ -189,13 +195,36 @@ ModelImporter:
     400178: transform7
     400180: transform8
     400182: transform9
+    400184: pCylinder13
+    400186: pCylinder14
+    400188: pCylinder15
+    400190: pCylinder16
+    400192: transform46
+    400194: transform47
     2100000: Chair_Seat
     2100002: phong2
+    2100004: Pant_Leg_Fabric
     2300000: pCube5
+    2300002: pCylinder15
+    2300004: pCylinder16
     3300000: pCube5
+    3300002: pCylinder15
+    3300004: pCylinder16
     4300000: pCube5
+    4300002: pCylinder15
+    4300004: pCylinder16
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chair_Seat
+    second: {fileID: 2100000, guid: fab061cd038ff4841a0fbea685487548, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pant_Leg_Fabric
+    second: {fileID: 2100000, guid: ae2168e69e0521249a87fff4931e2b1e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
