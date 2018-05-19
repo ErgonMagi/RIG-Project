@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour, ActorRequest {
 
     private bool paused;
     private bool textTyping;
+    private int letterCount;
+    private string currentText;
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +45,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             if(textTyping)
             {
                 textTyping = false;
+                dBoxText.text = currentText;
             }
             else if(paused)
             {
@@ -100,14 +103,15 @@ public class LevelManager : MonoBehaviour, ActorRequest {
 
     IEnumerator typingText(string text, Text textLoc)
     {
+        currentText = text;
         textTyping = true;
-        int count = 1;
+        letterCount = 1;
         while(textTyping)
         {
-            textLoc.text = text.Substring(0, count);
-            if(count < text.Length)
+            textLoc.text = text.Substring(0, letterCount);
+            if(letterCount < text.Length)
             {
-                count++;
+                letterCount++;
             }
             yield return new WaitForSeconds(0.04f);
         }
