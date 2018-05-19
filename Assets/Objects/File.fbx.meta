@@ -58,7 +58,12 @@ ModelImporter:
     7400004: File_Close
     7400006: File_Idle
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: File_Outer
+    second: {fileID: 2100000, guid: 22f189a38d90f4c4bad88218cf4a0b5a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

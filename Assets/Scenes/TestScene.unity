@@ -30,7 +30,7 @@ RenderSettings:
   m_HaloStrength: 0.384
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
-  m_HaloTexture: {fileID: 0}
+  m_HaloTexture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -7829,6 +7829,7 @@ GameObject:
   - component: {fileID: 1121979788}
   - component: {fileID: 1121979787}
   - component: {fileID: 1121979791}
+  - component: {fileID: 1121979792}
   m_Layer: 8
   m_Name: ComputerScreen
   m_TagString: Untagged
@@ -7915,6 +7916,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rtCam: {fileID: 1911167255}
   shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!122 &1121979792
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121979786}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4287749610
+  m_Size: 0.6
 --- !u!1 &1122545598
 GameObject:
   m_ObjectHideFlags: 0
@@ -11395,6 +11407,17 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 2c4d49305a00eb147989499c5af40a81, type: 3}
   m_PrefabInternal: {fileID: 1145226649}
+--- !u!122 &1638570612
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1638570611}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4287749610
+  m_Size: 0.6
 --- !u!114 &1638570613
 MonoBehaviour:
   m_ObjectHideFlags: 0
