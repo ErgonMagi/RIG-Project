@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour {
         menus.Add(movieMenu.gameObject);
         menus.Add(mainMenu);
 
-        compState = Gamestate.movieMenu;
+        compState = Gamestate.mainMenu;
         displayScoreboard = false;
     }
 	
@@ -78,16 +78,10 @@ public class GameController : MonoBehaviour {
                 switch(compState)
                 {
                     case Gamestate.mainMenu:
-                        if (mainMenu.transform.position.y > 75)
-                            mainMenu.transform.position -= new Vector3(0, 100, 0);
                         break;
                     case Gamestate.movieMenu:
                         if (movieMenu.gameObject.transform.position.y > 75)
                             movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
-                        break;
-                    case Gamestate.statsMenu:
-                        if (actorStatsMenu.gameObject.transform.position.y > 75)
-                            actorStatsMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
                         break;
                 }
                 break;
@@ -130,8 +124,8 @@ public class GameController : MonoBehaviour {
     {
         if (!cam.isLerping())
         {
-            gamestate = Gamestate.movieMenu;
-            compState = Gamestate.movieMenu;
+            gamestate = Gamestate.mainMenu;
+            compState = Gamestate.mainMenu;
         }
     }
 
@@ -141,7 +135,7 @@ public class GameController : MonoBehaviour {
         {
             gamestate = Gamestate.movieMenu;
             compState = Gamestate.movieMenu;
-            movieMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+            
         }
     }
 

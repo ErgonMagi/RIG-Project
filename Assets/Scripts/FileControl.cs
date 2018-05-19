@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FileControl : MonoBehaviour {
+public class FileControl : MonoBehaviour, ClickableObject {
 
 	Animator anim;
 
@@ -11,11 +11,9 @@ public class FileControl : MonoBehaviour {
 	{
 		anim = GetComponent<Animator>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (Input.GetKeyDown (KeyCode.Space))
-			anim.SetTrigger ("File_Clicked");
-	}
+
+    public void onClick()
+    {
+        anim.SetTrigger("File_Clicked");
+    }
 }
