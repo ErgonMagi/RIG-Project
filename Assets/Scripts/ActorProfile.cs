@@ -23,20 +23,6 @@ public class ActorProfile : MonoBehaviour {
     {
         player = FindObjectOfType<Player>();
         actor = null;
-
-        string filePath = Path.GetFullPath("Assets/ActorNames.txt");
-        actorNames = new List<string>();
-
-        StreamReader reader = new StreamReader(filePath);
-
-        while (!reader.EndOfStream)
-        {
-            actorNames.Add(reader.ReadLine());
-        }
-
-        reader.Close();
-
-        actorNameText.text = actorNames[0];
     }
 
     private void Update()

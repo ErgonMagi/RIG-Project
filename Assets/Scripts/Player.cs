@@ -2,24 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, ActorRequest {
 
     private Actor[] clients;
     private ActorManager actorManager;
 
 	// Use this for initialization
 	void Start () {
-        clients = new Actor[5];
+        clients = new Actor[20];
         actorManager = FindObjectOfType<ActorManager>();       
 	}
-
-    public void init()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            actorManager.generateActor(this, i);
-        }
-    }
 
     public Actor getActor(int actorNum)
     {

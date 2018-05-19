@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour {
     public Vector3 mainCamStartPos = new Vector3(-6.581f, 1.23f, -3.388f);
     public Vector3 mainCamLookingAtCompScreenPos = new Vector3(-6.581f, 1.23f, -3.388f);
 
+    private bool cameraLocked;
+    private bool playerCanClick;
+
     private enum Gamestate
     {
         desk, mainMenu, statsMenu, movieMenu
@@ -151,6 +154,10 @@ public class GameController : MonoBehaviour {
 
     public bool canFreeLook()
     {
+        if(cameraLocked)
+        {
+            return false;
+        }
         switch(gamestate)
         {
             case Gamestate.desk:
@@ -186,4 +193,28 @@ public class GameController : MonoBehaviour {
         return displayScoreboard;
     }
 
+    public void lockCamera()
+    {
+        cameraLocked = true;
+    }
+
+    public void unlockCamera()
+    {
+        cameraLocked = false;
+    }
+
+    public bool canClick()
+    {
+        return playerCanClick;
+    }
+
+    public void lockClicking()
+    {
+        playerCanClick = false;
+    }
+
+    public void unlockClicking()
+    {
+        playerCanClick = true;
+    }
 }

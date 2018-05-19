@@ -53,29 +53,34 @@ public class InputManager : MonoBehaviour
                 tapPosition = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
                 swipeLength = 0;
 
-                //Draws Vector3 dirFromCam a ray from the current camera through the mouse to check for interactable objects
-                Vector3 dirFromCam = new Vector3(0, 0, 1);
-                if (!cameraManager.getCam().orthographic)
+
+                //Check if player can interact with objects
+                if (gameController.canClick())
                 {
-                    dirFromCam = tapPosition - cameraManager.getCam().transform.position;
-                }
-
-                RaycastHit[] hit = Physics.RaycastAll(tapPosition, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("Clickable"));
-
-
-                //For every object hit, check if it is interactables
-                foreach (RaycastHit h in hit)
-                {
-                    clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();
-                    if (h.collider.gameObject.GetComponent<ActorPicture>() != null)
+                    //Draws Vector3 dirFromCam a ray from the current camera through the mouse to check for interactable objects
+                    Vector3 dirFromCam = new Vector3(0, 0, 1);
+                    if (!cameraManager.getCam().orthographic)
                     {
-                        objectSelected = true;
-                        clickedObject.onClick();
+                        dirFromCam = tapPosition - cameraManager.getCam().transform.position;
                     }
-                    if (clickedObject != null)
+
+                    RaycastHit[] hit = Physics.RaycastAll(tapPosition, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("Clickable"));
+
+
+                    //For every object hit, check if it is interactables
+                    foreach (RaycastHit h in hit)
                     {
-                        break;                  //If an interactable object is found, it is "selected" and the loop ends.
-                    }                           //The selectable object will be activated if the player does not swipe (See mouse release code)
+                        clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();
+                        if (h.collider.gameObject.GetComponent<ActorPicture>() != null)
+                        {
+                            objectSelected = true;
+                            clickedObject.onClick();
+                        }
+                        if (clickedObject != null)
+                        {
+                            break;                  //If an interactable object is found, it is "selected" and the loop ends.
+                        }                           //The selectable object will be activated if the player does not swipe (See mouse release code)
+                    }
                 }
 
             }
@@ -90,6 +95,8 @@ public class InputManager : MonoBehaviour
                 swipeLength += swipeDir.magnitude;
                 if (!objectSelected)
                 {
+
+                    //Check if player can swipe
                     if (gameController.canFreeLook())
                     {
                         //Rotate the camera around itself in the direction of swiping

@@ -49,12 +49,20 @@ public class ActorManager : MonoBehaviour {
         reader.Close();
 
         Player p = FindObjectOfType<Player>();
-        p.init();
        
     }
 	
-    public void generateActor(Player requestingObject, int arrayNum)
+    public void generateActor(ActorRequest requestingObject, int arrayNum)
+    {     
+        StartCoroutine(downloadActorData(requestingObject, arrayNum));
+    }
+
+    IEnumerator downloadActorData(ActorRequest requestingProfile, int arrayNum)
     {
+        while(actorNames == null)
+        {
+            yield return null;
+        }
         int actorNum = -1;
         bool pickingActor = true;
         while (pickingActor)
@@ -79,17 +87,12 @@ public class ActorManager : MonoBehaviour {
         //string urlName = System.Uri.EscapeUriString(actorNames[actorNum]);
         WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + names[0] + "%20" + names[1] + "&page=1&include_adult=false");
 
-        StartCoroutine(downloadActorData(www, requestingObject, arrayNum));
 
-    }
-
-    IEnumerator downloadActorData(WWW actorDownload, Player requestingProfile, int arrayNum)
-    {
-        while (!actorDownload.isDone)
+        while (!www.isDone)
         {
             yield return null;
         }
-        Results result = JsonConvert.DeserializeObject<Results>(actorDownload.text);
+        Results result = JsonConvert.DeserializeObject<Results>(www.text);
         ActorData[] actorData = result.results;
         float action, comedy, romance, scifi, horror, other;
         action = 1;
