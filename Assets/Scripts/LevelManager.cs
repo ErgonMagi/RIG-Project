@@ -8,8 +8,15 @@ public class LevelManager : MonoBehaviour, ActorRequest {
     Actor[] startingActorChoices;
     ActorManager actorManager;
     GameController gameController;
+    CameraManager cameraManager;
+    Player player;
 
     public GameObject dialogueBox;
+    public GameObject folder;
+    public GameObject desktop;
+
+    [SerializeField]
+    public GameObject[] actorChoices; 
 
     private Text dBoxText;
 
@@ -23,10 +30,14 @@ public class LevelManager : MonoBehaviour, ActorRequest {
 
         actorManager = FindObjectOfType<ActorManager>();
         gameController = FindObjectOfType<GameController>();
+        cameraManager = FindObjectOfType<CameraManager>();
+        player = FindObjectOfType<Player>();
 
-        startingActorChoices = new Actor[3];
-
-        actorManager.generateActor(this, 0);
+        startingActorChoices = new Actor[5];
+        for(int i = 0; i < 5; i++)
+        {
+            actorManager.generateActor(this, i);
+        }
         dBoxText = dialogueBox.GetComponentInChildren<Text>();
 
         StartCoroutine(levelOne());
@@ -83,24 +94,71 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         dialogueBox.SetActive(true);
         paused = true;
 
+        //Welcome
         StartCoroutine(typingText(l1text[0], dBoxText));
         while (paused)
         {         
             yield return null;
         }
 
+        //look at the folder
         StartCoroutine(typingText(l1text[1], dBoxText));
+        paused = true;
+        cameraManager.getCam().transform.Rotate(0,45f,0);
+        Vector3 camRot = cameraManager.getCam().transform.rotation.eulerAngles;
+        cameraManager.getCam().transform.Rotate(0, -45f, 0);
+        cameraManager.lerpToLoc(cameraManager.getCam().transform.position, camRot, 1f);
+        Behaviour halo = (Behaviour)folder.GetComponent("Halo");
+        halo.enabled = true;
+        while (paused)
+        {
+            yield return null;
+        }
+        
+        //Wait for player to click folder
+        //gameController.unlockCamera();
+        gameController.unlockClicking();
+
+        while(!gameController.isAtFile())
+        {
+            yield return null;
+        }
+
+        //Explain folder
+        gameController.lockClicking();
+        StartCoroutine(typingText(l1text[2], dBoxText));
         paused = true;
         while (paused)
         {
             yield return null;
         }
 
+
+        //Offer actors
+        StartCoroutine(typingText(l1text[3], dBoxText));
+        paused = true;
+        for(int i = 0; i < 4; i ++)
+        {
+            actorChoices[i].SetActive(true);
+            ActorSelection asel = actorChoices[i].GetComponent<ActorSelection>();
+            asel.setActor(startingActorChoices[i]);         
+        }
+        while (player.getActor(0) == null)
+        {
+            yield return null;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            actorChoices[i].SetActive(false);
+        }
+
+        //Turn off when done
         dialogueBox.SetActive(false);
-        gameController.unlockCamera();
-        gameController.unlockClicking();
     }
 
+
+
+    //Function used to type text one character at a time
     IEnumerator typingText(string text, Text textLoc)
     {
         currentText = text;

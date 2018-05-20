@@ -103,11 +103,11 @@ public class InputManager : MonoBehaviour
                         cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
                         cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
                     }
-                    else if (gameController.isInStatsMenu())
+                    /*else if (gameController.)
                     {
                         actorStatsMenu.scroll(swipeDir.x);
-                    }
-                    else if (gameController.isInMovieMenu())
+                    }*/
+                    else if (gameController.isAtComputer())
                     {
                         movieMenu.scroll(swipeDir.x);
                     }

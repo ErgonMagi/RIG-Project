@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 
     public Camera deskCam;
     public Camera computerCam;
+    public Camera fileCam;
     public GameObject mainMenu;
 
     private ActorStatsMenu actorStatsMenu;
@@ -27,7 +28,7 @@ public class GameController : MonoBehaviour {
 
     private enum Gamestate
     {
-        desk, mainMenu, statsMenu, movieMenu
+        desk, mainMenu, file, movieMenu
     }
 
     private bool displayScoreboard;
@@ -73,10 +74,6 @@ public class GameController : MonoBehaviour {
                     movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
                 scoreManager.Start();
                 break;
-            case Gamestate.statsMenu:
-                if (actorStatsMenu.gameObject.transform.position.y > 75)
-                    actorStatsMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
-                break;
             case Gamestate.desk:
                 switch(compState)
                 {
@@ -93,6 +90,7 @@ public class GameController : MonoBehaviour {
 
     }
 
+    //Moves to computer
     public void toComputer()
     {
         if(!cam.isLerping())
@@ -103,6 +101,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
+
+    //Moves back to desk
     public void fromComputer()
     {
         if (!cam.isLerping())
@@ -113,45 +113,40 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void openStatsMenu()
+    //Moves to file
+    public void toFile()
     {
         if (!cam.isLerping())
         {
-            gamestate = Gamestate.statsMenu;
-            compState = Gamestate.statsMenu;
-            actorStatsMenu.gameObject.transform.position += new Vector3(0, -100, 0);
+            cam.lerpToLoc(fileCam.transform.position, fileCam.transform.rotation.eulerAngles, 1.0f);
+            gamestate = Gamestate.file;
         }
     }
 
-    public void closeMenu()
+    //Moves back from file
+    public void fromFile()
     {
         if (!cam.isLerping())
         {
-            gamestate = Gamestate.mainMenu;
-            compState = Gamestate.mainMenu;
+            cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 90, 0), 1.0f);
+            gamestate = Gamestate.desk;
         }
     }
 
-    public void openMovieMenu()
-    {
-        if (!cam.isLerping())
-        {
-            gamestate = Gamestate.movieMenu;
-            compState = Gamestate.movieMenu;
-            
-        }
-    }
-
+    //Shows scoreboard
     public void displayingScoreboard()
     {
         displayScoreboard = true;
     }
 
+
+    //Hides scoreboard
     public void hideScoreboard()
     {
         displayScoreboard = false;
     }
 
+    //Returns whether freelook is enabled
     public bool canFreeLook()
     {
         if(cameraLocked)
@@ -166,53 +161,63 @@ public class GameController : MonoBehaviour {
         return false;
     }
 
-    public bool isInStatsMenu()
-    {
-        return gamestate == Gamestate.statsMenu;
-    }
 
-    public bool isInMovieMenu()
+    //Returns if at the computer
+    public bool isAtComputer()
     {
         return gamestate == Gamestate.movieMenu;
     }
 
+    //Returns if at file
+    public bool isAtFile()
+    {
+        return gamestate == Gamestate.file;
+    }
+
+    //Returns if player is at the desk
     public bool isAtDesk()
     {
         return gamestate == Gamestate.desk;
     }
 
+    //Resets scene for new week
     public void newWeek()
     {
-        closeMenu();
         fromComputer();
         movieMenu.resetMovieMenu();
     }
 
+    //Returns is scoreboard is displaying
     public bool isScoreboardShowing()
     {
         return displayScoreboard;
     }
 
+    //Locks the camera
     public void lockCamera()
     {
         cameraLocked = true;
     }
 
+    //Unlocks the camera
     public void unlockCamera()
     {
         cameraLocked = false;
     }
 
+    //returns if clicking is enabled
     public bool canClick()
     {
         return playerCanClick;
     }
 
+    //Locks clicking
     public void lockClicking()
     {
         playerCanClick = false;
     }
 
+    //Unlocks clicking
     public void unlockClicking()
     {
         playerCanClick = true;

@@ -41,9 +41,17 @@ public class ActorManager : MonoBehaviour {
 
         StreamReader reader = new StreamReader(filePath);
 
+        if(reader.EndOfStream)
+        {
+            
+        }
+
+
         while(!reader.EndOfStream)
         {
-            actorNames.Add(reader.ReadLine());
+            string line = reader.ReadLine();
+            Debug.Log(line);
+            actorNames.Add(line);
         }
 
         reader.Close();

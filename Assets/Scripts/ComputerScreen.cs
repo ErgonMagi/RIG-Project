@@ -13,6 +13,8 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
     public Camera rtCam;
     public Shader shader;
 
+    private bool unlocked;
+
 	// Use this for initialization
 	void Start () {
         rtCam.enabled = true;
@@ -24,14 +26,20 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
         GetComponent<Renderer>().material.mainTexture = rt;
         GetComponent<Renderer>().material.shader = shader;
 
+        unlocked = false;
 
     }
 	
     public void onClick()
     {
-        if(gameController.isAtDesk())
+        if(gameController.isAtDesk() && unlocked)
         {
             gameController.toComputer();
         }
+    }
+
+    public void unlock()
+    {
+        unlocked = true;
     }
 }

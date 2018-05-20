@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class FileControl : MonoBehaviour, ClickableObject {
 
-	Animator anim;
+	private Animator anim;
+    private GameController gameController;
 
 	// Use this for initialization
 	void Start () 
 	{
 		anim = GetComponent<Animator>();
+        gameController = FindObjectOfType<GameController>();
 	}
 
     public void onClick()
     {
         anim.SetTrigger("File_Clicked");
+        gameController.toFile();
     }
 }
