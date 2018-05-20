@@ -34,7 +34,27 @@ ModelImporter:
     4300000: polySurface1
     4300002: polySurface2
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ashtray_Ceramic
+    second: {fileID: 2100000, guid: 69547029a5927cf4eb32bcad18149f63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ciggy_Body
+    second: {fileID: 2100000, guid: 715ff84d0a7ec8643b8bded8f52ac10d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ciggy_Burnt_End
+    second: {fileID: 2100000, guid: 3cc5f8eb82ae0c3449245e1191de2871, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ciggy_Butt
+    second: {fileID: 2100000, guid: d7be65945c504074a857c9ef4e941917, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

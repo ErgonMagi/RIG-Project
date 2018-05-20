@@ -20,11 +20,17 @@ ModelImporter:
     400010: transform1
     400012: transform2
     2100000: blinn1
+    2100002: Mug_Ceramic
     2300000: pCylinder2
     3300000: pCylinder2
     4300000: pCylinder2
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mug_Ceramic
+    second: {fileID: 2100000, guid: 13e99ca514d20034e9347bc205bf2d49, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
