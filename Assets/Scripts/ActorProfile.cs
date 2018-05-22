@@ -30,6 +30,8 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
 
     private float rotateStep;
 
+    int stepcount;
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -41,7 +43,8 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
         faceUpRot = new Vector3(-90.0f, 15.0f, -90.0f);
         faceDownRot = new Vector3(90.0f, 15.0f, -90.0f);
 
-        rotateStep = 70.0f  / (rotateTime/Time.deltaTime);
+       
+        stepcount = 0;
     }
 
     private void Update()
@@ -64,6 +67,7 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
                 }
                 else
                 {
+                    rotateStep = 180.0f / (rotateTime / Time.deltaTime);
                     this.transform.RotateAround(this.transform.position, this.transform.up, rotateStep);
                 }
             }
@@ -76,6 +80,8 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
                 }
                 else
                 {
+                    stepcount++;
+                    rotateStep = 180.0f / (rotateTime / Time.deltaTime);
                     this.transform.RotateAround(this.transform.position, this.transform.up, -rotateStep);
                 }
             }
@@ -129,7 +135,6 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
 
     public void onClick()
     {
-        Debug.Log("Clicked");
         timeRotating = 0;
         rotating = true;
         faceUp = !faceUp;
