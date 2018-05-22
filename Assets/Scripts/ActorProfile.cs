@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActorProfile : MonoBehaviour {
+public class ActorProfile : MonoBehaviour, ClickableObject {
 
     public GameObject comedyBar, actionBar, romanceBar, horrorBar, scifiBar, otherBar;
     public Text comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
@@ -19,10 +19,29 @@ public class ActorProfile : MonoBehaviour {
     private Player player;
     private List<string> actorNames;
 
+    private bool faceUp;
+    private bool rotating;
+
+    private Vector3 faceUpRot;
+    private Vector3 faceDownRot;
+
+    private float timeRotating;
+    public float rotateTime;
+
+    private float rotateStep;
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
         actor = null;
+
+        faceUp = true;
+        rotating = false;
+
+        faceUpRot = new Vector3(-90.0f, 15.0f, -90.0f);
+        faceDownRot = new Vector3(90.0f, 15.0f, -90.0f);
+
+        rotateStep = 70.0f  / (rotateTime/Time.deltaTime);
     }
 
     private void Update()
@@ -30,6 +49,36 @@ public class ActorProfile : MonoBehaviour {
         if(actor == null)
         {
             getActorFromPlayer();
+        }
+
+        if(rotating)
+        {
+            timeRotating += Time.deltaTime;
+            //Check if rotating to be faceup
+            if(faceUp)
+            {
+                if(timeRotating >= rotateTime)
+                {
+                    rotating = false;
+                    this.transform.localRotation = Quaternion.Euler(faceDownRot);
+                }
+                else
+                {
+                    this.transform.RotateAround(this.transform.position, this.transform.up, rotateStep);
+                }
+            }
+            else
+            {
+                if (timeRotating >= rotateTime)
+                {
+                    rotating = false;
+                    this.transform.localRotation = Quaternion.Euler(faceUpRot);
+                }
+                else
+                {
+                    this.transform.RotateAround(this.transform.position, this.transform.up, -rotateStep);
+                }
+            }
         }
     }
 
@@ -76,5 +125,13 @@ public class ActorProfile : MonoBehaviour {
         otherVal.text = ((int)other).ToString();
         actionVal.text = ((int)action).ToString();
         actorPictureSprite.sprite = actorPicture;
+    }
+
+    public void onClick()
+    {
+        Debug.Log("Clicked");
+        timeRotating = 0;
+        rotating = true;
+        faceUp = !faceUp;
     }
 }

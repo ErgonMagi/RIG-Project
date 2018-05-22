@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour {
     public Camera deskCam;
     public Camera computerCam;
     public Camera fileCam;
-    public GameObject mainMenu;
 
     private ActorStatsMenu actorStatsMenu;
     private MovieMenu movieMenu;
@@ -49,7 +48,6 @@ public class GameController : MonoBehaviour {
 
         //menus.Add(actorStatsMenu.gameObject);
         menus.Add(movieMenu.gameObject);
-        menus.Add(mainMenu);
 
         compState = Gamestate.mainMenu;
         displayScoreboard = false;
@@ -65,10 +63,6 @@ public class GameController : MonoBehaviour {
 
         switch(gamestate)
         {
-            case Gamestate.mainMenu: 
-                if(mainMenu.transform.position.y > 75)
-                     mainMenu.transform.position -= new Vector3(0, 100, 0);
-                break;
             case Gamestate.movieMenu:
                 if (movieMenu.gameObject.transform.position.y > 75)
                     movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);

@@ -134,10 +134,16 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         }
 
 
-        //Offer actors
+        //Offer actors text
         StartCoroutine(typingText(l1text[3], dBoxText));
         paused = true;
-        for(int i = 0; i < 4; i ++)
+        while (paused)
+        {
+            yield return null;
+        }
+
+        //Wait for player to choose an actor
+        for (int i = 0; i < 4; i ++)
         {
             actorChoices[i].SetActive(true);
             ActorSelection asel = actorChoices[i].GetComponent<ActorSelection>();
@@ -154,6 +160,8 @@ public class LevelManager : MonoBehaviour, ActorRequest {
 
         //Turn off when done
         dialogueBox.SetActive(false);
+
+        gameController.unlockClicking();
     }
 
 

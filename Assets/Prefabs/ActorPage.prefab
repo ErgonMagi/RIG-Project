@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224120860003377860}
   - component: {fileID: 222042463354372200}
   - component: {fileID: 114864381849493260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ActionNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4198677385406358}
   - component: {fileID: 212185379295901148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ScifiFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4153497165331714}
   - component: {fileID: 212988599940616848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OtherFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 65947941306268702}
   - component: {fileID: 23967987642542592}
   - component: {fileID: 114865472700448594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ActorPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 224830728998798824}
   - component: {fileID: 222194665395690612}
   - component: {fileID: 114492080955714572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OtherNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4687683807192606}
   - component: {fileID: 212497941612428038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ScifiBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 224297112008969038}
   - component: {fileID: 222788860478888450}
   - component: {fileID: 114978092104391850}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Other Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 224439332118871438}
   - component: {fileID: 222263358176702780}
   - component: {fileID: 114190128004318498}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Horror Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4801483535575276}
   - component: {fileID: 212553497383533596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HorrorBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4898486454755432}
   - component: {fileID: 212603455660751722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HorrorFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4366394986255396}
   - component: {fileID: 212014989170358880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ActionFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 224903050390492210}
   - component: {fileID: 222209392967662938}
   - component: {fileID: 114606682529370300}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Actor Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 224607066517330420}
   - component: {fileID: 222143453207289866}
   - component: {fileID: 114843580448060912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RomanceNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041911794633184}
   - component: {fileID: 212310174625875032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RomanceBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580804227090934}
   - component: {fileID: 212039632408849180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ComedyFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4269372113827076}
   - component: {fileID: 212005022192444062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OtherBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 224721897234217672}
   - component: {fileID: 222402153853227728}
   - component: {fileID: 114261156178915594}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Sci-Fi Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4390298232080568}
   - component: {fileID: 212059050108012000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 224398216416086302}
   - component: {fileID: 222299111949147730}
   - component: {fileID: 114300354687248628}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Romance label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 223420104517607448}
   - component: {fileID: 114452553610276178}
   - component: {fileID: 114672716546920502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StatsPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 224330806357664460}
   - component: {fileID: 222175410943199338}
   - component: {fileID: 114685834587875756}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Comedy Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 224621563301088168}
   - component: {fileID: 222646400937616954}
   - component: {fileID: 114976634106230574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ScifiNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 224662944214002966}
   - component: {fileID: 222915235220467442}
   - component: {fileID: 114015097509362428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ComedyNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4574011359647028}
   - component: {fileID: 212963219796046654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ActionBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 224265233009199822}
   - component: {fileID: 222632729521241608}
   - component: {fileID: 114372371349438826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HorrorNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 224745670161683518}
   - component: {fileID: 222686980948346030}
   - component: {fileID: 114467222865175774}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Action Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4513019066541500}
   - component: {fileID: 212760561756703724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ComedyBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4113082957421544}
   - component: {fileID: 212466971878076098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RomanceFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,39 +498,39 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998723221425248}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.26, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4041911794633184}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4153497165331714
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1193062838418076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.26, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4269372113827076}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4198677385406358
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1086760646436848}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4687683807192606}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4269372113827076
 Transform:
   m_ObjectHideFlags: 1
@@ -552,13 +552,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1494964874393408}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.27, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4574011359647028}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4390298232080568
 Transform:
   m_ObjectHideFlags: 1
@@ -608,13 +608,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627807975539588}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.21, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4513019066541500}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4687683807192606
 Transform:
   m_ObjectHideFlags: 1
@@ -651,13 +651,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1483140754759860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.25, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4801483535575276}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &23967987642542592
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -672,7 +672,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dd9c69f5a26f3c4abc1bbb52c53ea13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1151,6 +1151,7 @@ MonoBehaviour:
   horror: 0
   scifi: 0
   other: 0
+  rotateTime: 2
 --- !u!114 &114976634106230574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2086,18 +2087,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1193202442706412}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.262}
-  m_LocalScale: {x: 0.22630979, y: 0.28451365, z: 0.0015437944}
+  m_LocalRotation: {x: -0.5609855, y: -0.43045935, z: -0.43045935, w: 0.5609855}
+  m_LocalPosition: {x: 0, y: 0, z: -4.3526}
+  m_LocalScale: {x: 0.18, y: 0.25, z: 0.0015437944}
   m_Children:
   - {fileID: 4390298232080568}
   - {fileID: 224210831073042932}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 15, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.629, y: 1.411}
+  m_AnchoredPosition: {x: -5.8108, y: 1.013}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224721897234217672
