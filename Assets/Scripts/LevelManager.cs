@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             "When you acquire more actors, you can swipe left or right to view them all.",
             "Click the back arrow to return to your desk",
             "Now, we get to the important part. Click on the computer and let’s get down to business.",
-            "Here, where you’ll be sending your actors for auditions. To send an actor, simply drag the actor to the square in the movie. Go ahead and try it out ! ",
+            "Here, where you’ll be sending your actors for auditions. To send an actor, simply drag the actor to the square in the movie, then click the button in the bottom right. Go ahead and try it out ! ",
             "Great job! You did it! You’ll be climbing that managerial ladder in no time.",
             "Certain auditions take time to complete. This means the actor will be unavailable for other auditions until the current audition is completed.",
             "Here’s another thing to remember. Sending actors to movies that don’t fit them could result in failure. If the actor fails too many times, they will leave the agency. If too many actors leave, you and me will be looking for a new audition.",
@@ -208,13 +208,33 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         desktop.GetComponent<ComputerScreen>().unlock();
         StopCoroutine(typingText(l1text[7], dBoxText));
         StartCoroutine(typingText(l1text[8], dBoxText));
+        paused = true;
+        while (paused)
+        {
+            yield return null;
+        }
         while (!gameController.isAtComputer())
         {
             yield return null;
         }
 
+        //Explain sending actors
+        StopCoroutine(typingText(l1text[8], dBoxText));
+        StartCoroutine(typingText(l1text[9], dBoxText));
+        paused = true;
+        while (paused)
+        {
+            yield return null;
+        }
+        dialogueBox.SetActive(false);
+
+        while (gameController.isAtComputer())
+        {
+            yield return null;
+        }
+
         //Turn off when done
-        
+
         gameController.unlockCamera();
         dialogueBox.SetActive(false);
 
