@@ -24,13 +24,19 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
 
     private Vector3 faceUpRot;
     private Vector3 faceDownRot;
+    public GameObject rotatePos;
+
+    private Vector3 startPos;
+    private Vector3 flipPos;
+
+    private GameController gc;
 
     private float timeRotating;
     public float rotateTime;
 
     private float rotateStep;
 
-    int stepcount;
+    private LevelManager lm;
 
     private void Start()
     {
@@ -40,11 +46,14 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
         faceUp = true;
         rotating = false;
 
-        faceUpRot = new Vector3(-90.0f, 15.0f, -90.0f);
-        faceDownRot = new Vector3(90.0f, 15.0f, -90.0f);
+        faceUpRot = new Vector3(-90.0f, 13.146f, -90.0f);
+        faceDownRot = new Vector3(90.0f, 13.146f, -90.0f);
 
-       
-        stepcount = 0;
+        startPos = this.transform.position;
+        flipPos = this.transform.position + this.transform.right * 0.015f;
+
+        gc = FindObjectOfType<GameController>();
+        lm = FindObjectOfType<LevelManager>();
     }
 
     private void Update()
@@ -64,11 +73,13 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
                 {
                     rotating = false;
                     this.transform.localRotation = Quaternion.Euler(faceDownRot);
+                    this.transform.position = startPos;
                 }
                 else
                 {
                     rotateStep = 180.0f / (rotateTime / Time.deltaTime);
-                    this.transform.RotateAround(this.transform.position, this.transform.up, rotateStep);
+                    this.transform.RotateAround(rotatePos.transform.position, this.transform.up, -rotateStep);
+                    this.transform.position = flipPos + (startPos - flipPos) * (timeRotating / rotateTime);
                 }
             }
             else
@@ -77,12 +88,13 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
                 {
                     rotating = false;
                     this.transform.localRotation = Quaternion.Euler(faceUpRot);
+                    this.transform.position = flipPos;
                 }
                 else
                 {
-                    stepcount++;
                     rotateStep = 180.0f / (rotateTime / Time.deltaTime);
-                    this.transform.RotateAround(this.transform.position, this.transform.up, -rotateStep);
+                    this.transform.RotateAround(rotatePos.transform.position, this.transform.up, rotateStep);
+                    this.transform.position = startPos + (flipPos - startPos) * (timeRotating / rotateTime);
                 }
             }
         }
@@ -135,8 +147,12 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
 
     public void onClick()
     {
-        timeRotating = 0;
-        rotating = true;
-        faceUp = !faceUp;
+        if(gc.isAtFile())
+        {
+            timeRotating = 0;
+            rotating = true;
+            faceUp = !faceUp;
+            lm.checkedStats();
+        }
     }
 }

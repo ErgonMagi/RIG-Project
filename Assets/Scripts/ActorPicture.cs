@@ -135,6 +135,15 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         }
     }
 
+    public bool isAssigned()
+    {
+        if(actor != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void Reset()
     {
         selected = false;

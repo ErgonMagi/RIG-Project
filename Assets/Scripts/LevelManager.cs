@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
     public GameObject dialogueBox;
     public GameObject folder;
     public GameObject desktop;
+    public GameObject backArrow;
 
     [SerializeField]
     public GameObject[] actorChoices; 
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
     private bool textTyping;
     private int letterCount;
     private string currentText;
+    private bool checkStats;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +41,8 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             actorManager.generateActor(this, i);
         }
         dBoxText = dialogueBox.GetComponentInChildren<Text>();
+
+        checkStats = false;
 
         StartCoroutine(levelOne());
 	}
@@ -78,6 +82,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             "Great! Now, tap on the actors picture to see their stats.",
             "These are your actor’s stats. They show what genre of movies your actors have acted in. Keep these stats in mind when sending your actors out to movies. They have a high chance of getting selected if movie fits the genre the actors are famous for.",
             "When you acquire more actors, you can swipe left or right to view them all.",
+            "Click the back arrow to return to your desk",
             "Now, we get to the important part. Click on the computer and let’s get down to business.",
             "Here, where you’ll be sending your actors for auditions. To send an actor, simply drag the actor to the square in the movie. Go ahead and try it out ! ",
             "Great job! You did it! You’ll be climbing that managerial ladder in no time.",
@@ -126,6 +131,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
 
         //Explain folder
         gameController.lockClicking();
+        StopCoroutine(typingText(l1text[1], dBoxText));
         StartCoroutine(typingText(l1text[2], dBoxText));
         paused = true;
         while (paused)
@@ -135,6 +141,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
 
 
         //Offer actors text
+        StopCoroutine(typingText(l1text[2], dBoxText));
         StartCoroutine(typingText(l1text[3], dBoxText));
         paused = true;
         while (paused)
@@ -158,10 +165,60 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             actorChoices[i].SetActive(false);
         }
 
+        //Now tap stats
+        gameController.unlockClicking();
+        StopCoroutine(typingText(l1text[3], dBoxText));
+        StartCoroutine(typingText(l1text[4], dBoxText));
+        checkStats = true;
+        while (checkStats)
+        {
+            yield return null;
+        }
+        gameController.lockClicking();
+
+        //Explain stats
+        StopCoroutine(typingText(l1text[4], dBoxText));
+        StartCoroutine(typingText(l1text[5], dBoxText));
+        paused = true;
+        while (paused)
+        {
+            yield return null;
+        }
+
+        //Explain swiping
+        StopCoroutine(typingText(l1text[5], dBoxText));
+        StartCoroutine(typingText(l1text[6], dBoxText));
+        paused = true;
+        while (paused)
+        {
+            yield return null;
+        }
+
+        //Click back arrow
+        backArrow.SetActive(true);
+        StopCoroutine(typingText(l1text[6], dBoxText));
+        StartCoroutine(typingText(l1text[7], dBoxText));
+        while (gameController.isAtFile())
+        {
+            yield return null;
+        }
+
+        //Click the computer
+        gameController.unlockClicking();
+        desktop.GetComponent<ComputerScreen>().unlock();
+        StopCoroutine(typingText(l1text[7], dBoxText));
+        StartCoroutine(typingText(l1text[8], dBoxText));
+        while (!gameController.isAtComputer())
+        {
+            yield return null;
+        }
+
         //Turn off when done
+        
+        gameController.unlockCamera();
         dialogueBox.SetActive(false);
 
-        gameController.unlockClicking();
+        
     }
 
 
@@ -181,5 +238,10 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             }
             yield return new WaitForSeconds(0.04f);
         }
+    }
+
+    public void checkedStats()
+    {
+        checkStats = false;
     }
 }

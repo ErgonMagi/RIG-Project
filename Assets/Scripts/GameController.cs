@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour {
     public Camera computerCam;
     public Camera fileCam;
 
-    private ActorStatsMenu actorStatsMenu;
     private MovieMenu movieMenu;
     private List<GameObject> menus;
     private ScoreManager scoreManager;
@@ -40,7 +39,6 @@ public class GameController : MonoBehaviour {
     void Start () {
         gamestate = Gamestate.desk;
         cam = FindObjectOfType<CameraManager>();
-        actorStatsMenu = FindObjectOfType<ActorStatsMenu>();
         movieMenu = FindObjectOfType<MovieMenu>();
         scoreManager = FindObjectOfType<ScoreManager>();
 
@@ -55,6 +53,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
         for(int i = 0; i < menus.Count; i++)
         {
             if(menus[i].transform.position.y < 75)

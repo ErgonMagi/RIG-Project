@@ -50,8 +50,6 @@ public class ActorManager : MonoBehaviour {
         }
 
         reader.Close();
-
-        Player p = FindObjectOfType<Player>();
        
     }
 	

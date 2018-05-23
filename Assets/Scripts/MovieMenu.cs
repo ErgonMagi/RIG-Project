@@ -21,6 +21,21 @@ public class MovieMenu : MonoBehaviour {
         StartCoroutine(allocateActors());
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < actorProfiles.Length; i++)
+        {
+            if(actorProfiles[i].GetComponent<ActorPicture>().isAssigned())
+            {
+                actorProfiles[i].SetActive(true);
+            }
+            else
+            {
+                actorProfiles[i].SetActive(false);
+            }
+        }
+    }
+
     public void resetMovieMenu()
     {
         for(int i = 0; i < movieProfiles.Length; i++)

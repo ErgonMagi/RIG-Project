@@ -16,6 +16,15 @@ public class FileControl : MonoBehaviour, ClickableObject {
         col = this.GetComponent<Collider>();
 	}
 
+    private void Update()
+    {
+        if (!gameController.isAtFile() && col.enabled == false)
+        {
+            anim.SetTrigger("File_Clicked");
+            col.enabled = true;
+        }
+    }
+
     public void onClick()
     {
         if(!gameController.isAtFile())

@@ -5,12 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour, ActorRequest {
 
     private Actor[] clients;
-    private ActorManager actorManager;
 
 	// Use this for initialization
 	void Start () {
-        clients = new Actor[20];
-        actorManager = FindObjectOfType<ActorManager>();       
+        clients = new Actor[20];  
 	}
 
     public Actor getActor(int actorNum)

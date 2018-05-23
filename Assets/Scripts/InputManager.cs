@@ -23,7 +23,6 @@ public class InputManager : MonoBehaviour
     private ClickableObject clickedObject;
     private CameraManager cameraManager;
     private GameController gameController;
-    private ActorStatsMenu actorStatsMenu;
     private MovieMenu movieMenu;
     private Vector2 mouseScreenPos;
     private float swipeLength;
@@ -35,7 +34,6 @@ public class InputManager : MonoBehaviour
 
         cameraManager = FindObjectOfType<CameraManager>();
         gameController = FindObjectOfType<GameController>();
-        actorStatsMenu = FindObjectOfType<ActorStatsMenu>();
         movieMenu = FindObjectOfType<MovieMenu>();
         objectSelected = false;
     }
