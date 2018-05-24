@@ -129,6 +129,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         {
             yield return null;
         }
+        halo.enabled = false;
 
         //Explain folder
         dialogueBox.SetActive(true);
@@ -255,6 +256,10 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         gameController.unlockCamera();
         dialogueBox.SetActive(false);
 
+        for(int i = 0; i < 4; i++)
+        {
+            player.setActor(startingActorChoices[i], i + 1);
+        }
         
     }
 
@@ -272,6 +277,10 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             if(letterCount < text.Length)
             {
                 letterCount++;
+            }
+            else
+            {
+                textTyping = false;
             }
             yield return new WaitForSeconds(0.04f);
         }
