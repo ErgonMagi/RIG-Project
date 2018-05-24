@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
             "This is your actor’s folder. All the actor’s you manage can be accessed here.",
             "Since you’re new here, I’ll give you one of the actors the guy before you managed. Select an actor to add to your folder.",
             "Great! Now, tap on the actors picture to see their stats.",
-            "These are your actor’s stats. They show what genre of movies your actors have acted in. Keep these stats in mind when sending your actors out to movies. They have a high chance of getting selected if movie fits the genre the actors are famous for.",
+            "These are your actor’s stats. They show what genre of movies your actors have acted in. Keep these stats in mind when sending your actors out to movies.",
             "When you acquire more actors, you can swipe left or right to view them all.",
             "Click the back arrow to return to your desk",
             "Now, we get to the important part. Click on the computer and let’s get down to business.",
@@ -119,8 +119,9 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         {
             yield return null;
         }
-        
+
         //Wait for player to click folder
+        dialogueBox.SetActive(false);
         //gameController.unlockCamera();
         gameController.unlockClicking();
 
@@ -130,6 +131,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         }
 
         //Explain folder
+        dialogueBox.SetActive(true);
         gameController.lockClicking();
         StopCoroutine(typingText(l1text[1], dBoxText));
         StartCoroutine(typingText(l1text[2], dBoxText));
@@ -169,14 +171,25 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         gameController.unlockClicking();
         StopCoroutine(typingText(l1text[3], dBoxText));
         StartCoroutine(typingText(l1text[4], dBoxText));
+        paused = true;
+        while (paused)
+        {
+            yield return null;
+        }
+
+        //Wait for stats to be tapped
         checkStats = true;
+        dialogueBox.SetActive(false);
         while (checkStats)
         {
             yield return null;
         }
         gameController.lockClicking();
 
+        yield return new WaitForSeconds(1.0f);
+
         //Explain stats
+        dialogueBox.SetActive(true);
         StopCoroutine(typingText(l1text[4], dBoxText));
         StartCoroutine(typingText(l1text[5], dBoxText));
         paused = true;
@@ -213,12 +226,16 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         {
             yield return null;
         }
+        dialogueBox.SetActive(false);
+
+        //Wait to click computer
         while (!gameController.isAtComputer())
         {
             yield return null;
         }
 
         //Explain sending actors
+        dialogueBox.SetActive(true);
         StopCoroutine(typingText(l1text[8], dBoxText));
         StartCoroutine(typingText(l1text[9], dBoxText));
         paused = true;

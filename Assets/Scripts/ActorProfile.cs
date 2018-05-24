@@ -89,6 +89,7 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
                     rotating = false;
                     this.transform.localRotation = Quaternion.Euler(faceUpRot);
                     this.transform.position = flipPos;
+                    lm.checkedStats();
                 }
                 else
                 {
@@ -151,8 +152,7 @@ public class ActorProfile : MonoBehaviour, ClickableObject {
         {
             timeRotating = 0;
             rotating = true;
-            faceUp = !faceUp;
-            lm.checkedStats();
+            faceUp = !faceUp;         
         }
     }
 }
