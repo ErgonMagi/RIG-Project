@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3950,7 +3950,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1637486109
+  randomSeed: 639179390
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7258,8 +7258,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 692367767}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.459, y: 1.0069, z: -4.0566}
-  m_LocalScale: {x: 0.33005175, y: 0.3300516, z: 0.3300516}
+  m_LocalPosition: {x: -5.459, y: 1.0069, z: -3.942}
+  m_LocalScale: {x: 0.0061009703, y: 0.0061009675, z: 0.0061009675}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
@@ -11043,7 +11043,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1417006358}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -14233,7 +14233,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 151468edd9d6dba45bd43ba3a7a5803a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5129995
+      value: -2.3983994
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 151468edd9d6dba45bd43ba3a7a5803a, type: 3}
       propertyPath: m_LocalRotation.x
