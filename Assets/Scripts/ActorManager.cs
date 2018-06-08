@@ -37,20 +37,12 @@ public class ActorManager : MonoBehaviour {
         takenActors = new List<int>();
         actors = new List<Actor>();
 
-        string filePath = Path.GetFullPath("Assets/ActorNames.txt");
+        actorNames.Add("Alicia Vikander");
+        actorNames.Add("Henry Cavill");
+        actorNames.Add("Scarlett Johansson");
+        actorNames.Add("John Goodman");
+        actorNames.Add("Daniel Craig");
 
-        StreamReader reader = new StreamReader(filePath);
-
-
-
-        while(!reader.EndOfStream)
-        {
-            string line = reader.ReadLine();
-            actorNames.Add(line);
-        }
-
-        reader.Close();
-       
     }
 	
     public void generateActor(ActorRequest requestingObject, int arrayNum)
