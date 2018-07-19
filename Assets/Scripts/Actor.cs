@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class Actor {
 
+    enum ActorState
+    {
+        available,
+        auditioning,
+        onMovie,
+        training
+    }
+
     private float comedy, action, romance, horror, scifi, other;
     private float baseComedy, baseAction, baseRomance, baseHorror, baseScifi, baseOther;
     private string actorName;
     private Sprite actorPicture;
     private float experience;
+    private ActorState actorState;
 
     public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture)
     {
+        actorState = ActorState.available;
         comedy = com;
         romance = rom;
         action = act;
@@ -28,6 +38,25 @@ public class Actor {
         actorPicture = picture;
     }
 
+    public void toMovie()
+    {
+        actorState = ActorState.onMovie;
+    }
+
+    public void toTraining()
+    {
+        actorState = ActorState.training;
+    }
+
+    public void toAudition()
+    {
+        actorState = ActorState.auditioning;
+    }
+
+    public void returnhome()
+    {
+        actorState = ActorState.available;
+    }
     public void setComedy(float com)
     {
         comedy = com;

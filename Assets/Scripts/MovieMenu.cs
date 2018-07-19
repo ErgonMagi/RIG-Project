@@ -56,7 +56,7 @@ public class MovieMenu : MonoBehaviour {
             {
                 yield return null;
             }
-            actorProfiles[i].GetComponent<ActorPicture>().setActor(player.getActor(i));
+            actorProfiles[i].GetComponent<ActorPicture>().setActor(ref player.clients[i]);
         }
     }
 

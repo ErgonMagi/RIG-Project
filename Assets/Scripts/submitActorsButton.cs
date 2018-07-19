@@ -18,6 +18,6 @@ public class submitActorsButton : MonoBehaviour, ClickableObject {
         MovieMenu mm = FindObjectOfType<MovieMenu>();
         mm.submitActors();
 
-        scoreManager.calculateScores();
+       // scoreManager.calculateScores();
     }
 }

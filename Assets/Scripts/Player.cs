@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ActorRequest {
 
-    private Actor[] clients;
+    public Actor[] clients;
 
 	// Use this for initialization
 	void Start () {

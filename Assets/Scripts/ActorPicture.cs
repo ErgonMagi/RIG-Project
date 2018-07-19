@@ -10,7 +10,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     private Vector3 startPos;
     private CameraManager cameraManager;
     private GameObject lockedPosition;
-    private Tuple<Actor, Movie> actorMoviePair;
+    private Movie movie;
     private ScoreManager scoreManager;
 
 	// Use this for initialization
@@ -41,7 +41,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         }
 	}
 
-    public void setActor(Actor a)
+    public void setActor(ref Actor a)
     {
         actor = a;
         GetComponent<SpriteRenderer>().sprite = actor.getPicture();
@@ -49,11 +49,12 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
 
     public void submitActorMoviePair()
     {
-        if(actorMoviePair != null)
+        if(movie != null)
         {
-            scoreManager.setPair(actorMoviePair.Item1, actorMoviePair.Item2);
+            Task t = new Task(ref actor, ref movie, 10, true);
+            FindObjectOfType<TaskManager>().addTask(t);
         }
-        actorMoviePair = null;
+        movie = null;
     }
 
     public void onClick()
@@ -126,7 +127,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
             if (h.collider.gameObject.layer == LayerMask.NameToLayer("ActorSlot"))
             {
                 lockedPosition = h.collider.gameObject;
-                actorMoviePair = Tuple.Create(actor, h.collider.gameObject.GetComponentInParent<MovieProfile>().getMovie());
+                movie = h.collider.gameObject.GetComponentInParent<MovieProfile>().getMovie();
             }
         }
         if (hit.Length == 0)
@@ -148,7 +149,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     {
         selected = false;
         this.transform.position = startPos;
-        actorMoviePair = null;
+        movie = null;
         lockedPosition = null;
     }
 }
