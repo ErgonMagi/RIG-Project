@@ -11,7 +11,7 @@ public class Task {
         training
     }
 
-    private Actor actor;
+    public Actor actor;
     private Movie movie;
     private System.DateTime time;
     private TaskType taskType;
@@ -36,9 +36,23 @@ public class Task {
         return time;
     }
 
-    public void complete()
+    public Movie getmovie()
     {
-        Debug.Log("Task complete");
+        return movie;
     }
 
+    public bool isAudition()
+    {
+        return taskType == TaskType.audition;
+    }
+
+    public bool isMovie()
+    {
+        return taskType == TaskType.movie;
+    }
+
+    public bool isTraining()
+    {
+        return taskType == TaskType.training;
+    }
 }

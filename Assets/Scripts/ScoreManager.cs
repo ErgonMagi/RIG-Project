@@ -14,65 +14,51 @@ public class ScoreManager : MonoBehaviour {
         scoreboard = FindObjectOfType<Scoreboard>();
     }
 
-    public void calculateScores()
+    public void checkAudition(ref Actor actor, Movie movie)
     {
-        bool[] passList = new bool[actorMoviePair.Count];
-        for(int i = 0; i < actorMoviePair.Count; i++)
+        bool pass = true;
+        if (actor.getAction() < movie.getAction())
         {
-            bool pass = true;
-            if (actorMoviePair[i].Item1.getAction() < actorMoviePair[i].Item2.getAction())
-            {
-                pass = false;
-            }
-            if (actorMoviePair[i].Item1.getComedy() < actorMoviePair[i].Item2.getComedy())
-            {
-                pass = false;
-            }
-            if (actorMoviePair[i].Item1.getHorror() < actorMoviePair[i].Item2.getHorror())
-            {
-                pass = false;
-            }
-            if (actorMoviePair[i].Item1.getScifi() < actorMoviePair[i].Item2.getScifi())
-            {
-                pass = false;
-            }
-            if (actorMoviePair[i].Item1.getRomance() < actorMoviePair[i].Item2.getRomance())
-            {
-                pass = false;
-            }
-            if (actorMoviePair[i].Item1.getOther() < actorMoviePair[i].Item2.getOther())
-            {
-                pass = false;
-            }
-            if(pass)
-            {
-                passList[i] = true;
-            }
-            else
-            {
-                passList[i] = false;
-            }
+            pass = false;
         }
-
-        //Print winners
-        for(int i = 0; i < passList.Length; i++)
+        if (actor.getComedy() < movie.getComedy())
         {
-            if(passList[i])
-            {
-                scoreboard.auditionPassed(actorMoviePair[i]);
-            }
-            else
-            {
-                scoreboard.auditionFailed(actorMoviePair[i]);
-            }
+            pass = false;
         }
-        scoreboard.display();
-        actorMoviePair = new List<Tuple<Actor, Movie>>();
+        if (actor.getHorror() < movie.getHorror())
+        {
+            pass = false;
+        }
+        if (actor.getScifi() < movie.getScifi())
+        {
+            pass = false;
+        }
+        if (actor.getRomance() < movie.getRomance())
+        {
+            pass = false;
+        }
+        if (actor.getOther() < movie.getOther())
+        {
+            pass = false;
+        }
+        if(pass)
+        {
+            actor.toMovie();
+            Task t = new Task(ref actor, ref movie, 5, false);
+            FindObjectOfType<TaskManager>().addTask(t);
+        }
+        else
+        {
+            actor.returnhome();
+        }
     }
 
-    public void setPair(Actor actor, Movie movie)
+    public void completeTask(Task task)
     {
-        actorMoviePair.Add(Tuple.Create(actor, movie));
+        if(task.isAudition())
+        {
+            checkAudition(ref task.actor, task.getmovie());
+            FindObjectOfType<ReputationBar>().showNotification();
+        }
     }
-
 }

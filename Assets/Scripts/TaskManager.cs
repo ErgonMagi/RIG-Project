@@ -16,12 +16,12 @@ public class TaskManager : MonoBehaviour {
     {
         removeList = new List<Task>();
 
-        foreach (Task t in taskList)
+        for(int i = 0; i < taskList.Count; i++)
         {
-            if(System.DateTime.Now > t.getTime())
+            if(System.DateTime.Now > taskList[i].getTime())
             {
-                t.complete();
-                removeList.Add(t);
+                FindObjectOfType<ScoreManager>().completeTask(taskList[i]);
+                removeList.Add(taskList[i]);
             }
         }
 

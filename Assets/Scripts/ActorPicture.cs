@@ -51,7 +51,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     {
         if(movie != null)
         {
-            Task t = new Task(ref actor, ref movie, 10, true);
+            Task t = new Task(ref actor, ref movie, 2, true);
             FindObjectOfType<TaskManager>().addTask(t);
         }
         movie = null;
