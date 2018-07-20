@@ -11,14 +11,12 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     private CameraManager cameraManager;
     private GameObject lockedPosition;
     private Movie movie;
-    private ScoreManager scoreManager;
 
 	// Use this for initialization
 	void Start () {
         selected = false;
         startPos = this.transform.localPosition;
         cameraManager = FindObjectOfType<CameraManager>();
-        scoreManager = FindObjectOfType<ScoreManager>();
 	}
 	
 	// Update is called once per frame
@@ -30,14 +28,10 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         else if(lockedPosition != null)
         {
             this.transform.position = lockedPosition.transform.position;
-            this.GetComponent<BoxCollider>().size = new Vector3(59.3f, 84.8f, 4f);
-            this.GetComponent<BoxCollider>().center = new Vector3(1.11f, -13.61f, 0f);
         }
         else
         {
             this.transform.localPosition = startPos;
-            this.GetComponent<BoxCollider>().size = new Vector3(24.8f,35.08f, 4f);
-            this.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0f);
         }
 	}
 
@@ -101,9 +95,6 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
             checkForLockPos();
         }
         selected = false;
-
-
-        this.transform.localPosition = startPos;
     }
 
     public void unlockPos()
@@ -121,8 +112,8 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
             dirFromCam = mousePos - cameraManager.getCam().transform.position;
         }
 
-        RaycastHit[] hit = Physics.RaycastAll(mousePos, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("ActorSlot"));
-        foreach (RaycastHit h in hit)
+        RaycastHit2D[] hit = Physics2D.RaycastAll(mousePos, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("ActorSlot"));
+        foreach (RaycastHit2D h in hit)
         {
             if (h.collider.gameObject.layer == LayerMask.NameToLayer("ActorSlot"))
             {

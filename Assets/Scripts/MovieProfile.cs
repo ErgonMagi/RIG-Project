@@ -23,24 +23,12 @@ public class MovieProfile : MonoBehaviour {
 
     public void generateMovie()
     {
-        movieManager.generateMovie(this);
-    }
+        Movie tempMovie = movieManager.getMovie();
 
-    public void generateMovie(int movieNum)
-    {
-        movieManager.generateMovie(this, movieNum);
-    }
+        moviePicture = tempMovie.getPicture();
+        this.movie = tempMovie;
 
-    public void setMovie(Movie movie)
-    {
-        moviePicture = movie.getPicture();
-        this.movie = movie;
-
-        updateProfile();
-    }
-
-    private void updateProfile()
-    {
         moviePictureSprite.sprite = moviePicture;
+
     }
 }

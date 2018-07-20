@@ -39,7 +39,7 @@ public class Actor {
         actorPicture = picture;
     }
 
-    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, float basecom, float baserom, float baseact, float basehor, float basesci, float baseoth)
+    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, float basecom, float baserom, float baseact, float basehor, float basesci, float baseoth, float experience, ActorState actorState)
     {
         actorState = ActorState.available;
         comedy = com;
@@ -56,6 +56,8 @@ public class Actor {
         baseScifi = basesci;
         baseOther = baseoth;
         actorPicture = picture;
+        this.experience = experience;
+        this.actorState = actorState;
     }
 
     public void toMovie()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour, ActorRequest {
+public class LevelManager : MonoBehaviour {
 
     Actor[] startingActorChoices;
     ActorManager actorManager;
@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour, ActorRequest {
                 startingActorChoices = new Actor[5];
                 for (int i = 0; i < 5; i++)
                 {
-                    actorManager.generateActor(this, i);
+                    startingActorChoices[i] = actorManager.getActor();
                 }
 
 

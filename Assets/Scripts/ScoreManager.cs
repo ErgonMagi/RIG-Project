@@ -5,13 +5,9 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour {
 
-    static List<Tuple <Actor, Movie>> actorMoviePair;
-    private Scoreboard scoreboard;
-
     public void Start()
     {
-        actorMoviePair = new List<Tuple<Actor, Movie>>();
-        scoreboard = FindObjectOfType<Scoreboard>();
+
     }
 
     public void checkAudition(ref Actor actor, Movie movie)
@@ -46,10 +42,12 @@ public class ScoreManager : MonoBehaviour {
             actor.toMovie();
             Task t = new Task(ref actor, ref movie, 5, false);
             FindObjectOfType<TaskManager>().addTask(t);
+            FindObjectOfType<NotificationManager>().addNotification(actor.getName() + " has succeeded on their audition!");
         }
         else
         {
             actor.returnhome();
+            FindObjectOfType<NotificationManager>().addNotification(actor.getName() + " failed their audition.");
         }
     }
 
@@ -58,7 +56,6 @@ public class ScoreManager : MonoBehaviour {
         if(task.isAudition())
         {
             checkAudition(ref task.actor, task.getmovie());
-            FindObjectOfType<ReputationBar>().showNotification();
         }
     }
 }

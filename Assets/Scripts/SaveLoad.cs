@@ -12,7 +12,7 @@ public class SaveLoad : MonoBehaviour {
     private int level;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
         DontDestroyOnLoad(gameObject);
 
@@ -134,6 +134,6 @@ class SerializableActor
             spriteSearch = Resources.Load<Sprite>("Actor images/Alicia Vikander");
         }
 
-        return new Actor(comedy, romance, action, horror, scifi, other, actorName, spriteSearch, baseComedy, baseRomance, baseAction, baseHorror, baseScifi, baseOther);
+        return new Actor(comedy, romance, action, horror, scifi, other, actorName, spriteSearch, baseComedy, baseRomance, baseAction, baseHorror, baseScifi, baseOther, experience, actorState);
     }
 }

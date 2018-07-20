@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ReputationBar : MonoBehaviour {
+public class NotificationBanner : MonoBehaviour {
 
     private Vector3 downPos;
     private Vector3 upPos;
@@ -75,6 +76,9 @@ public class ReputationBar : MonoBehaviour {
         nState = NotiState.movingDown;
     }
 
-
+    public void setText(string text)
+    {
+        this.GetComponentInChildren<Text>().text = text;
+    }
 
 }

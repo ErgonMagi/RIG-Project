@@ -4,16 +4,15 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 
-public class Genres
+public class MovieResults
 {
-    public int id { get; set; }
-    public string name { get; set; }
+    public MovieData[] results { get; set; }
 }
 
 public class MovieData
 {
     string backdrop_path { get; set; }
-    public Genres[] genres { get; set; }
+    public int[] genre_ids { get; set; }
     public string poster_path { get; set; }
     public string title { get; set; }
     public bool adult { get; set; }
@@ -22,64 +21,78 @@ public class MovieData
 
 public class MovieManager : MonoBehaviour {
 
-
-    private List<int> usedMovies;
+    private List<Movie> movieList;
+    private List<string> usedMovies;
+    private int pendingMovies;
 
     // Use this for initialization
-    void Start () {
-        
-    }
-	
-    public void generateMovie(MovieProfile requestingProfile, int movieNum = -1)
-    {
-        StartCoroutine(selectMovieWithPoster(requestingProfile, movieNum));
+    void Awake () {
+        DontDestroyOnLoad(gameObject);
+
+        movieList = new List<Movie>();
+        pendingMovies = 0;
     }
 
-    IEnumerator selectMovieWithPoster(MovieProfile requestingProfile, int movieNum = -1)
+    private void Update()
     {
-
-        if(usedMovies == null)
+        if(movieList.Count + pendingMovies < 6)
         {
-            usedMovies = new List<int>();
+            StartCoroutine(selectMovieWithPoster());
+            pendingMovies++;
+        }
+    }
+
+    IEnumerator selectMovieWithPoster()
+    {
+        Dictionary<string, string> headers = new Dictionary<string, string>();
+        headers.Add("Aceept-Encoding", "gzip");
+
+        if (usedMovies == null)
+        {
+            usedMovies = new List<string>();
         }
 
         WWW www;
         WWW img;
-        MovieData j = new MovieData();
 
-        bool findMovieMatchingReqs = true;
-        while (findMovieMatchingReqs)
+        MovieNameList movieNameList = new MovieNameList();
+        bool findingMovie = true;
+        string movieName = null;
+        while(findingMovie)
         {
-            int rand = 0;
-            bool pickingMovieNum = true;
-            while(pickingMovieNum)
+            findingMovie = false;
+            movieName = movieNameList.getName();
+            for(int i = 0; i < usedMovies.Count; i++)
             {
-                pickingMovieNum = false;
-                rand = (int)Random.Range(0, 10000);
-                for(int i = 0; i < usedMovies.Count; i++)
+                if(usedMovies[i] == movieName)
                 {
-                    if(rand == usedMovies[i])
-                    {
-                        pickingMovieNum = true;
-                    }
+                    //findingMovie = true;
                 }
             }
-            
-            www = new WWW("https://api.themoviedb.org/3/movie/" + rand + "?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US");
+        }
 
-            while (!www.isDone)
+        usedMovies.Add(movieName);
+        string [] splitName = movieName.Split(' ');
+        string urlName = null;
+        for(int i = 0; i < splitName.Length; i++)
+        {
+            urlName += splitName[i];
+            if(i < splitName.Length -1)
             {
-                yield return null;
-            }
-            var json = www.text;
-            j = JsonConvert.DeserializeObject<MovieData>(json);
-            if (j.poster_path != null && j.adult == false && j.original_language == "en")
-            {
-                findMovieMatchingReqs = false;
-                usedMovies.Add(rand);
+                urlName += "%20";
             }
         }
-        
+
+        www = new WWW("https://api.themoviedb.org/3/search/movie?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
+
+        while (!www.isDone)
+        {
+            yield return null;
+        }
+        var json = www.text;
+        MovieResults results = JsonConvert.DeserializeObject<MovieResults>(json);
+        MovieData [] j = results.results;
+
         bool noMatch = true;
         int action = 0;
         int comedy = 0;
@@ -88,34 +101,38 @@ public class MovieManager : MonoBehaviour {
         int horror = 0;
         int other = 0;
         int val = 4;
-        for(int i = 0;  i < j.genres.Length; i++)
+        if(j == null)
+        {
+            Debug.Log("movie not found");
+        }
+        for(int i = 0;  i < j[0].genre_ids.Length; i++)
         {
             //Action
-            if (j.genres[i].id == 28)
+            if (j[0].genre_ids[i] == 28)
             {
                 action = val;
                 noMatch = false;
             }
             //Comedy
-            if (j.genres[i].id == 35)
+            if (j[0].genre_ids[i] == 35)
             {
                 comedy = val;
                 noMatch = false;
             }
             //Romance
-            if (j.genres[i].id == 10749)
+            if (j[0].genre_ids[i] == 10749)
             {
                 romance = val;
                 noMatch = false;
             }
             //Scifi
-            if (j.genres[i].id == 878)
+            if (j[0].genre_ids[i] == 878)
             {
                 scifi = val;
                 noMatch = false;
             }
             //Horror
-            if (j.genres[i].id == 27)
+            if (j[0].genre_ids[i] == 27)
             {
                 horror = val;
                 noMatch = false;
@@ -127,7 +144,7 @@ public class MovieManager : MonoBehaviour {
             other = 4;
         }
 
-        img = new WWW("https://image.tmdb.org/t/p/w500" + j.poster_path);
+        img = new WWW("https://image.tmdb.org/t/p/w500" + j[0].poster_path, null, headers);
         while(!img.isDone)
         {
             yield return null;
@@ -135,10 +152,18 @@ public class MovieManager : MonoBehaviour {
 
         Sprite sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
 
-        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j.title, sprite);
+        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j[0].title, sprite);
 
-        requestingProfile.setMovie(tempMovie);
+        movieList.Add(tempMovie);
+        pendingMovies--;
+    }
 
+
+    public Movie getMovie()
+    {
+        Movie tempMovie = movieList[0];
+        movieList.Remove(movieList[0]);
+        return tempMovie;
     }
 
 }

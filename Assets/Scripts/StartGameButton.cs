@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartGameButton : MonoBehaviour {
 
 	public void startGame()
     {
-        SceneManager.LoadScene(1);
+        FindObjectOfType<LoadingBar>().startLoading();
+        this.GetComponentInChildren<Text>().text = "Loading...";
     }
 
 }

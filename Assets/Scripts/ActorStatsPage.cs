@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActorProfile : MonoBehaviour, ClickableObject {
+public class ActorStatsPage : MonoBehaviour, ClickableObject {
 
     public GameObject comedyBar, actionBar, romanceBar, horrorBar, scifiBar, otherBar;
     public Text comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
