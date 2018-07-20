@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Actor {
 
-    enum ActorState
+    public enum ActorState
     {
         available,
         auditioning,
@@ -35,6 +36,25 @@ public class Actor {
         baseHorror = hor;
         baseScifi = sci;
         baseOther = oth;
+        actorPicture = picture;
+    }
+
+    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, float basecom, float baserom, float baseact, float basehor, float basesci, float baseoth)
+    {
+        actorState = ActorState.available;
+        comedy = com;
+        romance = rom;
+        action = act;
+        horror = hor;
+        scifi = sci;
+        other = oth;
+        actorName = name;
+        baseComedy = basecom;
+        baseRomance = baserom;
+        baseAction = baseact;
+        baseHorror = basehor;
+        baseScifi = basesci;
+        baseOther = baseoth;
         actorPicture = picture;
     }
 
@@ -123,6 +143,36 @@ public class Actor {
         return other;
     }
 
+    public float getBaseComedy()
+    {
+        return baseComedy;
+    }
+
+    public float getBaseRomance()
+    {
+        return baseRomance;
+    }
+
+    public float getBaseHorror()
+    {
+        return baseHorror;
+    }
+
+    public float getBaseScifi()
+    {
+        return baseScifi;
+    }
+
+    public float getBaseAction()
+    {
+        return baseAction;
+    }
+
+    public float getBaseOther()
+    {
+        return baseOther;
+    }
+
     public Sprite getPicture()
     {
         return actorPicture;
@@ -152,4 +202,10 @@ public class Actor {
         horror += 0.25f * baseHorror;
         other += 0.25f * baseOther;
     }
+
+    public ActorState getState()
+    {
+        return actorState;
+    }
 }
+

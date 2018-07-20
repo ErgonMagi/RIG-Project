@@ -27,6 +27,8 @@ public class LevelManager : MonoBehaviour, ActorRequest {
     private string currentText;
     private bool checkStats;
 
+    private int currentLevel;
+
 	// Use this for initialization
 	void Start () {
 
@@ -34,19 +36,42 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         gameController = FindObjectOfType<GameController>();
         cameraManager = FindObjectOfType<CameraManager>();
         player = FindObjectOfType<Player>();
-
-        startingActorChoices = new Actor[5];
-        for(int i = 0; i < 5; i++)
-        {
-            actorManager.generateActor(this, i);
-        }
         dBoxText = dialogueBox.GetComponentInChildren<Text>();
 
-        checkStats = false;
+        currentLevel = FindObjectOfType<SaveLoad>().getLevel();
 
-        StartCoroutine(levelOne());
+        switch(currentLevel)
+        {
+            case 1:
+                startingActorChoices = new Actor[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    actorManager.generateActor(this, i);
+                }
+
+
+                checkStats = false;
+
+                StartCoroutine(levelOne());
+                break;
+            default:
+                gameController.unlockCamera();
+                gameController.unlockClicking();
+                dialogueBox.SetActive(false);
+                backArrow.SetActive(true);
+                desktop.GetComponent<ComputerScreen>().unlock();
+                break;
+
+        }
+
+        
 	}
-	
+
+    public int getLevel()
+    {
+        return currentLevel;
+    }
+
     public void setActor(Actor actor, int arrayNum)
     {
         startingActorChoices[arrayNum] = actor;
@@ -256,10 +281,8 @@ public class LevelManager : MonoBehaviour, ActorRequest {
         gameController.unlockCamera();
         dialogueBox.SetActive(false);
 
-        for(int i = 0; i < 4; i++)
-        {
-            player.setActor(startingActorChoices[i], i + 1);
-        }
+
+        currentLevel = 2;
         
     }
 

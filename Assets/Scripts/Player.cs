@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ActorRequest {
 
-    public Actor[] clients;
+    public Actor [] clients;
 
 	// Use this for initialization
 	void Start () {
-        clients = new Actor[20];  
+        clients = FindObjectOfType<SaveLoad>().getActors();
 	}
 
     public Actor getActor(int actorNum)
@@ -19,5 +19,15 @@ public class Player : MonoBehaviour, ActorRequest {
     public void setActor(Actor actor, int arrayNum)
     {
         clients[arrayNum] = actor;
+    }
+
+    public Actor[] getActorsList()
+    {
+        return clients;
+    }
+
+    public void setActors(Actor [] actors)
+    {
+        clients = actors;
     }
 }
