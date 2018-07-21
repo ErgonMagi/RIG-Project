@@ -178,7 +178,6 @@ public class GameController : MonoBehaviour {
     public void newWeek()
     {
         fromComputer();
-        movieMenu.resetMovieMenu();
     }
 
     //Returns is scoreboard is displaying

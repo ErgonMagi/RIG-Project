@@ -38,10 +38,14 @@ public class MovieManager : MonoBehaviour {
 
     private void Update()
     {
-        if(movieList.Count + pendingMovies < 6)
+        if(movieList.Count + pendingMovies < 20)
         {
-            StartCoroutine(selectMovieWithPoster());
-            pendingMovies++;
+            if(pendingMovies < 10)
+            {
+                StartCoroutine(selectMovieWithPoster());
+                pendingMovies++;
+            }
+
         }
         if(callsCounting)
         {
@@ -53,6 +57,11 @@ public class MovieManager : MonoBehaviour {
                 numCalls = 0;
             }
         }
+    }
+
+    public int getNumMovies()
+    {
+        return movieList.Count;
     }
 
     IEnumerator selectMovieWithPoster()
@@ -204,6 +213,7 @@ public class MovieManager : MonoBehaviour {
 
     public Movie getMovie()
     {
+        Debug.Log(movieList[0].getTitle() + " was removed.");
         Movie tempMovie = movieList[0];
         movieList.Remove(movieList[0]);
         return tempMovie;
