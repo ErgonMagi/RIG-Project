@@ -105,18 +105,18 @@ public class ActorManager : MonoBehaviour {
         ActorsNamesList actorNamesList = new ActorsNamesList();
         bool findingName = true;
         string actorName = null;
-        while(findingName)
+        while (findingName)
         {
             findingName = false;
             actorName = actorNamesList.getName();
-            for(int i = 0; i < takenActors.Count; i++)
+            for (int i = 0; i < takenActors.Count; i++)
             {
-                if(takenActors[i] == actorName)
+                if (takenActors[i] == actorName)
                 {
                     //findingName = true;
                 }
             }
-            
+
         }
         takenActors.Add(actorName);
         string[] nameSplit = actorName.Split(' ');
@@ -131,13 +131,14 @@ public class ActorManager : MonoBehaviour {
 
         }
         Debug.Log(urlName);
-        while(numCalls >= 20)
+        while (numCalls >= 20)
         {
             yield return null;
         }
-        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
         callsCounting = true;
         numCalls++;
+        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
+        
 
         while (!www.isDone)
         {
@@ -147,7 +148,7 @@ public class ActorManager : MonoBehaviour {
         secondSearchBytes += www.bytesDownloaded;
 
         Results result = JsonConvert.DeserializeObject<Results>(www.text);
-        if(result == null)
+        if (result == null)
         {
             Debug.Log("No results found for " + actorName);
         }
@@ -163,8 +164,8 @@ public class ActorManager : MonoBehaviour {
         scifi = 1;
         horror = 1;
         other = 1;
-        
-        if(actorData.Length == 0)
+
+        if (actorData.Length == 0)
         {
             Debug.Log("nothing in data");
         }
@@ -221,13 +222,29 @@ public class ActorManager : MonoBehaviour {
         scifi = (float)scifi / sumOfMovies * 20;
         other = (float)other / sumOfMovies * 20;
 
-        while (numCalls >= 20)
+        Sprite sprite;
+
+        if (!Directory.Exists(Application.persistentDataPath + "/actorImages"))
         {
-            yield return null;
+            Directory.CreateDirectory(Application.persistentDataPath + "/actorImages");
         }
-        WWW img = new WWW("https://image.tmdb.org/t/p/w185" + actorData[0].profile_path, null, headers);
-        callsCounting = true;
-        numCalls++;
+        if (File.Exists(Application.persistentDataPath + "/actorImages/" + actorName + ".png"))
+        {
+            byte[] imgData = File.ReadAllBytes(Application.persistentDataPath + "/actorImages/" + actorName + ".png");
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(imgData);
+            sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        }
+        else
+        { 
+            while (numCalls >= 20)
+            {
+                yield return null;
+            }
+            callsCounting = true;
+            numCalls++;
+            WWW img = new WWW("https://image.tmdb.org/t/p/w185" + actorData[0].profile_path, null, headers);
+        
 
         while (!img.isDone)
         {
@@ -236,8 +253,10 @@ public class ActorManager : MonoBehaviour {
 
         imgBytes += img.bytesDownloaded;
 
-        Sprite sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0.5f,0.5f));
+        sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0.5f, 0.5f));
 
+            File.WriteAllBytes(Application.persistentDataPath + "/actorImages/" + actorName + ".png", img.texture.EncodeToPNG());
+    }
 
         Actor tempActor = new Actor(comedy, romance, action, horror, scifi, other, actorData[0].name, sprite);
 

@@ -24,6 +24,9 @@ public class MovieManager : MonoBehaviour {
     private List<Movie> movieList;
     private List<string> usedMovies;
     private int pendingMovies;
+    private int numCalls = 0;
+    private bool callsCounting = false;
+    private float timer = 0;
 
     // Use this for initialization
     void Awake () {
@@ -39,6 +42,16 @@ public class MovieManager : MonoBehaviour {
         {
             StartCoroutine(selectMovieWithPoster());
             pendingMovies++;
+        }
+        if(callsCounting)
+        {
+            timer += Time.deltaTime;
+            if(timer > 10)
+            {
+                timer = 0;
+                callsCounting = false;
+                numCalls = 0;
+            }
         }
     }
 
@@ -83,6 +96,12 @@ public class MovieManager : MonoBehaviour {
             }
         }
 
+        while(numCalls >= 20)
+        {
+            yield return null;
+        }
+        numCalls++;
+        callsCounting = true;
         www = new WWW("https://api.themoviedb.org/3/search/movie?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
 
         while (!www.isDone)
@@ -144,14 +163,38 @@ public class MovieManager : MonoBehaviour {
             other = 4;
         }
 
-        img = new WWW("https://image.tmdb.org/t/p/w500" + j[0].poster_path, null, headers);
-        while(!img.isDone)
+        Sprite sprite;
+        if (!Directory.Exists(Application.persistentDataPath + "/movieImages"))
         {
-            yield return null;
+            Directory.CreateDirectory(Application.persistentDataPath + "/movieImages");
         }
+        if (File.Exists(Application.persistentDataPath + "/movieImages/" + movieName + ".png"))
+        {
+            byte[] imgData = File.ReadAllBytes(Application.persistentDataPath + "/movieImages/" + movieName + ".png");
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(imgData);
+            sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0));
+        }
+        else
+        {
+            while (numCalls >= 20)
+            {
+                yield return null;
+            }
+            numCalls++;
+            callsCounting = true;
+            img = new WWW("https://image.tmdb.org/t/p/w500" + j[0].poster_path, null, headers);
+            while (!img.isDone)
+            {
+                yield return null;
+            }
 
-        Sprite sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
+            sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
 
+            byte[] imgData = img.texture.EncodeToPNG();
+            File.WriteAllBytes(Application.persistentDataPath + "/movieImages/" + movieName + ".png", imgData);
+            
+        }
         Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j[0].title, sprite);
 
         movieList.Add(tempMovie);

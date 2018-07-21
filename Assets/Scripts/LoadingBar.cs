@@ -24,7 +24,7 @@ public class LoadingBar : MonoBehaviour {
         {
             percentage = 1;
         }
-        Debug.Log(percentage);
+
         if(baseNum != -1)
         {
             this.transform.localScale = new Vector3(percentage, 1, 1);
