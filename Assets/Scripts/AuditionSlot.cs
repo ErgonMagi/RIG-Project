@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovieProfile : MonoBehaviour {
+//Audition slots are the gameobjects that hold potential auditions for the player.
+
+public class AuditionSlot : MonoBehaviour {
 
     public SpriteRenderer moviePictureSprite;
     private Sprite moviePicture;
@@ -10,17 +12,21 @@ public class MovieProfile : MonoBehaviour {
     private Movie movie;
 
 
+    //On start a random movie is assigned
+    //Note: this will need to be made persistent.
     private void Start()
     {
         movieManager = FindObjectOfType<MovieManager>();
         generateMovie();
     }
 
+    //Returns the movie associated with this profile.
     public Movie getMovie()
     {
         return movie;
     }
 
+    //Assigns a new movie to the audition slot.
     public void generateMovie()
     {
         Movie tempMovie = movieManager.getMovie();

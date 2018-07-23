@@ -38,6 +38,7 @@ public class MovieManager : MonoBehaviour {
 
     private void Update()
     {
+        //Counter to ensure there is 20 movies in the reserve or downloading
         if(movieList.Count + pendingMovies < 20)
         {
             if(pendingMovies < 10)
@@ -47,6 +48,7 @@ public class MovieManager : MonoBehaviour {
             }
 
         }
+        //Counter to ensure not too many requests are made to TMDB
         if(callsCounting)
         {
             timer += Time.deltaTime;
@@ -59,16 +61,20 @@ public class MovieManager : MonoBehaviour {
         }
     }
 
+    //Returns the number of movies in the movie reserve list
     public int getNumMovies()
     {
         return movieList.Count;
     }
 
+    //Coroutine to download a movie
     IEnumerator selectMovieWithPoster()
     {
+        //Header data to accept compressed data
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Aceept-Encoding", "gzip");
 
+        //Create the usedMovie list
         if (usedMovies == null)
         {
             usedMovies = new List<string>();
@@ -77,6 +83,7 @@ public class MovieManager : MonoBehaviour {
         WWW www;
         WWW img;
 
+        //Find a movie name that hasn't been used yet.
         MovieNameList movieNameList = new MovieNameList();
         bool findingMovie = true;
         string movieName = null;
@@ -92,8 +99,9 @@ public class MovieManager : MonoBehaviour {
                 }
             }
         }
-
         usedMovies.Add(movieName);
+
+        //Split the movie name into a URL format
         string [] splitName = movieName.Split(' ');
         string urlName = null;
         for(int i = 0; i < splitName.Length; i++)
@@ -105,22 +113,29 @@ public class MovieManager : MonoBehaviour {
             }
         }
 
+        //Wait until the request limit is not reached.
         while(numCalls >= 20)
         {
             yield return null;
         }
         numCalls++;
         callsCounting = true;
+
+        //Request movie data from TMDB
         www = new WWW("https://api.themoviedb.org/3/search/movie?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
 
+        //Wait for download to finish.
         while (!www.isDone)
         {
             yield return null;
         }
+
+        //Convert json file to movie data
         var json = www.text;
         MovieResults results = JsonConvert.DeserializeObject<MovieResults>(json);
         MovieData [] j = results.results;
 
+        //Define movie stats
         bool noMatch = true;
         int action = 0;
         int comedy = 0;
@@ -129,10 +144,14 @@ public class MovieManager : MonoBehaviour {
         int horror = 0;
         int other = 0;
         int val = 4;
+
+        //Check that data was downloaded correctly
         if(j == null)
         {
             Debug.Log("movie not found");
         }
+
+        //Search through movie genres to find what stats it needs to be completed
         for(int i = 0;  i < j[0].genre_ids.Length; i++)
         {
             //Action
@@ -172,6 +191,7 @@ public class MovieManager : MonoBehaviour {
             other = 4;
         }
 
+        //Find movie poster sprite
         Sprite sprite;
         if (!Directory.Exists(Application.persistentDataPath + "/movieImages"))
         {
@@ -179,6 +199,7 @@ public class MovieManager : MonoBehaviour {
         }
         if (File.Exists(Application.persistentDataPath + "/movieImages/" + movieName + ".png"))
         {
+            //If it is in the persistent data folder, use it.
             byte[] imgData = File.ReadAllBytes(Application.persistentDataPath + "/movieImages/" + movieName + ".png");
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(imgData);
@@ -186,34 +207,43 @@ public class MovieManager : MonoBehaviour {
         }
         else
         {
+            //If its not in persistent data folder, download it
+            //Wait until tmdb request limit not reached
             while (numCalls >= 20)
             {
                 yield return null;
             }
             numCalls++;
             callsCounting = true;
+
+            //Request made to TMDB for poster image
             img = new WWW("https://image.tmdb.org/t/p/w500" + j[0].poster_path, null, headers);
+
+            //Wait til download is done
             while (!img.isDone)
             {
                 yield return null;
             }
 
+            //Convert downloaded texure to a sprite
             sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
 
+            //Save the texture in the persistent data folder.
             byte[] imgData = img.texture.EncodeToPNG();
             File.WriteAllBytes(Application.persistentDataPath + "/movieImages/" + movieName + ".png", imgData);
             
         }
+        //Create movie object
         Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j[0].title, sprite);
 
+        //Add movie to the reserve movie list
         movieList.Add(tempMovie);
         pendingMovies--;
     }
 
-
+    //Returns the first movie from the reserve movie list and removes it from the list.
     public Movie getMovie()
     {
-        Debug.Log(movieList[0].getTitle() + " was removed.");
         Movie tempMovie = movieList[0];
         movieList.Remove(movieList[0]);
         return tempMovie;

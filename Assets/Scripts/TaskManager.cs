@@ -12,6 +12,7 @@ public class TaskManager : MonoBehaviour {
         taskList = new List<Task>();
     }
 
+    //Cycles through the task list looking for any complete tasks.
     public void Update()
     {
         removeList = new List<Task>();
@@ -20,6 +21,7 @@ public class TaskManager : MonoBehaviour {
         {
             if(System.DateTime.Now > taskList[i].getTime())
             {
+                //If a task is past its complete time, completes the task.
                 FindObjectOfType<ScoreManager>().completeTask(taskList[i]);
                 removeList.Add(taskList[i]);
             }
@@ -32,6 +34,7 @@ public class TaskManager : MonoBehaviour {
 
     }
 
+    //Adds a task to the tasklist.
     public void addTask(Task task)
     {
         taskList.Add(task);

@@ -11,6 +11,7 @@ public class LoadingBar : MonoBehaviour {
     private MovieManager mm;
     private bool loading;
 
+    //Hides the loading bar on start
     private void Start()
     {
         this.transform.localScale = new Vector3(0, 1, 1);
@@ -19,6 +20,7 @@ public class LoadingBar : MonoBehaviour {
         loading = false;
     }
 
+    //The loading bar grows as the actors and movies are finished loading
     public void Update()
     {
         Debug.Log(mm.getNumMovies());
@@ -38,6 +40,7 @@ public class LoadingBar : MonoBehaviour {
         }
     }
 
+    //Called on click to start loading the game
     public void startLoading()
     {
         loading = true;

@@ -22,6 +22,7 @@ public class SaveLoad : MonoBehaviour {
         Load();
 	}
 
+    //Converts all relevants data into a serializable form and saves it to playerInfo.dat
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -33,6 +34,7 @@ public class SaveLoad : MonoBehaviour {
         file.Close();
     }
 
+    //Loads all data from playerInfo.dat and stores it in the SaveLoad object
     public void Load()
     {
         if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
@@ -47,23 +49,27 @@ public class SaveLoad : MonoBehaviour {
         }
     }
 
+    //Returns the loaded level
     public int getLevel()
     {
         return level;
     }
-
+    
+    //Returns the loaded actors
     public Actor[] getActors()
     {
         return actors;
     }
 }
 
+//A serializable object to contain all the playerdata for saving/loading
 [Serializable]
 class PlayerData
 {
     private SerializableActor[] actors = new SerializableActor[100];
     private int level;
 
+    //Constructor
     public PlayerData(Actor [] actors, int level)
     {
         for(int i = 0; i < actors.Length; i++)
@@ -76,6 +82,7 @@ class PlayerData
         this.level = level;
     }
 
+    //Returns the actors from the playerData (Used in loading)
     public Actor[] getActors()
     {
         Actor[] actors = new Actor[100];
@@ -89,13 +96,15 @@ class PlayerData
         }
         return actors;
     }
-
+    
+    //Returns the level from the playerData (Used in loading)
     public int getLevel()
     {
         return level;
     }
 }
 
+//A serializable form of the Actor class where the sprite is left out.
 [Serializable]
 class SerializableActor
 {
@@ -105,6 +114,7 @@ class SerializableActor
     private float experience;
     private Actor.ActorState actorState;
 
+    //Constructor to convert an actor to a serializable actor
     public SerializableActor(Actor actor)
     {
         comedy = actor.getComedy();
@@ -125,6 +135,7 @@ class SerializableActor
         actorState = actor.getState();
     }
 
+    //Returns the serializable actor as an actor.
     public Actor getActor()
     {
         Byte[] imgData = File.ReadAllBytes(Application.persistentDataPath + "/actorImages/" + actorName + ".png");

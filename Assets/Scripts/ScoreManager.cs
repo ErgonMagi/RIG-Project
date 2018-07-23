@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Class sued for checking success or failure of movies/auditions
+
 public class ScoreManager : MonoBehaviour {
 
-    public void Start()
-    {
-
-    }
-
+    //Checks whether an actor passes an audition for a movie and adds a notification
     public void checkAudition(ref Actor actor, Movie movie)
     {
         bool pass = true;
@@ -39,6 +37,7 @@ public class ScoreManager : MonoBehaviour {
         }
         if(pass)
         {
+            //If they pass, send them on the movie, create a task for it and notify the player
             actor.toMovie();
             Task t = new Task(ref actor, ref movie, 5, false);
             FindObjectOfType<TaskManager>().addTask(t);
@@ -46,11 +45,13 @@ public class ScoreManager : MonoBehaviour {
         }
         else
         {
+            //If they fail, notify the player
             actor.returnhome();
             FindObjectOfType<NotificationManager>().addNotification(actor.getName() + " failed their audition.");
         }
     }
 
+    //Completes a task+
     public void completeTask(Task task)
     {
         if(task.isAudition())
