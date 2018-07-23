@@ -66,7 +66,6 @@ public class GameController : MonoBehaviour {
             case Gamestate.movieMenu:
                 if (movieMenu.gameObject.transform.position.y > 75)
                     movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
-                scoreManager.Start();
                 break;
             case Gamestate.desk:
                 switch(compState)
