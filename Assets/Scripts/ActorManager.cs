@@ -15,23 +15,29 @@ public class Known_for
     public int[] genre_ids { get; set; }
 }
 
+public class Cast
+{
+    public int[] genre_ids { get; set; }
+}
+
 public class ActorData
 {
+    public int id { get; set; }
     public string name { get; set; }
     public string profile_path { get; set; }
     public float popularity;
     public Known_for [] known_for { get; set; }
+    public Cast [] cast { get; set; }
 }
 
-public class ActorManager : MonoBehaviour {
-
-    private int firstSearchBytes, secondSearchBytes, imgBytes;
+public class ActorManager : Singleton<ActorManager> {
 
     List<Actor> actors;
 
     public Sprite tempSprite;
 
     private List<string> takenActors;
+    private ActorsNamesList actorNamesList;
 
     private int pendingActors;
     private int numCalls;
@@ -43,16 +49,16 @@ public class ActorManager : MonoBehaviour {
     bool showOnce = true;
 
 	// Use this for initialization
-	void Awake () {
+	protected override void Awake () {
 
         DontDestroyOnLoad(gameObject);
+
+        actorNamesList = new ActorsNamesList();
+        actorNamesList.init();
 
         takenActors = new List<string>();
         actors = new List<Actor>();
         pendingActors = 0;
-        firstSearchBytes = 0;
-        secondSearchBytes = 0;
-        imgBytes = 0;
         numCalls = 0;
 
     }
@@ -103,20 +109,16 @@ public class ActorManager : MonoBehaviour {
     //Coroutine used to start downloading an actors data
     IEnumerator downloadActorData()
     {
-        //Header info to request compressed data
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Aceept-Encoding", "gzip");
-
-        ActorData[] actorData = null;
 
         //Loop to select an actor name that is not alreay in use.
-        ActorsNamesList actorNamesList = new ActorsNamesList();
         bool findingName = true;
         string actorName = null;
+        int actorId = -1;
         while (findingName)
         {
             findingName = false;
-            actorName = actorNamesList.getName();
+            actorId = actorNamesList.getId();
+            actorName = actorNamesList.getName(actorId);
             for (int i = 0; i < takenActors.Count; i++)
             {
                 if (takenActors[i] == actorName)
@@ -128,46 +130,20 @@ public class ActorManager : MonoBehaviour {
         }
         takenActors.Add(actorName);
 
-        //Break actor name into a url format
-        string[] nameSplit = actorName.Split(' ');
-        string urlName = null;
-        for (int i = 0; i < nameSplit.Length; i++)
-        {
-            urlName += nameSplit[i];
-            if (i < nameSplit.Length - 1)
-            {
-                urlName += "%20";
-            }
-
-        }
-        
+        //Download the movies the actor is credited with
         //Coroutine pauses here until more requests can be made to TMDB
-        while (numCalls >= 20)
+
+        ActorData credits = null;
+        yield return StartCoroutine(TMDBRequest.Instance.FindActorCredits(actorId, data => {
+            if (data != null)
+            {
+                credits = data;
+            }      
+            }));
+
+        while(credits == null)
         {
             yield return null;
-        }
-        callsCounting = true;
-        numCalls++;
-
-        //Request actor data from TMDB
-        WWW www = new WWW("https://api.themoviedb.org/3/search/person?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
-        
-        //Pauses here until download is done
-        while (!www.isDone)
-        {
-            yield return null;
-        }
-
-        //Convert the search results into actor data
-        Results result = JsonConvert.DeserializeObject<Results>(www.text);
-        if (result == null)
-        {
-            Debug.Log("No results found for " + actorName);
-        }
-        actorData = result.results;
-        if (actorData == null)
-        {
-            Debug.Log(actorName + " is not showing in tmdb");
         }
 
         //Define the actor stats
@@ -179,16 +155,15 @@ public class ActorManager : MonoBehaviour {
         horror = 1;
         other = 1;
 
-        //Check to make sure data loaded correctly
-        if (actorData.Length == 0)
+        if(credits.cast == null)
         {
-            Debug.Log("nothing in data");
+            Debug.Log("no cast for " + actorName);
         }
 
         //Searches through actors movies to create the actors stats
-        for (int i = 0; i < actorData[0].known_for.Length; i++)
+        for (int i = 0; i < credits.cast.Length; i++)
         {
-            int[] genres = actorData[0].known_for[i].genre_ids;
+            int[] genres = credits.cast[i].genre_ids;
             bool noMatch = true;
             for (int j = 0; j < genres.Length; j++)
             {
@@ -207,6 +182,7 @@ public class ActorManager : MonoBehaviour {
                 //Romance
                 if (genres[j] == 10749)
                 {
+
                     romance++;
                     noMatch = false;
                 }
@@ -255,39 +231,31 @@ public class ActorManager : MonoBehaviour {
             sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
         }
         else
-        { 
+        {
             //If it does not exist, download the sprite
-            //Coroutine pauses here until request limit is lowered
-            while (numCalls >= 20)
-            {
-                yield return null;
-            }
-            callsCounting = true;
-            numCalls++;
-
-            //Request to TMDB for actor image
-            WWW img = new WWW("https://image.tmdb.org/t/p/w185" + actorData[0].profile_path, null, headers);
-        
-            //Wait until download is done
-            while (!img.isDone)
-            {
-                yield return null;
-            }
+            Texture2D tex = null;
+            yield return TMDBRequest.Instance.FindActorImage(actorId, img => {
+                if (img != null)
+                {
+                    tex = img;
+                }
+            });
 
             //Convert downlaoded texture to a sprite
-            sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0.5f, 0.5f));
+            sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
 
             //Save the image in persistent data for future use.
-            File.WriteAllBytes(Application.persistentDataPath + "/actorImages/" + actorName + ".png", img.texture.EncodeToPNG());
+            File.WriteAllBytes(Application.persistentDataPath + "/actorImages/" + actorName + ".png", tex.EncodeToPNG());
         }
 
         //Create actor object
-        Actor tempActor = new Actor(comedy, romance, action, horror, scifi, other, actorData[0].name, sprite);
+        //ActorInit newInit = new ActorInit();
+        //newInit.comedy = 1f;
+        Actor tempActor = new Actor( comedy, romance, action, horror, scifi, other, actorName, sprite);
 
         //Add actor to reserve actor list
         actors.Add(tempActor);
         pendingActors--;
         yield break;
     }
-
 }

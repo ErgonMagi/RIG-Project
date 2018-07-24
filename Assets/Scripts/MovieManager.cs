@@ -70,18 +70,11 @@ public class MovieManager : MonoBehaviour {
     //Coroutine to download a movie
     IEnumerator selectMovieWithPoster()
     {
-        //Header data to accept compressed data
-        Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Aceept-Encoding", "gzip");
-
         //Create the usedMovie list
         if (usedMovies == null)
         {
             usedMovies = new List<string>();
         }
-
-        WWW www;
-        WWW img;
 
         //Find a movie name that hasn't been used yet.
         MovieNameList movieNameList = new MovieNameList();
@@ -101,6 +94,7 @@ public class MovieManager : MonoBehaviour {
         }
         usedMovies.Add(movieName);
 
+
         //Split the movie name into a URL format
         string [] splitName = movieName.Split(' ');
         string urlName = null;
@@ -113,27 +107,19 @@ public class MovieManager : MonoBehaviour {
             }
         }
 
-        //Wait until the request limit is not reached.
-        while(numCalls >= 20)
+        MovieData movieData = null;
+
+        yield return StartCoroutine(TMDBRequest.Instance.FindMovie(urlName, data => {
+            if (data != null)
+            {
+                movieData = data;
+            }
+        }));
+
+        while(movieData == null)
         {
             yield return null;
         }
-        numCalls++;
-        callsCounting = true;
-
-        //Request movie data from TMDB
-        www = new WWW("https://api.themoviedb.org/3/search/movie?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
-
-        //Wait for download to finish.
-        while (!www.isDone)
-        {
-            yield return null;
-        }
-
-        //Convert json file to movie data
-        var json = www.text;
-        MovieResults results = JsonConvert.DeserializeObject<MovieResults>(json);
-        MovieData [] j = results.results;
 
         //Define movie stats
         bool noMatch = true;
@@ -146,40 +132,40 @@ public class MovieManager : MonoBehaviour {
         int val = 4;
 
         //Check that data was downloaded correctly
-        if(j == null)
+        if(movieData == null)
         {
             Debug.Log("movie not found");
         }
 
         //Search through movie genres to find what stats it needs to be completed
-        for(int i = 0;  i < j[0].genre_ids.Length; i++)
+        for(int i = 0;  i < movieData.genre_ids.Length; i++)
         {
             //Action
-            if (j[0].genre_ids[i] == 28)
+            if (movieData.genre_ids[i] == 28)
             {
                 action = val;
                 noMatch = false;
             }
             //Comedy
-            if (j[0].genre_ids[i] == 35)
+            if (movieData.genre_ids[i] == 35)
             {
                 comedy = val;
                 noMatch = false;
             }
             //Romance
-            if (j[0].genre_ids[i] == 10749)
+            if (movieData.genre_ids[i] == 10749)
             {
                 romance = val;
                 noMatch = false;
             }
             //Scifi
-            if (j[0].genre_ids[i] == 878)
+            if (movieData.genre_ids[i] == 878)
             {
                 scifi = val;
                 noMatch = false;
             }
             //Horror
-            if (j[0].genre_ids[i] == 27)
+            if (movieData.genre_ids[i] == 27)
             {
                 horror = val;
                 noMatch = false;
@@ -217,24 +203,29 @@ public class MovieManager : MonoBehaviour {
             callsCounting = true;
 
             //Request made to TMDB for poster image
-            img = new WWW("https://image.tmdb.org/t/p/w500" + j[0].poster_path, null, headers);
+            Texture2D img = null;
+            yield return StartCoroutine(TMDBRequest.Instance.FindMovieImage(movieData.poster_path, data =>
+            {
+                if (data != null)
+                {
+                    img = data;
+                }
+            }));
 
-            //Wait til download is done
-            while (!img.isDone)
+            while (img == null)
             {
                 yield return null;
             }
-
             //Convert downloaded texure to a sprite
-            sprite = Sprite.Create(img.texture, new Rect(0, 0, img.texture.width, img.texture.height), new Vector2(0, 0));
+            sprite = Sprite.Create(img, new Rect(0, 0, img.width, img.height), new Vector2(0, 0));
 
             //Save the texture in the persistent data folder.
-            byte[] imgData = img.texture.EncodeToPNG();
+            byte[] imgData = img.EncodeToPNG();
             File.WriteAllBytes(Application.persistentDataPath + "/movieImages/" + movieName + ".png", imgData);
             
         }
         //Create movie object
-        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, j[0].title, sprite);
+        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, movieData.title, sprite);
 
         //Add movie to the reserve movie list
         movieList.Add(tempMovie);

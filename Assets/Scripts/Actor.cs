@@ -12,7 +12,11 @@ public class Actor {
         onMovie,
         training
     }
+    /*public Init
+        {
+        public float com, 
 
+     }*/
     private float comedy, action, romance, horror, scifi, other;
     private float baseComedy, baseAction, baseRomance, baseHorror, baseScifi, baseOther;
     private string actorName;
@@ -20,6 +24,10 @@ public class Actor {
     private float experience;
     private ActorState actorState;
 
+    /*public Actor(ActorInit init)
+{
+    actorState 
+}*/
     public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture)
     {
         actorState = ActorState.available;
