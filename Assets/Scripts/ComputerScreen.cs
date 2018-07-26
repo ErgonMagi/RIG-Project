@@ -13,20 +13,18 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
     public Camera rtCam;
     public Shader shader;
 
-    private bool unlocked;
+    private bool unlocked = false;
 
 	// Use this for initialization
 	void Start () {
         rtCam.enabled = true;
         rtCam.aspect = 1.78f;
-        gameController = FindObjectOfType<GameController>();
+        gameController = GameController.Instance;
         RenderTexture rt = new RenderTexture(1024, 1024, 1000);
         rt.Create();
         rtCam.targetTexture = rt;
         GetComponent<Renderer>().material.mainTexture = rt;
         GetComponent<Renderer>().material.shader = shader;
-
-        unlocked = false;
 
     }
 	
@@ -40,6 +38,7 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
 
     public void unlock()
     {
+        Debug.Log("Desktop unlocked");
         unlocked = true;
     }
 }

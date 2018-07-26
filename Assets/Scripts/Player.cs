@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : Singleton<Player> {
 
     public Actor [] clients;
 
 	// Use this for initialization
-	void Start () {
-        clients = FindObjectOfType<SaveLoad>().getActors();
+	protected override void Awake () {
+        base.Awake();
+        clients = SaveLoad.Instance.getActors();
 	}
 
     public Actor getActor(int actorNum)
@@ -19,6 +20,18 @@ public class Player : MonoBehaviour {
     public void setActor(Actor actor, int arrayNum)
     {
         clients[arrayNum] = actor;
+    }
+
+    public void addActor(Actor actor)
+    {
+        for(int i = 0; i < clients.Length; i++)
+        {
+            if(clients[i] == null)
+            {
+                clients[i] = actor;
+                return;
+            }
+        }
     }
 
     public Actor[] getActorsList()

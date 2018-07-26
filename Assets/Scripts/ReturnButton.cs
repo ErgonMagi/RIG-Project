@@ -9,7 +9,7 @@ public class ReturnButton : MonoBehaviour, ClickableObject {
 
 	// Use this for initialization
 	void Start () {
-        gameController = FindObjectOfType<GameController>();
+        gameController = GameController.Instance;
 	}
 	
 	// Update is called once per frame

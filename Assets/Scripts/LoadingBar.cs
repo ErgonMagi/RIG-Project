@@ -6,24 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class LoadingBar : MonoBehaviour {
 
-    private ActorManager am;
-    private MovieManager mm;
+    private ActorManager actorManager;
+    private MovieManager movieManager;
     private bool loading;
 
     //Hides the loading bar on start
     private void Start()
     {
         this.transform.localScale = new Vector3(0, 1, 1);
-        am = FindObjectOfType<ActorManager>();
-        mm = FindObjectOfType<MovieManager>();
+        actorManager = ActorManager.Instance;
+        movieManager = MovieManager.Instance;
         loading = false;
     }
 
     //The loading bar grows as the actors and movies are finished loading
     public void Update()
     {
-        int numActors = am.getNumActors();
-        int numMovies = mm.getNumMovies();
+        int numActors = actorManager.getNumActors();
+        int numMovies = movieManager.getNumMovies();
         if(numActors >5)
         {
             numActors = 5;
@@ -43,7 +43,7 @@ public class LoadingBar : MonoBehaviour {
         
         if(numActors >= 5 && numMovies >= 10 && loading)
         {
-            AsyncOperation async = SceneManager.LoadSceneAsync(1);
+            SceneManager.LoadSceneAsync(1);
             loading = false;
         }
     }

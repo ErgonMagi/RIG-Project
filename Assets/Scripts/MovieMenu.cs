@@ -17,7 +17,7 @@ public class MovieMenu : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = Player.Instance;
         StartCoroutine(allocateActors());
     }
 

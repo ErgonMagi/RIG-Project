@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : Singleton<LevelManager> {
 
     Actor[] startingActorChoices;
     ActorManager actorManager;
@@ -30,15 +30,16 @@ public class LevelManager : MonoBehaviour {
     private int currentLevel;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Awake () {
+        base.Awake();
 
-        actorManager = FindObjectOfType<ActorManager>();
-        gameController = FindObjectOfType<GameController>();
-        cameraManager = FindObjectOfType<CameraManager>();
-        player = FindObjectOfType<Player>();
+        actorManager = ActorManager.Instance;
+        gameController = GameController.Instance;
+        cameraManager = CameraManager.Instance;
+        player = Player.Instance;
         dBoxText = dialogueBox.GetComponentInChildren<Text>();
 
-        currentLevel = FindObjectOfType<SaveLoad>().getLevel();
+        currentLevel = SaveLoad.Instance.getLevel();
 
         switch(currentLevel)
         {

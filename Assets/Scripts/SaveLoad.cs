@@ -6,15 +6,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SaveLoad : MonoBehaviour {
+public class SaveLoad : Singleton<SaveLoad> {
 
     private Actor[] actors;
     private int level;
 
 	// Use this for initialization
-	void Awake () {
+	protected override void Awake () {
 
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
 
         level = 1;
         actors = new Actor[100];
@@ -28,7 +28,7 @@ public class SaveLoad : MonoBehaviour {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
-        PlayerData data = new PlayerData(FindObjectOfType<Player>().getActorsList(), FindObjectOfType<LevelManager>().getLevel());
+        PlayerData data = new PlayerData(Player.Instance.getActorsList(), LevelManager.Instance.getLevel());
 
         bf.Serialize(file, data);
         file.Close();

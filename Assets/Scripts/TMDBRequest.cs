@@ -12,7 +12,6 @@ public class TMDBRequest : Singleton<TMDBRequest> {
 
     // Use this for initialization
     protected override void Awake () {
-        Debug.Log("TMDB made");
 
         base.Awake();
 

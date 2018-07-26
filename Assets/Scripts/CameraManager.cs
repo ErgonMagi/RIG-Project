@@ -7,7 +7,7 @@ using UnityEngine;
  * and any transitions between them
  * *******************/
 
-public class CameraManager : MonoBehaviour {
+public class CameraManager : Singleton<CameraManager> {
 
     private float lerpTime;
     private Vector3 targetRotation;
@@ -22,9 +22,11 @@ public class CameraManager : MonoBehaviour {
     private bool lerping;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Awake () {
+        base.Awake();
+
         lerping = false;
-        currentCam = this.GetComponent<Camera>();
+        currentCam = Camera.main;
         swapCam = currentCam;
 	}
 	
@@ -79,6 +81,15 @@ public class CameraManager : MonoBehaviour {
             targetRotation.y += 360;
         }
 
+        while (targetRotation.z > 90)
+        {
+            targetRotation.z -= 360;
+        }
+        while (targetRotation.z < -90)
+        {
+            targetRotation.z += 360;
+        }
+
         startRotation = currentCam.transform.rotation.eulerAngles;
 
         while (startRotation.x > 90)
@@ -97,6 +108,15 @@ public class CameraManager : MonoBehaviour {
         while (startRotation.y < -90)
         {
             startRotation.y += 360;
+        }
+
+        while (startRotation.z > 90)
+        {
+            startRotation.z -= 360;
+        }
+        while (startRotation.z < -90)
+        {
+            startRotation.z += 360;
         }
 
         startPosition = currentCam.transform.position;
@@ -131,3 +151,4 @@ public class CameraManager : MonoBehaviour {
         return lerping;
     }
 }
+

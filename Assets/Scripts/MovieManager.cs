@@ -19,7 +19,7 @@ public class MovieData
     public string original_language { get; set; }
 }
 
-public class MovieManager : MonoBehaviour {
+public class MovieManager : Singleton<MovieManager> {
 
     private List<Movie> movieList;
     private List<string> usedMovies;
@@ -29,8 +29,8 @@ public class MovieManager : MonoBehaviour {
     private float timer = 0;
 
     // Use this for initialization
-    void Awake () {
-        DontDestroyOnLoad(gameObject);
+    protected override void Awake () {
+        base.Awake();
 
         movieList = new List<Movie>();
         pendingMovies = 0;

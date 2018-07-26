@@ -40,18 +40,12 @@ public class ActorManager : Singleton<ActorManager> {
     private ActorsNamesList actorNamesList;
 
     private int pendingActors;
-    private int numCalls;
-
-    private bool callsCounting = false;
-
-    private float timer;
 
     bool showOnce = true;
 
 	// Use this for initialization
 	protected override void Awake () {
-
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
 
         actorNamesList = new ActorsNamesList();
         actorNamesList.init();
@@ -59,24 +53,11 @@ public class ActorManager : Singleton<ActorManager> {
         takenActors = new List<string>();
         actors = new List<Actor>();
         pendingActors = 0;
-        numCalls = 0;
 
     }
 
     private void Update()
     {
-        
-        //Counter to keep track of number of requests to TMDB to stay under the limit of 40 per 10 seconds
-        if(callsCounting)
-        {
-            timer += Time.deltaTime;
-            if (timer > 10)
-            {
-                numCalls = 0;
-                callsCounting = false;
-            }
-        }
-
         //Counter to keep track of the number of actors in reserve and being downloaded
         if (actors.Count + pendingActors < 20)
         {
@@ -87,7 +68,6 @@ public class ActorManager : Singleton<ActorManager> {
         //Debugging to show when the game is ready to start
         if(actors.Count >= 5 && showOnce)
         {
-            Debug.Log("Enough actors");
             showOnce = false;
         }
     }

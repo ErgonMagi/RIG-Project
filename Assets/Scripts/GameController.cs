@@ -9,24 +9,27 @@ using UnityEngine;
  * *************************/
 
 
-public class GameController : MonoBehaviour {
+public class GameController : Singleton<GameController> {
 
     public Camera deskCam;
     public Camera computerCam;
     public Camera fileCam;
+    public MovieMenu movieMenu;
+    public Camera actorBoardCam;
+    public GameObject actorBoard;
 
-    private MovieMenu movieMenu;
     private List<GameObject> menus;
-    private ScoreManager scoreManager;
-    public Vector3 mainCamStartPos = new Vector3(-6.581f, 1.23f, -3.388f);
-    public Vector3 mainCamLookingAtCompScreenPos = new Vector3(-6.581f, 1.23f, -3.388f);
+    private Vector3 mainCamStartPos;
+    private Vector3 mainCamStartRot;
+    private Vector3 compCamPos;
+    private Vector3 compCamRot;
 
     private bool cameraLocked;
     private bool playerCanClick;
 
     private enum Gamestate
     {
-        desk, mainMenu, file, movieMenu
+        desk, mainMenu, file, movieMenu, actorBoard, actorPurchaseTicket
     }
 
     private bool displayScoreboard;
@@ -36,11 +39,15 @@ public class GameController : MonoBehaviour {
     
 
     // Use this for initialization
-    void Start () {
+    protected override void Awake () {
+        base.Awake();
         gamestate = Gamestate.desk;
-        cam = FindObjectOfType<CameraManager>();
-        movieMenu = FindObjectOfType<MovieMenu>();
-        scoreManager = FindObjectOfType<ScoreManager>();
+        cam = CameraManager.Instance;
+        mainCamStartPos = Camera.main.transform.position;
+        mainCamStartRot = Camera.main.transform.rotation.eulerAngles;
+        compCamPos = new Vector3(-5.85f, 1.343f, -3.447f);
+        compCamRot = new Vector3(0, 90, 0);
+
 
         menus = new List<GameObject>();
 
@@ -88,10 +95,28 @@ public class GameController : MonoBehaviour {
     {
         if(!cam.isLerping())
         {
-            cam.lerpToLoc(new Vector3(-5.85f, 1.343f, -3.447f), new Vector3(0, 90, 0), 1.0f);
+            cam.lerpToLoc(compCamPos, compCamRot, 1.0f);
             gamestate = Gamestate.movieMenu;
             cam.swapCamAfterLerp(computerCam);
         }
+    }
+
+
+    public void toActorBoard()
+    {
+        if (!cam.isLerping())
+        {
+            cam.swapCams(deskCam);
+            cam.lerpToLoc(actorBoardCam.transform.position, actorBoardCam.transform.rotation.eulerAngles, 1.0f);
+            actorBoard.GetComponent<Collider>().enabled = false;
+            gamestate = Gamestate.actorBoard;
+        }
+    }
+
+    public void toActorTicket(GameObject camera)
+    {
+        CameraManager.Instance.lerpToLoc(camera.transform.position, camera.transform.rotation.eulerAngles, 1.0f);
+        gamestate = Gamestate.actorPurchaseTicket;
     }
 
 
@@ -100,8 +125,14 @@ public class GameController : MonoBehaviour {
     {
         if (!cam.isLerping())
         {
+            if(gamestate == Gamestate.actorPurchaseTicket)
+            {
+                toActorBoard();
+                return;
+            }
             cam.swapCams(deskCam);
-            cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 90, 0), 1.0f);
+            actorBoard.GetComponent<Collider>().enabled = true;
+            cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);
             gamestate = Gamestate.desk;
         }
     }
@@ -121,7 +152,7 @@ public class GameController : MonoBehaviour {
     {
         if (!cam.isLerping())
         {
-            cam.lerpToLoc(new Vector3(-6.581f, 1.23f, -3.388f), new Vector3(0, 90, 0), 1.0f);
+            cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);
             gamestate = Gamestate.desk;
         }
     }
@@ -154,6 +185,11 @@ public class GameController : MonoBehaviour {
         return false;
     }
 
+    //Returns if at the actor board
+    public bool isAtBoard()
+    {
+        return gamestate == Gamestate.actorBoard;
+    }
 
     //Returns if at the computer
     public bool isAtComputer()

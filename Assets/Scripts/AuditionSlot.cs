@@ -16,7 +16,7 @@ public class AuditionSlot : MonoBehaviour {
     //Note: this will need to be made persistent.
     private void Start()
     {
-        movieManager = FindObjectOfType<MovieManager>();
+        movieManager = MovieManager.Instance;
         generateMovie();
     }
 
