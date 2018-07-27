@@ -26,6 +26,11 @@ public class AuditionSlot : MonoBehaviour {
         return movie;
     }
 
+    public bool isAssigned()
+    {
+        return movie != null;
+    }
+
     //Assigns a new movie to the audition slot.
     public void generateMovie()
     {

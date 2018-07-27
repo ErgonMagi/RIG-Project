@@ -119,6 +119,10 @@ public class GameController : Singleton<GameController> {
         gamestate = Gamestate.actorPurchaseTicket;
     }
 
+    public bool isAtTicket()
+    {
+        return gamestate == Gamestate.actorPurchaseTicket;
+    }
 
     //Moves back to desk
     public void fromComputer()

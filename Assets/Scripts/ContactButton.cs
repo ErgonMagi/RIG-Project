@@ -6,12 +6,26 @@ using TMPro;
 public class ContactButton : MonoBehaviour {
 
     TextMeshPro tmpro;
+    Collider2D col;
 
     bool selected = false;
 
     public void Start()
     {
         tmpro = this.GetComponent<TextMeshPro>();
+        col = this.GetComponent<Collider2D>();
+    }
+
+    public void Update()
+    {
+        if(GameController.Instance.isAtTicket())
+        {
+            col.enabled = true;
+        }
+        else
+        {
+            col.enabled = false;
+        }
     }
 
     public void OnMouseOver()

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActorPicture : MonoBehaviour, ClickableObject {
+public class ActorPicture : MonoBehaviour { //ClickableObject {
 
     private Actor actor;
     private bool selected;
@@ -25,7 +25,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         //TODO: Add lerping to the movement.
 
         //If the actor is selected, follow the mouse/finger
-		if(selected)
+		/*if(selected)
         {
             this.transform.position = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
         }
@@ -38,7 +38,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         else
         {
             this.transform.localPosition = startPos;
-        }
+        }*/
 	}
 
     //Sets the actor for this object to a
@@ -60,7 +60,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
     }
 
     //Selects the object when it is clicked.
-    public void onClick()
+  /*  public void onClick()
     {
         selected = true;
     }
@@ -110,7 +110,7 @@ public class ActorPicture : MonoBehaviour, ClickableObject {
         }
         //Deselect the actor
         selected = false;
-    }
+    }*/
 
     //Unlocks the actor from its locked position
     public void unlockPos()
