@@ -35,9 +35,29 @@ public class TMDBRequest : Singleton<TMDBRequest> {
         }
     }
 
+    public IEnumerator FindActor(int actorId, System.Action<ActorData> returnMethod)
+    {
+        while (numCalls >= 40)
+        {
+            yield return null;
+        }
+        callsCounting = true;
+        numCalls++;
+        WWW actor = new WWW("https://api.themoviedb.org/3/person/" + actorId + "?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US", null, headers);
+
+        while (!actor.isDone)
+        {
+            yield return null;
+        }
+
+        ActorData actorData = JsonConvert.DeserializeObject<ActorData>(actor.text);
+
+        returnMethod(actorData);
+    }
+
     public IEnumerator FindActorCredits(int actorId, System.Action<ActorData> returnMethod)
     {
-        while (numCalls >= 20)
+        while (numCalls >= 40)
         {
             yield return null;
         }
@@ -55,18 +75,10 @@ public class TMDBRequest : Singleton<TMDBRequest> {
         returnMethod(actorData);
     }
 
-    public IEnumerator FindActorImage(int actorId, System.Action<Texture2D> returnMethod)
+    public IEnumerator FindActorImage(string profilePath, System.Action<Texture2D> returnMethod)
     {
-        //Coroutine pauses here until request limit is lowered
-        while (numCalls >= 20)
-        {
-            yield return null;
-        }
-        callsCounting = true;
-        numCalls++;
-
         //Request to TMDB for actor image
-        WWW img = new WWW("https://api.themoviedb.org/3/person/" + actorId + "/images?api_key=e2ffb845e5d5fca810eaf5054914f41b", null, headers);
+        WWW img = new WWW("https://image.tmdb.org/t/p/w185" + profilePath, null, headers);
 
         while (!img.isDone)
         {
@@ -79,7 +91,7 @@ public class TMDBRequest : Singleton<TMDBRequest> {
     public IEnumerator FindMovie(string urlName, System.Action<MovieData> returnMethod)
     {
         //Wait until the request limit is not reached.
-        while (numCalls >= 20)
+        while (numCalls >= 40)
         {
             yield return null;
         }
@@ -107,6 +119,7 @@ public class TMDBRequest : Singleton<TMDBRequest> {
     {
         WWW img = new WWW("https://image.tmdb.org/t/p/w500" + posterPath, null, headers);
 
+        
         //Wait til download is done
         while (!img.isDone)
         {

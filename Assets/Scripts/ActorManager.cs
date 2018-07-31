@@ -213,8 +213,21 @@ public class ActorManager : Singleton<ActorManager> {
         else
         {
             //If it does not exist, download the sprite
+            ActorData tempAct = null;
+            yield return TMDBRequest.Instance.FindActor(actorId, data => {
+                if (data != null)
+                {
+                    tempAct = data;
+                }
+            });
+
+            while (tempAct == null)
+            {
+                yield return null;
+            }
+
             Texture2D tex = null;
-            yield return TMDBRequest.Instance.FindActorImage(actorId, img => {
+            yield return TMDBRequest.Instance.FindActorImage(tempAct.profile_path, img => {
                 if (img != null)
                 {
                     tex = img;
