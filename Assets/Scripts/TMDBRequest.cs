@@ -33,10 +33,6 @@ public class TMDBRequest : Singleton<TMDBRequest> {
                 timer = 0;
             }
         }
-        if (numCalls > 0)
-        {
-            Debug.Log("numCalls: " + numCalls);
-        }
     }
 
     public IEnumerator FindActor(int actorId, System.Action<ActorData> returnMethod)
