@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 75043156}
   - component: {fileID: 75043157}
   m_Layer: 0
-  m_Name: Scrollbar
+  m_Name: ActorScrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,12 +515,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92ec5a1a9bce224097d32ee4dfbf300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Yoffset: 0
+  scrollObject: []
+  currentFocusNum: 0
+  offset: 0
+  force: 0
   scrollMomentumScale: 0.05
   scrollSpeedScale: 0.01
   scrollDrag: 0.1
   scrollCutoff: 0
   lockScrollToFocusForce: 0.05
+  isHorizontal: 0
   objectSpacing: 7.5
 --- !u!61 &75043157
 BoxCollider2D:
@@ -623,7 +627,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1782711184}
+    m_TransformParent: {fileID: 1699936521}
     m_Modifications:
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.x
@@ -631,7 +635,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.57
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3183,7 +3187,8 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &403681779 stripped
@@ -4183,15 +4188,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1782711184}
+    m_TransformParent: {fileID: 1699936521}
     m_Modifications:
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 15.870582
+      value: 15.870583
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7927,15 +7932,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1782711184}
+    m_TransformParent: {fileID: 1699936521}
     m_Modifications:
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -12.629418
+      value: -12.629419
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.5000005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8125,6 +8130,7 @@ MonoBehaviour:
   - {fileID: 148434398}
   - {fileID: 987188883}
   actorScrollBar: {fileID: 75043156}
+  movieScrollBar: {fileID: 1699936520}
   swipeSpeed: 0.03
 --- !u!1001 &756840576
 Prefab:
@@ -8169,7 +8175,8 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &756840577 stripped
@@ -11274,15 +11281,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1782711184}
+    m_TransformParent: {fileID: 1699936521}
     m_Modifications:
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.1294181
+      value: -3.1294184
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.5000005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13643,15 +13650,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1782711184}
+    m_TransformParent: {fileID: 1699936521}
     m_Modifications:
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.370582
+      value: 6.3705816
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.4900002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -14229,6 +14236,94 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: b490a7e56a40b6f4b8decdf52f80efea, type: 3}
   m_PrefabInternal: {fileID: 1668722883}
+--- !u!1 &1699936519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1699936521}
+  - component: {fileID: 1699936520}
+  - component: {fileID: 1699936522}
+  m_Layer: 0
+  m_Name: MovieScrollbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1699936520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1699936519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92ec5a1a9bce224097d32ee4dfbf300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollObject: []
+  currentFocusNum: 0
+  offset: 0
+  force: 0
+  scrollMomentumScale: 0.05
+  scrollSpeedScale: 0.01
+  scrollDrag: 0.1
+  scrollCutoff: 0
+  lockScrollToFocusForce: 0.05
+  isHorizontal: 1
+  objectSpacing: 6.5
+--- !u!224 &1699936521
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1699936519}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 435272157}
+  - {fileID: 1370513691}
+  - {fileID: 392603005}
+  - {fileID: 1857993842}
+  - {fileID: 37209000}
+  - {fileID: 1754530732}
+  m_Father: {fileID: 1782711184}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.86, y: -4.58}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &1699936522
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1699936519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04557705, y: 4.504554}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19.326357, y: 10.719793}
+  m_EdgeRadius: 0
 --- !u!1001 &1702891501
 Prefab:
   m_ObjectHideFlags: 0
@@ -15325,12 +15420,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.69, y: 1, z: 1}
   m_Children:
-  - {fileID: 435272157}
-  - {fileID: 1370513691}
-  - {fileID: 392603005}
-  - {fileID: 1857993842}
-  - {fileID: 37209000}
-  - {fileID: 1754530732}
+  - {fileID: 1699936521}
   m_Father: {fileID: 444274023}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15498,15 +15588,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1782711184}
+    m_TransformParent: {fileID: 1699936521}
     m_Modifications:
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 25.370583
+      value: 25.37059
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.4500003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588080539063796, guid: b574c7836aae2a540a1a6ea078cffce5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15697,7 +15787,8 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1859119646 stripped
@@ -16392,7 +16483,8 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1988847029 stripped

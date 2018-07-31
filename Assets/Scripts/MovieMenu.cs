@@ -11,6 +11,7 @@ public class MovieMenu : MonoBehaviour {
     public GameObject[] actorProfiles;
 
     public ScrollBar actorScrollBar;
+    public ScrollBar movieScrollBar;
 
     public float swipeSpeed;
 
@@ -60,9 +61,9 @@ public class MovieMenu : MonoBehaviour {
         }
         if(firstFrame && GameController.Instance.isAtComputer())
         {
-            Debug.Log("Is at compter? " + GameController.Instance.isAtComputer());
             firstFrame = false;
             allocateActors();
+            allocateMovies();
             updateVisibility();
         }
     }
@@ -83,27 +84,22 @@ public class MovieMenu : MonoBehaviour {
         }
     }
 
+    private void allocateMovies()
+    {
+        for (int i = 0; i < movieProfiles.Length; i++)
+        {
+            if (!movieScrollBar.isInList(movieProfiles[i]))
+            {
+                movieScrollBar.addObject(movieProfiles[i].transform);
+            }
+        }
+    }
+
     public void submitActors()
     {
         for(int i = 0; i < actorProfiles.Length; i++)
         {
             actorProfiles[i].GetComponent<ActorPicture>().submitActorMoviePair();
-        }
-    }
-
-    public void scroll(float scrollLength)
-    {
-        for (int i = 0; i < movieProfiles.Length; i++)
-        {
-            movieProfiles[i].transform.localPosition -= new Vector3(scrollLength * swipeSpeed, 0, 0);
-            if (movieProfiles[i].transform.localPosition.x >= 38.0f)
-            {
-                movieProfiles[i].transform.localPosition -= new Vector3(57f, 0, 0);
-            }
-            else if (movieProfiles[i].transform.localPosition.x <= -28.5f)
-            {
-                movieProfiles[i].transform.localPosition += new Vector3(57f, 0, 0);
-            }
         }
     }
 }

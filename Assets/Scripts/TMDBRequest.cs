@@ -26,23 +26,37 @@ public class TMDBRequest : Singleton<TMDBRequest> {
         if(callsCounting)
         {
             timer += Time.deltaTime;
-            if(timer >= 10)
+            if(timer >= 12)
             {
                 callsCounting = false;
                 numCalls = 0;
                 timer = 0;
             }
         }
+        if (numCalls > 0)
+        {
+            Debug.Log("numCalls: " + numCalls);
+        }
     }
 
     public IEnumerator FindActor(int actorId, System.Action<ActorData> returnMethod)
     {
-        while (numCalls >= 40)
+        bool looping = true;
+        //Wait until the request limit is not reached.
+        while (looping)
         {
-            yield return null;
+            if (numCalls >= 40)
+            {
+                yield return null;
+            }
+            else
+            {
+                numCalls++;
+                callsCounting = true;
+                break;
+            }
         }
-        callsCounting = true;
-        numCalls++;
+
         WWW actor = new WWW("https://api.themoviedb.org/3/person/" + actorId + "?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US", null, headers);
 
         while (!actor.isDone)
@@ -57,12 +71,22 @@ public class TMDBRequest : Singleton<TMDBRequest> {
 
     public IEnumerator FindActorCredits(int actorId, System.Action<ActorData> returnMethod)
     {
-        while (numCalls >= 40)
+        bool looping = true;
+        //Wait until the request limit is not reached.
+        while (looping)
         {
-            yield return null;
+            if (numCalls >= 40)
+            {
+                yield return null;
+            }
+            else
+            {
+                numCalls++;
+                callsCounting = true;
+                break;
+            }
         }
-        callsCounting = true;
-        numCalls++;
+
         WWW credits = new WWW("https://api.themoviedb.org/3/person/" + actorId + "/movie_credits?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US", null, headers);
 
         while(!credits.isDone)
@@ -90,13 +114,22 @@ public class TMDBRequest : Singleton<TMDBRequest> {
 
     public IEnumerator FindMovie(string urlName, System.Action<MovieData> returnMethod)
     {
+        bool looping = true;
         //Wait until the request limit is not reached.
-        while (numCalls >= 40)
+        while (looping)
         {
-            yield return null;
+            if (numCalls >= 40)
+            {
+                yield return null;
+            }
+            else
+            {
+                numCalls++;
+                callsCounting = true;
+                break;
+            }
         }
-        numCalls++;
-        callsCounting = true;
+        
 
         //Request movie data from TMDB
         WWW www = new WWW("https://api.themoviedb.org/3/search/movie?api_key=e2ffb845e5d5fca810eaf5054914f41b&language=en-US&query=" + urlName + "&page=1&include_adult=false", null, headers);
@@ -111,6 +144,11 @@ public class TMDBRequest : Singleton<TMDBRequest> {
         var json = www.text;
         MovieResults results = JsonConvert.DeserializeObject<MovieResults>(json);
         MovieData[] j = results.results;
+
+        if(j == null)
+        {
+            Debug.Log("Nothing here");
+        }
 
         returnMethod(j[0]);
     }

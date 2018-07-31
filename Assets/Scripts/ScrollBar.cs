@@ -7,16 +7,18 @@ public class ScrollBar : MonoBehaviour {
     public List<Transform> scrollObject;
     private Transform myTransform;
     public int currentFocusNum;
-    public float Yoffset;
+    public float offset;
     private Vector3 mousePos;
     private Vector3 prevMousePos;
     private bool scrolling;
-    public float yForce;
+    public float force;
     public float scrollMomentumScale;
     public float scrollSpeedScale;
     public float scrollDrag;
     public float scrollCutoff;
     public float lockScrollToFocusForce;
+
+    public bool isHorizontal;
     private float totalOffset;
 
     public float objectSpacing;
@@ -24,7 +26,7 @@ public class ScrollBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         scrollObject = new List<Transform>();
-        Yoffset = 0;
+        offset = 0;
         totalOffset = 0;
         myTransform = this.transform;
         scrolling = false;
@@ -35,60 +37,67 @@ public class ScrollBar : MonoBehaviour {
         if (scrollObject.Count >= 1)
         {
             //Drag
-            yForce *= scrollDrag;
-            if(Mathf.Abs(yForce) < scrollCutoff)
+            force *= scrollDrag;
+            if(Mathf.Abs(force) < scrollCutoff)
             {
-                yForce = 0;
+                force = 0;
             }
 
             //Apply force
-            Yoffset += yForce;
+            offset += force;
 
             //Adjust focus
-            if (Yoffset < -objectSpacing / 2.0f)
+            if (offset < -objectSpacing / 2.0f)
             {
                 if (currentFocusNum < scrollObject.Count -1)
                 {
                     currentFocusNum++;
-                    Yoffset += objectSpacing;
+                    offset += objectSpacing;
                     totalOffset -= objectSpacing;
                 }
                 else
                 {
                     Debug.Log("Hit minimum");
-                    Yoffset = -objectSpacing / 2.0f;
+                    offset = -objectSpacing / 2.0f;
                 }
             }
-            else if (Yoffset > objectSpacing / 2.0f)
+            else if (offset > objectSpacing / 2.0f)
             {
                 if (currentFocusNum > 0)
                 {
                     currentFocusNum--;
-                    Yoffset -= objectSpacing;
+                    offset -= objectSpacing;
                     totalOffset += objectSpacing;
                 }
                 else
                 {
                     Debug.Log("Hit maximum");
-                    Yoffset = objectSpacing / 2.0f;
+                    offset = objectSpacing / 2.0f;
                 }
             }
 
             //Move towards focus
             if (!scrolling)
             {
-                Yoffset -= Yoffset * lockScrollToFocusForce;
-                if (Mathf.Abs(Yoffset) < 0.05)
+                offset -= offset * lockScrollToFocusForce;
+                if (Mathf.Abs(offset) < 0.05)
                 {
-                    Yoffset = 0;
-                    yForce = 0;
+                    offset = 0;
+                    force = 0;
                 }
             }
 
         //Set position of all objects    
             for(int i = 0; i < scrollObject.Count; i++)
             {
-                scrollObject[i].position = new Vector3(myTransform.position.x, myTransform.position.y + totalOffset + Yoffset - i*objectSpacing, myTransform.position.z);
+                if (isHorizontal)
+                {
+                    scrollObject[i].position = new Vector3(myTransform.position.x + totalOffset + offset - i * objectSpacing, myTransform.position.y, myTransform.position.z);
+                }
+                else
+                {
+                    scrollObject[i].position = new Vector3(myTransform.position.x, myTransform.position.y + totalOffset + offset - i * objectSpacing, myTransform.position.z);
+                }
             }
           
         }
@@ -110,7 +119,14 @@ public class ScrollBar : MonoBehaviour {
     private void OnMouseUp()
     {
         scrolling = false;
-        yForce = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
+        if (isHorizontal)
+        {
+            force = (mousePos.x - prevMousePos.x) * scrollMomentumScale;
+        }
+        else
+        {
+            force = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
+        }
     }
 
     private void OnMouseDown()
@@ -125,8 +141,16 @@ public class ScrollBar : MonoBehaviour {
         prevMousePos = mousePos;
         mousePos = Input.mousePosition;
 
-        float yChange = (mousePos.y - prevMousePos.y) * scrollSpeedScale;
-        Yoffset += yChange;
+        float change = 0;
+        if (isHorizontal)
+        {
+            change = (mousePos.x - prevMousePos.x) * scrollSpeedScale;
+        }
+        else
+        {
+            change = (mousePos.y - prevMousePos.y) * scrollSpeedScale;
+        }
+        offset += change;
     }
 
     public void addObject(Transform addedObject)

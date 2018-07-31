@@ -24,15 +24,15 @@ public class LoadingBar : MonoBehaviour {
     {
         int numActors = actorManager.getNumActors();
         int numMovies = movieManager.getNumMovies();
-        if(numActors >5)
+        if(numActors >10)
         {
-            numActors = 5;
+            numActors = 10;
         }
         if(numMovies >10)
         {
             numMovies = 10;
         }
-        float percentage = ((float)numActors + (float)numMovies) / (15.0f);
+        float percentage = ((float)numActors + (float)numMovies) / (20.0f);
         if(percentage > 1)
         {
             percentage = 1;
@@ -41,7 +41,7 @@ public class LoadingBar : MonoBehaviour {
         this.transform.localScale = new Vector3(percentage, 1, 1);
         this.GetComponentInChildren<Text>().text = (percentage*100).ToString() + "%";
         
-        if(numActors >= 5 && numMovies >= 10 && loading)
+        if(numActors >= 10 && numMovies >= 10 && loading)
         {
             SceneManager.LoadSceneAsync(1);
             loading = false;

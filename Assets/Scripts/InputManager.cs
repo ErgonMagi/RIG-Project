@@ -105,10 +105,6 @@ public class InputManager : MonoBehaviour
                     {
                         actorStatsMenu.scroll(swipeDir.x);
                     }*/
-                    else if (gameController.isAtComputer())
-                    {
-                        movieMenu.scroll(swipeDir.x);
-                    }
                 }
                 //Update the mouse position to the new positon.
                 mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
