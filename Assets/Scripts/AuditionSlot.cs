@@ -10,7 +10,10 @@ public class AuditionSlot : MonoBehaviour {
     private Sprite moviePicture;
     private MovieManager movieManager;
     private Movie movie;
+    private GameObject actor;
 
+    public GameObject lockPos;
+        
 
     //On start a random movie is assigned
     //Note: this will need to be made persistent.
@@ -31,6 +34,16 @@ public class AuditionSlot : MonoBehaviour {
         return movie != null;
     }
 
+    public void setActor(GameObject actor)
+    {
+        this.actor = actor;
+    }
+
+    public GameObject getActor()
+    {
+        return actor;
+    }
+
     //Assigns a new movie to the audition slot.
     public void generateMovie()
     {
@@ -41,5 +54,10 @@ public class AuditionSlot : MonoBehaviour {
 
         moviePictureSprite.sprite = moviePicture;
 
+    }
+
+    public GameObject getLockPos()
+    {
+        return lockPos;
     }
 }

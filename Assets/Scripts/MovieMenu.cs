@@ -12,17 +12,21 @@ public class MovieMenu : MonoBehaviour {
 
     public ScrollBar actorScrollBar;
     public ScrollBar movieScrollBar;
+    public Transform assignBar;
 
     public float swipeSpeed;
 
     private Player player;
     private bool firstFrame;
 
+    private bool actorAssignedThisDrag;
+
     // Use this for initialization
     void Start()
     {
         player = Player.Instance;
         updateVisibility();
+        actorAssignedThisDrag = false;
     }
 
     private void updateVisibility()
@@ -66,6 +70,27 @@ public class MovieMenu : MonoBehaviour {
             allocateMovies();
             updateVisibility();
         }
+        if(GameController.Instance.isAtComputer())
+        {
+            if(actorScrollBar.getNumObjects() > 0 && actorScrollBar.getCurrentFocus().transform.position.x < assignBar.position.x && !actorAssignedThisDrag)
+            {
+                actorAssignedThisDrag = true;
+                GameObject a = actorScrollBar.removeFocusObject();
+                if (movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor() != null)
+                {
+                    actorScrollBar.addObject(movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor().transform);
+                    movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor().GetComponent<ActorPicture>().unlockPos();
+                }             
+                a.GetComponent<ActorPicture>().lockToGameobject(movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getLockPos());
+                movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().setActor(a);
+                
+            }
+        }
+    }
+
+    public void resetActorAssignedThisDrag()
+    {
+        actorAssignedThisDrag = false;
     }
 
     private void allocateActors()

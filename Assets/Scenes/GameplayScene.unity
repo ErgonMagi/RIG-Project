@@ -519,9 +519,9 @@ MonoBehaviour:
   currentFocusNum: 0
   offset: 0
   force: 0
-  scrollMomentumScale: 0.05
-  scrollSpeedScale: 0.01
-  scrollDrag: 0.1
+  scrollMomentumScale: 0.1
+  scrollSpeedScale: 0.03
+  scrollDrag: 0.03
   scrollCutoff: 0
   lockScrollToFocusForce: 0.05
   isHorizontal: 0
@@ -3187,8 +3187,7 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &403681779 stripped
@@ -3828,6 +3827,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 514392001}
+--- !u!1 &519458371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 519458372}
+  m_Layer: 0
+  m_Name: Assignbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519458372
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519458371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.13, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 742149202}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &521160340
 GameObject:
   m_ObjectHideFlags: 0
@@ -8102,6 +8129,7 @@ Transform:
   - {fileID: 173343154}
   - {fileID: 444274023}
   - {fileID: 15295652}
+  - {fileID: 519458372}
   m_Father: {fileID: 1492934490}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8131,6 +8159,7 @@ MonoBehaviour:
   - {fileID: 987188883}
   actorScrollBar: {fileID: 75043156}
   movieScrollBar: {fileID: 1699936520}
+  assignBar: {fileID: 519458372}
   swipeSpeed: 0.03
 --- !u!1001 &756840576
 Prefab:
@@ -14268,9 +14297,9 @@ MonoBehaviour:
   currentFocusNum: 0
   offset: 0
   force: 0
-  scrollMomentumScale: 0.05
-  scrollSpeedScale: 0.01
-  scrollDrag: 0.1
+  scrollMomentumScale: 0.1
+  scrollSpeedScale: 0.03
+  scrollDrag: 0.03
   scrollCutoff: 0
   lockScrollToFocusForce: 0.05
   isHorizontal: 1

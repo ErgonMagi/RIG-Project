@@ -49,7 +49,7 @@ public class ScrollBar : MonoBehaviour {
             //Adjust focus
             if (offset < -objectSpacing / 2.0f)
             {
-                if (currentFocusNum < scrollObject.Count -1)
+                if (currentFocusNum < scrollObject.Count - 1)
                 {
                     currentFocusNum++;
                     offset += objectSpacing;
@@ -57,7 +57,6 @@ public class ScrollBar : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("Hit minimum");
                     offset = -objectSpacing / 2.0f;
                 }
             }
@@ -71,10 +70,10 @@ public class ScrollBar : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("Hit maximum");
                     offset = objectSpacing / 2.0f;
                 }
             }
+            
 
             //Move towards focus
             if (!scrolling)
@@ -92,14 +91,17 @@ public class ScrollBar : MonoBehaviour {
             {
                 if (isHorizontal)
                 {
-                    scrollObject[i].position = new Vector3(myTransform.position.x + totalOffset + offset - i * objectSpacing, myTransform.position.y, myTransform.position.z);
+                    scrollObject[i].position = new Vector3(myTransform.position.x + totalOffset + offset + i * objectSpacing, myTransform.position.y, myTransform.position.z);
                 }
                 else
                 {
-                    scrollObject[i].position = new Vector3(myTransform.position.x, myTransform.position.y + totalOffset + offset - i * objectSpacing, myTransform.position.z);
+                    scrollObject[i].position = new Vector3(scrollObject[i].transform.position.x, myTransform.position.y + totalOffset + offset + i * objectSpacing, myTransform.position.z);
+                    if(!scrolling)
+                    {
+                        scrollObject[i].position = new Vector3(myTransform.position.x, myTransform.position.y + totalOffset + offset + i * objectSpacing, myTransform.position.z);
+                    }
                 }
             }
-          
         }
         
 	}
@@ -116,6 +118,11 @@ public class ScrollBar : MonoBehaviour {
         return false;
     }
 
+    public GameObject getCurrentFocus()
+    {
+        return scrollObject[currentFocusNum].gameObject;
+    }
+
     private void OnMouseUp()
     {
         scrolling = false;
@@ -127,30 +134,39 @@ public class ScrollBar : MonoBehaviour {
         {
             force = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
         }
+
+        GetComponentInParent<MovieMenu>().resetActorAssignedThisDrag();
     }
 
     private void OnMouseDown()
     {
+        scrolling = true;
         mousePos = Input.mousePosition;
         prevMousePos = Input.mousePosition;
     }
 
     private void OnMouseDrag()
     {
-        scrolling = true;
         prevMousePos = mousePos;
         mousePos = Input.mousePosition;
 
-        float change = 0;
+        float xChange = 0;
+        float yChange = 0;
         if (isHorizontal)
         {
-            change = (mousePos.x - prevMousePos.x) * scrollSpeedScale;
+            xChange = (mousePos.x - prevMousePos.x) * scrollSpeedScale;
+            offset += xChange;
         }
         else
         {
-            change = (mousePos.y - prevMousePos.y) * scrollSpeedScale;
+            yChange = (mousePos.y - prevMousePos.y) * scrollSpeedScale;
+            offset += yChange;
+            if (scrollObject.Count > 0)
+            {
+                scrollObject[currentFocusNum].transform.position = new Vector3(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x, scrollObject[currentFocusNum].position.y, scrollObject[currentFocusNum].position.z);
+            }
         }
-        offset += change;
+        
     }
 
     public void addObject(Transform addedObject)
@@ -158,7 +174,6 @@ public class ScrollBar : MonoBehaviour {
         if(scrollObject.Count >= 1)
         {
             scrollObject.Insert(currentFocusNum + 1, addedObject);
-            currentFocusNum++;
         }
         else
         {
@@ -167,10 +182,19 @@ public class ScrollBar : MonoBehaviour {
         }
     }
 
+    public int getNumObjects()
+    {
+        return scrollObject.Count;
+    }
+
     public GameObject removeFocusObject()
     {
         GameObject temp = scrollObject[currentFocusNum].gameObject;
         scrollObject.Remove(scrollObject[currentFocusNum]);
+        if(currentFocusNum == scrollObject.Count)
+        {
+            currentFocusNum--;
+        }
         return temp;
     }
 }

@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moviePictureSprite: {fileID: 212308803724873208}
+  lockPos: {fileID: 1570580957827364}
 --- !u!212 &212077234809354288
 SpriteRenderer:
   m_ObjectHideFlags: 1
