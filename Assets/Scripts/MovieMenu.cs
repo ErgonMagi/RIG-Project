@@ -70,7 +70,7 @@ public class MovieMenu : MonoBehaviour {
             allocateMovies();
             updateVisibility();
         }
-        if(GameController.Instance.isAtComputer())
+       /* if(GameController.Instance.isAtComputer())
         {
             if(actorScrollBar.getNumObjects() > 0 && actorScrollBar.getCurrentFocus().transform.position.x < assignBar.position.x && !actorAssignedThisDrag)
             {
@@ -85,7 +85,7 @@ public class MovieMenu : MonoBehaviour {
                 movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().setActor(a);
                 
             }
-        }
+        }*/
     }
 
     public void resetActorAssignedThisDrag()

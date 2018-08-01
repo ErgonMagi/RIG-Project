@@ -6,6 +6,7 @@ public class ScrollBar : MonoBehaviour {
 
     public List<Transform> scrollObject;
     private Transform myTransform;
+    private Vector3 startPos;
     public int currentFocusNum;
     public float offset;
     private Vector3 mousePos;
@@ -30,6 +31,7 @@ public class ScrollBar : MonoBehaviour {
         totalOffset = 0;
         myTransform = this.transform;
         scrolling = false;
+        startPos = myTransform.position;
 	}
 	
 	// Update is called once per frame
@@ -47,36 +49,11 @@ public class ScrollBar : MonoBehaviour {
             offset += force;
 
             //Adjust focus
-            if (offset < -objectSpacing / 2.0f)
-            {
-                if (currentFocusNum < scrollObject.Count - 1)
-                {
-                    currentFocusNum++;
-                    offset += objectSpacing;
-                    totalOffset -= objectSpacing;
-                }
-                else
-                {
-                    offset = -objectSpacing / 2.0f;
-                }
-            }
-            else if (offset > objectSpacing / 2.0f)
-            {
-                if (currentFocusNum > 0)
-                {
-                    currentFocusNum--;
-                    offset -= objectSpacing;
-                    totalOffset += objectSpacing;
-                }
-                else
-                {
-                    offset = objectSpacing / 2.0f;
-                }
-            }
+            
             
 
             //Move towards focus
-            if (!scrolling)
+           /* if (!scrolling)
             {
                 offset -= offset * lockScrollToFocusForce;
                 if (Mathf.Abs(offset) < 0.05)
@@ -84,23 +61,16 @@ public class ScrollBar : MonoBehaviour {
                     offset = 0;
                     force = 0;
                 }
-            }
+            }*/
 
-        //Set position of all objects    
-            for(int i = 0; i < scrollObject.Count; i++)
+            //Set position of all objects 
+            if (isHorizontal)
             {
-                if (isHorizontal)
-                {
-                    scrollObject[i].position = new Vector3(myTransform.position.x + totalOffset + offset + i * objectSpacing, myTransform.position.y, myTransform.position.z);
-                }
-                else
-                {
-                    scrollObject[i].position = new Vector3(scrollObject[i].transform.position.x, myTransform.position.y + totalOffset + offset + i * objectSpacing, myTransform.position.z);
-                    if(!scrolling)
-                    {
-                        scrollObject[i].position = new Vector3(myTransform.position.x, myTransform.position.y + totalOffset + offset + i * objectSpacing, myTransform.position.z);
-                    }
-                }
+                this.transform.position = new Vector3(startPos.x + offset, myTransform.position.y, myTransform.position.z);
+            }
+            else
+            {
+                this.transform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
             }
         }
         
