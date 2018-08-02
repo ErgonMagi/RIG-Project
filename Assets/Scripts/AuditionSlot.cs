@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Audition slots are the gameobjects that hold potential auditions for the player.
 
 public class AuditionSlot : MonoBehaviour {
 
-    public SpriteRenderer moviePictureSprite;
+    public Image imageRenderer;
     private Sprite moviePicture;
     private MovieManager movieManager;
     private Movie movie;
     private GameObject actor;
+
 
     public GameObject lockPos;
         
@@ -52,8 +54,13 @@ public class AuditionSlot : MonoBehaviour {
         moviePicture = tempMovie.getPicture();
         this.movie = tempMovie;
 
-        moviePictureSprite.sprite = moviePicture;
+        imageRenderer.sprite = moviePicture;
 
+    }
+
+    public void resetActor()
+    {
+        actor = null;
     }
 
     public GameObject getLockPos()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrollBar : MonoBehaviour {
 
@@ -18,11 +19,13 @@ public class ScrollBar : MonoBehaviour {
     public float scrollDrag;
     public float scrollCutoff;
     public float lockScrollToFocusForce;
+    public Vector3 centrePosition;
 
     public bool isHorizontal;
-    private float totalOffset;
+    public float totalOffset;
 
     public float objectSpacing;
+
 
 	// Use this for initialization
 	void Start () {
@@ -32,12 +35,20 @@ public class ScrollBar : MonoBehaviour {
         myTransform = this.transform;
         scrolling = false;
         startPos = myTransform.position;
-	}
+        centrePosition = this.transform.position;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (scrollObject.Count >= 1)
         {
+          
+            for(int i = 0; i < scrollObject.Count; i++)
+            {
+                scrollObject[i].SetSiblingIndex(i);
+            }
+
             //Drag
             force *= scrollDrag;
             if(Mathf.Abs(force) < scrollCutoff)
@@ -48,29 +59,121 @@ public class ScrollBar : MonoBehaviour {
             //Apply force
             offset += force;
 
-            //Adjust focus
-            
-            
+            //Update focus if not scrolling
+            if (!scrolling)
+            {
+                if (!isHorizontal)
+                {
+                    while (offset > objectSpacing / 2)
+                    {
+                        if (currentFocusNum < scrollObject.Count - 1)
+                        {
+                            totalOffset += objectSpacing;
+                            offset -= objectSpacing;
+                            currentFocusNum++;
+                        }
+                    }
+                    while (offset < -objectSpacing / 2)
+                    {
+                        if (currentFocusNum > 0)
+                        {
+                            totalOffset -= objectSpacing;
+                            offset += objectSpacing;
+                            currentFocusNum--;
+                        }
+                    }
+                }
+                else
+                {
+                    while (offset < -objectSpacing / 2)
+                    {
+                        if (currentFocusNum < scrollObject.Count - 1)
+                        {
+                            totalOffset -= objectSpacing;
+                            offset += objectSpacing;
+                            currentFocusNum++;
+                        }
+                    }
+                    while (offset > objectSpacing / 2)
+                    {
+                        if (currentFocusNum > 0)
+                        {
+                            totalOffset += objectSpacing;
+                            offset -= objectSpacing;
+                            currentFocusNum--;
+                        }
+                    }
+                }
+            }
 
             //Move towards focus
-           /* if (!scrolling)
+            if (!scrolling)
             {
                 offset -= offset * lockScrollToFocusForce;
-                if (Mathf.Abs(offset) < 0.05)
+                //move to focus
+                if (!isHorizontal)
                 {
-                    offset = 0;
-                    force = 0;
+                    if ((startPos.y - myTransform.position.y) - objectSpacing * currentFocusNum > objectSpacing)
+                    {
+                        Debug.Log("moving +half");
+                        offset += objectSpacing/2;
+                    }
+                    else if ((myTransform.position.y - startPos.y) - objectSpacing * currentFocusNum < -objectSpacing)
+                    {
+                        Debug.Log("moving -half");
+                        offset -= objectSpacing/2;
+                    }
                 }
-            }*/
+                else
+                {
+                    if ((startPos.x - myTransform.position.x) - objectSpacing * currentFocusNum > objectSpacing)
+                    {
+                        offset -= objectSpacing / 2;
+                    }
+                    else if ((startPos.x - myTransform.position.x) - objectSpacing * currentFocusNum < -objectSpacing)
+                    {
+                        offset += objectSpacing / 2;
+                    }
+                }
+                
+            }
 
             //Set position of all objects 
             if (isHorizontal)
             {
-                this.transform.position = new Vector3(startPos.x + offset, myTransform.position.y, myTransform.position.z);
+                this.transform.position = new Vector3(startPos.x + offset + totalOffset, myTransform.position.y, myTransform.position.z);
             }
             else
             {
-                this.transform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+                this.transform.position = new Vector3(myTransform.position.x, startPos.y + offset + totalOffset, myTransform.position.z);
+            }
+
+            //Keep inside bounds
+            if (isHorizontal)
+            {
+                if (offset + totalOffset < -(scrollObject.Count - 1) * objectSpacing - objectSpacing / 2)
+                {
+                    offset = -(objectSpacing / 2) + 0.05f;
+                    totalOffset = -(scrollObject.Count - 1) * objectSpacing;
+                }
+                else if (offset + totalOffset > objectSpacing / 2)
+                {
+                    offset = objectSpacing / 2 - 0.05f;
+                    totalOffset = 0;
+                }
+            }
+            else
+            {
+                if (offset + totalOffset <  -objectSpacing / 2)
+                { 
+                    offset = -objectSpacing / 2 + 0.05f;
+                    totalOffset = 0;            
+                }
+                else if (offset + totalOffset > (scrollObject.Count - 1) * objectSpacing + objectSpacing / 2)
+                {
+                    offset = objectSpacing / 2 - 0.05f;
+                    totalOffset = (scrollObject.Count - 1) * objectSpacing;
+                }
             }
         }
         
@@ -105,6 +208,13 @@ public class ScrollBar : MonoBehaviour {
             force = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
         }
 
+        if (!isHorizontal)
+        {
+            for (int i = 0; i < scrollObject.Count; i++)
+            {
+                scrollObject[i].localPosition = new Vector3(0, scrollObject[i].localPosition.y, 0);
+            }
+        }
         GetComponentInParent<MovieMenu>().resetActorAssignedThisDrag();
     }
 
@@ -126,6 +236,18 @@ public class ScrollBar : MonoBehaviour {
         {
             xChange = (mousePos.x - prevMousePos.x) * scrollSpeedScale;
             offset += xChange;
+            if (offset + totalOffset < -(scrollObject.Count - 1) * objectSpacing - objectSpacing / 2)
+            {
+                offset = -objectSpacing / 2 + 0.05f;
+                totalOffset = -(scrollObject.Count - 1) * objectSpacing;
+                currentFocusNum = scrollObject.Count - 1;
+            }
+            else if (offset + totalOffset > objectSpacing / 2)
+            {
+                offset = objectSpacing / 2 - 0.05f;
+                totalOffset = 0;
+                currentFocusNum = 0;
+            }
         }
         else
         {
@@ -133,7 +255,24 @@ public class ScrollBar : MonoBehaviour {
             offset += yChange;
             if (scrollObject.Count > 0)
             {
+                for (int i = 0; i < scrollObject.Count; i++)
+                {
+                    scrollObject[i].localPosition = new Vector3(0, scrollObject[i].localPosition.y, 0);
+                }
                 scrollObject[currentFocusNum].transform.position = new Vector3(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x, scrollObject[currentFocusNum].position.y, scrollObject[currentFocusNum].position.z);
+            }
+
+            if (offset + totalOffset < -objectSpacing / 2)
+            {
+                offset = -objectSpacing / 2 + 0.05f;
+                totalOffset = 0;
+                currentFocusNum = 0;
+            }
+            else if (offset + totalOffset > (scrollObject.Count - 1) * objectSpacing + objectSpacing / 2)
+            {
+                offset = objectSpacing / 2 - 0.05f;
+                currentFocusNum = scrollObject.Count - 1;
+                totalOffset = (scrollObject.Count - 1) * objectSpacing;
             }
         }
         
@@ -141,6 +280,7 @@ public class ScrollBar : MonoBehaviour {
 
     public void addObject(Transform addedObject)
     {
+        addedObject.SetParent(myTransform);
         if(scrollObject.Count >= 1)
         {
             scrollObject.Insert(currentFocusNum + 1, addedObject);
@@ -149,22 +289,48 @@ public class ScrollBar : MonoBehaviour {
         {
             scrollObject.Add(addedObject);
             currentFocusNum = 0;
+            if (!isHorizontal)
+            {
+                objectSpacing =  GetComponentInChildren<VerticalLayoutGroup>().spacing + scrollObject[currentFocusNum].GetComponent<RectTransform>().rect.height;
+            }
+            else
+            {
+                objectSpacing = GetComponentInChildren<HorizontalLayoutGroup>().spacing + scrollObject[currentFocusNum].GetComponent<RectTransform>().rect.width;
+            }
         }
     }
 
     public int getNumObjects()
     {
-        return scrollObject.Count;
+        int numAssigned = 0;
+
+        for(int i = 0; i< scrollObject.Count; i++)
+        {
+            if(scrollObject[i].GetComponent<ActorPicture>() != null)
+            {
+                if(scrollObject[i].GetComponent<ActorPicture>().isSetTomovie())
+                {
+                    numAssigned++;
+                }
+            }
+            else if (scrollObject[i].GetComponent<AuditionSlot>() != null)
+            {
+                if (scrollObject[i].GetComponent<AuditionSlot>().getActor() != null)
+                {
+                    numAssigned++;
+                }
+            }
+        }
+
+
+
+        return scrollObject.Count - numAssigned;
     }
 
     public GameObject removeFocusObject()
     {
         GameObject temp = scrollObject[currentFocusNum].gameObject;
         scrollObject.Remove(scrollObject[currentFocusNum]);
-        if(currentFocusNum == scrollObject.Count)
-        {
-            currentFocusNum--;
-        }
         return temp;
     }
 }

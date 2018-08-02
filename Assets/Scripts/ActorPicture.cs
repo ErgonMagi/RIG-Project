@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ActorPicture : MonoBehaviour {
 
@@ -9,8 +10,8 @@ public class ActorPicture : MonoBehaviour {
     private bool selected;
     private Vector3 startPos;
     private CameraManager cameraManager;
-    private GameObject lockedPosition;
     private Movie movie;
+    public Transform actorScrollBar;
 
 	// Use this for initialization
 	void Start () {
@@ -18,23 +19,12 @@ public class ActorPicture : MonoBehaviour {
         startPos = this.transform.localPosition;
         cameraManager = CameraManager.Instance;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-        //TODO: Add lerping to the movement.
-        //If not selected, but has a lock position, set it to the lock position
-        if(lockedPosition != null)
-        {
-            this.transform.position = lockedPosition.transform.position;
-        }
-	}
 
     //Sets the actor for this object to a
     public void setActor(ref Actor a)
     {
         actor = a;
-        GetComponent<SpriteRenderer>().sprite = actor.getPicture();
+        GetComponent<Image>().sprite = actor.getPicture();
     }
 
     //Submits to the TaskManager which actor and movie this object has paired.
@@ -50,19 +40,20 @@ public class ActorPicture : MonoBehaviour {
  
     public void lockToGameobject(GameObject lockPos)
     {
-        lockedPosition = lockPos;
-        movie = lockPos.GetComponentInParent<AuditionSlot>().getMovie();
         this.transform.localScale = new Vector3(1.25f, 1.3f, 1);
-        GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        this.transform.SetParent(lockPos.transform);
+        movie = lockPos.GetComponentInParent<AuditionSlot>().getMovie();      
+        this.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     //Unlocks the actor from its locked position
     public void unlockPos()
     {
+        this.transform.SetParent(actorScrollBar);
+        actorScrollBar.GetComponent<ScrollBar>().addObject(gameObject.transform);
         movie = null;
-        lockedPosition = null;
         this.transform.localScale = new Vector3(2.5f, 2.5f, 1);
-        GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+        this.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     //Returns if their is an actor assigned to the picture.

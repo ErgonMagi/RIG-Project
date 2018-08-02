@@ -38,7 +38,6 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
 
     public void unlock()
     {
-        Debug.Log("Desktop unlocked");
         unlocked = true;
     }
 }

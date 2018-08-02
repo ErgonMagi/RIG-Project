@@ -12,7 +12,8 @@ public class MovieMenu : MonoBehaviour {
 
     public ScrollBar actorScrollBar;
     public ScrollBar movieScrollBar;
-    public Transform assignBar;
+
+    public GameObject assignBar;
 
     public float swipeSpeed;
 
@@ -55,10 +56,9 @@ public class MovieMenu : MonoBehaviour {
             }
         }
     }
-
+    
     private void Update()
     {
-        updateVisibility();
         if(!firstFrame && !GameController.Instance.isAtComputer())
         {
             firstFrame = true;
@@ -70,22 +70,21 @@ public class MovieMenu : MonoBehaviour {
             allocateMovies();
             updateVisibility();
         }
-       /* if(GameController.Instance.isAtComputer())
+        if(GameController.Instance.isAtComputer())
         {
-            if(actorScrollBar.getNumObjects() > 0 && actorScrollBar.getCurrentFocus().transform.position.x < assignBar.position.x && !actorAssignedThisDrag)
+            if(actorScrollBar.getNumObjects() > 0 && actorScrollBar.getCurrentFocus() != null && actorScrollBar.getCurrentFocus().transform.position.x < 50f && actorScrollBar.getCurrentFocus().transform.position.x > 10f && !actorAssignedThisDrag)
             {
                 actorAssignedThisDrag = true;
                 GameObject a = actorScrollBar.removeFocusObject();
                 if (movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor() != null)
                 {
-                    actorScrollBar.addObject(movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor().transform);
                     movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor().GetComponent<ActorPicture>().unlockPos();
                 }             
                 a.GetComponent<ActorPicture>().lockToGameobject(movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getLockPos());
                 movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().setActor(a);
                 
             }
-        }*/
+        }
     }
 
     public void resetActorAssignedThisDrag()
