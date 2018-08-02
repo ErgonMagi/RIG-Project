@@ -20,6 +20,10 @@ public class ScrollBar : MonoBehaviour {
     public float scrollCutoff;
     public float lockScrollToFocusForce;
     public Vector3 centrePosition;
+    public float currentPos;
+    public float focusPos;
+
+    private bool addingToEnd;
 
     public bool isHorizontal;
     public float totalOffset;
@@ -36,7 +40,7 @@ public class ScrollBar : MonoBehaviour {
         scrolling = false;
         startPos = myTransform.position;
         centrePosition = this.transform.position;
-
+        addingToEnd = false;
     }
 	
 	// Update is called once per frame
@@ -193,11 +197,16 @@ public class ScrollBar : MonoBehaviour {
 
     public GameObject getCurrentFocus()
     {
+        if(currentFocusNum >= scrollObject.Count)
+        {
+            return null;
+        }
         return scrollObject[currentFocusNum].gameObject;
     }
 
     private void OnMouseUp()
     {
+        GetComponentInParent<MovieMenu>().AssignActor();
         scrolling = false;
         if (isHorizontal)
         {
@@ -215,8 +224,19 @@ public class ScrollBar : MonoBehaviour {
                 scrollObject[i].localPosition = new Vector3(0, scrollObject[i].localPosition.y, 0);
             }
         }
-        GetComponentInParent<MovieMenu>().resetActorAssignedThisDrag();
     }
+
+    public void resetYToSwipedObject(Transform swipedObject)
+    {
+        for(int i = 0; i < scrollObject.Count; i++)
+        {
+            if(swipedObject == scrollObject[i])
+            {
+                totalOffset = objectSpacing * i;
+                offset = 0;
+            }
+        }
+    } 
 
     private void OnMouseDown()
     {
@@ -281,22 +301,33 @@ public class ScrollBar : MonoBehaviour {
     public void addObject(Transform addedObject)
     {
         addedObject.SetParent(myTransform);
-        if(scrollObject.Count >= 1)
-        {
-            scrollObject.Insert(currentFocusNum + 1, addedObject);
-        }
-        else
+        int index = currentFocusNum;
+        if(scrollObject.Count == 0)
         {
             scrollObject.Add(addedObject);
             currentFocusNum = 0;
-            if (!isHorizontal)
+        }
+        else
+        {
+            if (index > scrollObject.Count)
             {
-                objectSpacing =  GetComponentInChildren<VerticalLayoutGroup>().spacing + scrollObject[currentFocusNum].GetComponent<RectTransform>().rect.height;
+                index = scrollObject.Count;
             }
-            else
+            scrollObject.Insert(index, addedObject);
+            if (index == scrollObject.Count -1)
             {
-                objectSpacing = GetComponentInChildren<HorizontalLayoutGroup>().spacing + scrollObject[currentFocusNum].GetComponent<RectTransform>().rect.width;
+                currentFocusNum++;
             }
+        }
+        
+       
+        if (!isHorizontal)
+        {
+            objectSpacing =  GetComponentInChildren<VerticalLayoutGroup>().spacing + scrollObject[currentFocusNum].GetComponent<RectTransform>().rect.height;
+        }
+        else
+        {
+            objectSpacing = GetComponentInChildren<HorizontalLayoutGroup>().spacing + scrollObject[currentFocusNum].GetComponent<RectTransform>().rect.width;
         }
     }
 
@@ -329,8 +360,15 @@ public class ScrollBar : MonoBehaviour {
 
     public GameObject removeFocusObject()
     {
-        GameObject temp = scrollObject[currentFocusNum].gameObject;
+        GameObject temp;       
+        temp = scrollObject[currentFocusNum].gameObject;
         scrollObject.Remove(scrollObject[currentFocusNum]);
+        if (currentFocusNum == scrollObject.Count)
+        {
+            currentFocusNum--;
+        }
+
+
         return temp;
     }
 }

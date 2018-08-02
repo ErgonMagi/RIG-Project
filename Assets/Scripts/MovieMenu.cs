@@ -63,33 +63,32 @@ public class MovieMenu : MonoBehaviour {
         {
             firstFrame = true;
         }
-        if(firstFrame && GameController.Instance.isAtComputer())
+        if (firstFrame && GameController.Instance.isAtComputer())
         {
             firstFrame = false;
             allocateActors();
             allocateMovies();
             updateVisibility();
         }
-        if(GameController.Instance.isAtComputer())
+    }
+
+    public void AssignActor()
+    {
+        if (GameController.Instance.isAtComputer())
         {
-            if(actorScrollBar.getNumObjects() > 0 && actorScrollBar.getCurrentFocus() != null && actorScrollBar.getCurrentFocus().transform.position.x < 50f && actorScrollBar.getCurrentFocus().transform.position.x > 10f && !actorAssignedThisDrag)
+            if (actorScrollBar.getNumObjects() > 0 && actorScrollBar.getCurrentFocus() != null && actorScrollBar.getCurrentFocus().transform.position.x < 51f && actorScrollBar.getCurrentFocus().transform.position.x > 10f && !actorAssignedThisDrag)
             {
-                actorAssignedThisDrag = true;
+                actorScrollBar.resetYToSwipedObject(actorScrollBar.getCurrentFocus().transform);
                 GameObject a = actorScrollBar.removeFocusObject();
                 if (movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor() != null)
                 {
                     movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getActor().GetComponent<ActorPicture>().unlockPos();
-                }             
+                }
                 a.GetComponent<ActorPicture>().lockToGameobject(movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().getLockPos());
                 movieScrollBar.getCurrentFocus().GetComponent<AuditionSlot>().setActor(a);
-                
+
             }
         }
-    }
-
-    public void resetActorAssignedThisDrag()
-    {
-        actorAssignedThisDrag = false;
     }
 
     private void allocateActors()
