@@ -36,6 +36,7 @@ public class AuditionScreen : MonoBehaviour {
         getMovies();
     }
 
+    //Gets the actors list from the player and tells the ui to update
     public void getActors()
     {
         actorsList = player.getActorsList();
@@ -43,6 +44,7 @@ public class AuditionScreen : MonoBehaviour {
         movieScrollBar.UpdateUI();
     }
 
+    //Currntly generates new movies but will need to change to get movies on a timed basis
     public void getMovies()
     {
         for(int i = 0; i < MaxMoviesShown; i++)
@@ -52,6 +54,22 @@ public class AuditionScreen : MonoBehaviour {
             a.actor = null;
             auditionList.Add(a);
         }
+        movieScrollBar.UpdateUI();
+    }
+
+    //Unassigns an actor from an audition
+    public void UnassignActor(int actorNum)
+    {
+        Audition newAudition = new Audition();
+
+        newAudition.movie = auditionList[actorNum].movie;
+        newAudition.actor = null;
+
+        actorsList.Insert(actorScrollBar.getCurrentFocusnum(), auditionList[actorNum].actor);
+
+        auditionList[actorNum] = newAudition;
+
+        actorScrollBar.UpdateUI();
         movieScrollBar.UpdateUI();
     }
 

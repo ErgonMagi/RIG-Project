@@ -9,7 +9,10 @@ public class AuditionSlot : MonoBehaviour {
 
     public Image movieImageRenderer;
     public Image actorImageRenderer;
+    public CancelActorAssignmentButton cancelButton;
     private AuditionScreen.Audition audition;
+
+    private int arrayNumber;
         
     public void setAudition(AuditionScreen.Audition a)
     {
@@ -19,12 +22,20 @@ public class AuditionSlot : MonoBehaviour {
         {
             actorImageRenderer.enabled = true;
             actorImageRenderer.sprite = audition.actor.getPicture();
+            cancelButton.showButton();
+
         }
         else
         {
             actorImageRenderer.enabled = false;
         }
     }
+
+    public void setArrayNum(int i)
+    {
+        cancelButton.setArrayNum(i);
+    }
+
 
     public bool hasMovie()
     {
@@ -35,5 +46,4 @@ public class AuditionSlot : MonoBehaviour {
     {
         audition = new AuditionScreen.Audition();
     }
-   
 }

@@ -15,6 +15,7 @@ public class GameController : Singleton<GameController> {
     public Camera computerCam;
     public Camera fileCam;
     public AuditionScreen auditionScreen;
+    public Canvas DesktopCanvas;
     public Camera actorBoardCam;
     public GameObject actorBoard;
 
@@ -36,6 +37,8 @@ public class GameController : Singleton<GameController> {
     private Gamestate gamestate;
     private CameraManager cam;
     private Gamestate compState;
+
+    private bool menuBool;
     
 
     // Use this for initialization
@@ -48,44 +51,27 @@ public class GameController : Singleton<GameController> {
         compCamPos = new Vector3(-5.85f, 1.343f, -3.447f);
         compCamRot = new Vector3(0, 90, 0);
 
-
-        menus = new List<GameObject>();
-
-        //menus.Add(actorStatsMenu.gameObject);
-        menus.Add(auditionScreen.gameObject);
-
         compState = Gamestate.mainMenu;
         displayScoreboard = false;
+        menuBool = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
 
-        for(int i = 0; i < menus.Count; i++)
+        if(menuBool)
         {
-            if(menus[i].transform.position.y < 75)
-                menus[i].transform.position += new Vector3(0, 100, 0);
+            DesktopCanvas.enabled = false;
+            menuBool = false;
         }
 
         switch(gamestate)
         {
             case Gamestate.movieMenu:
-                if (auditionScreen.gameObject.transform.position.y > 75)
-                    auditionScreen.gameObject.transform.position -= new Vector3(0, 100, 0);
+                DesktopCanvas.enabled = true;
+                menuBool = true;
                 break;
-            case Gamestate.desk:
-                switch(compState)
-                {
-                    case Gamestate.mainMenu:
-                        break;
-                    case Gamestate.movieMenu:
-                        if (auditionScreen.gameObject.transform.position.y > 75)
-                            auditionScreen.gameObject.transform.position -= new Vector3(0, 100, 0);
-                        break;
-                }
-                break;
-
         }
 
     }

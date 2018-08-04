@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class submitActorsButton : MonoBehaviour, ClickableObject {
+public class submitActorsButton : MonoBehaviour {
 
     //Submits all actors to their auditions on click (Should be changed to show confirm screen).
     public void onClick()

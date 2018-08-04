@@ -67,6 +67,11 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         
 	}
 
+    public int getCurrentFocusnum()
+    {
+        return currentFocusIndex;
+    }
+
     public void UpdateUI()
     {
         List<Actor> actorList = auditionScreen.getActorsList();

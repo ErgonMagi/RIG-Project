@@ -6,35 +6,43 @@ using UnityEngine.UI;
 public class CancelActorAssignmentButton : MonoBehaviour {
 
     bool selected = false;
-    public AuditionSlot auditionSlot;
     private Image imageRenderer;
     private Button button;
+
+    public AuditionScreen auditionScreen;
+
+    private int arrayNum;
 
     public void Start()
     { 
         imageRenderer = GetComponent<Image>();
         button = GetComponent<Button>();
+
+        hideButton();
     }
 
-    /*public void Update()
+    public void showButton()
     {
-        if (auditionSlot.GetComponent<AuditionSlot>().getActor() != null)
-        {
-            imageRenderer.enabled = true;
-            button.enabled = true;
-        }
-        else
-        {
-            imageRenderer.enabled = false;
-            button.enabled = false;
-        }
+        imageRenderer.enabled = true;
+        button.enabled = true;
+    }
+
+    public void hideButton()
+    {
+        imageRenderer.enabled = false;
+        button.enabled = false;
+    }
+
+    public void setArrayNum(int i)
+    {
+        arrayNum = i;
     }
 
     public void Clicked()
     {
-        GameObject temp = auditionSlot.getActor();
-        auditionSlot.resetActor();
-    }*/
+        auditionScreen.UnassignActor(arrayNum);
+        hideButton();
+    }
 }
 
 

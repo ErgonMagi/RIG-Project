@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de94713983547ca4d982627c5703c4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auditionSlot: {fileID: 114923162894937260}
+  auditionScreen: {fileID: 0}
 --- !u!114 &114533644254384354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movieImageRenderer: {fileID: 114241307305251848}
   actorImageRenderer: {fileID: 114017575664419932}
+  cancelButton: {fileID: 114275907004818398}
 --- !u!222 &222083478616610090
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -376,7 +377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.2279997, y: 0.00000047683716}
+  m_AnchoredPosition: {x: 2.27, y: -0.45}
   m_SizeDelta: {x: 0.698, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224042163878487026
