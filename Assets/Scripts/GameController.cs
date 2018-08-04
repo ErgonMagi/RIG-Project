@@ -14,7 +14,7 @@ public class GameController : Singleton<GameController> {
     public Camera deskCam;
     public Camera computerCam;
     public Camera fileCam;
-    public MovieMenu movieMenu;
+    public AuditionScreen auditionScreen;
     public Camera actorBoardCam;
     public GameObject actorBoard;
 
@@ -52,7 +52,7 @@ public class GameController : Singleton<GameController> {
         menus = new List<GameObject>();
 
         //menus.Add(actorStatsMenu.gameObject);
-        menus.Add(movieMenu.gameObject);
+        menus.Add(auditionScreen.gameObject);
 
         compState = Gamestate.mainMenu;
         displayScoreboard = false;
@@ -71,8 +71,8 @@ public class GameController : Singleton<GameController> {
         switch(gamestate)
         {
             case Gamestate.movieMenu:
-                if (movieMenu.gameObject.transform.position.y > 75)
-                    movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
+                if (auditionScreen.gameObject.transform.position.y > 75)
+                    auditionScreen.gameObject.transform.position -= new Vector3(0, 100, 0);
                 break;
             case Gamestate.desk:
                 switch(compState)
@@ -80,8 +80,8 @@ public class GameController : Singleton<GameController> {
                     case Gamestate.mainMenu:
                         break;
                     case Gamestate.movieMenu:
-                        if (movieMenu.gameObject.transform.position.y > 75)
-                            movieMenu.gameObject.transform.position -= new Vector3(0, 100, 0);
+                        if (auditionScreen.gameObject.transform.position.y > 75)
+                            auditionScreen.gameObject.transform.position -= new Vector3(0, 100, 0);
                         break;
                 }
                 break;
@@ -98,6 +98,7 @@ public class GameController : Singleton<GameController> {
             cam.lerpToLoc(compCamPos, compCamRot, 1.0f);
             gamestate = Gamestate.movieMenu;
             cam.swapCamAfterLerp(computerCam);
+            auditionScreen.getActors();
         }
     }
 

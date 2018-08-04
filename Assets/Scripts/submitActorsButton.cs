@@ -7,7 +7,7 @@ public class submitActorsButton : MonoBehaviour, ClickableObject {
     //Submits all actors to their auditions on click (Should be changed to show confirm screen).
     public void onClick()
     {
-        MovieMenu mm = FindObjectOfType<MovieMenu>();
-        mm.submitActors();
+        AuditionScreen auditionScreen = FindObjectOfType<AuditionScreen>();
+        auditionScreen.submitActors();
     }
 }

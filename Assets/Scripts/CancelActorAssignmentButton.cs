@@ -7,7 +7,6 @@ public class CancelActorAssignmentButton : MonoBehaviour {
 
     bool selected = false;
     public AuditionSlot auditionSlot;
-    public ScrollBar actorScrollBar;
     private Image imageRenderer;
     private Button button;
 
@@ -17,7 +16,7 @@ public class CancelActorAssignmentButton : MonoBehaviour {
         button = GetComponent<Button>();
     }
 
-    public void Update()
+    /*public void Update()
     {
         if (auditionSlot.GetComponent<AuditionSlot>().getActor() != null)
         {
@@ -35,8 +34,7 @@ public class CancelActorAssignmentButton : MonoBehaviour {
     {
         GameObject temp = auditionSlot.getActor();
         auditionSlot.resetActor();
-        temp.GetComponent<ActorPicture>().unlockPos();
-    }
+    }*/
 }
 
 

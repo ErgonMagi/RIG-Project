@@ -7,64 +7,33 @@ using UnityEngine.UI;
 
 public class AuditionSlot : MonoBehaviour {
 
-    public Image imageRenderer;
-    private Sprite moviePicture;
-    private MovieManager movieManager;
-    private Movie movie;
-    private GameObject actor;
-
-
-    public GameObject lockPos;
+    public Image movieImageRenderer;
+    public Image actorImageRenderer;
+    private AuditionScreen.Audition audition;
         
-
-    //On start a random movie is assigned
-    //Note: this will need to be made persistent.
-    private void Start()
+    public void setAudition(AuditionScreen.Audition a)
     {
-        movieManager = MovieManager.Instance;
-        generateMovie();
+        audition = a;
+        movieImageRenderer.sprite = a.movie.getPicture();
+        if(audition.actor != null)
+        {
+            actorImageRenderer.enabled = true;
+            actorImageRenderer.sprite = audition.actor.getPicture();
+        }
+        else
+        {
+            actorImageRenderer.enabled = false;
+        }
     }
 
-    //Returns the movie associated with this profile.
-    public Movie getMovie()
+    public bool hasMovie()
     {
-        return movie;
+        return audition.movie != null;
     }
-
-    public bool isAssigned()
+    
+    public void Empty()
     {
-        return movie != null;
+        audition = new AuditionScreen.Audition();
     }
-
-    public void setActor(GameObject actor)
-    {
-        this.actor = actor;
-    }
-
-    public GameObject getActor()
-    {
-        return actor;
-    }
-
-    //Assigns a new movie to the audition slot.
-    public void generateMovie()
-    {
-        Movie tempMovie = movieManager.getMovie();
-
-        moviePicture = tempMovie.getPicture();
-        this.movie = tempMovie;
-
-        imageRenderer.sprite = moviePicture;
-
-    }
-
-    public void resetActor()
-    {
-        actor = null;
-    }
-
-    public GameObject getLockPos()
-    {
-        return lockPos;
-    }
+   
 }

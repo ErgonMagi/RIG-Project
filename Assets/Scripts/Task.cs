@@ -19,7 +19,7 @@ public class Task {
     private TaskType taskType;
 
     //Constructor
-    public Task(ref Actor actor, ref Movie movie, double time, bool isAudition)
+    public Task(Actor actor, Movie movie, double time, bool isAudition)
     {
         this.actor = actor;
         this.movie = movie;

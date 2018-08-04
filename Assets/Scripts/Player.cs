@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Singleton<Player> {
 
-    public Actor [] clients;
+    public List<Actor> clients;
 
 	// Use this for initialization
 	protected override void Awake () {
@@ -14,32 +14,29 @@ public class Player : Singleton<Player> {
 
     public Actor getActor(int actorNum)
     {
+        if(actorNum >= clients.Count)
+        {
+            return null;
+        }
         return clients[actorNum];
     }
 
     public void setActor(Actor actor, int arrayNum)
     {
-        clients[arrayNum] = actor;
+        clients.Insert(arrayNum, actor);
     }
 
     public void addActor(Actor actor)
     {
-        for(int i = 0; i < clients.Length; i++)
-        {
-            if(clients[i] == null)
-            {
-                clients[i] = actor;
-                return;
-            }
-        }
+        clients.Add(actor);
     }
 
-    public Actor[] getActorsList()
+    public List<Actor> getActorsList()
     {
         return clients;
     }
 
-    public void setActors(Actor [] actors)
+    public void setActors(List<Actor> actors)
     {
         clients = actors;
     }

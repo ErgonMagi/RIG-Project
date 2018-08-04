@@ -28,10 +28,24 @@ public class SaveLoad : Singleton<SaveLoad> {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
-        PlayerData data = new PlayerData(Player.Instance.getActorsList(), LevelManager.Instance.getLevel());
+        PlayerData data = new PlayerData(Player.Instance.getActorsList().ToArray(), LevelManager.Instance.getLevel());
 
         bf.Serialize(file, data);
         file.Close();
+    }
+
+    private List<Actor> convertArrayToList(Actor[] actors)
+    {
+        List<Actor> Temp = new List<Actor>();
+
+        for(int i = 0; i < actors.Length; i++)
+        {
+            if (actors[i] != null)
+            {
+                Temp.Add(actors[i]);
+            }
+        }
+        return Temp;
     }
 
     //Loads all data from playerInfo.dat and stores it in the SaveLoad object
@@ -56,9 +70,9 @@ public class SaveLoad : Singleton<SaveLoad> {
     }
     
     //Returns the loaded actors
-    public Actor[] getActors()
+    public List<Actor> getActors()
     {
-        return actors;
+        return convertArrayToList(actors);
     }
 }
 

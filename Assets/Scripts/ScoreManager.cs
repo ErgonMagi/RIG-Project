@@ -39,7 +39,7 @@ public class ScoreManager : MonoBehaviour {
         {
             //If they pass, send them on the movie, create a task for it and notify the player
             actor.toMovie();
-            Task t = new Task(ref actor, ref movie, 5, false);
+            Task t = new Task(actor, movie, 5, false);
             FindObjectOfType<TaskManager>().addTask(t);
             FindObjectOfType<NotificationManager>().addNotification(actor.getName() + " has succeeded on their audition!");
         }

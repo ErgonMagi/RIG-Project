@@ -7,67 +7,38 @@ using UnityEngine.UI;
 public class ActorPicture : MonoBehaviour {
 
     private Actor actor;
-    private bool selected;
-    private Vector3 startPos;
-    private CameraManager cameraManager;
-    private Movie movie;
-    public Transform actorScrollBar;
+    public Image imageRenderer;
+    private Transform myTransform;
 
 	// Use this for initialization
 	void Start () {
-        selected = false;
-        startPos = this.transform.localPosition;
-        cameraManager = CameraManager.Instance;
-	}
+        myTransform = this.transform;
+        enabled = false;
+    }
 
     //Sets the actor for this object to a
-    public void setActor(ref Actor a)
+    public void setActor(Actor a)
     {
+        if(a == null)
+        {
+            Debug.Log("null actor passed");
+        }
         actor = a;
-        GetComponent<Image>().sprite = actor.getPicture();
+        imageRenderer.sprite = actor.getPicture();
     }
 
-    //Submits to the TaskManager which actor and movie this object has paired.
-    public void submitActorMoviePair()
+    public bool hasActor()
     {
-        if(movie != null)
-        {
-            Task t = new Task(ref actor, ref movie, 2, true);
-            FindObjectOfType<TaskManager>().addTask(t);
-        }
-        movie = null;
-    }
- 
-    public void lockToGameobject(GameObject lockPos)
-    {
-        this.transform.localScale = new Vector3(1.25f, 1.3f, 1);
-        this.transform.SetParent(lockPos.transform);
-        movie = lockPos.GetComponentInParent<AuditionSlot>().getMovie();      
-        this.transform.localPosition = new Vector3(0, 0, 0);
+        return actor != null;
     }
 
-    //Unlocks the actor from its locked position
-    public void unlockPos()
+    public void Empty()
     {
-        this.transform.SetParent(actorScrollBar);
-        actorScrollBar.GetComponent<ScrollBar>().addObject(gameObject.transform);
-        movie = null;
-        this.transform.localScale = new Vector3(2.5f, 2.5f, 1);
-        this.transform.localPosition = new Vector3(0, 0, 0);
+        actor = null;
     }
 
-    //Returns if their is an actor assigned to the picture.
-    public bool isAssigned()
+    public Transform getTransform()
     {
-        if(actor != null)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public bool isSetTomovie()
-    {
-        return movie != null;
+        return myTransform;
     }
 }
