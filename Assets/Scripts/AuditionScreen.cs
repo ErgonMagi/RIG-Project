@@ -14,6 +14,7 @@ public class AuditionScreen : MonoBehaviour {
     //Ui variables
     public ActorScrollBar actorScrollBar;
     public MovieScrollBar movieScrollBar;
+    public ConfirmationPanel confirmationPanel;
 
 
     //Data variables
@@ -71,6 +72,7 @@ public class AuditionScreen : MonoBehaviour {
 
         actorScrollBar.UpdateUI();
         movieScrollBar.UpdateUI();
+        confirmationPanel.UpdateUI();
     }
 
     public List<Actor> getActorsList()
@@ -104,6 +106,7 @@ public class AuditionScreen : MonoBehaviour {
         
         actorScrollBar.UpdateUI();
         movieScrollBar.UpdateUI();
+        confirmationPanel.UpdateUI();
 
     }
 
@@ -120,5 +123,8 @@ public class AuditionScreen : MonoBehaviour {
             }
             
         }
+        actorScrollBar.UpdateUI();
+        movieScrollBar.UpdateUI();
+        confirmationPanel.UpdateUI();
     }
 }
