@@ -29,7 +29,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     private bool scrolling;
     private float force;
     private float objectSpacing;
-    private int currentFocusIndex;
+    public int currentFocusIndex;
     private float maxOffset;
     private Vector3 startPos;
     private Transform myTransform;

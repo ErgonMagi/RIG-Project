@@ -77,6 +77,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable
             {
                 auditions[i].gameObject.SetActive(true);
                 auditions[i].setAudition(auditionList[i]);
+                auditions[i].setArrayNum(i);
             }
             else
             {
