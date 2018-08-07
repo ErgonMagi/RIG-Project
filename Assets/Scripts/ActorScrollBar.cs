@@ -9,7 +9,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     public AuditionScreen auditionScreen;
 
     //Actors
-    public List<ActorPicture> actorPictures; 
+    public List<ActorPicture> actorPictures;
+    private Collider2D collider;
     
     //Input variables
     private Vector3 mousePos;
@@ -43,6 +44,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         objectSpacing = 7.79f; //actorPictures[0].GetComponent<RectTransform>().rect.height + GetComponent<VerticalLayoutGroup>().spacing;
         myTransform = this.transform;
         startPos = myTransform.position;
+        collider = this.GetComponent<Collider2D>();
     }
 	
 	// Update is called once per frame
@@ -177,6 +179,18 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
         focusTransform.position = new Vector3(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x, focusTransform.position.y, focusTransform.position.z);
        
+    }
+
+    public void SetCollision(bool collisionOn)
+    {
+        if(collisionOn)
+        {
+            collider.enabled = true;
+        }
+        else
+        {
+            collider.enabled = false;
+        }
     }
 
 }

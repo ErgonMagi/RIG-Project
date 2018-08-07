@@ -5,10 +5,11 @@ using UnityEngine;
 public class CloseConfirmationScreen : MonoBehaviour {
 
 
-    public ConfirmationPanel confirmationPanel;
+    public AuditionScreen auditionScreen;
 
     public void CloseScreen()
     {
-        confirmationPanel.HideConfirmationScreen();
+        auditionScreen.HideConfirmationScreen();
     }
 }
+    

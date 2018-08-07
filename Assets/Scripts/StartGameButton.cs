@@ -6,10 +6,16 @@ using UnityEngine.UI;
 
 public class StartGameButton : MonoBehaviour {
 
+    private bool isLoading = false;
+
 	public void startGame()
     {
-        FindObjectOfType<LoadingBar>().startLoading();
-        this.GetComponentInChildren<Text>().text = "Loading...";
+        if (!isLoading)
+        {
+            isLoading = true;
+            FindObjectOfType<LoadingBar>().startLoading();
+            this.GetComponentInChildren<Text>().text = "Loading...";
+        }
     }
 
 }

@@ -17,7 +17,7 @@ public class submitActorsButton : MonoBehaviour {
         }
         else
         {
-            confirmationPanel.ShowConfirmationScreen();
+            auditionScreen.ShowConfirmationScreen();
         }
     }
 }

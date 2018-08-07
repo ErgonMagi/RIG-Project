@@ -106,7 +106,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224726326579077198}
-  - component: {fileID: 114277396377513576}
   - component: {fileID: 114538336178225504}
   m_Layer: 0
   m_Name: AuditionSummaryLight
@@ -279,20 +278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auditionScreen: {fileID: 0}
---- !u!114 &114277396377513576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1753766787883226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cdb16ceeee1d644a8662b32e13c35da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actorImageRenderer: {fileID: 114267991100451938}
-  movieImageRenderer: {fileID: 114077194266195584}
-  cancelButton: {fileID: 0}
 --- !u!114 &114538336178225504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -606,7 +591,7 @@ RectTransform:
   m_GameObject: {fileID: 1753766787883226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000172, y: 0.9999263, z: 0.99999464}
+  m_LocalScale: {x: 1.0000172, y: 0.9999264, z: 1}
   m_Children:
   - {fileID: 224503635489750204}
   - {fileID: 224999653049160790}

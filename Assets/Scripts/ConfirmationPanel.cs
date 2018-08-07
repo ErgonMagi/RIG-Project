@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
 
@@ -14,8 +15,43 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
     public float lerpTime;
     private bool lerping = false;
 
+    public Transform lerpObject;
+
+    private Collider2D collider;
+
+    //Input variables
+    private Vector3 mousePos;
+    private Vector3 prevMousePos;
+
+    //Public Scroll variables
+    public float offset;
+    public bool isHorizontal;
+    public float scrollMomentumScale;
+    public float scrollSpeedScale;
+    public float scrollDragScale;
+
+    //Private scroll variables
+    private bool scrolling;
+    private float force;
+    private float objectSpacing;
+    public float maxOffset;
+    private Vector3 startPos;
+    private Transform myTransform;
+    private int ActivePicturesInArray;
+
     private void Update()
     {    
+        if(myTransform == null)
+        {
+            myTransform = this.transform;
+        }
+
+        if(collider = null)
+        {
+            collider = this.GetComponent<Collider2D>();
+        }
+
+        //Visibility code
         if (lerping)
         {
             t += Time.deltaTime;
@@ -26,13 +62,82 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
             }
             if (isVisible)
             {
-                this.transform.position = new Vector3(50, Mathf.Lerp(hiddenPos.y, visiblePos.y,  t / lerpTime), 0);
+                lerpObject.position = new Vector3(50, Mathf.Lerp(hiddenPos.y, visiblePos.y,  t / lerpTime), 0);
             }
             else
             {
-                this.transform.position = new Vector3(50, Mathf.Lerp(visiblePos.y, hiddenPos.y, t / lerpTime), 0);
+                lerpObject.position = new Vector3(50, Mathf.Lerp(visiblePos.y, hiddenPos.y, t / lerpTime), 0);
             }
         }
+
+        //Scroll code
+        if (!scrolling)
+        {
+            //Calculate force
+            force *= scrollDragScale;
+            offset += force;
+        }
+
+
+        //Update position
+        myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+    }
+
+    private void UpdateMaxOffset()
+    {
+        //Calculate the max size
+        ActivePicturesInArray = 0;
+        int totalCounted = 0;
+        for (int i = 0; i < auditionSummaries.Count; i++)
+        {
+            if (!auditionSummaries[i].IsEmpty())
+            {
+                ActivePicturesInArray++;
+            }
+            totalCounted++;
+        }
+
+        maxOffset = ActivePicturesInArray * objectSpacing - (objectSpacing / 2);
+    }
+
+    private void OnMouseUp()
+    {
+        //Calculate the slide effect
+        scrolling = false;
+        force = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
+
+    }
+
+    private void OnMouseDown()
+    {
+        scrolling = true;
+        mousePos = Input.mousePosition;
+        prevMousePos = Input.mousePosition;
+        Debug.Log("conf screen clicked");
+    }
+
+    private void OnMouseDrag()
+    {
+        prevMousePos = mousePos;
+        mousePos = Input.mousePosition;
+
+        float xChange = 0;
+        float yChange = 0;
+
+        xChange = mousePos.x - prevMousePos.x;
+        yChange = mousePos.y - prevMousePos.y;
+
+        offset += yChange * scrollSpeedScale;
+
+        if (offset < -objectSpacing / 2)
+        {
+            offset = -objectSpacing / 2;
+        }
+        else if (offset > maxOffset)
+        {
+            offset = maxOffset;
+        }
+
     }
 
     public void ShowConfirmationScreen()
@@ -80,11 +185,37 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         {
             auditionSummaries[i].gameObject.SetActive(false);
         }
+        UpdateMaxOffset();
+        if (arrayNum > 1)
+        {
+            if (objectSpacing == 0)
+            {
+                objectSpacing = auditionSummaries[0].transform.position.y - auditionSummaries[1].transform.position.y;
+            }
+        }
     }
 
     [ContextMenu("Show transform pos")]
     public void ShowTransformPos()
     {
-        Debug.Log(this.transform.position);
+        Debug.Log(lerpObject.transform.position);
+    }
+
+    public void SetCollision(bool collisionOn)
+    {
+        if(collider == null)
+        {
+            collider = this.GetComponent<Collider2D>();
+        }
+        if (collisionOn)
+        {
+            Debug.Log("Collider enabled");
+            collider.enabled = true;
+        }
+        else
+        {
+            Debug.Log("Collider disabled");
+            collider.enabled = false;
+        }
     }
 }

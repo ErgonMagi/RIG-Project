@@ -13,23 +13,31 @@ public class AuditionSummary : MonoBehaviour {
 
     private AuditionScreen.Audition audition;
 
-	public void setAudition(AuditionScreen.Audition aud)
+    private bool isEmpty = true;
+
+    public void setAudition(AuditionScreen.Audition aud)
     {
         audition = aud;
         actorImageRenderer.sprite = audition.actor.getPicture();
         movieImageRenderer.sprite = audition.movie.getPicture();
+        isEmpty = false;
         cancelButton.showButton();
     }
 
     public void Empty()
     {
         audition = new AuditionScreen.Audition();
-        cancelButton.hideButton();
+        isEmpty = true;
     }
 
     public void setArrayNum(int arrayNum)
     {
         cancelButton.setArrayNum(arrayNum);
+    }
+
+    public bool IsEmpty()
+    {
+        return isEmpty;
     }
 
 }

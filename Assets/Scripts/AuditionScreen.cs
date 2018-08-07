@@ -24,7 +24,6 @@ public class AuditionScreen : MonoBehaviour {
     //Player specific data
     public int MaxMoviesShown;
 
-
     private Player player;
 
     // Use this for initialization
@@ -35,6 +34,7 @@ public class AuditionScreen : MonoBehaviour {
         auditionList = new List<Audition>();
         getActors();
         getMovies();
+        confirmationPanel.SetCollision(false);
     }
 
     //Gets the actors list from the player and tells the ui to update
@@ -73,6 +73,22 @@ public class AuditionScreen : MonoBehaviour {
         actorScrollBar.UpdateUI();
         movieScrollBar.UpdateUI();
         confirmationPanel.UpdateUI();
+    }
+
+    public void ShowConfirmationScreen()
+    {
+        confirmationPanel.ShowConfirmationScreen();
+        actorScrollBar.SetCollision(false);
+        movieScrollBar.SetCollision(false);
+        confirmationPanel.SetCollision(true);
+    }
+
+    public void HideConfirmationScreen()
+    {
+        confirmationPanel.HideConfirmationScreen();
+        actorScrollBar.SetCollision(true);
+        movieScrollBar.SetCollision(true);
+        confirmationPanel.SetCollision(false);
     }
 
     public List<Actor> getActorsList()
