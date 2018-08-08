@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
 
@@ -14,6 +15,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
     private float t;
     public float lerpTime;
     private bool lerping = false;
+    float yPos = -10.3f;
 
     public Transform lerpObject;
 
@@ -44,6 +46,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         if(myTransform == null)
         {
             myTransform = this.transform;
+            startPos = myTransform.localPosition;
         }
 
         if(collider = null)
@@ -52,7 +55,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         }
 
         //Visibility code
-        if (lerping)
+        /*if (lerping)
         {
             t += Time.deltaTime;
             if (t >= lerpTime)
@@ -68,6 +71,11 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
             {
                 lerpObject.position = new Vector3(50, Mathf.Lerp(visiblePos.y, hiddenPos.y, t / lerpTime), 0);
             }
+        }*/
+        if(isVisible)
+        {
+            //DOTween.To(() => yPos, x => yPos = x, 0f, 0.5);
+            lerpObject.GetComponent<RectTransform>().DOLocalMoveY(0, 0.5f);
         }
 
         //Scroll code
@@ -80,7 +88,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
 
 
         //Update position
-        myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+        myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + offset/myTransform.lossyScale.y, myTransform.localPosition.z);
     }
 
     private void UpdateMaxOffset()
@@ -98,6 +106,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         }
 
         maxOffset = ActivePicturesInArray * objectSpacing - (objectSpacing / 2);
+        maxOffset /= myTransform.lossyScale.y;
     }
 
     private void OnMouseUp()

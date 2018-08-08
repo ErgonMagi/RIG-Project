@@ -28,6 +28,7 @@ public class AuditionSlot : MonoBehaviour {
         else
         {
             actorImageRenderer.enabled = false;
+            cancelButton.hideButton();
         }
     }
 
@@ -45,5 +46,6 @@ public class AuditionSlot : MonoBehaviour {
     public void Empty()
     {
         audition = new AuditionScreen.Audition();
+        cancelButton.hideButton();
     }
 }

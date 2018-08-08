@@ -41,7 +41,6 @@ public class CancelActorAssignmentButton : MonoBehaviour {
     public void Clicked()
     {
         auditionScreen.UnassignActor(arrayNum);
-        hideButton();
     }
 }
 

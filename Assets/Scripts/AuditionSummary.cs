@@ -28,6 +28,7 @@ public class AuditionSummary : MonoBehaviour {
     {
         audition = new AuditionScreen.Audition();
         isEmpty = true;
+        cancelButton.hideButton();
     }
 
     public void setArrayNum(int arrayNum)
