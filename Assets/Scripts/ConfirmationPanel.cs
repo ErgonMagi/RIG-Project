@@ -17,6 +17,8 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
     private bool lerping = false;
     float yPos = -10.3f;
 
+    private Tweener tween;
+
     public Transform lerpObject;
 
     private Collider2D collider;
@@ -52,30 +54,6 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         if(collider = null)
         {
             collider = this.GetComponent<Collider2D>();
-        }
-
-        //Visibility code
-        /*if (lerping)
-        {
-            t += Time.deltaTime;
-            if (t >= lerpTime)
-            {
-                t = lerpTime;
-                lerping = false;
-            }
-            if (isVisible)
-            {
-                lerpObject.position = new Vector3(50, Mathf.Lerp(hiddenPos.y, visiblePos.y,  t / lerpTime), 0);
-            }
-            else
-            {
-                lerpObject.position = new Vector3(50, Mathf.Lerp(visiblePos.y, hiddenPos.y, t / lerpTime), 0);
-            }
-        }*/
-        if(isVisible)
-        {
-            //DOTween.To(() => yPos, x => yPos = x, 0f, 0.5);
-            lerpObject.GetComponent<RectTransform>().DOLocalMoveY(0, 0.5f);
         }
 
         //Scroll code
@@ -151,27 +129,31 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
 
     public void ShowConfirmationScreen()
     {
-        if(!isVisible)
-        {
-            isVisible = true;
-            lerping = true;
-            t = 0;
-        }
+        tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(0, 1f).SetEase(Ease.OutBack);
+        isVisible = true;
     }
 
     public void HideConfirmationScreen()
     {
-        if(isVisible)
-        {
-            isVisible = false;
-            lerping = true;
-            t = 0;
-        }
+        tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(-10.3f, 1f).SetEase(Ease.OutBack);
+        isVisible = false;
     }
 
-    public bool IsVisble()
+    public bool IsVisible()
     {
         return isVisible;
+    }
+
+    public bool isTweening()
+    {
+        if(tween == null)
+        {
+            return false;
+        }
+        else
+        {
+            return tween.IsPlaying();
+        }
     }
 
     public void UpdateUI()

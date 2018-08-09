@@ -32135,10 +32135,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1177811887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e5ebe7e673a334a8d54a3ddc5738e3, type: 3}
+  m_Script: {fileID: 11500000, guid: c3b9d2a51b35a18448f4c9de56a40367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confirmationPanel: {fileID: 262508465}
   auditionScreen: {fileID: 742149203}
 --- !u!114 &1177811890
 MonoBehaviour:

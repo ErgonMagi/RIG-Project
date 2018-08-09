@@ -10,14 +10,7 @@ public class submitActorsButton : MonoBehaviour {
     //Submits all actors to their auditions on click (Should be changed to show confirm screen).
     public void onClick()
     {
-        Debug.Log("button clicked");
-        if (confirmationPanel.IsVisble())
-        {
-            auditionScreen.submitActors();
-        }
-        else
-        {
-            auditionScreen.ShowConfirmationScreen();
-        }
+        auditionScreen.ShowConfirmationScreen();
+      
     }
 }
