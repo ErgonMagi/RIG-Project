@@ -34,7 +34,16 @@ public class AuditionScreen : MonoBehaviour {
         auditionList = new List<Audition>();
         getActors();
         getMovies();
-        confirmationPanel.SetCollision(false);
+    }
+
+    private void Update()
+    {
+        if(auditionList.Count ==0)
+        {
+            getMovies();
+            confirmationPanel.SetCollision(false);
+        }
+        
     }
 
     //Gets the actors list from the player and tells the ui to update
@@ -77,6 +86,9 @@ public class AuditionScreen : MonoBehaviour {
 
     public void ShowConfirmationScreen()
     {
+        actorScrollBar.UpdateUI();
+        movieScrollBar.UpdateUI();
+        confirmationPanel.UpdateUI();
         confirmationPanel.ShowConfirmationScreen();
         actorScrollBar.SetCollision(false);
         movieScrollBar.SetCollision(false);
@@ -85,6 +97,9 @@ public class AuditionScreen : MonoBehaviour {
 
     public void HideConfirmationScreen()
     {
+        actorScrollBar.UpdateUI();
+        movieScrollBar.UpdateUI();
+        confirmationPanel.UpdateUI();
         confirmationPanel.HideConfirmationScreen();
         actorScrollBar.SetCollision(true);
         movieScrollBar.SetCollision(true);

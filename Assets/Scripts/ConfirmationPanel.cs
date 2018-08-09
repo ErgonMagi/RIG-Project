@@ -51,9 +51,10 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
             startPos = myTransform.localPosition;
         }
 
-        if(collider = null)
+        if(collider == null)
         {
             collider = this.GetComponent<Collider2D>();
+            collider.enabled = false;
         }
 
         //Scroll code
