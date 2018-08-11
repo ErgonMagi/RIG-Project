@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NotificationManager : MonoBehaviour {
+public class NotificationManager : Singleton<NotificationManager> {
 
     private List<Notification> notificationList;
 
-    private NotificationBanner notificationBanner;
+    public NotificationBanner notificationBanner;
+    public NotificationMenu notificationMenu;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Awake () {
+        base.Awake();
         notificationList = new List<Notification>();
-        notificationBanner = FindObjectOfType<NotificationBanner>();
 	}
 	
     //Adds a notification to the end of the list
-	public void addNotification(string text)
+	public void addNotification(string text, Actor actor, Movie movie)
     {
-        notificationList.Add(new Notification(text));
+        notificationList.Add(new Notification(text, actor, movie));
         //notificationBanner.setText("You have " + notificationList.Count + " notifications");
         notificationBanner.setText(text);
         notificationBanner.showNotification();
@@ -27,6 +28,11 @@ public class NotificationManager : MonoBehaviour {
     public Notification getNotification(int notificationNum)
     {
         return notificationList[notificationNum];
+    }
+
+    public List<Notification> getNotificationsList()
+    {
+        return notificationList;
     }
 
     //Returns the number of unread notifications 
@@ -43,9 +49,15 @@ public class NotificationManager : MonoBehaviour {
         return count;
     }
    
+    public void BannerClicked()
+    {
+        showNotifications();
+    }
+
     public void showNotifications()
     {
         //Add code for moving camera to the notifications and opening the ui.
+        notificationMenu.ShowNotificationMenu();
     }
 
 }

@@ -132,12 +132,14 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
     {
         tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(0, 1f).SetEase(Ease.OutBack);
         isVisible = true;
+        SetCollision(true);
     }
 
     public void HideConfirmationScreen()
     {
-        tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(-10.3f, 1f).SetEase(Ease.OutBack);
+        tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(-13.3f, 1f).SetEase(Ease.OutBack);
         isVisible = false;
+        SetCollision(false);
     }
 
     public bool IsVisible()

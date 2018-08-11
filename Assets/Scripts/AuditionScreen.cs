@@ -41,7 +41,6 @@ public class AuditionScreen : MonoBehaviour {
         if(auditionList.Count ==0)
         {
             getMovies();
-            confirmationPanel.SetCollision(false);
         }
         
     }
@@ -57,7 +56,7 @@ public class AuditionScreen : MonoBehaviour {
     //Currntly generates new movies but will need to change to get movies on a timed basis
     public void getMovies()
     {
-        for(int i = 0; i < MaxMoviesShown; i++)
+        for(int i = auditionList.Count; i < MaxMoviesShown; i++)
         {
             Audition a = new Audition();
             a.movie = MovieManager.Instance.getMovie();
@@ -90,9 +89,6 @@ public class AuditionScreen : MonoBehaviour {
         movieScrollBar.UpdateUI();
         confirmationPanel.UpdateUI();
         confirmationPanel.ShowConfirmationScreen();
-        actorScrollBar.SetCollision(false);
-        movieScrollBar.SetCollision(false);
-        confirmationPanel.SetCollision(true);
     }
 
     public void HideConfirmationScreen()
@@ -101,9 +97,6 @@ public class AuditionScreen : MonoBehaviour {
         movieScrollBar.UpdateUI();
         confirmationPanel.UpdateUI();
         confirmationPanel.HideConfirmationScreen();
-        actorScrollBar.SetCollision(true);
-        movieScrollBar.SetCollision(true);
-        confirmationPanel.SetCollision(false);
     }
 
     public List<Actor> getActorsList()
@@ -151,9 +144,18 @@ public class AuditionScreen : MonoBehaviour {
                 Task t = new Task(auditionList[i].actor,  auditionList[i].movie, 2, true);
                 FindObjectOfType<TaskManager>().addTask(t);
                 removeList.Add(auditionList[i]);
-            }
-            
+            }      
         }
+
+        for(int i = 0; i < removeList.Count; i++)
+        {
+            auditionList.Remove(removeList[i]);
+        }
+
+        confirmationPanel.HideConfirmationScreen();
+
+        getMovies();
+
         actorScrollBar.UpdateUI();
         movieScrollBar.UpdateUI();
         confirmationPanel.UpdateUI();

@@ -2,83 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class NotificationBanner : MonoBehaviour {
 
     private Vector3 downPos;
     private Vector3 upPos;
+    private Transform myTransform;
+    private Tweener tween;
 
-    enum NotiState
-    {
-        movingDown,
-        movingUp,
-        showing,
-        hiding
-    }
-    private NotiState nState;
-    private float t;
     public float moveTime;
     public float showTime;
 
 	// Use this for initialization
 	void Start () {
-        downPos = this.transform.position;
-        upPos = this.transform.position + new Vector3(0, 200, 0);
-        nState = NotiState.hiding;
+        myTransform = this.transform;
+        downPos = myTransform.position;
+        upPos = myTransform.position + new Vector3(0, 200, 0);
 
-        this.transform.position = upPos;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        t += Time.deltaTime;
-
-        if(nState == NotiState.movingDown)
-        {
-            if(t < moveTime)
-            {
-                this.transform.position = upPos + (t / moveTime) * (downPos - upPos);
-            }
-            else
-            {
-                t = 0;
-                this.transform.position = downPos;
-                nState = NotiState.showing;
-            }
-        }
-        else if(nState == NotiState.movingUp)
-        {
-            if (t < moveTime)
-            {
-                this.transform.position = downPos + (t / moveTime) * (upPos - downPos);
-            }
-            else
-            {
-                t = 0;
-                this.transform.position = upPos;
-                nState = NotiState.hiding;
-            }
-        }
-        else if(nState == NotiState.showing)
-        {
-            if(t >= showTime)
-            {
-                t = 0;
-                nState = NotiState.movingUp;
-            }
-        }
+        myTransform.position = upPos;
 	}
 
     public void showNotification()
     {
-        t = 0;
-        nState = NotiState.movingDown;
+        tween = myTransform.DOMoveY(downPos.y, moveTime);
+        tween = myTransform.DOMoveY(upPos.y, moveTime).SetDelay(moveTime + showTime);
+    }
+
+    public void hideNotification()
+    {
+        myTransform.position = upPos;
     }
 
     public void setText(string text)
     {
         this.GetComponentInChildren<Text>().text = text;
+    }
+
+    public void Clicked()
+    {
+        tween.Complete();
+        hideNotification();
+
+        //Add show the notifications menu.
+        NotificationManager.Instance.BannerClicked();
     }
 
 }

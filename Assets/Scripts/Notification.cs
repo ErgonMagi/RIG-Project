@@ -6,11 +6,15 @@ public class Notification {
 
     private string text;
     private bool isUnread;
+    private Actor actor;
+    private Movie movie;
 
     //Constructor
-    public Notification(string t)
+    public Notification(string t, Actor a, Movie m)
     {
         text = t;
+        actor = a;
+        movie = m;
         isUnread = true;
     }
 
@@ -18,6 +22,16 @@ public class Notification {
     public string getText()
     {
         return text;
+    }
+
+    public Actor getActors()
+    {
+        return actor;
+    }
+
+    public Movie getMovie()
+    {
+        return movie;
     }
 
     //Returns whether the notification has been read
