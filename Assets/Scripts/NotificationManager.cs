@@ -54,6 +54,11 @@ public class NotificationManager : Singleton<NotificationManager> {
         showNotifications();
     }
 
+    public void EnvelopeClicked()
+    {
+        showNotifications();
+    }
+
     public void showNotifications()
     {
         //Add code for moving camera to the notifications and opening the ui.
