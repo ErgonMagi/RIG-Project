@@ -25,6 +25,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     public Transform assignBar;
     public float scrollDragScale;
     public float moveToFocusTargetScale;
+    public float lockRange;
 
     //Private scroll variables
     private bool scrolling;
@@ -37,6 +38,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     private float focusTargetOffset;
     private int ActivePicturesInArray;
 
+    private bool xLocked;
+    private bool yLocked;
 
     // Use this for initialization
     void Start () {
@@ -45,13 +48,39 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         myTransform = this.transform;
         startPos = myTransform.position;
         collider = this.GetComponent<Collider2D>();
+        xLocked = false;
+        yLocked = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (!scrolling)
+        if(Mathf.Abs(focusTargetOffset - offset) > lockRange)
         {
+            xLocked = true;
+            //Reset x position of focused actor
+            Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
+            focusTransform.position = new Vector3(myTransform.position.x, focusTransform.position.y, focusTransform.position.z);
+        }
+        else
+        {
+            xLocked = false;
+        }
+
+        if(actorPictures[currentFocusIndex].transform.localPosition.x < -lockRange)
+        {
+            yLocked = true;
+            offset = focusTargetOffset;
+        }
+        else
+        {
+            yLocked = false;
+        }
+
+        if (!yLocked)
+        {
+            if (!scrolling)
+            {
             //Calculate force
             force *= scrollDragScale;
             offset += force;
@@ -61,11 +90,13 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
             float focusForce = (focusTargetOffset - offset) * moveToFocusTargetScale;
 
             offset += focusForce;
-        }
+            }
 
 
         //Update position
-        myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+        
+            myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+        }
         
 	}
 
@@ -164,20 +195,26 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         xChange = mousePos.x - prevMousePos.x;
         yChange = mousePos.y - prevMousePos.y;
 
-        offset += yChange * scrollSpeedScale;
+        if (!yLocked)
+        {
+            offset += yChange * scrollSpeedScale;
 
-        if(offset < -objectSpacing/2)
-        {
-            offset = -objectSpacing/2;
-        }
-        else if (offset > maxOffset)
-        {
-            offset = maxOffset;
+            if (offset < -objectSpacing / 2)
+            {
+                offset = -objectSpacing / 2;
+            }
+            else if (offset > maxOffset)
+            {
+                offset = maxOffset;
+            }
         }
 
         //Allow horizontal movement of focused object
-        Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-        focusTransform.position = new Vector3(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x, focusTransform.position.y, focusTransform.position.z);
+        if (!xLocked)
+        {
+            Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
+            focusTransform.position = new Vector3(Mathf.Min(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x,myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
+        }
        
     }
 
