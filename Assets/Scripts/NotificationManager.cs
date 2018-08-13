@@ -63,6 +63,15 @@ public class NotificationManager : Singleton<NotificationManager> {
     {
         //Add code for moving camera to the notifications and opening the ui.
         notificationMenu.ShowNotificationMenu();
+        GameController.Instance.lockCamera();
+        GameController.Instance.lockClicking();
+    }
+
+    public void hideNotifications()
+    {
+        notificationMenu.HideNotificationMenu();
+        GameController.Instance.unlockCamera();
+        GameController.Instance.unlockClicking();
     }
 
 }
