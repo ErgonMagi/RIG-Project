@@ -20,22 +20,17 @@ public class InputManager : MonoBehaviour
 
     private Vector3 tapPosition;
     Vector2 swipeDir;
-    private ClickableObject clickedObject;
     private CameraManager cameraManager;
     private GameController gameController;
     private AuditionScreen auditionScreen;
     private Vector2 mouseScreenPos;
-    private float swipeLength;
-    private bool objectSelected;
+
 
     // Use this for initialization
     void Start()
     {
-
-        cameraManager = FindObjectOfType<CameraManager>();
-        gameController = FindObjectOfType<GameController>();
-        auditionScreen = FindObjectOfType<AuditionScreen>();
-        objectSelected = false;
+        cameraManager = CameraManager.Instance;
+        gameController = GameController.Instance;
     }
 
     // Update is called once per frame
@@ -49,37 +44,6 @@ public class InputManager : MonoBehaviour
                 //Finds the position of the mouse in pixels and in world coordinates
                 mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 tapPosition = cameraManager.getCam().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.getCam().nearClipPlane));
-                swipeLength = 0;
-
-
-                //Check if player can interact with objects
-                if (gameController.canClick())
-                {
-                    //Draws Vector3 dirFromCam a ray from the current camera through the mouse to check for interactable objects
-                    Vector3 dirFromCam = new Vector3(0, 0, 1);
-                    if (!cameraManager.getCam().orthographic)
-                    {
-                        dirFromCam = tapPosition - cameraManager.getCam().transform.position;
-                    }
-
-                    RaycastHit[] hit = Physics.RaycastAll(tapPosition, dirFromCam, 15.0f, 1 << LayerMask.NameToLayer("Clickable"));
-
-
-                    //For every object hit, check if it is interactables
-                    foreach (RaycastHit h in hit)
-                    {
-                        clickedObject = h.collider.gameObject.GetComponent<ClickableObject>();
-                        if (h.collider.gameObject.GetComponent<ActorPicture>() != null)
-                        {
-                            objectSelected = true;
-                            clickedObject.onClick();
-                        }
-                        if (clickedObject != null)
-                        {
-                            break;                  //If an interactable object is found, it is "selected" and the loop ends.
-                        }                           //The selectable object will be activated if the player does not swipe (See mouse release code)
-                    }
-                }
 
             }
 
@@ -87,25 +51,16 @@ public class InputManager : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 //Calculates how far the player has swiped in this frame as pixels
-                swipeDir = mouseScreenPos - new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                swipeDir = mouseScreenPos - new Vector2(Input.mousePosition.x, Input.mousePosition.y); 
 
-                //Sums the total swipe length to check if a player is tapping or swiping
-                swipeLength += swipeDir.magnitude;
-                if (!objectSelected)
+                //Check if player can swipe
+                if (gameController.canFreeLook())
                 {
-
-                    //Check if player can swipe
-                    if (gameController.canFreeLook())
-                    {
-                        //Rotate the camera around itself in the direction of swiping
-                        cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
-                        cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
-                    }
-                    /*else if (gameController.)
-                    {
-                        actorStatsMenu.scroll(swipeDir.x);
-                    }*/
+                    //Rotate the camera around itself in the direction of swiping
+                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                    cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
                 }
+
                 //Update the mouse position to the new positon.
                 mouseScreenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             }
@@ -113,29 +68,17 @@ public class InputManager : MonoBehaviour
             //Runs on any frame the lmb is not held down.
             if (!Input.GetMouseButton(0))
             {
-                if (!objectSelected)
+                //Swipe deceleration.
+                if (gameController.canFreeLook())
                 {
-                    //If there was an object selected by the last click and the player did not swipe, activate the object and then deselect it.
-                    if (clickedObject != null && swipeLength < 10)
+                    if (swipeDir.magnitude * 100 > swipeNullPoint)
                     {
-                        clickedObject.onClick();
-                        clickedObject = null;
-                    }
+                        cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
+                        cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
 
-                    //Swipe deceleration.
-                    if (gameController.canFreeLook())
-                    {
-                        if (swipeDir.magnitude * 100 > swipeNullPoint)
-                        {
-                            cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, transform.up, swipeDir.x * scrollSpeed);
-                            cameraManager.getCam().transform.RotateAround(cameraManager.getCam().transform.position, cameraManager.getCam().transform.right, -swipeDir.y * scrollSpeed);
-
-                            swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
-                        }
+                        swipeDir.Scale(new Vector3(swipeDrag, swipeDrag, 0));
                     }
-                }
-                objectSelected = false;
-                clickedObject = null;
+                }   
             }
         }
     }

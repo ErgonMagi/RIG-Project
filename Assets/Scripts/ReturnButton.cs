@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ReturnButton : MonoBehaviour, ClickableObject {
+public class ReturnButton : MonoBehaviour, IPointerClickHandler {
 
     GameController gameController;
 
@@ -24,7 +25,7 @@ public class ReturnButton : MonoBehaviour, ClickableObject {
         }
 	}
 
-    public void onClick()
+    public void OnPointerClick(PointerEventData pointer)
     {
         gameController.fromComputer();
     }

@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
-public class NotificationBanner : MonoBehaviour {
+public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+
+    public float minSwipeDist;
 
     private Vector3 downPos;
     private Vector3 upPos;
     private Transform myTransform;
-    private Tweener tween;
+    private Tweener downTween;
+    private Tweener upTween;
+
+    private Vector2 mouseDownPos;
+    private Vector2 mouseUpPos;
 
     public float moveTime;
     public float showTime;
+
+    private bool clicked;
 
 	// Use this for initialization
 	void Start () {
@@ -21,12 +30,28 @@ public class NotificationBanner : MonoBehaviour {
         upPos = myTransform.position + new Vector3(0, 200, 0);
 
         myTransform.position = upPos;
+        clicked = false;
 	}
+
+    public void Update()
+    {
+        if(clicked)
+        {
+            //Mark mouse up position
+            Vector2 mouseDragPos = Input.mousePosition;
+
+            //Move banner up with mouse
+            if (mouseDragPos.y > mouseDownPos.y)
+            {
+                myTransform.position = new Vector2(myTransform.position.x, (mouseDragPos.y - mouseDownPos.y) + downPos.y);
+            }
+        }
+    }
 
     public void showNotification()
     {
-        tween = myTransform.DOMoveY(downPos.y, moveTime);
-        tween = myTransform.DOMoveY(upPos.y, moveTime).SetDelay(moveTime + showTime);
+        downTween = myTransform.DOMoveY(downPos.y, moveTime);
+        upTween = myTransform.DOMoveY(upPos.y, moveTime).SetDelay(moveTime + showTime);
     }
 
     public void hideNotification()
@@ -39,9 +64,46 @@ public class NotificationBanner : MonoBehaviour {
         this.GetComponentInChildren<Text>().text = text;
     }
 
+    public void OnPointerDown(PointerEventData pointer)
+    {
+        //Mark the position of the click
+        mouseDownPos = Input.mousePosition;
+
+        upTween.Complete();
+        downTween.Complete();
+        clicked = true;
+    }
+
+    public void OnPointerUp(PointerEventData pointer)
+    {
+        clicked = false;
+
+        //Mark mouse up position
+        mouseUpPos = Input.mousePosition;
+        Debug.Log(mouseUpPos);
+
+        //Check distance between points
+        if(Vector2.Distance(mouseDownPos, mouseUpPos) < minSwipeDist)
+        {
+            Clicked();
+        }
+        else
+        {
+            if(mouseUpPos.y > mouseDownPos.y)
+            {
+                downTween.Complete();
+                upTween.Complete();
+
+                upTween = myTransform.DOMoveY(upPos.y, 0.25f);
+            }
+        }
+
+    }
+
     public void Clicked()
     {
-        tween.Complete();
+        downTween.Complete();
+        upTween.Complete();
         hideNotification();
 
         //Add show the notifications menu.

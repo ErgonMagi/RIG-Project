@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class MovieScrollBar : MonoBehaviour, UIUpdatable
+public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, IPointerUpHandler
 {
 
     //Parent Object
@@ -29,7 +30,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable
     //Private scroll variables
     private bool scrolling;
     private float force;
-    private float objectSpacing;
+    public float objectSpacing;
     private int currentFocusIndex;
     private float maxOffset;
     private Vector3 startPos;
@@ -42,10 +43,10 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable
     void Start()
     {
         scrolling = false;
-        objectSpacing = 5.77f; //actorPictures[0].GetComponent<RectTransform>().rect.height + GetComponent<VerticalLayoutGroup>().spacing;
         myTransform = this.transform;
         startPos = myTransform.position;
         collider = this.GetComponent<Collider2D>();
+        objectSpacing = 5;
     }
 
     // Update is called once per frame
@@ -127,46 +128,48 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable
         return currentFocusIndex;
     }
 
-    private void OnMouseUp()
+    public void OnPointerUp(PointerEventData pointer)
     {
         //Update the focused target
         UpdateFocusedObject();
 
         //Calculate the slide effect
         scrolling = false;
-        force = (mousePos.x - prevMousePos.x) * scrollMomentumScale;
+        force = (mousePos.x - prevMousePos.x);
     }
 
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = Input.mousePosition;
-        prevMousePos = Input.mousePosition;
+        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
+        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseDrag()
     {
-        prevMousePos = mousePos;
-        mousePos = Input.mousePosition;
-
-        float xChange = 0;
-        float yChange = 0;
-
-        xChange = mousePos.x - prevMousePos.x;
-        yChange = mousePos.y - prevMousePos.y;
-
-        offset += xChange * scrollSpeedScale;
-
-        if (offset < -maxOffset)
+        if (scrolling)
         {
-            offset = -maxOffset;
-        }
-        else if (offset > objectSpacing/2)
-        {
-            offset = objectSpacing/2;
-        }
+            prevMousePos = mousePos;
+            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
 
+            float xChange = 0;
+            float yChange = 0;
 
+            xChange = mousePos.x - prevMousePos.x;
+            yChange = mousePos.y - prevMousePos.y;
+
+            offset += xChange;
+
+            if (offset < -maxOffset)
+            {
+                offset = -maxOffset;
+            }
+            else if (offset > objectSpacing / 2)
+            {
+                offset = objectSpacing / 2;
+            }
+
+        }
     }
 
     public void SetCollision(bool collisionOn)

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ActorScrollBar : MonoBehaviour, UIUpdatable {
+public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, IPointerUpHandler {
 
     //Parent Object
     public AuditionScreen auditionScreen;
@@ -44,7 +45,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     // Use this for initialization
     void Start () {
         scrolling = false;
-        objectSpacing = 7.79f; //actorPictures[0].GetComponent<RectTransform>().rect.height + GetComponent<VerticalLayoutGroup>().spacing;
+        objectSpacing = 7.79f;
         myTransform = this.transform;
         startPos = myTransform.position;
         collider = this.GetComponent<Collider2D>();
@@ -81,15 +82,15 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         {
             if (!scrolling)
             {
-            //Calculate force
-            force *= scrollDragScale;
-            offset += force;
+                //Calculate force
+                force *= scrollDragScale;
+                offset += force;
 
-            //Slide towards focus target
+                //Slide towards focus target
         
-            float focusForce = (focusTargetOffset - offset) * moveToFocusTargetScale;
+                float focusForce = (focusTargetOffset - offset) * moveToFocusTargetScale;
 
-            offset += focusForce;
+                offset += focusForce;
             }
 
 
@@ -155,7 +156,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         maxOffset = ActivePicturesInArray * objectSpacing - (objectSpacing/2);
     } 
 
-    private void OnMouseUp()
+    public void OnPointerUp(PointerEventData pointer)
     {
         //Check if an actor has been swiped
         if (actorPictures[currentFocusIndex].transform.position.x < assignBar.position.x)
@@ -173,49 +174,51 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
 
         //Calculate the slide effect
         scrolling = false;
-        force = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
+        force = (mousePos.y - prevMousePos.y);
         
     }
 
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = Input.mousePosition;
-        prevMousePos = Input.mousePosition;
+        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
+        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseDrag()
     {
-        prevMousePos = mousePos;
-        mousePos = Input.mousePosition;
-
-        float xChange = 0;
-        float yChange = 0;
-
-        xChange = mousePos.x - prevMousePos.x;
-        yChange = mousePos.y - prevMousePos.y;
-
-        if (!yLocked)
+        if (scrolling)
         {
-            offset += yChange * scrollSpeedScale;
+            prevMousePos = mousePos;
+            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
 
-            if (offset < -objectSpacing / 2)
+            float xChange = 0;
+            float yChange = 0;
+
+            xChange = mousePos.x - prevMousePos.x;
+            yChange = mousePos.y - prevMousePos.y;
+
+            if (!yLocked)
             {
-                offset = -objectSpacing / 2;
+                offset += yChange;
+
+                if (offset < -objectSpacing / 2)
+                {
+                    offset = -objectSpacing / 2;
+                }
+                else if (offset > maxOffset)
+                {
+                    offset = maxOffset;
+                }
             }
-            else if (offset > maxOffset)
+
+            //Allow horizontal movement of focused object
+            if (!xLocked)
             {
-                offset = maxOffset;
+                Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
+                focusTransform.position = new Vector3(Mathf.Min(mousePos.x, myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
             }
         }
-
-        //Allow horizontal movement of focused object
-        if (!xLocked)
-        {
-            Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-            focusTransform.position = new Vector3(Mathf.Min(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x,myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
-        }
-       
     }
 
     public void SetCollision(bool collisionOn)

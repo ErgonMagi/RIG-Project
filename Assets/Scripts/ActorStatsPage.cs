@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ActorStatsPage : MonoBehaviour, ClickableObject {
+public class ActorStatsPage : MonoBehaviour, IPointerClickHandler {
 
     public GameObject comedyBar, actionBar, romanceBar, horrorBar, scifiBar, otherBar;
     public Text comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
@@ -146,7 +147,7 @@ public class ActorStatsPage : MonoBehaviour, ClickableObject {
         actorPictureSprite.sprite = actorPicture;
     }
 
-    public void onClick()
+    public void OnPointerClick(PointerEventData pointer)
     {
         if(gc.isAtFile())
         {
