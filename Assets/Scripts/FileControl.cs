@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class FileControl : MonoBehaviour, ClickableObject {
+public class FileControl : MonoBehaviour, IPointerClickHandler {
 
 	private Animator anim;
     private GameController gameController;
@@ -25,7 +26,7 @@ public class FileControl : MonoBehaviour, ClickableObject {
         }
     }
 
-    public void onClick()
+    public void OnPointerClick(PointerEventData pointer)
     {
         if(!gameController.isAtFile())
         {

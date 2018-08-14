@@ -6,11 +6,10 @@ using DG.Tweening;
 public class NotificationMenu : MonoBehaviour {
 
     private Transform myTransform;
+    private float height;
+
 
     //public vars
-    public float topY;
-    public float showY;
-    public float bottomY;
     public float transitionTime;
 
     //Provate vars
@@ -19,8 +18,9 @@ public class NotificationMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         myTransform = this.transform;
-        myTransform.position = new Vector3(myTransform.position.x, bottomY, myTransform.position.z);
-	}
+        height = GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height;
+        myTransform.position = new Vector3(myTransform.position.x, -height, myTransform.position.z);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,13 +30,12 @@ public class NotificationMenu : MonoBehaviour {
     public void ShowNotificationMenu()
     {
         Debug.Log("showing menu");
-        myTransform.DOMoveY(showY, transitionTime);
+        myTransform.DOLocalMoveY(0, transitionTime);
     }
 
     public void HideNotificationMenu()
     {
-        myTransform.DOMoveY(topY, transitionTime);
-        myTransform.DOMoveY(bottomY, 0).SetDelay(transitionTime);
+        myTransform.DOLocalMoveY(-1.5f*height, transitionTime);
     }
 
     [ContextMenu("show pos")]

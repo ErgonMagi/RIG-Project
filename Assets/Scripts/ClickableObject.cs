@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ClickableObject {
+/*public interface ClickableObject {
 
     void onClick();
 
-}
+}*/

@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /************************
  * The computer screen 
  * interactable object
  * *********************/
 
-public class ComputerScreen : MonoBehaviour, ClickableObject {
+public class ComputerScreen : MonoBehaviour, IPointerClickHandler {
 
     GameController gameController;
     public Camera rtCam;
@@ -28,7 +29,7 @@ public class ComputerScreen : MonoBehaviour, ClickableObject {
 
     }
 	
-    public void onClick()
+    public void OnPointerClick(PointerEventData pointer)
     {
         if(gameController.isAtDesk() && unlocked)
         {

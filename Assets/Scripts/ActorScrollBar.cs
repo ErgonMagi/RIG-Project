@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ActorScrollBar : MonoBehaviour, UIUpdatable {
+public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, IPointerUpHandler {
 
     //Parent Object
     public AuditionScreen auditionScreen;
@@ -25,6 +26,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     public Transform assignBar;
     public float scrollDragScale;
     public float moveToFocusTargetScale;
+    public float lockRange;
 
     //Private scroll variables
     private bool scrolling;
@@ -37,35 +39,65 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
     private float focusTargetOffset;
     private int ActivePicturesInArray;
 
+    private bool xLocked;
+    private bool yLocked;
 
     // Use this for initialization
     void Start () {
         scrolling = false;
-        objectSpacing = 7.79f; //actorPictures[0].GetComponent<RectTransform>().rect.height + GetComponent<VerticalLayoutGroup>().spacing;
+        objectSpacing = 7.79f;
         myTransform = this.transform;
         startPos = myTransform.position;
         collider = this.GetComponent<Collider2D>();
+        xLocked = false;
+        yLocked = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (!scrolling)
+        if(Mathf.Abs(focusTargetOffset - offset) > lockRange)
         {
-            //Calculate force
-            force *= scrollDragScale;
-            offset += force;
-
-            //Slide towards focus target
-        
-            float focusForce = (focusTargetOffset - offset) * moveToFocusTargetScale;
-
-            offset += focusForce;
+            xLocked = true;
+            //Reset x position of focused actor
+            Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
+            focusTransform.position = new Vector3(myTransform.position.x, focusTransform.position.y, focusTransform.position.z);
         }
+        else
+        {
+            xLocked = false;
+        }
+
+        if(actorPictures[currentFocusIndex].transform.localPosition.x < -lockRange)
+        {
+            yLocked = true;
+            offset = focusTargetOffset;
+        }
+        else
+        {
+            yLocked = false;
+        }
+
+        if (!yLocked)
+        {
+            if (!scrolling)
+            {
+                //Calculate force
+                force *= scrollDragScale;
+                offset += force;
+
+                //Slide towards focus target
+        
+                float focusForce = (focusTargetOffset - offset) * moveToFocusTargetScale;
+
+                offset += focusForce;
+            }
 
 
         //Update position
-        myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+        
+            myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+        }
         
 	}
 
@@ -124,7 +156,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
         maxOffset = ActivePicturesInArray * objectSpacing - (objectSpacing/2);
     } 
 
-    private void OnMouseUp()
+    public void OnPointerUp(PointerEventData pointer)
     {
         //Check if an actor has been swiped
         if (actorPictures[currentFocusIndex].transform.position.x < assignBar.position.x)
@@ -142,43 +174,51 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable {
 
         //Calculate the slide effect
         scrolling = false;
-        force = (mousePos.y - prevMousePos.y) * scrollMomentumScale;
+        force = (mousePos.y - prevMousePos.y);
         
     }
 
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = Input.mousePosition;
-        prevMousePos = Input.mousePosition;
+        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
+        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseDrag()
     {
-        prevMousePos = mousePos;
-        mousePos = Input.mousePosition;
-
-        float xChange = 0;
-        float yChange = 0;
-
-        xChange = mousePos.x - prevMousePos.x;
-        yChange = mousePos.y - prevMousePos.y;
-
-        offset += yChange * scrollSpeedScale;
-
-        if(offset < -objectSpacing/2)
+        if (scrolling)
         {
-            offset = -objectSpacing/2;
-        }
-        else if (offset > maxOffset)
-        {
-            offset = maxOffset;
-        }
+            prevMousePos = mousePos;
+            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
 
-        //Allow horizontal movement of focused object
-        Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-        focusTransform.position = new Vector3(CameraManager.Instance.getCam().ScreenToWorldPoint(mousePos).x, focusTransform.position.y, focusTransform.position.z);
-       
+            float xChange = 0;
+            float yChange = 0;
+
+            xChange = mousePos.x - prevMousePos.x;
+            yChange = mousePos.y - prevMousePos.y;
+
+            if (!yLocked)
+            {
+                offset += yChange;
+
+                if (offset < -objectSpacing / 2)
+                {
+                    offset = -objectSpacing / 2;
+                }
+                else if (offset > maxOffset)
+                {
+                    offset = maxOffset;
+                }
+            }
+
+            //Allow horizontal movement of focused object
+            if (!xLocked)
+            {
+                Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
+                focusTransform.position = new Vector3(Mathf.Min(mousePos.x, myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
+            }
+        }
     }
 
     public void SetCollision(bool collisionOn)

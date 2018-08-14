@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
-public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
+public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler, IPointerUpHandler {
 
     public AuditionScreen auditionScreen;
     public List<AuditionSummary> auditionSummaries;
@@ -88,7 +89,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         maxOffset /= myTransform.lossyScale.y;
     }
 
-    private void OnMouseUp()
+    public void OnPointerUp(PointerEventData pointer)
     {
         //Calculate the slide effect
         scrolling = false;
@@ -96,36 +97,37 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
 
     }
 
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = Input.mousePosition;
-        prevMousePos = Input.mousePosition;
-        Debug.Log("conf screen clicked");
+        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
+        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseDrag()
     {
-        prevMousePos = mousePos;
-        mousePos = Input.mousePosition;
-
-        float xChange = 0;
-        float yChange = 0;
-
-        xChange = mousePos.x - prevMousePos.x;
-        yChange = mousePos.y - prevMousePos.y;
-
-        offset += yChange * scrollSpeedScale;
-
-        if (offset < -objectSpacing / 2)
+        if (scrolling)
         {
-            offset = -objectSpacing / 2;
-        }
-        else if (offset > maxOffset)
-        {
-            offset = maxOffset;
-        }
+            prevMousePos = mousePos;
+            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
 
+            float xChange = 0;
+            float yChange = 0;
+
+            xChange = mousePos.x - prevMousePos.x;
+            yChange = mousePos.y - prevMousePos.y;
+
+            offset += yChange;
+
+            if (offset < -objectSpacing / 2)
+            {
+                offset = -objectSpacing / 2;
+            }
+            else if (offset > maxOffset)
+            {
+                offset = maxOffset;
+            }
+        }
     }
 
     public void ShowConfirmationScreen()
@@ -203,12 +205,10 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable {
         }
         if (collisionOn)
         {
-            Debug.Log("Collider enabled");
             collider.enabled = true;
         }
         else
         {
-            Debug.Log("Collider disabled");
             collider.enabled = false;
         }
     }

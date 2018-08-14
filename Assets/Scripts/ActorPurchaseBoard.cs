@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ActorPurchaseBoard : MonoBehaviour, ClickableObject {
+public class ActorPurchaseBoard : MonoBehaviour, IPointerClickHandler {
 
     public GameObject[] actorPictures;
 
@@ -39,7 +40,7 @@ public class ActorPurchaseBoard : MonoBehaviour, ClickableObject {
         }
     }
 
-    public void onClick()
+    public void OnPointerClick(PointerEventData pointer)
     {
          GameController.Instance.toActorBoard();   
     }

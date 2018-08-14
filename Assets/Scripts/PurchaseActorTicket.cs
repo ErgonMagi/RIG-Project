@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class PurchaseActorTicket : MonoBehaviour, ClickableObject {
+public class PurchaseActorTicket : MonoBehaviour, IPointerClickHandler {
 
     private Actor actor = null;
     private Vector3 rotation;
@@ -20,7 +21,7 @@ public class PurchaseActorTicket : MonoBehaviour, ClickableObject {
         actorPurchaseBoard = FindObjectOfType<ActorPurchaseBoard>();
     }
 
-    public void onClick()
+    public void OnPointerClick(PointerEventData pointer)
     {
         if (GameController.Instance.isAtBoard() && this.GetComponent<Renderer>().enabled)
         {
