@@ -146,7 +146,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 42.72278, w: 0}
   m_textInfo:
     textComponent: {fileID: 114126555167585202}
     characterCount: 8
@@ -215,7 +215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textGUI: {fileID: 114126555167585202}
   actorImage: {fileID: 114486228970390006}
-  movieImage: {fileID: 0}
 --- !u!114 &114566143449840896
 MonoBehaviour:
   m_ObjectHideFlags: 1

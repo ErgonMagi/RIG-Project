@@ -10,7 +10,7 @@ public class NotificationManager : Singleton<NotificationManager> {
     public NotificationMenu notificationMenu;
 
     public AuditionResultNotifications auditionResults;
-    //public UIUpdatable movieResults;
+    public MovieResultNotifications movieResults;
 
 	// Use this for initialization
 	protected override void Awake () {
@@ -30,7 +30,7 @@ public class NotificationManager : Singleton<NotificationManager> {
     public void UpdateNotificationsUI()
     {
         auditionResults.UpdateUI();
-        //movieResults.UpdateUI();
+        movieResults.UpdateUI();
     }
 
     //Returns the notifications given by notificationNum
@@ -59,7 +59,7 @@ public class NotificationManager : Singleton<NotificationManager> {
         return auditionNots;
     }
 
-    public List<Notification> geMovieResultNotifications()
+    public List<Notification> getMovieResultNotifications()
     {
         List<Notification> auditionNots = new List<Notification>();
 

@@ -15,8 +15,11 @@ public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUp
     private Tweener downTween;
     private Tweener upTween;
 
+    private Vector2 clickedPos;
+
     private Vector2 mouseDownPos;
     private Vector2 mouseUpPos;
+    private float halfheight;
 
     public float moveTime;
     public float showTime;
@@ -31,6 +34,8 @@ public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUp
 
         myTransform.position = upPos;
         clicked = false;
+
+        halfheight = GetComponent<RectTransform>().rect.height / 2;
 	}
 
     public void Update()
@@ -41,9 +46,13 @@ public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUp
             Vector2 mouseDragPos = Input.mousePosition;
 
             //Move banner up with mouse
-            if (mouseDragPos.y > mouseDownPos.y)
+            if (clickedPos.y + (mouseDragPos.y - mouseDownPos.y) > downPos.y)
             {
-                myTransform.position = new Vector2(myTransform.position.x, (mouseDragPos.y - mouseDownPos.y) + downPos.y);
+                myTransform.position = new Vector2(myTransform.position.x, clickedPos.y + (mouseDragPos.y - mouseDownPos.y));
+            }
+            else
+            {
+                myTransform.position = new Vector2(myTransform.position.x, downPos.y);   //Add half extents
             }
         }
     }
@@ -69,8 +78,10 @@ public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUp
         //Mark the position of the click
         mouseDownPos = Input.mousePosition;
 
-        upTween.Complete();
-        downTween.Complete();
+        clickedPos = myTransform.position;
+
+        upTween.Pause();
+        downTween.Pause();
         clicked = true;
     }
 

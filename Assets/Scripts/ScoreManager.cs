@@ -60,7 +60,7 @@ public class ScoreManager : MonoBehaviour {
         }
         else if(task.isMovie())
         {
-            NotificationManager.Instance.addNotification(task.actor.getName() + " has completed their movie.", task.actor, task.getmovie(), Notification.NotificationType.Audition);
+            NotificationManager.Instance.addNotification(task.actor.getName() + " has completed their movie.", task.actor, task.getmovie(), Notification.NotificationType.Movie);
         }
     }
 }
