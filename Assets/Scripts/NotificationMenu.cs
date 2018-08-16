@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class NotificationMenu : MonoBehaviour {
 
     private Transform myTransform;
     private float height;
+
+    public ScrollRect auditionScroll;
+    public ScrollRect movieScroll;
 
 
     //public vars
@@ -29,7 +33,8 @@ public class NotificationMenu : MonoBehaviour {
 
     public void ShowNotificationMenu()
     {
-        Debug.Log("showing menu");
+        //movieScroll.verticalNormalizedPosition = 0;
+        auditionScroll.verticalNormalizedPosition = 0;
         myTransform.DOLocalMoveY(0, transitionTime);
     }
 

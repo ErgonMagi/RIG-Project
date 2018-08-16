@@ -9,12 +9,21 @@ public class Notification {
     private Actor actor;
     private Movie movie;
 
+    public enum NotificationType{
+        Audition,
+        Movie,
+        Training
+        };
+
+    private NotificationType notificationType;
+
     //Constructor
-    public Notification(string t, Actor a, Movie m)
+    public Notification(string t, Actor a, Movie m, NotificationType nt)
     {
         text = t;
         actor = a;
         movie = m;
+        notificationType = nt;
         isUnread = true;
     }
 
@@ -24,7 +33,12 @@ public class Notification {
         return text;
     }
 
-    public Actor getActors()
+    public NotificationType getNotiType()
+    {
+        return notificationType;
+    }
+
+    public Actor getActor()
     {
         return actor;
     }

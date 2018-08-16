@@ -41,13 +41,13 @@ public class ScoreManager : MonoBehaviour {
             actor.toMovie();
             Task t = new Task(actor, movie, 5, false);
             FindObjectOfType<TaskManager>().addTask(t);
-            FindObjectOfType<NotificationManager>().addNotification(actor.getName() + " has succeeded on their audition!", actor, movie);
+            NotificationManager.Instance.addNotification(actor.getName() + " has succeeded on their audition!", actor, movie, Notification.NotificationType.Audition);
         }
         else
         {
             //If they fail, notify the player
             actor.returnhome();
-            FindObjectOfType<NotificationManager>().addNotification(actor.getName() + " failed their audition.", actor, movie);
+            NotificationManager.Instance.addNotification(actor.getName() + " failed their audition.", actor, movie, Notification.NotificationType.Audition);
         }
     }
 
@@ -57,6 +57,10 @@ public class ScoreManager : MonoBehaviour {
         if(task.isAudition())
         {
             checkAudition(ref task.actor, task.getmovie());
+        }
+        else if(task.isMovie())
+        {
+            NotificationManager.Instance.addNotification(task.actor.getName() + " has completed their movie.", task.actor, task.getmovie(), Notification.NotificationType.Audition);
         }
     }
 }
