@@ -23,12 +23,13 @@ public class Actor {
     private Sprite actorPicture;
     private float experience;
     private ActorState actorState;
+    private string[] moviesStarredIn;
 
     /*public Actor(ActorInit init)
 {
     actorState 
 }*/
-    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture)
+    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, string[] moviesIn)
     {
         actorState = ActorState.available;
         comedy = com;
@@ -45,9 +46,10 @@ public class Actor {
         baseScifi = sci;
         baseOther = oth;
         actorPicture = picture;
+        moviesStarredIn = moviesIn;
     }
 
-    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, float basecom, float baserom, float baseact, float basehor, float basesci, float baseoth, float experience, ActorState actorState)
+    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, string [] moviesIn, float basecom, float baserom, float baseact, float basehor, float basesci, float baseoth, float experience, ActorState actorState)
     {
         actorState = ActorState.available;
         comedy = com;
@@ -66,6 +68,7 @@ public class Actor {
         actorPicture = picture;
         this.experience = experience;
         this.actorState = actorState;
+        moviesStarredIn = moviesIn;
     }
 
     public void toMovie()
@@ -201,6 +204,23 @@ public class Actor {
     public void addExperience(float xp)
     {
         experience += xp;
+    }
+
+    public string [] getMoviesStarredIn()
+    {
+        return moviesStarredIn;
+    }
+
+    public bool hasStarredIn(string movieName)
+    {
+        for(int i = 0; i < moviesStarredIn.Length; i++)
+        {
+            if(movieName == moviesStarredIn[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void levelUp()

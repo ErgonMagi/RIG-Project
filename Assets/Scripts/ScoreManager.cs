@@ -10,6 +10,21 @@ public class ScoreManager : MonoBehaviour {
     //Checks whether an actor passes an audition for a movie and adds a notification
     public void checkAudition(ref Actor actor, Movie movie)
     {
+        //Check if in the movie
+        string[] moviesList = actor.getMoviesStarredIn();
+        for(int i = 0; i < moviesList.Length; i++)
+        {
+            if(moviesList[i] == movie.getTitle())
+            {
+                actor.toMovie();
+                Task t = new Task(actor, movie, 5, false);
+                FindObjectOfType<TaskManager>().addTask(t);
+                NotificationManager.Instance.addNotification(actor.getName() + " has succeeded on their audition! They were in the movie!", actor, movie, Notification.NotificationType.Audition);
+                return;
+            }
+        }
+
+
         bool pass = true;
         if (actor.getAction() < movie.getAction())
         {

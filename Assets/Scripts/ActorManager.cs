@@ -18,6 +18,7 @@ public class Known_for
 public class Cast
 {
     public int[] genre_ids { get; set; }
+    public string title { get; set; }
 }
 
 public class ActorData
@@ -140,6 +141,8 @@ public class ActorManager : Singleton<ActorManager> {
             Debug.Log("no cast for " + actorName);
         }
 
+        List<string> moviesList = new List<string>();
+
         //Searches through actors movies to create the actors stats
         for (int i = 0; i < credits.cast.Length; i++)
         {
@@ -183,7 +186,7 @@ public class ActorManager : Singleton<ActorManager> {
             {
                 other++;
             }
-
+            moviesList.Add(credits.cast[i].title);
         }
 
         //Normalise the actor data so it sums to 20 (Could change to sum to an amount based on the actors rank (normal, epic, legendary etc)
@@ -244,7 +247,7 @@ public class ActorManager : Singleton<ActorManager> {
         //Create actor object
         //ActorInit newInit = new ActorInit();
         //newInit.comedy = 1f;
-        Actor tempActor = new Actor( comedy, romance, action, horror, scifi, other, actorName, sprite);
+        Actor tempActor = new Actor( comedy, romance, action, horror, scifi, other, actorName, sprite, moviesList.ToArray());
 
         //Add actor to reserve actor list
         actors.Add(tempActor);

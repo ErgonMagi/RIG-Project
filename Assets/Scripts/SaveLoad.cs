@@ -127,6 +127,7 @@ class SerializableActor
     private string actorName;
     private float experience;
     private Actor.ActorState actorState;
+    private string[] moviesStarredIn;
 
     //Constructor to convert an actor to a serializable actor
     public SerializableActor(Actor actor)
@@ -147,6 +148,7 @@ class SerializableActor
         actorName = actor.getName();
         experience = actor.getExperience();
         actorState = actor.getState();
+        moviesStarredIn = actor.getMoviesStarredIn();
     }
 
     //Returns the serializable actor as an actor.
@@ -162,6 +164,6 @@ class SerializableActor
             spriteSearch = Resources.Load<Sprite>("Actor images/Alicia Vikander");
         }
 
-        return new Actor(comedy, romance, action, horror, scifi, other, actorName, spriteSearch, baseComedy, baseRomance, baseAction, baseHorror, baseScifi, baseOther, experience, actorState);
+        return new Actor(comedy, romance, action, horror, scifi, other, actorName, spriteSearch, moviesStarredIn, baseComedy, baseRomance, baseAction, baseHorror, baseScifi, baseOther, experience, actorState);
     }
 }
