@@ -56,7 +56,41 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 	// Update is called once per frame
 	void Update () {
 
-        if(Mathf.Abs(focusTargetOffset - offset) > lockRange)
+        if (scrolling)
+        {
+            prevMousePos = mousePos;
+            mousePos = getMousePositionWorldSpace();
+
+            float xChange = 0;
+            float yChange = 0;
+
+            xChange = mousePos.x - prevMousePos.x;
+            yChange = mousePos.y - prevMousePos.y;
+
+            if (!yLocked)
+            {
+                offset += yChange;
+
+                if (offset < -objectSpacing / 2)
+                {
+                    offset = -objectSpacing / 2;
+                }
+                else if (offset > maxOffset)
+                {
+                    offset = maxOffset;
+                }
+            }
+
+            //Allow horizontal movement of focused object
+            if (!xLocked)
+            {
+                Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
+                focusTransform.position = new Vector3(Mathf.Min(mousePos.x, myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
+            }
+        }
+
+
+        if (Mathf.Abs(focusTargetOffset - offset) > lockRange)
         {
             xLocked = true;
             //Reset x position of focused actor
@@ -139,6 +173,22 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         focusTargetOffset = currentFocusIndex * objectSpacing;
     }
 
+    private Vector3 getMousePositionWorldSpace()
+    {
+        Vector3 mp = Input.mousePosition;
+
+        Ray ray = CameraManager.Instance.getCam().ScreenPointToRay(mp);
+
+        Plane plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+        float dist;
+        plane.Raycast(ray, out dist);
+
+        Vector3 point = ray.origin + dist * ray.direction;
+
+        return point;
+
+    }
+
     private void UpdateMaxOffset()
     {
         //Calculate the max size
@@ -181,44 +231,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    private void OnMouseDrag()
-    {
-        if (scrolling)
-        {
-            prevMousePos = mousePos;
-            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-
-            float xChange = 0;
-            float yChange = 0;
-
-            xChange = mousePos.x - prevMousePos.x;
-            yChange = mousePos.y - prevMousePos.y;
-
-            if (!yLocked)
-            {
-                offset += yChange;
-
-                if (offset < -objectSpacing / 2)
-                {
-                    offset = -objectSpacing / 2;
-                }
-                else if (offset > maxOffset)
-                {
-                    offset = maxOffset;
-                }
-            }
-
-            //Allow horizontal movement of focused object
-            if (!xLocked)
-            {
-                Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-                focusTransform.position = new Vector3(Mathf.Min(mousePos.x, myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
-            }
-        }
+        mousePos = getMousePositionWorldSpace();
+        prevMousePos = getMousePositionWorldSpace();
     }
 
     public void SetCollision(bool collisionOn)

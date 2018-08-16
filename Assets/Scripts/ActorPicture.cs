@@ -41,4 +41,10 @@ public class ActorPicture : MonoBehaviour {
     {
         return myTransform;
     }
+
+    [ContextMenu("show pos")]
+    public void showPos()
+    {
+        Debug.Log(this.transform.localPosition);
+    }
 }

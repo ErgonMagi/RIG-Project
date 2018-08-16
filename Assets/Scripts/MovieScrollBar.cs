@@ -46,12 +46,37 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         myTransform = this.transform;
         startPos = myTransform.position;
         collider = this.GetComponent<Collider2D>();
-        objectSpacing = 5;
+        objectSpacing = 5.2507f;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (scrolling)
+        {
+            prevMousePos = mousePos;
+            mousePos = getMousePositionWorldSpace();
+
+            float xChange = 0;
+            float yChange = 0;
+
+            xChange = mousePos.x - prevMousePos.x;
+            yChange = mousePos.y - prevMousePos.y;
+
+            offset += xChange;
+
+            if (offset < -maxOffset)
+            {
+                offset = -maxOffset;
+            }
+            else if (offset > objectSpacing / 2)
+            {
+                offset = objectSpacing / 2;
+            }
+
+        }
+
 
         if (!scrolling)
         {
@@ -106,6 +131,22 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         focusTargetOffset = -currentFocusIndex * objectSpacing;
     }
 
+    private Vector3 getMousePositionWorldSpace()
+    {
+        Vector3 mp = Input.mousePosition;
+
+        Ray ray = CameraManager.Instance.getCam().ScreenPointToRay(mp);
+
+        Plane plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+        float dist;
+        plane.Raycast(ray, out dist);
+
+        Vector3 point = ray.origin + dist * ray.direction;
+
+        return point;
+
+    }
+
     private void UpdateMaxOffset()
     {
         //Calculate the max size
@@ -141,35 +182,8 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    private void OnMouseDrag()
-    {
-        if (scrolling)
-        {
-            prevMousePos = mousePos;
-            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-
-            float xChange = 0;
-            float yChange = 0;
-
-            xChange = mousePos.x - prevMousePos.x;
-            yChange = mousePos.y - prevMousePos.y;
-
-            offset += xChange;
-
-            if (offset < -maxOffset)
-            {
-                offset = -maxOffset;
-            }
-            else if (offset > objectSpacing / 2)
-            {
-                offset = objectSpacing / 2;
-            }
-
-        }
+        mousePos = getMousePositionWorldSpace();
+        prevMousePos = getMousePositionWorldSpace();
     }
 
     public void SetCollision(bool collisionOn)
