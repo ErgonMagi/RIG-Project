@@ -36,6 +36,21 @@ public class Player : Singleton<Player> {
         return clients;
     }
 
+    public List<Actor> getAvialableActors()
+    {
+        List<Actor> availableActors = new List<Actor>();
+
+        for(int i = 0; i < clients.Count; i++)
+        {
+            if(clients[i].getState() == Actor.ActorState.available)
+            {
+                availableActors.Add(clients[i]);
+            }
+        }
+
+        return availableActors;
+    }
+
     public void setActors(List<Actor> actors)
     {
         clients = actors;

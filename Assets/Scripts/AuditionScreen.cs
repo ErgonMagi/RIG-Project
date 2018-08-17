@@ -48,7 +48,7 @@ public class AuditionScreen : MonoBehaviour {
     //Gets the actors list from the player and tells the ui to update
     public void getActors()
     {
-        actorsList = player.getActorsList();
+        actorsList = player.getAvialableActors();
         actorScrollBar.UpdateUI();
         movieScrollBar.UpdateUI();
     }

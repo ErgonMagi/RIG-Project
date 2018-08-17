@@ -128,6 +128,7 @@ class SerializableActor
     private float experience;
     private Actor.ActorState actorState;
     private string[] moviesStarredIn;
+    private Actor.ActorState state;
 
     //Constructor to convert an actor to a serializable actor
     public SerializableActor(Actor actor)
@@ -144,6 +145,7 @@ class SerializableActor
         baseHorror = actor.getBaseHorror();
         baseScifi = actor.getBaseScifi();
         baseOther = actor.getBaseOther();
+        state = actor.getState();
 
         actorName = actor.getName();
         experience = actor.getExperience();

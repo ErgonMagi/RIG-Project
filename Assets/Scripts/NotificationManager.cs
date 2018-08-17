@@ -56,6 +56,11 @@ public class NotificationManager : Singleton<NotificationManager> {
             }
         }
 
+        for (int i = 0; i < auditionNots.Count; i++)
+        {
+            notificationList.Remove(auditionNots[i]);
+        }
+
         return auditionNots;
     }
 
@@ -69,6 +74,11 @@ public class NotificationManager : Singleton<NotificationManager> {
             {
                 auditionNots.Add(notificationList[i]);
             }
+        }
+
+        for (int i = 0; i < auditionNots.Count; i++)
+        {
+            notificationList.Remove(auditionNots[i]);
         }
 
         return auditionNots;
