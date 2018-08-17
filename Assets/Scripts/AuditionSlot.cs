@@ -11,23 +11,34 @@ public class AuditionSlot : MonoBehaviour {
     public Image actorImageRenderer;
     public CancelActorAssignmentButton cancelButton;
     private AuditionScreen.Audition audition;
+    public float rotationAngle;
+    public AuditionSlot firstSlot;
 
-    private int arrayNumber;
+    public float zeroPos;
     private RectTransform myTransform;
+    private float spacing;
+    public float anglePercent;
+    public float angle;
+
 
     private void Update()
     {
         if(myTransform == null)
         {
             myTransform = GetComponent<RectTransform>();
+            spacing = myTransform.rect.width + GetComponentInParent<HorizontalLayoutGroup>().spacing;
+
         }
 
-        float anglePercent = (myTransform.position.x - 51.0f) / 5f;
+        anglePercent = (zeroPos - myTransform.position.x) / spacing;
 
-        float angle = anglePercent * -20;
+        angle = anglePercent * rotationAngle;
 
-        myTransform.rotation = Quaternion.Euler(new Vector3(myTransform.rotation.x, angle, myTransform.rotation.z));
-        myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y, Mathf.Pow(Mathf.Min(anglePercent,1),2));
+        if(Mathf.Abs(zeroPos - myTransform.position.x) < 2 * spacing)
+        {
+            myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y, Mathf.Pow(anglePercent, 2));
+            myTransform.rotation = Quaternion.Euler(new Vector3(myTransform.rotation.x, angle, myTransform.rotation.z));
+        }     
     }
 
     public void setAudition(AuditionScreen.Audition a)
@@ -68,7 +79,7 @@ public class AuditionSlot : MonoBehaviour {
     [ContextMenu("Print pos")]
     public void printpos()
     {
-        Debug.Log(myTransform.position);
+        Debug.Log(transform.position.ToString("F4"));
     }
 
 }

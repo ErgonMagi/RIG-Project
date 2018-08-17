@@ -46,11 +46,13 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         myTransform = this.transform;
         startPos = myTransform.position;
         collider = this.GetComponent<Collider2D>();
-        objectSpacing = 5.2507f;
+        auditions[0].gameObject.SetActive(true);
+        objectSpacing = auditions[0].GetComponent<RectTransform>().rect.width + GetComponent<HorizontalLayoutGroup>().spacing;
+        auditions[0].gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (scrolling)
@@ -198,4 +200,10 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         }
     }
 
+
+    [ContextMenu("Print pos")]
+    public void printpos()
+    {
+        Debug.Log(transform.position.ToString("F4"));
+    }
 }
