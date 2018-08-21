@@ -15,7 +15,8 @@ public class AuditionSlot : MonoBehaviour {
     public AuditionSlot firstSlot;
 
     public float zeroPos;
-    private RectTransform myTransform;
+    private float zeroZPos;
+    private Transform myTransform;
     private float spacing;
     public float anglePercent;
     public float angle;
@@ -25,9 +26,9 @@ public class AuditionSlot : MonoBehaviour {
     {
         if(myTransform == null)
         {
-            myTransform = GetComponent<RectTransform>();
-            spacing = myTransform.rect.width + GetComponentInParent<HorizontalLayoutGroup>().spacing;
-
+            myTransform = transform;
+            spacing = GetComponent<RectTransform>().rect.width + GetComponentInParent<HorizontalLayoutGroup>().spacing;
+            zeroZPos = myTransform.position.z;
         }
 
         anglePercent = (zeroPos - myTransform.position.x) / spacing;
@@ -36,7 +37,7 @@ public class AuditionSlot : MonoBehaviour {
 
         if(Mathf.Abs(zeroPos - myTransform.position.x) < 2 * spacing)
         {
-            myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y, Mathf.Pow(anglePercent, 2));
+            myTransform.localPosition = new Vector3(myTransform.localPosition.x, myTransform.localPosition.y, Mathf.Pow(anglePercent, 2) );
             myTransform.rotation = Quaternion.Euler(new Vector3(myTransform.rotation.x, angle, myTransform.rotation.z));
         }     
     }
@@ -79,7 +80,7 @@ public class AuditionSlot : MonoBehaviour {
     [ContextMenu("Print pos")]
     public void printpos()
     {
-        Debug.Log(transform.position.ToString("F4"));
+        Debug.Log(transform.localPosition.ToString("F4"));
     }
 
 }

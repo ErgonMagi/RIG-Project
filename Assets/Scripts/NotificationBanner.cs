@@ -30,7 +30,7 @@ public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUp
 	void Start () {
         myTransform = this.transform;
         downPos = myTransform.position;
-        upPos = myTransform.position + new Vector3(0, 200, 0);
+        upPos = myTransform.position + new Vector3(0, 400, 0);
 
         myTransform.position = upPos;
         clicked = false;

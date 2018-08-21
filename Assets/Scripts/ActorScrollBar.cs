@@ -16,6 +16,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     //Input variables
     private Vector3 mousePos;
     private Vector3 prevMousePos;
+    private Vector3 clickPos;
 
     //Public Scroll variables
     public float offset;
@@ -47,7 +48,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         scrolling = false;
         objectSpacing = 7.79f;
         myTransform = this.transform;
-        startPos = myTransform.position;
+        startPos = myTransform.localPosition;
         collider = this.GetComponent<Collider2D>();
         xLocked = false;
         yLocked = false;
@@ -85,7 +86,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
             if (!xLocked)
             {
                 Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-                focusTransform.position = new Vector3(Mathf.Min(mousePos.x, myTransform.position.x), focusTransform.position.y, focusTransform.position.z);
+                focusTransform.localPosition = new Vector3(Mathf.Min(mousePos.x - clickPos.x, 0), focusTransform.localPosition.y, focusTransform.localPosition.z);
             }
         }
 
@@ -95,7 +96,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
             xLocked = true;
             //Reset x position of focused actor
             Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-            focusTransform.position = new Vector3(myTransform.position.x, focusTransform.position.y, focusTransform.position.z);
+            focusTransform.localPosition = new Vector3(0, focusTransform.localPosition.y, focusTransform.localPosition.z);
         }
         else
         {
@@ -130,7 +131,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
         //Update position
         
-            myTransform.position = new Vector3(myTransform.position.x, startPos.y + offset, myTransform.position.z);
+            myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + offset, myTransform.localPosition.z);
         }
         
 	}
@@ -233,6 +234,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         scrolling = true;
         mousePos = getMousePositionWorldSpace();
         prevMousePos = getMousePositionWorldSpace();
+        clickPos = mousePos;
     }
 
     public void SetCollision(bool collisionOn)
@@ -245,6 +247,12 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         {
             collider.enabled = false;
         }
+    }
+
+    [ContextMenu("Show pos")]
+    public void showPosition()
+    {
+        Debug.Log(transform.position);
     }
 
 }

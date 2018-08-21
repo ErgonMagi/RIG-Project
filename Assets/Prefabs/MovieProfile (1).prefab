@@ -323,7 +323,7 @@ MonoBehaviour:
   cancelButton: {fileID: 114295668525679614}
   rotationAngle: 20
   firstSlot: {fileID: 0}
-  zeroPos: 51.2503
+  zeroPos: 53.5643
   anglePercent: 0
   angle: 0
 --- !u!114 &114935509572287408

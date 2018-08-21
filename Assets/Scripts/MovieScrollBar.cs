@@ -31,7 +31,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     private bool scrolling;
     private float force;
     public float objectSpacing;
-    private int currentFocusIndex;
+    public int currentFocusIndex;
     private float maxOffset;
     private Vector3 startPos;
     private Transform myTransform;
@@ -44,7 +44,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     {
         scrolling = false;
         myTransform = this.transform;
-        startPos = myTransform.position;
+        startPos = myTransform.localPosition;
         collider = this.GetComponent<Collider2D>();
         auditions[0].gameObject.SetActive(true);
         objectSpacing = auditions[0].GetComponent<RectTransform>().rect.width + GetComponent<HorizontalLayoutGroup>().spacing;
@@ -95,7 +95,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
 
         //Update position
-        myTransform.position = new Vector3(startPos.x + offset, myTransform.position.y, myTransform.position.z);
+        myTransform.localPosition = new Vector3(startPos.x + offset, myTransform.localPosition.y, myTransform.localPosition.z);
 
     }
 
@@ -136,10 +136,10 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     private Vector3 getMousePositionWorldSpace()
     {
         Vector3 mp = Input.mousePosition;
-
+        
         Ray ray = CameraManager.Instance.getCam().ScreenPointToRay(mp);
 
-        Plane plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+        Plane plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0f));
         float dist;
         plane.Raycast(ray, out dist);
 
