@@ -29,6 +29,8 @@ public class NotificationMenu : MonoBehaviour {
         height = GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height;
         myTransform.position = new Vector3(myTransform.position.x, -height, myTransform.position.z);
         currentMenu = 0;
+        menuXPositions[0] = auditionScroll.transform.position.x;
+        menuXPositions[1] = 2*menuXPositions[0]-movieScroll.transform.position.x;
     }
 	
 	// Update is called once per frame
