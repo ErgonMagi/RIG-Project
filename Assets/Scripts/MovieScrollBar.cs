@@ -58,7 +58,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         if (scrolling)
         {
             prevMousePos = mousePos;
-            mousePos = getMousePositionWorldSpace();
+            mousePos = Input.mousePosition;
 
             float xChange = 0;
             float yChange = 0;
@@ -184,8 +184,8 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = getMousePositionWorldSpace();
-        prevMousePos = getMousePositionWorldSpace();
+        mousePos = Input.mousePosition;
+        prevMousePos = Input.mousePosition;
     }
 
     public void SetCollision(bool collisionOn)

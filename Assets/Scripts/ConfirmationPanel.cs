@@ -139,7 +139,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
 
     public void HideConfirmationScreen()
     {
-        tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(-13.3f, 1f).SetEase(Ease.OutBack);
+        tween = lerpObject.GetComponent<RectTransform>().DOLocalMoveY(startPos.y, 1f).SetEase(Ease.OutBack);
         isVisible = false;
         SetCollision(false);
     }
