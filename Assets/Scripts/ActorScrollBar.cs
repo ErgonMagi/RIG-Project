@@ -46,7 +46,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     // Use this for initialization
     void Start () {
         scrolling = false;
-        objectSpacing = 7.79f;
+        objectSpacing = 7.79f * this.transform.localScale.y;
         myTransform = this.transform;
         startPos = myTransform.localPosition;
         collider = this.GetComponent<Collider2D>();
@@ -60,7 +60,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         if (scrolling)
         {
             prevMousePos = mousePos;
-            mousePos = getMousePositionWorldSpace();
+            mousePos = Input.mousePosition;
 
             float xChange = 0;
             float yChange = 0;
@@ -232,8 +232,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = getMousePositionWorldSpace();
-        prevMousePos = getMousePositionWorldSpace();
+        mousePos = Input.mousePosition;
+        prevMousePos = Input.mousePosition;
         clickPos = mousePos;
     }
 

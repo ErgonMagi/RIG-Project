@@ -48,6 +48,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         collider = this.GetComponent<Collider2D>();
         auditions[0].gameObject.SetActive(true);
         objectSpacing = auditions[0].GetComponent<RectTransform>().rect.width + GetComponent<HorizontalLayoutGroup>().spacing;
+        objectSpacing *= myTransform.localScale.x;
         auditions[0].gameObject.SetActive(false);
     }
 
@@ -163,7 +164,7 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
             totalCounted++;
         }
 
-        maxOffset = ActivePicturesInArray * objectSpacing - (objectSpacing / 2);
+        maxOffset = (ActivePicturesInArray * objectSpacing - (objectSpacing / 2));
     }
 
     public int getfocusNum()

@@ -12,34 +12,45 @@ public class AuditionSlot : MonoBehaviour {
     public CancelActorAssignmentButton cancelButton;
     private AuditionScreen.Audition audition;
     public float rotationAngle;
-    public AuditionSlot firstSlot;
+    public Transform zeroPosHolder;
 
     public float zeroPos;
+    public float xPos;
     private float zeroZPos;
     private Transform myTransform;
-    private float spacing;
+    public float spacing;
     public float anglePercent;
     public float angle;
 
+    private void Start()
+    {
+        myTransform = transform;
+        zeroZPos = myTransform.position.z;
+        spacing = 10;
+        zeroPos = zeroPosHolder.position.x;
+    }
 
     private void Update()
     {
-        if(myTransform == null)
-        {
-            myTransform = transform;
-            spacing = GetComponent<RectTransform>().rect.width + GetComponentInParent<HorizontalLayoutGroup>().spacing;
-            zeroZPos = myTransform.position.z;
-        }
-
+        xPos = myTransform.position.x;
         anglePercent = (zeroPos - myTransform.position.x) / spacing;
 
         angle = anglePercent * rotationAngle;
 
-        if(Mathf.Abs(zeroPos - myTransform.position.x) < 2 * spacing)
+        if(Mathf.Abs(zeroPos - myTransform.position.x) < 6 * spacing)
         {
-            myTransform.localPosition = new Vector3(myTransform.localPosition.x, myTransform.localPosition.y, Mathf.Pow(anglePercent, 2) );
-            myTransform.rotation = Quaternion.Euler(new Vector3(myTransform.rotation.x, angle, myTransform.rotation.z));
+            if (Mathf.Abs(angle) < 90)
+            {
+                myTransform.localPosition = new Vector3(myTransform.localPosition.x, myTransform.localPosition.y, Mathf.Pow(anglePercent, 2));
+                myTransform.rotation = Quaternion.Euler(new Vector3(myTransform.rotation.x, angle, myTransform.rotation.z));
+            }
         }     
+    }
+
+    public void setZeroAndSpacing(float zeroPos, float spacing)
+    {
+        this.zeroPos = zeroPos;
+        this.spacing = spacing;
     }
 
     public void setAudition(AuditionScreen.Audition a)
@@ -80,7 +91,7 @@ public class AuditionSlot : MonoBehaviour {
     [ContextMenu("Print pos")]
     public void printpos()
     {
-        Debug.Log(transform.localPosition.ToString("F4"));
+        Debug.Log(this.transform.position.ToString("F4"));
     }
 
 }
