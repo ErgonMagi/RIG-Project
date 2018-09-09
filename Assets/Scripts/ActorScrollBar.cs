@@ -46,8 +46,11 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     // Use this for initialization
     void Start () {
         scrolling = false;
-        objectSpacing = 7.79f * this.transform.localScale.y;
         myTransform = this.transform;
+        actorPictures[0].gameObject.SetActive(true);
+        objectSpacing = (actorPictures[0].GetComponent<RectTransform>().rect.height + GetComponent<VerticalLayoutGroup>().spacing) * this.transform.localScale.y;
+        lockRange *= this.transform.localScale.y;
+        actorPictures[0].gameObject.SetActive(false);
         startPos = myTransform.localPosition;
         collider = this.GetComponent<Collider2D>();
         xLocked = false;
@@ -86,7 +89,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
             if (!xLocked)
             {
                 Transform focusTransform = actorPictures[currentFocusIndex].getTransform();
-                focusTransform.localPosition = new Vector3(Mathf.Min(mousePos.x - clickPos.x, 0), focusTransform.localPosition.y, focusTransform.localPosition.z);
+                focusTransform.localPosition = new Vector3(Mathf.Min((mousePos.x - clickPos.x)/myTransform.localScale.x, 0), focusTransform.localPosition.y, focusTransform.localPosition.z);
             }
         }
 
@@ -103,7 +106,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
             xLocked = false;
         }
 
-        if(actorPictures[currentFocusIndex].transform.localPosition.x < -lockRange)
+        if(actorPictures[currentFocusIndex].transform.localPosition.x < -lockRange/myTransform.localScale.y)
         {
             yLocked = true;
             offset = focusTargetOffset;

@@ -68,7 +68,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
 
 
         //Update position
-        myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + offset/myTransform.lossyScale.y, myTransform.localPosition.z);
+        myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + offset, myTransform.localPosition.z);
     }
 
     private void UpdateMaxOffset()
@@ -86,7 +86,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
         }
 
         maxOffset = ActivePicturesInArray * objectSpacing - (objectSpacing / 2);
-        maxOffset /= myTransform.lossyScale.y;
+        maxOffset *= myTransform.localScale.y;
     }
 
     public void OnPointerUp(PointerEventData pointer)
@@ -100,8 +100,8 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
-        prevMousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Input.mousePosition;
+        prevMousePos = Input.mousePosition;
     }
 
     private void OnMouseDrag()
@@ -109,7 +109,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
         if (scrolling)
         {
             prevMousePos = mousePos;
-            mousePos = CameraManager.Instance.getCam().ScreenToWorldPoint(Input.mousePosition);
+            mousePos = Input.mousePosition;
 
             float xChange = 0;
             float yChange = 0;
@@ -118,6 +118,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
             yChange = mousePos.y - prevMousePos.y;
 
             offset += yChange;
+
 
             if (offset < -objectSpacing / 2)
             {
@@ -186,7 +187,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
         {
             if (objectSpacing == 0)
             {
-                objectSpacing = auditionSummaries[0].transform.position.y - auditionSummaries[1].transform.position.y;
+                objectSpacing = (auditionSummaries[0].GetComponent<RectTransform>().rect.height + GetComponent<VerticalLayoutGroup>().spacing) * myTransform.localScale.y;
             }
         }
     }
