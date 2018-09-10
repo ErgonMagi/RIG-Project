@@ -49,7 +49,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
         if(myTransform == null)
         {
             myTransform = this.transform;
-            startPos = myTransform.localPosition;
+            startPos = lerpObject.localPosition;
         }
 
         if(collider == null)
