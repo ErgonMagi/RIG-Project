@@ -5,11 +5,13 @@ using UnityEngine;
 public class Player : Singleton<Player> {
 
     public List<Actor> clients;
+    private int money;
 
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
         clients = SaveLoad.Instance.getActors();
+        money = SaveLoad.Instance.getMoney();
 	}
 
     public Actor getActor(int actorNum)
@@ -19,6 +21,29 @@ public class Player : Singleton<Player> {
             return null;
         }
         return clients[actorNum];
+    }
+
+    public void addMoney(int addedMoney)
+    {
+        money += addedMoney;
+    }
+
+    public bool spendMoney(int spentMoney)
+    {
+        if(money >= spentMoney)
+        {
+            money -= spentMoney;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int getMoney()
+    {
+        return money;
     }
 
     public void setActor(Actor actor, int arrayNum)

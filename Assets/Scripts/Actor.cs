@@ -12,11 +12,21 @@ public class Actor {
         onMovie,
         training
     }
-    /*public Init
-        {
-        public float com, 
 
-     }*/
+    public struct Init
+    {
+        public float com, act, rom, hor, sci, other;
+        public float baseCom, baseAct, baseRom, baseHor, baseSci, baseOth;
+        public string name;
+        public Sprite pic;
+        public string[] moviesActorIn;
+        public ActorState state;
+        public float exp;
+        public int incomeVal;
+    };
+     
+
+
     private float comedy, action, romance, horror, scifi, other;
     private float baseComedy, baseAction, baseRomance, baseHorror, baseScifi, baseOther;
     private string actorName;
@@ -24,52 +34,47 @@ public class Actor {
     private float experience;
     private ActorState actorState;
     private string[] moviesStarredIn;
+    private int incomeValue;
 
 
-    /*public Actor(ActorInit init)
-{
-    actorState 
-}*/
-    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, string[] moviesIn)
+    public Actor(Init i)
     {
-        actorState = ActorState.available;
-        comedy = com;
-        romance = rom;
-        action = act;
-        horror = hor;
-        scifi = sci;
-        other = oth;
-        actorName = name;
-        baseComedy = com;
-        baseRomance = rom;
-        baseAction = act;
-        baseHorror = hor;
-        baseScifi = sci;
-        baseOther = oth;
-        actorPicture = picture;
-        moviesStarredIn = moviesIn;
+        actorState = i.state;
+        comedy = i.com;
+        romance = i.rom;
+        action = i.act;
+        horror = i.hor;
+        scifi = i.sci;
+        other = i.other;
+        actorName = i.name;
+        if(i.baseCom == 0 && i.baseAct == 0 & i.baseHor == 0 & i.baseOth == 0 & i.baseRom == 0 & i.baseSci == 0)
+        {
+            baseComedy = comedy;
+            baseRomance = romance;
+            baseAction = action;
+            baseHorror = horror;
+            baseScifi = scifi;
+            baseOther = other;
+        }
+        else
+        {
+            baseComedy = i.baseCom;
+            baseRomance = i.baseRom;
+            baseAction = i.baseAct;
+            baseHorror = i.baseHor;
+            baseScifi = i.baseSci;
+            baseOther = i.baseOth;
+        }
+        
+        actorPicture = i.pic;
+        moviesStarredIn = i.moviesActorIn;
+        incomeValue = i.incomeVal;
+        experience = i.exp;
     }
 
-    public Actor(float com, float rom, float act, float hor, float sci, float oth, string name, Sprite picture, string [] moviesIn, float basecom, float baserom, float baseact, float basehor, float basesci, float baseoth, float experience, ActorState actorState)
+    public int getIncomeValue()
     {
-        actorState = ActorState.available;
-        comedy = com;
-        romance = rom;
-        action = act;
-        horror = hor;
-        scifi = sci;
-        other = oth;
-        actorName = name;
-        baseComedy = basecom;
-        baseRomance = baserom;
-        baseAction = baseact;
-        baseHorror = basehor;
-        baseScifi = basesci;
-        baseOther = baseoth;
-        actorPicture = picture;
-        this.experience = experience;
-        this.actorState = actorState;
-        moviesStarredIn = moviesIn;
+        return incomeValue;
     }
 
     public void toMovie()

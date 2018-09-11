@@ -49,10 +49,14 @@ public class ContactButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         if(selected)
         {
-            GameController.Instance.fromComputer();
-            Actor purchasedActor = this.GetComponentInParent<PurchaseActorTicket>().getActor();
-            Player.Instance.addActor(purchasedActor);
+            PurchaseActorTicket pat = this.GetComponentInParent<PurchaseActorTicket>();
             
+            if(Player.Instance.spendMoney(pat.getPrice()))
+            {
+                Actor purchasedActor = pat.getActor();
+                Player.Instance.addActor(purchasedActor);
+                GameController.Instance.fromComputer();
+            }
         }
     }
 }

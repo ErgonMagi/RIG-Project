@@ -39,9 +39,9 @@ public class AuditionSlot : MonoBehaviour {
 
         if(Mathf.Abs(zeroPos - myTransform.position.x) < 6 * spacing)
         {
-            if (Mathf.Abs(angle) < 90)
+            if (Mathf.Abs(angle) < 30)
             {
-                myTransform.localPosition = new Vector3(myTransform.localPosition.x, myTransform.localPosition.y, Mathf.Pow(anglePercent, 2));
+                myTransform.localPosition = new Vector3(myTransform.localPosition.x, myTransform.localPosition.y, Mathf.Pow(anglePercent, 2) * rotationAngle/18f);
                 myTransform.rotation = Quaternion.Euler(new Vector3(myTransform.rotation.x, angle, myTransform.rotation.z));
             }
         }     

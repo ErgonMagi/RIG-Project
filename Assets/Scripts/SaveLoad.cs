@@ -10,6 +10,8 @@ public class SaveLoad : Singleton<SaveLoad> {
 
     private Actor[] actors;
     private int level;
+    private int money;
+    private DateTime prevTime;
 
 	// Use this for initialization
 	protected override void Awake () {
@@ -18,7 +20,8 @@ public class SaveLoad : Singleton<SaveLoad> {
 
         level = 1;
         actors = new Actor[100];
-
+        prevTime = DateTime.Now;
+        money = 0;
         Load();
 	}
 
@@ -28,7 +31,7 @@ public class SaveLoad : Singleton<SaveLoad> {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
-        PlayerData data = new PlayerData(Player.Instance.getActorsList().ToArray(), LevelManager.Instance.getLevel());
+        PlayerData data = new PlayerData(Player.Instance.getActorsList().ToArray(), LevelManager.Instance.getLevel(), IncomeManager.Instance.getPrevIncomeTime(), Player.Instance.getMoney());
 
         bf.Serialize(file, data);
         file.Close();
@@ -59,6 +62,8 @@ public class SaveLoad : Singleton<SaveLoad> {
             PlayerData data = (PlayerData)bf.Deserialize(file);
             actors = data.getActors();
             level = data.getLevel();
+            money = data.getMoney();
+            prevTime = data.getPrevIncomeTime();
             file.Close();
         }
     }
@@ -74,6 +79,16 @@ public class SaveLoad : Singleton<SaveLoad> {
     {
         return convertArrayToList(actors);
     }
+
+    public DateTime getPrevIncomeTime()
+    {
+        return prevTime;
+    }
+
+    public int getMoney()
+    {
+        return money;
+    }
 }
 
 //A serializable object to contain all the playerdata for saving/loading
@@ -82,9 +97,11 @@ class PlayerData
 {
     private SerializableActor[] actors = new SerializableActor[100];
     private int level;
+    private System.DateTime prevTime;
+    private int money;
 
     //Constructor
-    public PlayerData(Actor [] actors, int level)
+    public PlayerData(Actor [] actors, int level, System.DateTime prevIncTime, int mon)
     {
         for(int i = 0; i < actors.Length; i++)
         {
@@ -94,6 +111,8 @@ class PlayerData
             }
         }
         this.level = level;
+        this.prevTime = prevIncTime;
+        money = mon;
     }
 
     //Returns the actors from the playerData (Used in loading)
@@ -110,11 +129,21 @@ class PlayerData
         }
         return actors;
     }
+
+    public System.DateTime getPrevIncomeTime()
+    {
+        return prevTime;
+    }
     
     //Returns the level from the playerData (Used in loading)
     public int getLevel()
     {
         return level;
+    }
+
+    public int getMoney()
+    {
+        return money;
     }
 }
 
@@ -129,6 +158,7 @@ class SerializableActor
     private Actor.ActorState actorState;
     private string[] moviesStarredIn;
     private Actor.ActorState state;
+    private int incomeValue;
 
     //Constructor to convert an actor to a serializable actor
     public SerializableActor(Actor actor)
@@ -146,6 +176,7 @@ class SerializableActor
         baseScifi = actor.getBaseScifi();
         baseOther = actor.getBaseOther();
         state = actor.getState();
+        incomeValue = actor.getIncomeValue();
 
         actorName = actor.getName();
         experience = actor.getExperience();
@@ -166,6 +197,26 @@ class SerializableActor
             spriteSearch = Resources.Load<Sprite>("Actor images/Alicia Vikander");
         }
 
-        return new Actor(comedy, romance, action, horror, scifi, other, actorName, spriteSearch, moviesStarredIn, baseComedy, baseRomance, baseAction, baseHorror, baseScifi, baseOther, experience, actorState);
+        Actor.Init init;
+        init.com = comedy;
+        init.rom = romance;
+        init.act = action;
+        init.hor = horror;
+        init.sci = scifi;
+        init.other = other;
+        init.name = actorName;
+        init.pic = spriteSearch;
+        init.moviesActorIn = moviesStarredIn;
+        init.baseCom = baseComedy;
+        init.baseRom = baseRomance;
+        init.baseHor = baseHorror;
+        init.baseAct = baseAction;
+        init.baseSci = baseScifi;
+        init.baseOth = baseOther;
+        init.exp = experience;
+        init.state = actorState;
+        init.incomeVal = incomeValue;
+
+        return new Actor(init);
     }
 }

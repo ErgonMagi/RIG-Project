@@ -8,6 +8,7 @@ public class PurchaseActorTicket : MonoBehaviour, IPointerClickHandler {
 
     private Actor actor = null;
     private Vector3 rotation;
+    private int price;
     public GameObject actorSprite;
     public GameObject actorName;
     public GameObject actorPrice;
@@ -34,7 +35,7 @@ public class PurchaseActorTicket : MonoBehaviour, IPointerClickHandler {
         actor = a;
         float randomAngle = Random.Range(-15, 0);
         rotation = new Vector3(0, 0, randomAngle);
-
+        int price = Random.Range(50, 200);
         UpdateData();
     }
 
@@ -44,8 +45,12 @@ public class PurchaseActorTicket : MonoBehaviour, IPointerClickHandler {
         actor = null;
         UpdateData();
         actorPurchaseBoard.FillBoard();
-        return temp;
-        
+        return temp;       
+    }
+
+    public int getPrice()
+    {
+        return price;
     }
 
     private void UpdateData()
@@ -56,7 +61,7 @@ public class PurchaseActorTicket : MonoBehaviour, IPointerClickHandler {
             this.transform.rotation = Quaternion.Euler(rotation);
             actorSprite.GetComponent<SpriteRenderer>().sprite = actor.getPicture();
             actorName.GetComponent<TextMeshPro>().text = actor.getName();
-            actorPrice.GetComponent<TextMeshPro>().text = "$100";
+            actorPrice.GetComponent<TextMeshPro>().text = "$" + price.ToString();
         }
         else
         {

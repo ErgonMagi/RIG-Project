@@ -247,7 +247,20 @@ public class ActorManager : Singleton<ActorManager> {
         //Create actor object
         //ActorInit newInit = new ActorInit();
         //newInit.comedy = 1f;
-        Actor tempActor = new Actor( comedy, romance, action, horror, scifi, other, actorName, sprite, moviesList.ToArray());
+        Actor.Init init = new Actor.Init();
+        init.com = comedy;
+        init.rom = romance;
+        init.act = action;
+        init.hor = horror;
+        init.sci = scifi;
+        init.other = other;
+        init.name = actorName;
+        init.pic = sprite;
+        init.moviesActorIn = moviesList.ToArray();
+        System.Random r = new System.Random();
+        init.incomeVal = r.Next(5, 15);
+
+        Actor tempActor = new Actor(init);
 
         //Add actor to reserve actor list
         actors.Add(tempActor);
