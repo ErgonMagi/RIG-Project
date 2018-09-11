@@ -33,6 +33,7 @@ public class Player : Singleton<Player> {
         if(money >= spentMoney)
         {
             money -= spentMoney;
+            Debug.Log("The player now has: $" + money);
             return true;
         }
         else

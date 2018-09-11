@@ -35,7 +35,7 @@ public class PurchaseActorTicket : MonoBehaviour, IPointerClickHandler {
         actor = a;
         float randomAngle = Random.Range(-15, 0);
         rotation = new Vector3(0, 0, randomAngle);
-        int price = Random.Range(50, 200);
+        price = Random.Range(50, 200);
         UpdateData();
     }
 

@@ -50,7 +50,8 @@ public class ContactButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if(selected)
         {
             PurchaseActorTicket pat = this.GetComponentInParent<PurchaseActorTicket>();
-            
+            Debug.Log("Price for actor is: $" + pat.getPrice());
+
             if(Player.Instance.spendMoney(pat.getPrice()))
             {
                 Actor purchasedActor = pat.getActor();
