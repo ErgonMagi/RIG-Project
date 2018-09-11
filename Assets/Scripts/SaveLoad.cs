@@ -21,7 +21,7 @@ public class SaveLoad : Singleton<SaveLoad> {
         level = 1;
         actors = new Actor[100];
         prevTime = DateTime.Now;
-        money = 0;
+        money = 500;
         Load();
 	}
 

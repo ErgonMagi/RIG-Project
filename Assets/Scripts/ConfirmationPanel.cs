@@ -68,7 +68,7 @@ public class ConfirmationPanel : MonoBehaviour, UIUpdatable, IPointerDownHandler
 
 
         //Update position
-        myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + offset, myTransform.localPosition.z);
+        myTransform.localPosition = new Vector3(myTransform.localPosition.x, offset, myTransform.localPosition.z);
     }
 
     private void UpdateMaxOffset()

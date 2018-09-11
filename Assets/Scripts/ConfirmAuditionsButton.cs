@@ -8,6 +8,7 @@ public class ConfirmAuditionsButton : MonoBehaviour {
 
     public void onClick()
     {
+        NotificationManager.Instance.QuickNotification("Actors sent on auditions");
         auditionScreen.submitActors();
     }
 }

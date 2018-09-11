@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class NotificationManager : Singleton<NotificationManager> {
 
@@ -9,6 +12,11 @@ public class NotificationManager : Singleton<NotificationManager> {
     public NotificationBanner notificationBanner;
     public NotificationMenu notificationMenu;
 
+    public Image quickNotification;
+    public TextMeshProUGUI quickNotiText;
+    private Color onColor, offColor, onTextColor, offTextColor;
+
+
     public AuditionResultNotifications auditionResults;
     public MovieResultNotifications movieResults;
 
@@ -16,8 +24,26 @@ public class NotificationManager : Singleton<NotificationManager> {
 	protected override void Awake () {
         base.Awake();
         notificationList = new List<Notification>();
-	}
+        onColor = quickNotification.color;
+        offColor = new Color(onColor.r, onColor.g, onColor.b, 0);
+        quickNotification.color = offColor;
+        onTextColor = quickNotiText.color;
+        offTextColor = new Color(onTextColor.r, onTextColor.g, onTextColor.b, 0);
+        quickNotiText.color = offTextColor;
+        quickNotification.transform.DOLocalMoveY(-1000, 0).SetDelay(2);
+    }
 	
+    public void QuickNotification(string notiText)
+    {
+        quickNotification.transform.localPosition = Vector3.zero;
+        quickNotiText.text = notiText;
+        quickNotification.DOColor(onColor, 1);
+        quickNotification.DOColor(offColor, 1).SetDelay(1f);
+        quickNotiText.DOColor(onTextColor, 1);
+        quickNotiText.DOColor(offTextColor, 1).SetDelay(1f);
+        quickNotification.transform.DOLocalMoveY(-1000, 0).SetDelay(2);
+    }
+
     //Adds a notification to the end of the list
 	public void addNotification(string text, Actor actor, Movie movie, Notification.NotificationType notiType)
     {

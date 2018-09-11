@@ -57,6 +57,7 @@ public class ContactButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
                 Actor purchasedActor = pat.getActor();
                 Player.Instance.addActor(purchasedActor);
                 GameController.Instance.fromComputer();
+                NotificationManager.Instance.QuickNotification("Actor purchased");
             }
         }
     }
