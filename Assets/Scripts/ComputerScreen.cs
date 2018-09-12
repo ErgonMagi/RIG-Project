@@ -19,9 +19,9 @@ public class ComputerScreen : MonoBehaviour, IPointerClickHandler {
 	// Use this for initialization
 	void Start () {
         rtCam.enabled = true;
-        rtCam.aspect = 1.78f;
+        //rtCam.aspect = 1.78f;
         gameController = GameController.Instance;
-        RenderTexture rt = new RenderTexture(1024, 1024, 1000);
+        RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 1000);
         rt.Create();
         rtCam.targetTexture = rt;
         GetComponent<Renderer>().material.mainTexture = rt;

@@ -11,6 +11,9 @@ using UnityEngine;
 
 public class GameController : Singleton<GameController> {
 
+    public Camera renderCam;
+
+
     public Camera deskCam;
     public Camera computerCam;
     public Camera fileCam;
@@ -85,9 +88,15 @@ public class GameController : Singleton<GameController> {
             gamestate = Gamestate.movieMenu;
             cam.swapCamAfterLerp(computerCam);
             auditionScreen.getActors();
+            StartCoroutine(waitToSwapCam());
         }
     }
 
+    private IEnumerator waitToSwapCam()
+    {
+        yield return new WaitForSeconds(1);
+        DesktopCanvas.worldCamera = computerCam;
+    }
 
     public void toActorBoard()
     {
@@ -121,6 +130,7 @@ public class GameController : Singleton<GameController> {
                 toActorBoard();
                 return;
             }
+            DesktopCanvas.worldCamera = renderCam;
             cam.swapCams(deskCam);
             actorBoard.GetComponent<Collider>().enabled = true;
             cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);

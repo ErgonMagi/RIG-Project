@@ -38,10 +38,10 @@ public class NotificationManager : Singleton<NotificationManager> {
         quickNotification.transform.localPosition = Vector3.zero;
         quickNotiText.text = notiText;
         quickNotification.DOColor(onColor, 1);
-        quickNotification.DOColor(offColor, 1).SetDelay(1f);
+        quickNotification.DOColor(offColor, 1).SetDelay(1.5f);
         quickNotiText.DOColor(onTextColor, 1);
-        quickNotiText.DOColor(offTextColor, 1).SetDelay(1f);
-        quickNotification.transform.DOLocalMoveY(-1000, 0).SetDelay(2);
+        quickNotiText.DOColor(offTextColor, 1).SetDelay(1.5f);
+        quickNotification.transform.DOLocalMoveY(-1000, 0).SetDelay(2.5f);
     }
 
     //Adds a notification to the end of the list

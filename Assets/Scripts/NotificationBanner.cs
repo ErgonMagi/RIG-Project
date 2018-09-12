@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
     public float minSwipeDist;
+    public TextMeshProUGUI bannerText;
 
     private Vector3 downPos;
     private Vector3 upPos;
@@ -70,7 +72,7 @@ public class NotificationBanner : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void setText(string text)
     {
-        this.GetComponentInChildren<Text>().text = text;
+        bannerText.text = text;
     }
 
     public void OnPointerDown(PointerEventData pointer)
