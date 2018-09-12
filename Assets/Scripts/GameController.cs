@@ -94,7 +94,7 @@ public class GameController : Singleton<GameController> {
 
     private IEnumerator waitToSwapCam()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.1f);
         DesktopCanvas.worldCamera = computerCam;
     }
 
