@@ -4,13 +4,14 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class ActorStatsPage : MonoBehaviour, IPointerClickHandler {
+public class ActorStatsPage : MonoBehaviour {
 
     public GameObject comedyBar, actionBar, romanceBar, horrorBar, scifiBar, otherBar;
-    public Text comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
-    public Text actorNameText;
-    public SpriteRenderer actorPictureSprite;
+    public TextMeshProUGUI comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
+    public TextMeshProUGUI actorNameText, actorInitials;
+    public Image actorPictureSprite;
     public int actorNum;
 
     public float comedy, action, romance, horror, scifi, other;
@@ -20,22 +21,7 @@ public class ActorStatsPage : MonoBehaviour, IPointerClickHandler {
     private Player player;
     private List<string> actorNames;
 
-    private bool faceUp;
-    private bool rotating;
-
-    private Vector3 faceUpRot;
-    private Vector3 faceDownRot;
-    public GameObject rotatePos;
-
-    private Vector3 startPos;
-    private Vector3 flipPos;
-
     private GameController gc;
-
-    private float timeRotating;
-    public float rotateTime;
-
-    private float rotateStep;
 
     private LevelManager lm;
 
@@ -43,15 +29,6 @@ public class ActorStatsPage : MonoBehaviour, IPointerClickHandler {
     {
         player = FindObjectOfType<Player>();
         actor = null;
-
-        faceUp = true;
-        rotating = false;
-
-        faceUpRot = new Vector3(-90.0f, 13.146f, -90.0f);
-        faceDownRot = new Vector3(90.0f, 13.146f, -90.0f);
-
-        startPos = this.transform.position;
-        flipPos = this.transform.position + this.transform.right * 0.015f;
 
         gc = FindObjectOfType<GameController>();
         lm = FindObjectOfType<LevelManager>();
@@ -62,44 +39,7 @@ public class ActorStatsPage : MonoBehaviour, IPointerClickHandler {
         if(actor == null)
         {
             getActorFromPlayer();
-        }
-
-        if(rotating)
-        {
-            timeRotating += Time.deltaTime;
-            //Check if rotating to be faceup
-            if(faceUp)
-            {
-                if(timeRotating >= rotateTime)
-                {
-                    rotating = false;
-                    this.transform.localRotation = Quaternion.Euler(faceDownRot);
-                    this.transform.position = startPos;
-                }
-                else
-                {
-                    rotateStep = 180.0f / (rotateTime / Time.deltaTime);
-                    this.transform.RotateAround(rotatePos.transform.position, this.transform.up, -rotateStep);
-                    this.transform.position = flipPos + (startPos - flipPos) * (timeRotating / rotateTime);
-                }
-            }
-            else
-            {
-                if (timeRotating >= rotateTime)
-                {
-                    rotating = false;
-                    this.transform.localRotation = Quaternion.Euler(faceUpRot);
-                    this.transform.position = flipPos;
-                    lm.checkedStats();
-                }
-                else
-                {
-                    rotateStep = 180.0f / (rotateTime / Time.deltaTime);
-                    this.transform.RotateAround(rotatePos.transform.position, this.transform.up, rotateStep);
-                    this.transform.position = startPos + (flipPos - startPos) * (timeRotating / rotateTime);
-                }
-            }
-        }
+        }       
     }
 
     public Actor getActor()
@@ -145,15 +85,7 @@ public class ActorStatsPage : MonoBehaviour, IPointerClickHandler {
         otherVal.text = ((int)other).ToString();
         actionVal.text = ((int)action).ToString();
         actorPictureSprite.sprite = actorPicture;
-    }
-
-    public void OnPointerClick(PointerEventData pointer)
-    {
-        if(gc.isAtFile())
-        {
-            timeRotating = 0;
-            rotating = true;
-            faceUp = !faceUp;         
-        }
+        string[] name = actorName.Split(' ');
+        actorInitials.text = name[0][0].ToString() + name[1][0];
     }
 }

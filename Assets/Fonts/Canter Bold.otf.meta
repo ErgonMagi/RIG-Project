@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: bab0802f5a00ab047a7f182cad5d745f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Canter
+  fontNames:
+  - Canter
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6790b3124fa11aa4dac56ffb428fb47d, type: 3}
+  - {fileID: 12800000, guid: 872ed095f3b6dae4dbcee89795996a38, type: 3}
+  - {fileID: 12800000, guid: 67fe7b8ec01949b4081f22165c6c726c, type: 3}
+  - {fileID: 12800000, guid: 1fabb03f22b26e64f8fdbd0a4a282b90, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

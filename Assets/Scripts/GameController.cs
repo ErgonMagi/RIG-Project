@@ -19,8 +19,11 @@ public class GameController : Singleton<GameController> {
     public Camera fileCam;
     public AuditionScreen auditionScreen;
     public Canvas DesktopCanvas;
+    public Canvas IpadCanvas;
     public Camera actorBoardCam;
     public GameObject actorBoard;
+    public Camera lookAtIpadCamera;
+    public Camera IpadCam;
 
     private List<GameObject> menus;
     private Vector3 mainCamStartPos;
@@ -62,21 +65,6 @@ public class GameController : Singleton<GameController> {
 	// Update is called once per frame
 	void Update () {
 
-
-        if(menuBool)
-        {
-            DesktopCanvas.enabled = false;
-            menuBool = false;
-        }
-
-        switch(gamestate)
-        {
-            case Gamestate.movieMenu:
-                DesktopCanvas.enabled = true;
-                menuBool = true;
-                break;
-        }
-
     }
 
     //Moves to computer
@@ -84,19 +72,15 @@ public class GameController : Singleton<GameController> {
     {
         if(!cam.isLerping())
         {
+            DesktopCanvas.enabled = true;
             cam.lerpToLoc(compCamPos, compCamRot, 1.0f);
             gamestate = Gamestate.movieMenu;
             cam.swapCamAfterLerp(computerCam);
             auditionScreen.getActors();
-            StartCoroutine(waitToSwapCam());
+            DesktopCanvas.worldCamera = computerCam;
         }
     }
 
-    private IEnumerator waitToSwapCam()
-    {
-        yield return new WaitForSeconds(1.1f);
-        DesktopCanvas.worldCamera = computerCam;
-    }
 
     public void toActorBoard()
     {
@@ -130,7 +114,8 @@ public class GameController : Singleton<GameController> {
                 toActorBoard();
                 return;
             }
-            DesktopCanvas.worldCamera = renderCam;
+            DesktopCanvas.enabled = false;
+            IpadCanvas.enabled = false;
             cam.swapCams(deskCam);
             actorBoard.GetComponent<Collider>().enabled = true;
             cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);
@@ -139,20 +124,24 @@ public class GameController : Singleton<GameController> {
     }
 
     //Moves to file
-    public void toFile()
+    public void toIpad()
     {
         if (!cam.isLerping())
         {
-            cam.lerpToLoc(fileCam.transform.position, fileCam.transform.rotation.eulerAngles, 1.0f);
-            gamestate = Gamestate.file;
+            IpadCanvas.enabled = true;
+            cam.lerpToLoc(lookAtIpadCamera.transform.position, lookAtIpadCamera.transform.rotation.eulerAngles, 1.0f);
+            gamestate = Gamestate.movieMenu;
+            cam.swapCamAfterLerp(computerCam);
         }
     }
 
     //Moves back from file
-    public void fromFile()
+    public void fromIpad()
     {
         if (!cam.isLerping())
         {
+            IpadCanvas.enabled = false;
+            cam.swapCams(deskCam);
             cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);
             gamestate = Gamestate.desk;
         }
