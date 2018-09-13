@@ -77,7 +77,7 @@ public class ActorStatsPage : MonoBehaviour {
         horrorBar.transform.localScale = new Vector3((int)horror / 30f, horrorBar.transform.localScale.y,  horrorBar.transform.localScale.z);
         scifiBar.transform.localScale = new Vector3((int)scifi / 30f, scifiBar.transform.localScale.y,  scifiBar.transform.localScale.z);
         otherBar.transform.localScale = new Vector3((int)other / 30f, otherBar.transform.localScale.y,  otherBar.transform.localScale.z);
-        actorNameText.text = actorName;
+        actorNameText.text = actor.getState().ToString();
         comedyVal.text = ((int)comedy).ToString();
         romanceVal.text = ((int)romance).ToString();
         horrorVal.text = ((int)horror).ToString();
@@ -86,6 +86,6 @@ public class ActorStatsPage : MonoBehaviour {
         actionVal.text = ((int)action).ToString();
         actorPictureSprite.sprite = actorPicture;
         string[] name = actorName.Split(' ');
-        actorInitials.text = name[0][0].ToString() + name[1][0];
+        actorInitials.text = actorName;
     }
 }
