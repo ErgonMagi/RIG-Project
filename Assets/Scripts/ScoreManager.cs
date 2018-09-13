@@ -16,10 +16,6 @@ public class ScoreManager : Singleton<ScoreManager> {
         {
             if(moviesList[i] == movie.getTitle())
             {
-                actor.toMovie();
-                Task t = new Task(actor, movie, 5, false);
-                FindObjectOfType<TaskManager>().addTask(t);
-                NotificationManager.Instance.addNotification(actor.getName() + " has succeeded on their audition! They were in the movie!", actor, movie, Notification.NotificationType.Audition);
                 return true;
             }
         }
