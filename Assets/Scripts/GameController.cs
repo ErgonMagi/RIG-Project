@@ -130,7 +130,7 @@ public class GameController : Singleton<GameController> {
         {
             IpadCanvas.enabled = true;
             cam.lerpToLoc(lookAtIpadCamera.transform.position, lookAtIpadCamera.transform.rotation.eulerAngles, 1.0f);
-            gamestate = Gamestate.movieMenu;
+            gamestate = Gamestate.file;
             cam.swapCamAfterLerp(computerCam);
         }
     }

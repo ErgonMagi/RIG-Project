@@ -132,7 +132,7 @@ public class LevelManager : Singleton<LevelManager> {
             yield return null;
         }
 
-        //look at the folder
+        /*//look at the folder
         StartCoroutine(typingText(l1text[1], dBoxText));
         paused = true;
         cameraManager.getCam().transform.Rotate(0,45f,0);
@@ -177,7 +177,7 @@ public class LevelManager : Singleton<LevelManager> {
         {
             yield return null;
         }
-
+        */
         //Wait for player to choose an actor
         for (int i = 0; i < 4; i ++)
         {
@@ -195,7 +195,7 @@ public class LevelManager : Singleton<LevelManager> {
         }
 
         //Now tap stats
-        gameController.unlockClicking();
+        /*gameController.unlockClicking();
         StopCoroutine(typingText(l1text[3], dBoxText));
         StartCoroutine(typingText(l1text[4], dBoxText));
         paused = true;
@@ -233,7 +233,8 @@ public class LevelManager : Singleton<LevelManager> {
         {
             yield return null;
         }
-
+        */
+        /*
         //Click back arrow
         backArrow.SetActive(true);
         StopCoroutine(typingText(l1text[6], dBoxText));
@@ -241,7 +242,7 @@ public class LevelManager : Singleton<LevelManager> {
         while (gameController.isAtFile())
         {
             yield return null;
-        }
+        }*/
 
         //Click the computer
         gameController.unlockClicking();
