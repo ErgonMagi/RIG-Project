@@ -7,10 +7,12 @@ using UnityEngine.EventSystems;
 public class ReturnButton : MonoBehaviour, IPointerClickHandler {
 
     GameController gameController;
+    Vector3 startScale;
 
 	// Use this for initialization
 	void Start () {
         gameController = GameController.Instance;
+        startScale = transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +36,7 @@ public class ReturnButton : MonoBehaviour, IPointerClickHandler {
     {
         if(vis)
         {
-            this.transform.localScale = new Vector3(1, 1, 1);
+            this.transform.localScale = startScale;
         }
         else
         {

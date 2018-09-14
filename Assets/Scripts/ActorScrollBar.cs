@@ -8,6 +8,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
     //Parent Object
     public AuditionScreen auditionScreen;
+    public RectTransform desktopTransform;
 
     //Actors
     public List<ActorPicture> actorPictures;
@@ -63,7 +64,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         if (scrolling)
         {
             prevMousePos = mousePos;
-            mousePos = Input.mousePosition;
+            mousePos = getMousePositionRectSpace();
 
             float xChange = 0;
             float yChange = 0;
@@ -134,7 +135,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
         //Update position
         
-            myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + offset, myTransform.localPosition.z);
+
+        myTransform.localPosition = new Vector3(myTransform.localPosition.x, startPos.y + (offset ), myTransform.localPosition.z);
         }
         
 	}
@@ -177,17 +179,14 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         focusTargetOffset = currentFocusIndex * objectSpacing;
     }
 
-    private Vector3 getMousePositionWorldSpace()
+    private Vector3 getMousePositionRectSpace()
     {
         Vector3 mp = Input.mousePosition;
+        Vector2 point;
 
-        Ray ray = CameraManager.Instance.getCam().ScreenPointToRay(mp);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(desktopTransform, mp, CameraManager.Instance.getCam(), out point);
 
-        Plane plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
-        float dist;
-        plane.Raycast(ray, out dist);
-
-        Vector3 point = ray.origin + dist * ray.direction;
+        point = new Vector3(point.x, point.y, 0);
 
         return point;
 
@@ -213,7 +212,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public void OnPointerUp(PointerEventData pointer)
     {
         //Check if an actor has been swiped
-        if (actorPictures[currentFocusIndex].transform.position.x < assignBar.position.x)
+        if (actorPictures[currentFocusIndex].transform.localPosition.x < assignBar.localPosition.x)
         {
             //Pass actor to audition screen
             auditionScreen.AssignActorToAudition(currentFocusIndex);
@@ -235,8 +234,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = Input.mousePosition;
-        prevMousePos = Input.mousePosition;
+        mousePos = getMousePositionRectSpace();
+        prevMousePos = getMousePositionRectSpace();
         clickPos = mousePos;
     }
 

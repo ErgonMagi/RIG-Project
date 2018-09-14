@@ -19,11 +19,12 @@ public class GameController : Singleton<GameController> {
     public Camera fileCam;
     public AuditionScreen auditionScreen;
     public Canvas DesktopCanvas;
-    public Canvas IpadCanvas;
+    public Canvas [] IpadCanvases;
     public Camera actorBoardCam;
     public GameObject actorBoard;
     public Camera lookAtIpadCamera;
     public Camera IpadCam;
+    public ActorStatsMenu actorStatsMenu;
 
     private List<GameObject> menus;
     private Vector3 mainCamStartPos;
@@ -115,7 +116,10 @@ public class GameController : Singleton<GameController> {
                 return;
             }
             DesktopCanvas.enabled = false;
-            IpadCanvas.enabled = false;
+            foreach(Canvas c in IpadCanvases)
+            {
+                c.enabled = false;
+            }
             cam.swapCams(deskCam);
             actorBoard.GetComponent<Collider>().enabled = true;
             cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);
@@ -128,7 +132,11 @@ public class GameController : Singleton<GameController> {
     {
         if (!cam.isLerping())
         {
-            IpadCanvas.enabled = true;
+            actorStatsMenu.UpdateMenu();
+            foreach (Canvas c in IpadCanvases)
+            {
+                c.enabled = true;
+            }
             cam.lerpToLoc(lookAtIpadCamera.transform.position, lookAtIpadCamera.transform.rotation.eulerAngles, 1.0f);
             gamestate = Gamestate.file;
             cam.swapCamAfterLerp(computerCam);
@@ -140,7 +148,10 @@ public class GameController : Singleton<GameController> {
     {
         if (!cam.isLerping())
         {
-            IpadCanvas.enabled = false;
+            foreach (Canvas c in IpadCanvases)
+            {
+                c.enabled = false;
+            }
             cam.swapCams(deskCam);
             cam.lerpToLoc(mainCamStartPos, mainCamStartRot, 1.0f);
             gamestate = Gamestate.desk;
