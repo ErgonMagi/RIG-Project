@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartGameButton : MonoBehaviour {
+
 
     private bool isLoading = false;
 
@@ -14,7 +16,7 @@ public class StartGameButton : MonoBehaviour {
         {
             isLoading = true;
             FindObjectOfType<LoadingBar>().startLoading();
-            this.GetComponentInChildren<Text>().text = "Loading...";
+            this.GetComponentInChildren<TextMeshProUGUI>().text = "Loading...";
         }
     }
 
