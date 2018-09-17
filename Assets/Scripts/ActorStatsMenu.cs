@@ -29,44 +29,6 @@ public class ActorStatsMenu : MonoBehaviour {
 		
 	}
 
-   /* public void OnPointerUp(PointerEventData pointer)
-    {
-        mousePosUp = Input.mousePosition;
-
-        //Swipe right
-        if(mousePosUp.x - mousePosDown.x > swipeDist)
-        {
-            if(centreActorNum < Player.Instance.getActorsList().Count-1)
-            {
-                centreActorNum++;
-            }
-        }
-
-        //Swipe left
-        if (mousePosUp.x - mousePosDown.x < -swipeDist)
-        {
-            if (centreActorNum > 0)
-            {
-                centreActorNum--;
-            }
-        }
-
-        Debug.Log("Menu updated");
-
-        UpdateMenu();
-    }
-
-    public void OnPointerDown(PointerEventData pointer)
-    {
-        swiping = true;
-        mousePosDown = Input.mousePosition;
-        mousePosUp = Input.mousePosition;
-    }
-
-    private void UpdateMenu()
-    {
-        actorPages[1].setActor(Player.Instance.getActorsList()[centreActorNum]);
-    }*/
 
     public void UpdateMenu()
     {

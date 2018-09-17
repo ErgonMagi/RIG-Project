@@ -13,7 +13,7 @@ public class CancelActorAssignmentButton : MonoBehaviour {
 
     private int arrayNum;
 
-    public void Start()
+    public void Awake()
     { 
         imageRenderer = GetComponent<Image>();
         button = GetComponent<Button>();
@@ -29,7 +29,6 @@ public class CancelActorAssignmentButton : MonoBehaviour {
 
     public void hideButton()
     {
-        imageRenderer.enabled = false;
         button.enabled = false;
     }
 

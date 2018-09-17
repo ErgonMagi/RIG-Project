@@ -12,6 +12,8 @@ public class NotificationManager : Singleton<NotificationManager> {
     public NotificationBanner notificationBanner;
     public NotificationMenu notificationMenu;
 
+    public ReturnButton returnButton;
+
     public Image quickNotification;
     public TextMeshProUGUI quickNotiText;
     private Color onColor, offColor, onTextColor, offTextColor;
@@ -139,6 +141,7 @@ public class NotificationManager : Singleton<NotificationManager> {
         //Add code for moving camera to the notifications and opening the ui.
         UpdateNotificationsUI();
         notificationMenu.ShowNotificationMenu();
+        returnButton.SetVisbility(false);
         GameController.Instance.lockCamera();
         GameController.Instance.lockClicking();
     }
@@ -146,6 +149,7 @@ public class NotificationManager : Singleton<NotificationManager> {
     public void hideNotifications()
     {
         notificationMenu.HideNotificationMenu();
+        returnButton.SetVisbility(true);
         GameController.Instance.unlockCamera();
         GameController.Instance.unlockClicking();
     }

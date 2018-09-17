@@ -19,11 +19,11 @@ public class ReturnButton : MonoBehaviour, IPointerClickHandler {
 	void Update () {
 		if(gameController.isAtDesk())
         {
-            setVisbility(false);
+            SetVisbility(false);
         }
         else
         {
-            setVisbility(true);
+            SetVisbility(true);
         }
 	}
 
@@ -32,7 +32,7 @@ public class ReturnButton : MonoBehaviour, IPointerClickHandler {
         gameController.fromComputer();
     }
 
-    private void setVisbility(bool vis)
+    public void SetVisbility(bool vis)
     {
         if(vis)
         {

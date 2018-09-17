@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using Lean.Touch;
 
 public class NotificationMenu : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class NotificationMenu : MonoBehaviour {
     public float[] menuXPositions;
     private int currentMenu;
 
+    private bool isShowing;
 
     //public vars
     public float transitionTime;
@@ -31,10 +33,38 @@ public class NotificationMenu : MonoBehaviour {
         currentMenu = 0;
         menuXPositions[0] = auditionScroll.transform.position.x;
         menuXPositions[1] = 2*menuXPositions[0]-movieScroll.transform.position.x;
+        isShowing = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnEnable()
+    {
+        LeanTouch.OnFingerSwipe += OnFingerSwipe;
+    }
+
+    private void OnDisable()
+    {
+        LeanTouch.OnFingerSwipe -= OnFingerSwipe;
+    }
+
+    private void OnFingerSwipe(LeanFinger finger)
+    {
+        if (isShowing)
+        {
+            Vector2 swipeDir = finger.SwipeScreenDelta;
+
+            if (swipeDir.x > 100)
+            {
+                ChangeMenu(false);
+            }
+            else if (swipeDir.x < -100)
+            {
+                ChangeMenu(true);
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -79,6 +109,7 @@ public class NotificationMenu : MonoBehaviour {
     public void ShowNotificationMenu()
     {
         rightArrow.SetActive(true);
+        isShowing = true;
         movieScroll.verticalNormalizedPosition = 1;
         auditionScroll.verticalNormalizedPosition = 1;
         myTransform.DOLocalMoveY(0, transitionTime);
@@ -86,6 +117,7 @@ public class NotificationMenu : MonoBehaviour {
 
     public void HideNotificationMenu()
     {
+        isShowing = false;
         rightArrow.SetActive(false);
         leftArrow.SetActive(false);
         myTransform.DOLocalMoveY(-1.5f*height, transitionTime);
