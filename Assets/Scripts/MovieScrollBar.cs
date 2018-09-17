@@ -13,30 +13,23 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     //Auditions
     public List<AuditionSlot> auditions;
 
-    private Collider2D collider;
+    public HorizontalLayoutGroup scrollbarLayoutGroup;
+    public ScrollRect scrollRect;
+    public RectTransform contentRect;
 
-    //Input variables
-    private Vector3 mousePos;
-    private Vector3 prevMousePos;
+    public float currentPos;
+    public float widthOfScrollbar;
 
-    //Public Scroll variables
-    public float offset;
-    public float scrollMomentumScale;
-    public float scrollSpeedScale;
-    public int numPicturesOnScreen;
-    public float scrollDragScale;
-    public float moveToFocusTargetScale;
+    public float snapToMiddleDist;
+    public float centringForceStrength;
 
     //Private scroll variables
     private bool scrolling;
-    private float force;
-    public float objectSpacing;
+    private float objectSpacing;
+    private float spacing;
     public int currentFocusIndex;
-    private float maxOffset;
-    private Vector3 startPos;
+    private int numActiveAuditions;
     private Transform myTransform;
-    private float focusTargetOffset;
-    private int ActivePicturesInArray;
 
 
     // Use this for initialization
@@ -44,65 +37,42 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     {
         scrolling = false;
         myTransform = this.transform;
-        startPos = myTransform.localPosition;
-        collider = this.GetComponent<Collider2D>();
-        auditions[0].gameObject.SetActive(true);
-        objectSpacing = auditions[0].GetComponent<RectTransform>().rect.width + GetComponent<HorizontalLayoutGroup>().spacing;
-        objectSpacing *= myTransform.localScale.x;
-        auditions[0].gameObject.SetActive(false);
+        spacing = scrollbarLayoutGroup.spacing;
+        objectSpacing = auditions[0].GetComponent<RectTransform>().rect.width + spacing;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (scrolling)
+        //Debug.Log(scrollRect.horizontalNormalizedPosition);
+        if(!scrolling)
         {
-            prevMousePos = mousePos;
-            mousePos = Input.mousePosition;
+            //Calculate centred position in normalized position
+            float centrePos = currentFocusIndex * objectSpacing;
+            float normalizedPos = centrePos / widthOfScrollbar;
 
-            float xChange = 0;
-            float yChange = 0;
+            //Find distance from centre position
+            float dist = normalizedPos - scrollRect.horizontalNormalizedPosition;
 
-            xChange = mousePos.x - prevMousePos.x;
-            yChange = mousePos.y - prevMousePos.y;
-
-            offset += xChange;
-
-            if (offset < -maxOffset)
+            if (Mathf.Abs(dist * objectSpacing) > snapToMiddleDist)
             {
-                offset = -maxOffset;
+
+                //Multiply by scaling force
+                float distMovingCloser = dist * centringForceStrength;
+
+                scrollRect.horizontalNormalizedPosition += distMovingCloser;
             }
-            else if (offset > objectSpacing / 2)
+            else
             {
-                offset = objectSpacing / 2;
+                scrollRect.horizontalNormalizedPosition = normalizedPos;
             }
-
         }
-
-
-        if (!scrolling)
-        {
-            //Calculate force
-            force *= scrollDragScale;
-            offset += force;
-
-            //Slide towards focus target
-
-            float focusForce = (focusTargetOffset - offset) * moveToFocusTargetScale;
-
-            offset += focusForce;
-        }
-
-
-        //Update position
-        myTransform.localPosition = new Vector3(startPos.x + offset, myTransform.localPosition.y, myTransform.localPosition.z);
-
     }
 
     public void UpdateUI()
     {
         List<AuditionScreen.Audition> auditionList = auditionScreen.getAuditionsList();
+        numActiveAuditions = auditionList.Count;
         for (int i = 0; i < auditions.Count; i++)
         {
             if (i < auditionList.Count)
@@ -117,54 +87,27 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
                 auditions[i].Empty();
             }
         }
-        UpdateMaxOffset();
         UpdateFocusedObject();
     }
 
     private void UpdateFocusedObject()
     {
-        //find the first picture on screen
-        int arrayIndexOfFirstVisible = Mathf.FloorToInt((-offset - objectSpacing / 2) / objectSpacing);
-        int arrayIndexOfCentreObject = Mathf.Min(ActivePicturesInArray - 1, arrayIndexOfFirstVisible + Mathf.FloorToInt(numPicturesOnScreen / 2));
-        if (arrayIndexOfCentreObject < 0)
+        //Calculate percentage positions of all objects
+        widthOfScrollbar = (numActiveAuditions - 1) * objectSpacing;
+        currentPos = widthOfScrollbar * scrollRect.horizontalNormalizedPosition + objectSpacing/2.0f;
+
+        int arrayNum = (int)(currentPos / objectSpacing);
+
+        if(arrayNum >= numActiveAuditions)
         {
-            arrayIndexOfCentreObject = 0;
+            arrayNum = numActiveAuditions - 1;
         }
-        currentFocusIndex = arrayIndexOfCentreObject;
-        focusTargetOffset = -currentFocusIndex * objectSpacing;
-    }
-
-    private Vector3 getMousePositionWorldSpace()
-    {
-        Vector3 mp = Input.mousePosition;
-        
-        Ray ray = CameraManager.Instance.getCam().ScreenPointToRay(mp);
-
-        Plane plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0f));
-        float dist;
-        plane.Raycast(ray, out dist);
-
-        Vector3 point = ray.origin + dist * ray.direction;
-
-        return point;
-
-    }
-
-    private void UpdateMaxOffset()
-    {
-        //Calculate the max size
-        ActivePicturesInArray = 0;
-        int totalCounted = 0;
-        for (int i = 0; i < auditions.Count; i++)
+        else if(arrayNum < 0)
         {
-            if (auditions[i].hasMovie())
-            {
-                ActivePicturesInArray++;
-            }
-            totalCounted++;
+            arrayNum = 0;
         }
 
-        maxOffset = (ActivePicturesInArray * objectSpacing - (objectSpacing / 2));
+        currentFocusIndex = arrayNum;
     }
 
     public int getfocusNum()
@@ -179,32 +122,10 @@ public class MovieScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
         //Calculate the slide effect
         scrolling = false;
-        force = (mousePos.x - prevMousePos.x);
     }
 
     public void OnPointerDown(PointerEventData pointer)
     {
         scrolling = true;
-        mousePos = Input.mousePosition;
-        prevMousePos = Input.mousePosition;
-    }
-
-    public void SetCollision(bool collisionOn)
-    {
-        if (collisionOn)
-        {
-            collider.enabled = true;
-        }
-        else
-        {
-            collider.enabled = false;
-        }
-    }
-
-
-    [ContextMenu("Print pos")]
-    public void printpos()
-    {
-        Debug.Log(transform.position.ToString("F4"));
     }
 }

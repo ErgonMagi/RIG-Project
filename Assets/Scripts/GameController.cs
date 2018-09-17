@@ -18,7 +18,7 @@ public class GameController : Singleton<GameController> {
     public Camera computerCam;
     public Camera fileCam;
     public AuditionScreen auditionScreen;
-    public Canvas DesktopCanvas;
+    public Canvas [] DesktopCanvases;
     public Canvas [] IpadCanvases;
     public Camera actorBoardCam;
     public GameObject actorBoard;
@@ -73,12 +73,15 @@ public class GameController : Singleton<GameController> {
     {
         if(!cam.isLerping())
         {
-            DesktopCanvas.enabled = true;
+            foreach(Canvas c in DesktopCanvases)
+            {
+                c.enabled = true;
+                c.worldCamera = computerCam;
+            }
             cam.lerpToLoc(compCamPos, compCamRot, 1.0f);
             gamestate = Gamestate.movieMenu;
             cam.swapCamAfterLerp(computerCam);
             auditionScreen.getActors();
-            DesktopCanvas.worldCamera = computerCam;
         }
     }
 
@@ -115,8 +118,11 @@ public class GameController : Singleton<GameController> {
                 toActorBoard();
                 return;
             }
-            DesktopCanvas.enabled = false;
-            foreach(Canvas c in IpadCanvases)
+            foreach (Canvas c in DesktopCanvases)
+            {
+                c.enabled = false;
+            }
+            foreach (Canvas c in IpadCanvases)
             {
                 c.enabled = false;
             }
