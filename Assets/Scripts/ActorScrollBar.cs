@@ -23,7 +23,6 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     public float objectSpacing;
     public int currentFocusIndex;
     private Transform myTransform;
-    private int ActivePicturesInArray;
 
     public float heightOfScrollbar;
     private int numActiveActors;
@@ -39,6 +38,8 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        UpdateFocusedObject();
 
         if (!scrolling)
         {
@@ -62,10 +63,6 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
                 scrollRect.verticalNormalizedPosition = normalizedPos;
             }
         }
-
-
-
-
     }
 
     public int getCurrentFocusnum()
@@ -105,7 +102,7 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         {
             arrayNum = numActiveActors - 1;
         }
-        else if (arrayNum < 0)
+        if (arrayNum < 0)
         {
             arrayNum = 0;
         }
@@ -115,8 +112,6 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
     public void OnPointerUp(PointerEventData pointer)
     {
-        //Update the focused target
-        UpdateFocusedObject();
 
         //Calculate the slide effect
         scrolling = false;
@@ -126,4 +121,22 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
     {
         scrolling = true;
     }
+
+    public void AssignActor(ActorPicture ap)
+    {
+        Debug.Log("Assign actor called with " + ap.name);
+        for (int i = 0; i < numActiveActors; i++)
+        {
+            if(actorPictures[i] == ap)
+            {
+                Debug.Log("Match");
+                auditionScreen.AssignActorToAudition(i);
+            }
+            else
+            {
+                Debug.Log("no match");
+            }
+        }
+    }
+
 }

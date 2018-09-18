@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Lean.Touch;
+using UnityEngine.EventSystems;
 
-public class ActorPicture : MonoBehaviour {
+public class ActorPicture : MonoBehaviour
+{
 
     private Actor actor;
     public Image imageRenderer;
     private Transform myTransform;
+    public ActorScrollBar actorScrollBar;
 
 	// Use this for initialization
 	void Start () {
@@ -43,9 +46,8 @@ public class ActorPicture : MonoBehaviour {
         return myTransform;
     }
 
-    [ContextMenu("show pos")]
-    public void showPos()
+    public void Clicked()
     {
-        Debug.Log(this.transform.localPosition);
+        actorScrollBar.AssignActor(this);
     }
 }

@@ -994,6 +994,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (64)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -1965,6 +1970,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (83)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -2060,7 +2070,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 58720650}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1911167255}
@@ -2674,6 +2684,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -4109,6 +4124,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -4228,6 +4248,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -4398,6 +4423,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (62)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -6124,6 +6154,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -7904,6 +7939,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -8194,6 +8234,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -10141,6 +10186,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (77)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -10785,6 +10835,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (87)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -11639,6 +11694,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (99)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -13666,6 +13726,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (98)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -14849,6 +14914,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (76)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -15098,6 +15168,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -16018,6 +16093,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (97)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -16947,6 +17027,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -17070,6 +17155,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -18792,6 +18882,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (66)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -20444,6 +20539,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -20847,6 +20947,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -21314,6 +21419,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -22220,6 +22330,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -23183,6 +23298,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (94)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -23302,6 +23422,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (92)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -24338,6 +24463,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -24869,6 +24999,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (54)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -24988,6 +25123,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (74)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -26602,6 +26742,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -26721,6 +26866,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (89)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -26840,6 +26990,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -29163,6 +29318,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (88)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -29534,6 +29694,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -30579,6 +30744,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -31261,6 +31431,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -31525,6 +31700,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -34399,6 +34579,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (68)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -35088,6 +35273,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -35207,6 +35397,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (51)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -38184,6 +38379,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (80)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -38303,6 +38503,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (38)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -39410,6 +39615,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (84)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -40347,6 +40557,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -41297,6 +41512,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -41416,6 +41636,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -41535,6 +41760,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -42090,6 +42320,7 @@ MonoBehaviour:
   auditionScreen: {fileID: 742149203}
   scrollRect: {fileID: 1048071610}
   scrollbarLayoutGroup: {fileID: 1255356354}
+  currentPos: 0
   actorPictures:
   - {fileID: 365494168}
   - {fileID: 757940012}
@@ -42191,7 +42422,9 @@ MonoBehaviour:
   - {fileID: 334604880}
   - {fileID: 160113268}
   - {fileID: 257169226}
+  objectSpacing: 0
   currentFocusIndex: 0
+  heightOfScrollbar: 0
   snapToMiddleDist: 0.1
   centringForceStrength: 0.2
 --- !u!114 &1048071608
@@ -42207,7 +42440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -42901,6 +43134,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (81)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -43479,6 +43717,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (79)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -43925,6 +44168,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -45027,6 +45275,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -45816,6 +46069,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (65)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -45935,6 +46193,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (63)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -46089,6 +46352,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -47020,6 +47288,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (93)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -49330,6 +49603,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -49666,6 +49944,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (82)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -50001,6 +50284,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (95)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -50302,6 +50590,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -50566,6 +50859,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -51290,6 +51588,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (61)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -52741,6 +53044,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (70)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -54012,6 +54320,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (57)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -54142,6 +54455,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (78)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -54600,6 +54918,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (86)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -56037,6 +56360,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -56555,6 +56883,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (71)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -58356,6 +58689,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (56)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -58808,6 +59146,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -60339,6 +60682,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -60527,6 +60875,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -60885,6 +61238,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -62093,6 +62451,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -62629,6 +62992,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (60)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -63881,6 +64249,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -64845,6 +65218,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (53)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -64964,6 +65342,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (91)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -65414,6 +65797,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -67288,6 +67676,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (96)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -68253,6 +68646,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -69713,6 +70111,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (85)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -70104,6 +70507,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -71378,6 +71786,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -72008,6 +72421,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (72)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -72471,6 +72889,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -74472,6 +74895,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -74591,6 +75019,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -75552,6 +75985,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -75865,6 +76303,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (67)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -76310,6 +76753,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -77293,6 +77741,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (69)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -77412,6 +77865,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (90)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -77605,6 +78063,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -77756,6 +78219,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (75)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -78153,6 +78621,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -78272,6 +78745,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -78402,6 +78880,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -78666,6 +79149,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -79157,6 +79645,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -81995,6 +82488,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (73)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
@@ -84164,6 +84662,11 @@ Prefab:
       propertyPath: m_Name
       value: ActorPicture (55)
       objectReference: {fileID: 0}
+    - target: {fileID: 114649252888898902, guid: d59d32ef0495b6e4fa7eb492c1061e51,
+        type: 2}
+      propertyPath: actorScrollBar
+      value: 
+      objectReference: {fileID: 1048071607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59d32ef0495b6e4fa7eb492c1061e51, type: 2}
   m_IsPrefabParent: 0
