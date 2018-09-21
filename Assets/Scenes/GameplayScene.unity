@@ -1418,7 +1418,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -11755,6 +11755,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 31f749cb3c9ef6741b1d25b3a3373cec, type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 31f749cb3c9ef6741b1d25b3a3373cec, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -62297,7 +62301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00018261734, y: 395}
+  m_AnchoredPosition: {x: -0.00018310547, y: 395}
   m_SizeDelta: {x: 0, y: 772.14}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1515533864
@@ -71210,6 +71214,14 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0.269
       objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: c8604f4c161bc5347b1801c07c03b06c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2c124457ded0247449e0b31e2e190987, type: 2}
+    - target: {fileID: 2300004, guid: c8604f4c161bc5347b1801c07c03b06c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2c124457ded0247449e0b31e2e190987, type: 2}
     m_RemovedComponents:
     - {fileID: 9500000, guid: c8604f4c161bc5347b1801c07c03b06c, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: c8604f4c161bc5347b1801c07c03b06c, type: 3}
