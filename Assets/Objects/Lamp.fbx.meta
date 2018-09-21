@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: c8604f4c161bc5347b1801c07c03b06c
-timeCreated: 1524218011
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -19,6 +17,10 @@ ModelImporter:
     100022: transform4
     100024: transform5
     100026: transform6
+    100028: polySurface1
+    100030: polySurface2
+    100032: polySurface3
+    100034: transform7
     400000: //RootNode
     400002: pCube2
     400004: pCube3
@@ -33,11 +35,25 @@ ModelImporter:
     400022: transform4
     400024: transform5
     400026: transform6
+    400028: polySurface1
+    400030: polySurface2
+    400032: polySurface3
+    400034: transform7
     2100000: Lamp_Aluminium
     2100002: Lamp_Shade_Fabric
+    2100004: phongE1
     2300000: pCube5
+    2300002: polySurface1
+    2300004: polySurface2
+    2300006: polySurface3
     3300000: pCube5
+    3300002: polySurface1
+    3300004: polySurface2
+    3300006: polySurface3
     4300000: pCube5
+    4300002: polySurface1
+    4300004: polySurface2
+    4300006: polySurface3
     9500000: //RootNode
   externalObjects:
   - first:
