@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de94713983547ca4d982627c5703c4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageRenderer: {fileID: 114935509572287408}
+  button: {fileID: 114631116295688858}
   auditionScreen: {fileID: 0}
 --- !u!114 &114408201413243370
 MonoBehaviour:
@@ -401,7 +403,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774398024535972}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

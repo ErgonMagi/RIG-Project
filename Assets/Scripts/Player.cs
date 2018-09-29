@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class Player : Singleton<Player> {
 
     public List<Actor> clients;
+    public TextMeshProUGUI currencyText;
     private int money;
 
 	// Use this for initialization
@@ -26,6 +29,7 @@ public class Player : Singleton<Player> {
     public void addMoney(int addedMoney)
     {
         money += addedMoney;
+        currencyText.text = money.ToString();
     }
 
     public bool spendMoney(int spentMoney)
@@ -34,6 +38,7 @@ public class Player : Singleton<Player> {
         {
             money -= spentMoney;
             Debug.Log("The player now has: $" + money);
+            currencyText.text = money.ToString();
             return true;
         }
         else

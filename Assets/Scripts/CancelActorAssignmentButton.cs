@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class CancelActorAssignmentButton : MonoBehaviour {
 
     bool selected = false;
-    private Image imageRenderer;
-    private Button button;
+    public Image imageRenderer;
+    public Button button;
 
     public AuditionScreen auditionScreen;
 
@@ -15,8 +15,6 @@ public class CancelActorAssignmentButton : MonoBehaviour {
 
     public void Awake()
     { 
-        imageRenderer = GetComponent<Image>();
-        button = GetComponent<Button>();
 
         hideButton();
     }
