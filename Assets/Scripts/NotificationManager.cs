@@ -47,9 +47,9 @@ public class NotificationManager : Singleton<NotificationManager> {
     }
 
     //Adds a notification to the end of the list
-	public void addNotification(string text, Actor actor, Movie movie, Notification.NotificationType notiType)
+	public void addNotification(string text, Actor actor, Movie movie, bool passed, Notification.NotificationType notiType)
     {
-        notificationList.Add(new Notification(text, actor, movie, notiType));
+        notificationList.Add(new Notification(text, actor, movie, passed, notiType));
         //notificationBanner.setText("You have " + notificationList.Count + " notifications");
         notificationBanner.setText(text);
         notificationBanner.showNotification();

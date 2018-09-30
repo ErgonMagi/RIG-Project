@@ -8,17 +8,40 @@ public class Movie
     private int comedy, action, romance, horror, scifi, other;
     private string title;
     private Sprite moviePicture;
+    private int movieCoinReward;
+    private int auditionPrice;
+    private int auditionRepReward;
 
-    public Movie(int com, int rom, int act, int hor, int sci, int oth, string name, Sprite picture)
+    public struct init
     {
-        comedy = com;
-        romance = rom;
-        action = act;
-        horror = hor;
-        scifi = sci;
-        other = oth;
-        title = name;
-        moviePicture = picture;
+        public int comedy;
+        public int romance;
+        public int action;
+        public int horror;
+        public int scifi;
+        public int other;
+        public string title;
+        public Sprite picture;
+        public int coinReward;
+        public int price;
+        public int repReward;
+    }
+
+
+    public Movie(init i)
+    {
+        comedy = i.comedy;
+        romance = i.romance;
+        action = i.action;
+        horror = i.horror;
+        scifi = i.scifi;
+        other = i.other;
+        title = i.title;
+        moviePicture = i.picture;
+
+        movieCoinReward = i.coinReward;
+        auditionRepReward = i.repReward;
+        auditionPrice = i.price;
     }
 
     public void setComedy(int com)
@@ -95,6 +118,21 @@ public class Movie
     public string getTitle()
     {
         return title;
+    }
+
+    public int getMovieCoinReward()
+    {
+        return movieCoinReward;
+    }
+
+    public int getAuditionPrice()
+    {
+        return auditionPrice;
+    }
+
+    public int getAuditionRepReward()
+    {
+        return auditionRepReward;
     }
 
 }

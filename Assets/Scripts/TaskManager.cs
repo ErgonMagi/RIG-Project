@@ -45,19 +45,19 @@ public class TaskManager : MonoBehaviour {
                 task.actor.toMovie();
                 Task t = new Task(task.actor, task.getmovie(), 5, false);
                 FindObjectOfType<TaskManager>().addTask(t);
-                NotificationManager.Instance.addNotification(task.actor.getName() + " has succeeded on their audition!", task.actor, task.getmovie(), Notification.NotificationType.Audition);
+                NotificationManager.Instance.addNotification(task.actor.getName() + " has succeeded on their audition!", task.actor, task.getmovie(), true, Notification.NotificationType.Audition);
             }
             else
             {
                 //If they fail, notify the player
                 task.actor.returnhome();
-                NotificationManager.Instance.addNotification(task.actor.getName() + " failed their audition.", task.actor, task.getmovie(), Notification.NotificationType.Audition);
+                NotificationManager.Instance.addNotification(task.actor.getName() + " failed their audition.", task.actor, task.getmovie(), false, Notification.NotificationType.Audition);
             }
         }
         else if (task.isMovie())
         {
             task.actor.returnhome();
-            NotificationManager.Instance.addNotification(task.actor.getName() + " has completed their movie.", task.actor, task.getmovie(), Notification.NotificationType.Movie);
+            NotificationManager.Instance.addNotification(task.actor.getName() + " has completed their movie.", task.actor, task.getmovie(), true, Notification.NotificationType.Movie);
         }
     }
 

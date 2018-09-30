@@ -29,7 +29,7 @@ public class Player : Singleton<Player> {
     public void addMoney(int addedMoney)
     {
         money += addedMoney;
-        currencyText.text = money.ToString();
+        CurrencyManager.Instance.UpdateCurrency();
     }
 
     public bool spendMoney(int spentMoney)
@@ -37,8 +37,7 @@ public class Player : Singleton<Player> {
         if(money >= spentMoney)
         {
             money -= spentMoney;
-            Debug.Log("The player now has: $" + money);
-            currencyText.text = money.ToString();
+            CurrencyManager.Instance.UpdateCurrency();
             return true;
         }
         else

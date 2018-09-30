@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 //Audition slots are the gameobjects that hold potential auditions for the player.
 
@@ -13,6 +14,7 @@ public class AuditionSlot : MonoBehaviour {
     private AuditionScreen.Audition audition;
     public float rotationAngle;
     public Transform zeroPosHolder;
+    public TextMeshProUGUI price;
 
     public float zeroPos;
     public float xPos;
@@ -21,6 +23,7 @@ public class AuditionSlot : MonoBehaviour {
     public float spacing;
     public float anglePercent;
     public float angle;
+
 
     private void Start()
     {
@@ -57,6 +60,7 @@ public class AuditionSlot : MonoBehaviour {
     {
         audition = a;
         movieImageRenderer.sprite = a.movie.getPicture();
+        price.text = a.movie.getAuditionPrice().ToString();
         if(audition.actor != null)
         {
             actorImageRenderer.enabled = true;

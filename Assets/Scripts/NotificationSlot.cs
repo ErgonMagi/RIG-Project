@@ -9,6 +9,7 @@ public class NotificationSlot : MonoBehaviour {
     private Actor actor;
     private Movie movie;
     private string text;
+    public TextMeshProUGUI repText;
 
     public TextMeshProUGUI textGUI;
     public Image actorImage;
@@ -19,6 +20,15 @@ public class NotificationSlot : MonoBehaviour {
         actor = noti.getActor();
         //movie = noti.getMovie();
         text = noti.getText();
+
+        if(noti.isPassed())
+        {
+            repText.text = noti.getMovie().getAuditionRepReward().ToString();
+        }
+        else
+        {
+            repText.text = "0";
+        }
 
         textGUI.text = text;
         //movieImage.sprite = movie.getPicture();

@@ -160,4 +160,17 @@ public class AuditionScreen : MonoBehaviour {
         movieScrollBar.UpdateUI();
         confirmationPanel.UpdateUI();
     }
+
+    public int getSubmissionPrice()
+    {
+        int price = 0;
+        for (int i = 0; i < auditionList.Count; i++)
+        {
+            if (auditionList[i].actor != null)
+            {
+                price += auditionList[i].movie.getAuditionPrice();
+            }
+        }
+        return price;
+    }
 }

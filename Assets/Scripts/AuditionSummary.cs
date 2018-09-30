@@ -8,6 +8,7 @@ public class AuditionSummary : MonoBehaviour {
 
     public Image actorImageRenderer;
     public Image movieImageRenderer;
+    public TextMeshProUGUI price;
 
     public CancelActorAssignmentButton cancelButton;
 
@@ -20,6 +21,7 @@ public class AuditionSummary : MonoBehaviour {
         audition = aud;
         actorImageRenderer.sprite = audition.actor.getPicture();
         movieImageRenderer.sprite = audition.movie.getPicture();
+        price.text = audition.movie.getAuditionPrice().ToString();
         isEmpty = false;
         cancelButton.showButton();
     }
@@ -27,6 +29,7 @@ public class AuditionSummary : MonoBehaviour {
     public void Empty()
     {
         audition = new AuditionScreen.Audition();
+        price.text = "";
         isEmpty = true;
         cancelButton.hideButton();
     }

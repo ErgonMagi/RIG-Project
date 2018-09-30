@@ -8,6 +8,7 @@ public class Notification {
     private bool isUnread;
     private Actor actor;
     private Movie movie;
+    private bool passed;
 
     public enum NotificationType{
         Audition,
@@ -18,7 +19,7 @@ public class Notification {
     private NotificationType notificationType;
 
     //Constructor
-    public Notification(string t, Actor a, Movie m, NotificationType nt)
+    public Notification(string t, Actor a, Movie m, bool passed, NotificationType nt)
     {
         text = t;
         actor = a;
@@ -58,5 +59,10 @@ public class Notification {
     public void setRead()
     {
         isUnread = false;
+    }
+
+    public bool isPassed()
+    {
+        return passed;
     }
 }

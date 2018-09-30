@@ -8,7 +8,16 @@ public class ConfirmAuditionsButton : MonoBehaviour {
 
     public void onClick()
     {
-        NotificationManager.Instance.QuickNotification("Actors sent on auditions");
-        auditionScreen.submitActors();
+        if (Player.Instance.getMoney() > auditionScreen.getSubmissionPrice())
+        {
+            NotificationManager.Instance.QuickNotification("Actors sent on auditions");
+            Player.Instance.spendMoney(auditionScreen.getSubmissionPrice());
+            auditionScreen.submitActors();
+        }
+        else
+        {
+            NotificationManager.Instance.QuickNotification("You cannot afford to do that");
+        }
+
     }
 }

@@ -80,13 +80,13 @@ public class MovieManager : Singleton<MovieManager> {
         MovieNameList movieNameList = new MovieNameList();
         bool findingMovie = true;
         string movieName = null;
-        while(findingMovie)
+        while (findingMovie)
         {
             findingMovie = false;
             movieName = movieNameList.getName();
-            for(int i = 0; i < usedMovies.Count; i++)
+            for (int i = 0; i < usedMovies.Count; i++)
             {
-                if(usedMovies[i] == movieName)
+                if (usedMovies[i] == movieName)
                 {
                     //findingMovie = true;
                 }
@@ -96,12 +96,12 @@ public class MovieManager : Singleton<MovieManager> {
 
 
         //Split the movie name into a URL format
-        string [] splitName = movieName.Split(' ');
+        string[] splitName = movieName.Split(' ');
         string urlName = null;
-        for(int i = 0; i < splitName.Length; i++)
+        for (int i = 0; i < splitName.Length; i++)
         {
             urlName += splitName[i];
-            if(i < splitName.Length -1)
+            if (i < splitName.Length - 1)
             {
                 urlName += "%20";
             }
@@ -116,7 +116,7 @@ public class MovieManager : Singleton<MovieManager> {
             }
         }));
 
-        while(movieData == null)
+        while (movieData == null)
         {
             yield return null;
         }
@@ -132,13 +132,13 @@ public class MovieManager : Singleton<MovieManager> {
         int val = 4;
 
         //Check that data was downloaded correctly
-        if(movieData == null)
+        if (movieData == null)
         {
             Debug.Log("movie not found");
         }
 
         //Search through movie genres to find what stats it needs to be completed
-        for(int i = 0;  i < movieData.genre_ids.Length; i++)
+        for (int i = 0; i < movieData.genre_ids.Length; i++)
         {
             //Action
             if (movieData.genre_ids[i] == 28)
@@ -172,7 +172,7 @@ public class MovieManager : Singleton<MovieManager> {
             }
             val--;
         }
-        if(noMatch)
+        if (noMatch)
         {
             other = 4;
         }
@@ -222,10 +222,24 @@ public class MovieManager : Singleton<MovieManager> {
             //Save the texture in the persistent data folder.
             byte[] imgData = img.EncodeToPNG();
             File.WriteAllBytes(Application.persistentDataPath + "/movieImages/" + movieName + ".png", imgData);
-            
+
         }
         //Create movie object
-        Movie tempMovie = new Movie(comedy, romance, action, horror, scifi, other, movieData.title, sprite);
+        Movie.init m = new Movie.init()
+        {
+            comedy = comedy,
+            romance = romance,
+            action = action,
+            horror = horror,
+            scifi = scifi,
+            other = other,
+            title = movieData.title,
+            picture = sprite,
+            coinReward = 100,
+            price = 20,
+            repReward = 100,
+        };
+        Movie tempMovie = new Movie(m);
 
         //Add movie to the reserve movie list
         movieList.Add(tempMovie);
