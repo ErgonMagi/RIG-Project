@@ -33,4 +33,9 @@ public class AuditionResultNotifications : MonoBehaviour, UIUpdatable {
             notificationSlots[i].gameObject.SetActive(false);
         }
     }
+
+    public List<Notification> GetNotifications()
+    {
+        return notifications;
+    }
 }

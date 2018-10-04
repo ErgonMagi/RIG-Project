@@ -33,4 +33,9 @@ public class MovieResultNotifications : MonoBehaviour, UIUpdatable {
             notificationSlots[i].gameObject.SetActive(false);
         }
     }
+
+    public List<Notification> GetNotifications()
+    {
+        return notifications;
+    }
 }

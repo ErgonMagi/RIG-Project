@@ -9,6 +9,7 @@ public class Player : Singleton<Player> {
     public List<Actor> clients;
     public TextMeshProUGUI currencyText;
     private int money;
+    private float reputation;
 
 	// Use this for initialization
 	protected override void Awake () {
@@ -49,6 +50,16 @@ public class Player : Singleton<Player> {
     public int getMoney()
     {
         return money;
+    }
+
+    public void AddReputation(float rep)
+    {
+        reputation += rep;
+    }
+
+    public float GetReputation()
+    {
+        return reputation;
     }
 
     public void setActor(Actor actor, int arrayNum)
