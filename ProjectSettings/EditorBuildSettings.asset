@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameplayScene.unity
     guid: 3df6299eda1e49e4fafa968309406426
+  - enabled: 1
+    path: Assets/Scenes/2nd Tier Scene.unity
+    guid: c2852e771cf5e504d9a45a1bbe27af2f
