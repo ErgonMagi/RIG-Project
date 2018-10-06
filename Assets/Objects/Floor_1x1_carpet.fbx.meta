@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 31f749cb3c9ef6741b1d25b3a3373cec
-timeCreated: 1523508901
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -18,7 +16,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Carpet_Floor
-    second: {fileID: 2100000, guid: 1ce2d92430313e645a4c145da2a8d1a3, type: 2}
+    second: {fileID: 2100000, guid: 85509372a845603438b86c51ff24b28b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
