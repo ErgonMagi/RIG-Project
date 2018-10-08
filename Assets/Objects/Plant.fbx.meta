@@ -258,7 +258,27 @@ ModelImporter:
     4300092: polySurface2
     4300094: pPlane41
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf
+    second: {fileID: 2100000, guid: 64e619ffeab2d26498ded9c2815ae91d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plant_Pot
+    second: {fileID: 2100000, guid: 0c2e0a99b6fa845428d8e60e0effcc45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Soil
+    second: {fileID: 2100000, guid: 99fe5f195aa136c488292bbd6723514c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stem
+    second: {fileID: 2100000, guid: 7a33b2c655460034b86ef9656c74719a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -288,7 +308,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 4
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
