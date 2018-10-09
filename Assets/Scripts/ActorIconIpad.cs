@@ -8,7 +8,6 @@ public class ActorIconIpad : MonoBehaviour, IPointerClickHandler
 {
 
     public Image actorImage;
-    public Image availabilityBubble;
     public Image actorBorder;
     public ActorStatsMenu actorStatsMenu;
 
@@ -18,14 +17,6 @@ public class ActorIconIpad : MonoBehaviour, IPointerClickHandler
     {
         this.actor = actor;
         actorImage.sprite = actor.getPicture();
-        if(actor.getState() == Actor.ActorState.available)
-        {
-            availabilityBubble.color = Color.green;
-        }
-        else
-        {
-            availabilityBubble.color = Color.red;
-        }
     }
 
     public Actor GetActor()

@@ -8,10 +8,11 @@ using TMPro;
 
 public class ActorStatsPage : MonoBehaviour {
 
-    public GameObject comedyBar, actionBar, romanceBar, horrorBar, scifiBar, otherBar;
+    public Image comedyBar, actionBar, romanceBar, horrorBar, scifiBar, otherBar;
     public TextMeshProUGUI comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
-    public TextMeshProUGUI actorNameText, actorInitials;
+    public TextMeshProUGUI actorNameText, availabilityText;
     public Image actorPictureSprite;
+    public Image availabilityBubble;
     public int actorNum;
 
     public float comedy, action, romance, horror, scifi, other;
@@ -71,12 +72,12 @@ public class ActorStatsPage : MonoBehaviour {
 
     private void updateProfile()
     {
-        comedyBar.transform.localScale = new Vector3((int)comedy / 30f, comedyBar.transform.localScale.y,  comedyBar.transform.localScale.z);
-        actionBar.transform.localScale = new Vector3((int)action / 30f, actionBar.transform.localScale.y,  actionBar.transform.localScale.z);
-        romanceBar.transform.localScale = new Vector3((int)romance / 30f, romanceBar.transform.localScale.y,  romanceBar.transform.localScale.z);
-        horrorBar.transform.localScale = new Vector3((int)horror / 30f, horrorBar.transform.localScale.y,  horrorBar.transform.localScale.z);
-        scifiBar.transform.localScale = new Vector3((int)scifi / 30f, scifiBar.transform.localScale.y,  scifiBar.transform.localScale.z);
-        otherBar.transform.localScale = new Vector3((int)other / 30f, otherBar.transform.localScale.y,  otherBar.transform.localScale.z);
+        comedyBar.fillAmount = (int)comedy / 30f;
+        actionBar.fillAmount = (int)action / 30f;
+        romanceBar.fillAmount = (int)romance / 30f;
+        horrorBar.fillAmount = (int)horror / 30f;
+        scifiBar.fillAmount = (int)scifi / 30f;
+        otherBar.fillAmount = (int)other / 30f;
         actorNameText.text = actor.getState().ToString();
         comedyVal.text = ((int)comedy).ToString();
         romanceVal.text = ((int)romance).ToString();
@@ -86,6 +87,14 @@ public class ActorStatsPage : MonoBehaviour {
         actionVal.text = ((int)action).ToString();
         actorPictureSprite.sprite = actorPicture;
         string[] name = actorName.Split(' ');
-        actorInitials.text = actorName;
+        availabilityText.text = actor.getState().ToString();
+        if(actor.getState() == Actor.ActorState.available)
+        {
+            availabilityBubble.color = Color.green;
+        }
+        else
+        {
+            availabilityBubble.color = Color.red;
+        }
     }
 }
