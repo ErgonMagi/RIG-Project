@@ -38,4 +38,9 @@ public class MovieResultNotifications : MonoBehaviour, UIUpdatable {
     {
         return notifications;
     }
+
+    public List<MoviesCompletedNotification> getNotificationSlots()
+    {
+        return notificationSlots;
+    }
 }

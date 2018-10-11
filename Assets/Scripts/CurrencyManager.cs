@@ -12,6 +12,12 @@ public class CurrencyManager : Singleton<CurrencyManager> {
     public TextMeshProUGUI currencyOwned;
     public TextMeshProUGUI currencyChange;
 
+    public void setStartCurrency(int curr)
+    {
+        currency = curr;
+        newCurrency = curr;
+        currencyOwned.text = currency.ToString();
+    }
 
     public void UpdateCurrency()
     {
@@ -54,6 +60,7 @@ public class CurrencyManager : Singleton<CurrencyManager> {
             if(timeTicking > timeTaken)
             {
                 timeTicking = timeTaken;
+                currency = newCurrency;
             }
         }
     }

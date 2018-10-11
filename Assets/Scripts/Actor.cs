@@ -32,6 +32,7 @@ public class Actor {
     private string actorName;
     private Sprite actorPicture;
     private float experience;
+    private float maxExperience;
     private ActorState actorState;
     private string[] moviesStarredIn;
     private int incomeValue;
@@ -70,6 +71,12 @@ public class Actor {
         moviesStarredIn = i.moviesActorIn;
         incomeValue = i.incomeVal;
         experience = i.exp;
+        maxExperience = 1000;
+    }
+
+    public float getMaxExperience()
+    {
+        return maxExperience;
     }
 
     public int getIncomeValue()

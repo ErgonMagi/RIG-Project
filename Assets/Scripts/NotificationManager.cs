@@ -50,8 +50,7 @@ public class NotificationManager : Singleton<NotificationManager> {
 	public void addNotification(string text, Actor actor, Movie movie, bool passed, Notification.NotificationType notiType)
     {
         notificationList.Add(new Notification(text, actor, movie, passed, notiType));
-        //notificationBanner.setText("You have " + notificationList.Count + " notifications");
-        notificationBanner.setText(text);
+        notificationBanner.setText(notificationList.Count.ToString());
         notificationBanner.showNotification();
     }
 
