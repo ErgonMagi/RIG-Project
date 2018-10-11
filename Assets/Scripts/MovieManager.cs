@@ -238,6 +238,7 @@ public class MovieManager : Singleton<MovieManager> {
             coinReward = 100,
             price = 20,
             repReward = 100,
+            xpReward = 100,
         };
         Movie tempMovie = new Movie(m);
 

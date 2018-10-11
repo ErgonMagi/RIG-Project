@@ -11,6 +11,7 @@ public class Movie
     private int movieCoinReward;
     private int auditionPrice;
     private int auditionRepReward;
+    private int movieXPReward;
 
     public struct init
     {
@@ -25,6 +26,7 @@ public class Movie
         public int coinReward;
         public int price;
         public int repReward;
+        public int xpReward;
     }
 
 
@@ -39,9 +41,15 @@ public class Movie
         title = i.title;
         moviePicture = i.picture;
 
+        movieXPReward = i.xpReward;
         movieCoinReward = i.coinReward;
         auditionRepReward = i.repReward;
         auditionPrice = i.price;
+    }
+
+    public int getMovieXPReward()
+    {
+        return movieXPReward;
     }
 
     public void setComedy(int com)

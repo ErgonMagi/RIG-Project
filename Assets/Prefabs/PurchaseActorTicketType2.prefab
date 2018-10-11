@@ -245,7 +245,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 21745768881198582, guid: 109b3eb01b609a8418c347be75c6fa43, type: 2}
+  - {fileID: 21188506879824820, guid: 57f6641318aa4c94fa4f643a2b4b9ac0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -279,7 +279,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 21745768881198582, guid: 109b3eb01b609a8418c347be75c6fa43, type: 2}
+  - {fileID: 21188506879824820, guid: 57f6641318aa4c94fa4f643a2b4b9ac0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -313,7 +313,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 21745768881198582, guid: 109b3eb01b609a8418c347be75c6fa43, type: 2}
+  - {fileID: 21188506879824820, guid: 57f6641318aa4c94fa4f643a2b4b9ac0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -412,16 +412,16 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Dion is the worst
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 109b3eb01b609a8418c347be75c6fa43, type: 2}
-  m_sharedMaterial: {fileID: 21745768881198582, guid: 109b3eb01b609a8418c347be75c6fa43,
+  m_fontAsset: {fileID: 11400000, guid: 57f6641318aa4c94fa4f643a2b4b9ac0, type: 2}
+  m_sharedMaterial: {fileID: 21188506879824820, guid: 57f6641318aa4c94fa4f643a2b4b9ac0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281348144
+  m_fontColor: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36.1
+  m_fontSize: 21.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -528,16 +528,16 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 109b3eb01b609a8418c347be75c6fa43, type: 2}
-  m_sharedMaterial: {fileID: 21745768881198582, guid: 109b3eb01b609a8418c347be75c6fa43,
+  m_fontAsset: {fileID: 11400000, guid: 57f6641318aa4c94fa4f643a2b4b9ac0, type: 2}
+  m_sharedMaterial: {fileID: 21188506879824820, guid: 57f6641318aa4c94fa4f643a2b4b9ac0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281348144
+  m_fontColor: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35.3
+  m_fontSize: 28.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -668,16 +668,16 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Dion is the worst
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 109b3eb01b609a8418c347be75c6fa43, type: 2}
-  m_sharedMaterial: {fileID: 21745768881198582, guid: 109b3eb01b609a8418c347be75c6fa43,
+  m_fontAsset: {fileID: 11400000, guid: 57f6641318aa4c94fa4f643a2b4b9ac0, type: 2}
+  m_sharedMaterial: {fileID: 21188506879824820, guid: 57f6641318aa4c94fa4f643a2b4b9ac0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281348144
+  m_fontColor: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36.1
+  m_fontSize: 21.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

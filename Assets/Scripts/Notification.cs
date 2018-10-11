@@ -26,6 +26,7 @@ public class Notification {
         movie = m;
         notificationType = nt;
         isUnread = true;
+        this.passed = passed;
     }
 
     //Returns the notifications text

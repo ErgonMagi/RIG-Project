@@ -12,7 +12,10 @@ public class ConfirmAuditionNotifications : MonoBehaviour {
         List<Notification> auditionResultList = auditionResultNotifications.GetNotifications();
         foreach(Notification n in auditionResultList)
         {
-            repGained += n.getMovie().getAuditionRepReward();
+            if (n.isPassed())
+            {
+                repGained += n.getMovie().getAuditionRepReward();
+            }
         }
         Player.Instance.AddReputation(repGained);
         NotificationManager.Instance.hideNotifications();

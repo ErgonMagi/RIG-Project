@@ -9,14 +9,33 @@ public class Player : Singleton<Player> {
     public List<Actor> clients;
     public TextMeshProUGUI currencyText;
     private int money;
-    private float reputation;
+    private float reputation, maxReputation;
+    private int level;
 
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
         clients = SaveLoad.Instance.getActors();
         money = SaveLoad.Instance.getMoney();
+        reputation = 0;   //Update to load rep
+        maxReputation = 1000f;
 	}
+
+    private void Start()
+    {
+        CurrencyManager.Instance.setStartCurrency(money);
+        ReputationManager.Instance.setStartReputation(reputation, maxReputation);
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
+
+    public void SetLevel(int lvl)
+    {
+        level = lvl;
+    }
 
     public Actor getActor(int actorNum)
     {
@@ -55,6 +74,7 @@ public class Player : Singleton<Player> {
     public void AddReputation(float rep)
     {
         reputation += rep;
+        ReputationManager.Instance.UpdateReputation();
     }
 
     public float GetReputation()

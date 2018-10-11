@@ -78,7 +78,7 @@ public class ActorStatsPage : MonoBehaviour {
         horrorBar.fillAmount = (int)horror / 30f;
         scifiBar.fillAmount = (int)scifi / 30f;
         otherBar.fillAmount = (int)other / 30f;
-        actorNameText.text = actor.getState().ToString();
+        actorNameText.text = actorName;
         comedyVal.text = ((int)comedy).ToString();
         romanceVal.text = ((int)romance).ToString();
         horrorVal.text = ((int)horror).ToString();
