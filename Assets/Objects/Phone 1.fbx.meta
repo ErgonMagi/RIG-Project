@@ -1,89 +1,23 @@
 fileFormatVersion: 2
-guid: 3cf7cccae43e3ac41a25d162efb27840
+guid: 52a869ac89ab3ca4cb01fefc5e5e2f93
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: pCube1
-    100004: pCube2
-    100006: pCube3
-    100008: pCube4
-    100010: pCube5
-    100012: pCube6
-    100014: pCube7
-    100016: polySurface1
-    100018: polySurface2
-    100020: polySurface5
-    100022: polySurface6
-    100024: polySurface7
-    400000: //RootNode
-    400002: pCube1
-    400004: pCube2
-    400006: pCube3
-    400008: pCube4
-    400010: pCube5
-    400012: pCube6
-    400014: pCube7
-    400016: polySurface1
-    400018: polySurface2
-    400020: polySurface5
-    400022: polySurface6
-    400024: polySurface7
-    2100000: Shelf_Plastic
-    2100002: Shelf_Metal
-    2100004: lambert1
-    2100006: Cabinet_Glass
-    2100008: Cabinet_Wood_Brown
+    100000: pCube2
+    100002: pCube3
+    100004: //RootNode
+    400000: pCube2
+    400002: pCube3
+    400004: //RootNode
+    2100000: Phone_plastic
     2300000: pCube2
     2300002: pCube3
-    2300004: pCube4
-    2300006: pCube5
-    2300008: pCube6
-    2300010: pCube7
-    2300012: polySurface1
-    2300014: polySurface2
-    2300016: polySurface5
-    2300018: polySurface6
-    2300020: polySurface7
     3300000: pCube2
     3300002: pCube3
-    3300004: pCube4
-    3300006: pCube5
-    3300008: pCube6
-    3300010: pCube7
-    3300012: polySurface1
-    3300014: polySurface2
-    3300016: polySurface5
-    3300018: polySurface6
-    3300020: polySurface7
-    4300000: polySurface1
-    4300002: polySurface2
-    4300004: polySurface5
-    4300006: polySurface6
-    4300008: polySurface7
-    4300010: pCube2
-    4300012: pCube3
-    4300014: pCube4
-    4300016: pCube5
-    4300018: pCube6
-    4300020: pCube7
+    4300000: pCube2
+    4300002: pCube3
     9500000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cabinet_Glass
-    second: {fileID: 2100000, guid: 74498a7548fec7a44ba2cb9f341ffaef, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Shelf_Metal
-    second: {fileID: 2100000, guid: 59094694af8d7554cbc4adf68a43a11b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Shelf_Plastic
-    second: {fileID: 2100000, guid: f30b5694e272cf64a97a33651f5eb26e, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0

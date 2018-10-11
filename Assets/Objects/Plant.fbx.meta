@@ -56,6 +56,13 @@ ModelImporter:
     100100: pPlane9
     100102: transform1
     100104: transform2
+    100106: polySurface4 1
+    100108: transform3
+    100110: transform4
+    100112: transform5
+    100114: transform6
+    100116: transform7
+    100118: transform8
     400000: pCube1
     400002: pCylinder2
     400004: pCylinder3
@@ -109,6 +116,13 @@ ModelImporter:
     400100: pPlane9
     400102: transform1
     400104: transform2
+    400106: polySurface4 1
+    400108: transform3
+    400110: transform4
+    400112: transform5
+    400114: transform6
+    400116: transform7
+    400118: transform8
     2100000: Plant_Pot
     2100002: Soil
     2100004: Leaf
