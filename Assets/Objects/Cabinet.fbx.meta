@@ -77,6 +77,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Cabinet_Wood_Brown
+    second: {fileID: 2100000, guid: e347c6298376e3a46a7e0bb95eb2a8e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Shelf_Metal
     second: {fileID: 2100000, guid: 59094694af8d7554cbc4adf68a43a11b, type: 2}
   - first:
@@ -84,6 +89,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Shelf_Plastic
     second: {fileID: 2100000, guid: f30b5694e272cf64a97a33651f5eb26e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 3988d0bd515012149a43b6e8f2a9ca6a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
