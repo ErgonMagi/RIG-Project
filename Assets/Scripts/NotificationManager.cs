@@ -52,6 +52,7 @@ public class NotificationManager : Singleton<NotificationManager> {
         notificationList.Add(new Notification(text, actor, movie, passed, notiType));
         notificationBanner.setText(notificationList.Count.ToString());
         notificationBanner.showNotification();
+        UpdateNotificationsUI();
     }
 
     public void UpdateNotificationsUI()
@@ -82,12 +83,6 @@ public class NotificationManager : Singleton<NotificationManager> {
                 auditionNots.Add(notificationList[i]);
             }
         }
-
-        for (int i = 0; i < auditionNots.Count; i++)
-        {
-            notificationList.Remove(auditionNots[i]);
-        }
-
         return auditionNots;
     }
 
@@ -102,13 +97,15 @@ public class NotificationManager : Singleton<NotificationManager> {
                 auditionNots.Add(notificationList[i]);
             }
         }
-
-        for (int i = 0; i < auditionNots.Count; i++)
-        {
-            notificationList.Remove(auditionNots[i]);
-        }
-
         return auditionNots;
+    }
+
+    public void RemoveNotifications(List<Notification> viewedNotifications)
+    {
+        foreach(Notification n in viewedNotifications)
+        {
+            notificationList.Remove(n);
+        }
     }
 
     //Returns the number of unread notifications 

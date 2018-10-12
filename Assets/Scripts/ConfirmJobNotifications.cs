@@ -32,6 +32,7 @@ public class ConfirmJobNotifications : MonoBehaviour {
                     currencyEarned += notificationSlot.getMovie().getAuditionRepReward();
                 }
             }
+            NotificationManager.Instance.RemoveNotifications(movieResultNotifications.GetNotifications());
             Player.Instance.addMoney(currencyEarned);
             StartCoroutine(closeMenuAfterWait(1.5f));
         }

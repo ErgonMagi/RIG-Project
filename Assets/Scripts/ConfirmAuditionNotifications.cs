@@ -20,6 +20,7 @@ public class ConfirmAuditionNotifications : MonoBehaviour {
             }
         }
         Player.Instance.AddReputation(repGained);
+        NotificationManager.Instance.RemoveNotifications(auditionResultList);
         auditionResultNotifications.emptyNotifications();
         if (movieResultNotifications.hasNotifications())
         {
