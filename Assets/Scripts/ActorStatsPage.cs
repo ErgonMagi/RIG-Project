@@ -12,7 +12,9 @@ public class ActorStatsPage : MonoBehaviour {
     public TextMeshProUGUI comedyVal, romanceVal, actionVal, horrorVal, scifiVal, otherVal;
     public TextMeshProUGUI actorNameText, availabilityText;
     public Image actorPictureSprite;
+    public Image XPFill;
     public Image availabilityBubble;
+    public TextMeshProUGUI actorLevel;
     public int actorNum;
 
     public float comedy, action, romance, horror, scifi, other;
@@ -67,6 +69,8 @@ public class ActorStatsPage : MonoBehaviour {
         actorPicture = actor.getPicture();
         this.actor = actor;
 
+        XPFill.fillAmount = actor.getExperience() / actor.getMaxExperience();
+
         updateProfile();
     }
 
@@ -88,6 +92,7 @@ public class ActorStatsPage : MonoBehaviour {
         actorPictureSprite.sprite = actorPicture;
         string[] name = actorName.Split(' ');
         availabilityText.text = actor.getState().ToString();
+        actorLevel.text = "Lv. " + actor.getLevel().ToString();
         if(actor.getState() == Actor.ActorState.available)
         {
             availabilityBubble.color = Color.green;

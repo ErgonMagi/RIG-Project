@@ -5,6 +5,8 @@ using UnityEngine;
 public class ConfirmAuditionNotifications : MonoBehaviour {
 
     public AuditionResultNotifications auditionResultNotifications;
+    public MovieResultNotifications movieResultNotifications;
+    public NotificationMenu notificationMenu;
 
 	public void Clicked()
     {
@@ -18,6 +20,14 @@ public class ConfirmAuditionNotifications : MonoBehaviour {
             }
         }
         Player.Instance.AddReputation(repGained);
-        NotificationManager.Instance.hideNotifications();
+        auditionResultNotifications.emptyNotifications();
+        if (movieResultNotifications.hasNotifications())
+        {
+            notificationMenu.ChangeMenu(true);
+        }
+        else
+        {
+            NotificationManager.Instance.hideNotifications();
+        }
     }
 }

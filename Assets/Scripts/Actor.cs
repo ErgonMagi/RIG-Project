@@ -22,6 +22,7 @@ public class Actor {
         public string[] moviesActorIn;
         public ActorState state;
         public float exp;
+        public int level;
         public int incomeVal;
     };
      
@@ -36,6 +37,7 @@ public class Actor {
     private ActorState actorState;
     private string[] moviesStarredIn;
     private int incomeValue;
+    private int level;
 
 
     public Actor(Init i)
@@ -72,6 +74,7 @@ public class Actor {
         incomeValue = i.incomeVal;
         experience = i.exp;
         maxExperience = 1000;
+        this.level = i.level;
     }
 
     public float getMaxExperience()
@@ -82,6 +85,11 @@ public class Actor {
     public int getIncomeValue()
     {
         return incomeValue;
+    }
+
+    public int getLevel()
+    {
+        return level;
     }
 
     public void toMovie()
@@ -217,6 +225,12 @@ public class Actor {
     public void addExperience(float xp)
     {
         experience += xp;
+        if(experience > maxExperience)
+        {
+            level++;
+            experience -= maxExperience;
+            maxExperience *= 2;
+        }
     }
 
     public string [] getMoviesStarredIn()

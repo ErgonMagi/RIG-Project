@@ -34,6 +34,16 @@ public class AuditionResultNotifications : MonoBehaviour, UIUpdatable {
         }
     }
 
+    public void emptyNotifications()
+    {
+        notifications = new List<Notification>();
+    }
+
+    public bool hasNotifications()
+    {
+        return notifications.Count > 0;
+    }
+
     public List<Notification> GetNotifications()
     {
         return notifications;

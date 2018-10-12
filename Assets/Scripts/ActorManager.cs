@@ -259,6 +259,7 @@ public class ActorManager : Singleton<ActorManager> {
         init.moviesActorIn = moviesList.ToArray();
         System.Random r = new System.Random();
         init.incomeVal = r.Next(5, 15);
+        init.level = 1;
 
         Actor tempActor = new Actor(init);
 

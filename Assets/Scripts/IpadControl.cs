@@ -10,6 +10,7 @@ public class IpadControl : MonoBehaviour, IPointerClickHandler {
     private Collider col;
     public Camera rtCam;
     public Shader shader;
+    public ActorStatsMenu actorStatsMenu;
 
 	// Use this for initialization
 	void Start () 
@@ -28,5 +29,6 @@ public class IpadControl : MonoBehaviour, IPointerClickHandler {
     public void OnPointerClick(PointerEventData pointer)
     {
         gameController.toIpad();
+        actorStatsMenu.UpdateMenu();
     }
 }

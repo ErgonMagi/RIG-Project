@@ -216,6 +216,7 @@ class SerializableActor
         init.exp = experience;
         init.state = actorState;
         init.incomeVal = incomeValue;
+        init.level = 1;
 
         return new Actor(init);
     }
