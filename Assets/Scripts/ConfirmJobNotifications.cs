@@ -27,7 +27,7 @@ public class ConfirmJobNotifications : MonoBehaviour {
                 {
                     a.addExperience((float)m.getMovieXPReward());
 
-                    notificationSlot.getXPFillImage().DOFillAmount(a.getExperience() / a.getMaxExperience(), 1.0f);
+                    notificationSlot.addExperience((float)m.getMovieXPReward());
 
                     currencyEarned += notificationSlot.getMovie().getAuditionRepReward();
                 }

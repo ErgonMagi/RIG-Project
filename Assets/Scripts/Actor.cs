@@ -38,10 +38,12 @@ public class Actor {
     private string[] moviesStarredIn;
     private int incomeValue;
     private int level;
+    private int[] statChange;
 
 
     public Actor(Init i)
     {
+        statChange = new int[] { 0, 0, 0, 0, 0, 0 };
         actorState = i.state;
         comedy = i.com;
         romance = i.rom;
@@ -73,7 +75,7 @@ public class Actor {
         moviesStarredIn = i.moviesActorIn;
         incomeValue = i.incomeVal;
         experience = i.exp;
-        maxExperience = 1000;
+        maxExperience = 100;
         this.level = i.level;
     }
 
@@ -225,9 +227,9 @@ public class Actor {
     public void addExperience(float xp)
     {
         experience += xp;
-        if(experience > maxExperience)
+        if(experience >= maxExperience)
         {
-            level++;
+            levelUp();
             experience -= maxExperience;
             maxExperience *= 2;
         }
@@ -252,12 +254,19 @@ public class Actor {
 
     public void levelUp()
     {
+        level++;
+        statChange = new int []{ (int)(0.25f * baseComedy), (int)(0.25f * baseRomance), (int)(0.25f * baseAction), (int)(0.25f * baseScifi), (int)(0.25f * baseHorror), (int)(0.25f * baseOther) };
         comedy += 0.25f * baseComedy;
         romance += 0.25f * baseRomance;
         action += 0.25f * baseAction;
         scifi += 0.25f * baseScifi;
         horror += 0.25f * baseHorror;
         other += 0.25f * baseOther;
+    }
+
+    public int[] getStatChange()
+    {
+        return statChange;
     }
 
     public ActorState getState()

@@ -20,16 +20,29 @@ public class ReputationManager : Singleton<ReputationManager> {
         repBarFill.fillAmount = reputation / maxRep;
     }
 
-    public void levelUp(float newMaxRep)
+    public IEnumerator levelUp(float newMaxRep)
     {
+        reputation -= maxRep;
+        repBarFill.DOFillAmount(1, 1.0f);
+        yield return new WaitForSeconds(1.0f);
+        //Add level up effect here
+        Player.Instance.SetLevel(Player.Instance.getLevel() + 1);
         reputation = 0;
         maxRep = newMaxRep;
-        Player.Instance.SetLevel(Player.Instance.getLevel() + 1);
+        repBarFill.fillAmount = 0 / maxRep;
+        repBarFill.DOFillAmount(reputation / maxRep, 1.0f);
     }
 
     public void UpdateReputation()
     {
         reputation = Player.Instance.GetReputation();
-        repBarFill.DOFillAmount(reputation / maxRep, 1.0f);
+        if(reputation > maxRep)
+        {
+            StartCoroutine(levelUp(maxRep * 2));
+        }
+        else
+        {
+            repBarFill.DOFillAmount(reputation / maxRep, 1.0f);
+        }
     }
 }
