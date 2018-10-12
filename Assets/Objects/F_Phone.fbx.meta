@@ -1,21 +1,23 @@
 fileFormatVersion: 2
-guid: 52a869ac89ab3ca4cb01fefc5e5e2f93
+guid: 7a102b396f308124b9021b0c30a6c896
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: pCube2
-    100002: pCube3
-    100004: //RootNode
-    400000: pCube2
-    400002: pCube3
-    400004: //RootNode
-    2100000: Phone_plastic
-    2300000: pCube2
-    2300002: pCube3
-    3300000: pCube2
-    3300002: pCube3
-    4300000: pCube2
-    4300002: pCube3
+    100000: //RootNode
+    100002: pCube1
+    100004: pCube2
+    400000: //RootNode
+    400002: pCube1
+    400004: pCube2
+    2100000: Phone_Plastic_Dark
+    2100002: Phone_Plastic_Light
+    2100004: Phone_Screen
+    2300000: pCube1
+    2300002: pCube2
+    3300000: pCube1
+    3300002: pCube2
+    4300000: pCube1
+    4300002: pCube2
     9500000: //RootNode
   externalObjects: {}
   materials:
