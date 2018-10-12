@@ -137,8 +137,11 @@ public class NotificationManager : Singleton<NotificationManager> {
 
     public void showNotifications()
     {
-        //Add code for moving camera to the notifications and opening the ui.
         UpdateNotificationsUI();
+        if(auditionResults.GetNotifications().Count == 0)
+        {
+            notificationMenu.showJobResults();
+        }
         notificationMenu.ShowNotificationMenu();
         returnButton.SetVisbility(false);
         GameController.Instance.lockCamera();

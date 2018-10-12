@@ -106,6 +106,11 @@ public class NotificationMenu : MonoBehaviour {
         }
     }
 
+    public void showJobResults()
+    {
+        myTransform.DOMoveX(menuXPositions[1], 0);
+    }
+
     public void ShowNotificationMenu()
     {
         rightArrow.SetActive(true);
