@@ -16,9 +16,9 @@ public class TitleBackground : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         myTransform.position -= new Vector3(scrollSpeed, 0) * Time.deltaTime;
-        if(myTransform.position.x < -934f)
+        if(myTransform.localPosition.x < -myTransform.rect.width*2)
         {
-            myTransform.position += new Vector3(2 * myTransform.rect.width, 0);
+            myTransform.localPosition += new Vector3(3 * myTransform.rect.width, 0);
         }
 	}
 }
