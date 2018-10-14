@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 533eb91b37077c941ab74e5c22d45d54
-timeCreated: 1523775572
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -103,6 +101,24 @@ ModelImporter:
     100190: pCylinder16
     100192: transform46
     100194: transform47
+    100196: pCube6
+    100198: pCylinder17
+    100200: polySurface30
+    100202: polySurface32
+    100204: polySurface33
+    100206: polySurface34
+    100208: polySurface35
+    100210: polySurface36
+    100212: polySurface37
+    100214: polySurface38
+    100216: polySurface39
+    100218: polySurface40
+    100220: polySurface41
+    100222: polySurface42
+    100224: polySurface43
+    100226: polySurface44
+    100228: polySurface45
+    100230: transform48
     400000: //RootNode
     400002: pCube1
     400004: pCube2
@@ -201,18 +217,88 @@ ModelImporter:
     400190: pCylinder16
     400192: transform46
     400194: transform47
+    400196: pCube6
+    400198: pCylinder17
+    400200: polySurface30
+    400202: polySurface32
+    400204: polySurface33
+    400206: polySurface34
+    400208: polySurface35
+    400210: polySurface36
+    400212: polySurface37
+    400214: polySurface38
+    400216: polySurface39
+    400218: polySurface40
+    400220: polySurface41
+    400222: polySurface42
+    400224: polySurface43
+    400226: polySurface44
+    400228: polySurface45
+    400230: transform48
     2100000: Chair_Seat
     2100002: phong2
     2100004: Pant_Leg_Fabric
+    2100006: Chair_Seat_Fabric
     2300000: pCube5
     2300002: pCylinder15
     2300004: pCylinder16
+    2300006: pCube6
+    2300008: pCylinder17
+    2300010: polySurface30
+    2300012: polySurface32
+    2300014: polySurface33
+    2300016: polySurface34
+    2300018: polySurface35
+    2300020: polySurface36
+    2300022: polySurface37
+    2300024: polySurface38
+    2300026: polySurface39
+    2300028: polySurface40
+    2300030: polySurface41
+    2300032: polySurface42
+    2300034: polySurface43
+    2300036: polySurface44
+    2300038: polySurface45
     3300000: pCube5
     3300002: pCylinder15
     3300004: pCylinder16
+    3300006: pCube6
+    3300008: pCylinder17
+    3300010: polySurface30
+    3300012: polySurface32
+    3300014: polySurface33
+    3300016: polySurface34
+    3300018: polySurface35
+    3300020: polySurface36
+    3300022: polySurface37
+    3300024: polySurface38
+    3300026: polySurface39
+    3300028: polySurface40
+    3300030: polySurface41
+    3300032: polySurface42
+    3300034: polySurface43
+    3300036: polySurface44
+    3300038: polySurface45
     4300000: pCube5
     4300002: pCylinder15
     4300004: pCylinder16
+    4300006: polySurface30
+    4300008: polySurface32
+    4300010: polySurface33
+    4300012: polySurface34
+    4300014: polySurface35
+    4300016: polySurface36
+    4300018: polySurface37
+    4300020: polySurface38
+    4300022: polySurface39
+    4300024: polySurface40
+    4300026: polySurface41
+    4300028: polySurface42
+    4300030: polySurface43
+    4300032: polySurface44
+    4300034: polySurface45
+    4300036: pCube6
+    4300038: pCylinder17
     9500000: //RootNode
   externalObjects:
   - first:
