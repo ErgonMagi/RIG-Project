@@ -68,6 +68,17 @@ public class GameController : Singleton<GameController> {
 
     }
 
+    public void UpdateCameras(Camera main, Camera comp, Camera folder)
+    {
+        deskCam = main;
+        computerCam = comp;
+        fileCam = folder;
+        mainCamStartPos = Camera.main.transform.position;
+        mainCamStartRot = Camera.main.transform.rotation.eulerAngles;
+        compCamPos = new Vector3(-5.85f, 1.343f, -3.447f);
+        compCamRot = new Vector3(0, 90, 0);
+    }
+
     //Moves to computer
     public void toComputer()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 public class NotificationManager : Singleton<NotificationManager> {
 
@@ -22,8 +23,27 @@ public class NotificationManager : Singleton<NotificationManager> {
     public AuditionResultNotifications auditionResults;
     public MovieResultNotifications movieResults;
 
-	// Use this for initialization
-	protected override void Awake () {
+    internal void UpdateReferences(NotificationBanner notiBanner, NotificationMenu notiMenu, ReturnButton retButton, Image quickNoti, TextMeshProUGUI quicknotitext, AuditionResultNotifications audResNots, MovieResultNotifications movResNot)
+    {
+        notificationBanner = notiBanner;
+        notificationMenu = notiMenu;
+        returnButton = retButton;
+        quickNotification = quickNoti;
+        quickNotiText = quicknotitext;
+        auditionResults = audResNots;
+        movieResults = movResNot;
+        notificationList = new List<Notification>();
+        onColor = quickNotification.color;
+        offColor = new Color(onColor.r, onColor.g, onColor.b, 0);
+        quickNotification.color = offColor;
+        onTextColor = quickNotiText.color;
+        offTextColor = new Color(onTextColor.r, onTextColor.g, onTextColor.b, 0);
+        quickNotiText.color = offTextColor;
+        quickNotification.transform.DOLocalMoveY(-1000, 0).SetDelay(2);
+    }
+
+    // Use this for initialization
+    protected override void Awake () {
         base.Awake();
         notificationList = new List<Notification>();
         onColor = quickNotification.color;

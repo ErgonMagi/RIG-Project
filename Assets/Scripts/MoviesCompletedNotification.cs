@@ -40,6 +40,11 @@ public class MoviesCompletedNotification : MonoBehaviour {
         currencyText.text = noti.getMovie().getMovieCoinReward().ToString();
         XPText.text = noti.getMovie().getMovieXPReward().ToString();
         XPFill.fillAmount = actor.getExperience() / actor.getMaxExperience();
+        statSquare.enabled = false;
+        for (int i = 0; i < statsArray.Length; i++)
+        {
+            statsArray[i].text = "";
+        }
 
         textGUI.text = text;
         //movieImage.sprite = movie.getPicture();
@@ -58,7 +63,7 @@ public class MoviesCompletedNotification : MonoBehaviour {
 
     public void addExperience(float xp)
     {
-        if(actor.getExperience() <= xp)
+        if(actor.getExperience() < xp)
         {
             StartCoroutine(levelUp());
         }

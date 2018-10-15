@@ -125,6 +125,12 @@ public class CameraManager : Singleton<CameraManager> {
         lerping = true;
     }
 
+    public void UpdateCamera(Camera newCam)
+    {
+        currentCam = newCam;
+        swapCam = newCam;
+    }
+
     public void swapCams(Camera cam)
     {
         if(cam != currentCam)
