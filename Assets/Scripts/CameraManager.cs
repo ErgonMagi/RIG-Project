@@ -127,8 +127,8 @@ public class CameraManager : Singleton<CameraManager> {
 
     public void UpdateCamera(Camera newCam)
     {
-        currentCam = newCam;
         swapCam = newCam;
+        currentCam = newCam;     
     }
 
     public void swapCams(Camera cam)

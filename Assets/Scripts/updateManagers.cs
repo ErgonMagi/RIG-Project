@@ -6,7 +6,7 @@ using TMPro;
 
 public class updateManagers : MonoBehaviour {
 
-    public Camera main, comp, file;
+    public Camera main, comp, file, lookAtComp;
     public NotificationBanner notiBanner;
     public NotificationMenu notiMenu;
     public ReturnButton retButton;
@@ -17,14 +17,19 @@ public class updateManagers : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        GameController.Instance.UpdateCameras(main, comp, file);
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        GameController.Instance.UpdateCameras(main, comp, file, lookAtComp);
         NotificationManager.Instance.UpdateReferences(notiBanner, notiMenu, retButton, quickNoti, quicknotitext, audResNots, movResNot);
         CameraManager.Instance.UpdateCamera(main);
+    }
+
+    // Update is called once per frame
+    void Update () {
+       
     }
 }

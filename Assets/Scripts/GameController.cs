@@ -16,6 +16,7 @@ public class GameController : Singleton<GameController> {
 
     public Camera deskCam;
     public Camera computerCam;
+    public Camera lookAtCompCam;
     public Camera fileCam;
     public AuditionScreen auditionScreen;
     public Canvas [] DesktopCanvases;
@@ -55,8 +56,8 @@ public class GameController : Singleton<GameController> {
         cam = CameraManager.Instance;
         mainCamStartPos = Camera.main.transform.position;
         mainCamStartRot = Camera.main.transform.rotation.eulerAngles;
-        compCamPos = new Vector3(-5.85f, 1.343f, -3.447f);
-        compCamRot = new Vector3(0, 90, 0);
+        compCamPos = lookAtCompCam.transform.position;
+        compCamRot = lookAtCompCam.transform.rotation.eulerAngles;
 
         compState = Gamestate.mainMenu;
         displayScoreboard = false;
@@ -68,15 +69,15 @@ public class GameController : Singleton<GameController> {
 
     }
 
-    public void UpdateCameras(Camera main, Camera comp, Camera folder)
+    public void UpdateCameras(Camera main, Camera comp, Camera folder, Camera lookAtComp)
     {
         deskCam = main;
         computerCam = comp;
         fileCam = folder;
         mainCamStartPos = Camera.main.transform.position;
         mainCamStartRot = Camera.main.transform.rotation.eulerAngles;
-        compCamPos = new Vector3(-5.85f, 1.343f, -3.447f);
-        compCamRot = new Vector3(0, 90, 0);
+        compCamPos = lookAtCompCam.transform.position;
+        compCamRot = lookAtCompCam.transform.rotation.eulerAngles;
     }
 
     //Moves to computer
