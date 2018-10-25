@@ -51,5 +51,6 @@ public class ConfirmJobNotifications : MonoBehaviour {
         {
             NotificationManager.Instance.hideNotifications();
         }
+        GameController.Instance.RefreshActors();
     }
 }

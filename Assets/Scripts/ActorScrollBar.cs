@@ -35,9 +35,13 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
         myTransform = this.transform;
         objectSpacing = actorPictures[0].GetComponent<RectTransform>().rect.height + scrollbarLayoutGroup.spacing;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    private void OnEnable()
+    {
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
 
         UpdateFocusedObject();
 
@@ -124,18 +128,13 @@ public class ActorScrollBar : MonoBehaviour, UIUpdatable, IPointerDownHandler, I
 
     public void AssignActor(ActorPicture ap)
     {
-        Debug.Log("Assign actor called with " + ap.name);
         for (int i = 0; i < numActiveActors; i++)
         {
             if(actorPictures[i] == ap)
             {
-                Debug.Log("Match");
                 auditionScreen.AssignActorToAudition(i);
             }
-            else
-            {
-                Debug.Log("no match");
-            }
+
         }
     }
 

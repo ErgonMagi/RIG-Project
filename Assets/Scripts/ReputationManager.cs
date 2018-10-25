@@ -3,14 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class ReputationManager : Singleton<ReputationManager> {
 
-    private float reputation;
+    public float reputation;
     private float newRep;
-    private float maxRep;
+    public float maxRep;
 
     public Image repBarFill;
+
+    public void OnEnable()
+    {
+        maxRep = 1000f;
+        SceneManager.sceneLoaded += newScene;
+    }
+
+    public void OnDisable()
+    {
+        SceneManager.sceneLoaded -= newScene;
+    }
+
+    public void newScene(Scene scene, LoadSceneMode mode)
+    {
+        UpdateReputation();
+    }
 
     public void setStartReputation(float rep, float maxRep)
     {
@@ -35,14 +52,16 @@ public class ReputationManager : Singleton<ReputationManager> {
 
     public void UpdateReputation()
     {
+        
         reputation = Player.Instance.GetReputation();
-        if(reputation > maxRep)
+        if (reputation > maxRep)
         {
             StartCoroutine(levelUp(maxRep * 2));
         }
         else
         {
-            repBarFill.DOFillAmount(reputation / maxRep, 1.0f);
+            float fill = (float)reputation / maxRep;
+            repBarFill.DOFillAmount(fill, 1.0f);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Player : Singleton<Player> {
 
@@ -11,6 +12,8 @@ public class Player : Singleton<Player> {
     private int money;
     private float reputation, maxReputation;
     private int level;
+    public delegate void UpdateAction();
+    public static event UpdateAction actorUpdate;
 
 	// Use this for initialization
 	protected override void Awake () {
@@ -85,11 +88,13 @@ public class Player : Singleton<Player> {
     public void setActor(Actor actor, int arrayNum)
     {
         clients.Insert(arrayNum, actor);
+        actorUpdate();
     }
 
     public void addActor(Actor actor)
     {
         clients.Add(actor);
+        actorUpdate();
     }
 
     public List<Actor> getActorsList()
@@ -115,5 +120,6 @@ public class Player : Singleton<Player> {
     public void setActors(List<Actor> actors)
     {
         clients = actors;
+        actorUpdate();
     }
 }

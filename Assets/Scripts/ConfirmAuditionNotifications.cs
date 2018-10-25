@@ -30,5 +30,6 @@ public class ConfirmAuditionNotifications : MonoBehaviour {
         {
             NotificationManager.Instance.hideNotifications();
         }
+        GameController.Instance.RefreshActors();
     }
 }

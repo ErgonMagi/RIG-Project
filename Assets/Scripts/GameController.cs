@@ -269,4 +269,9 @@ public class GameController : Singleton<GameController> {
     {
         playerCanClick = true;
     }
+
+    public void RefreshActors()
+    {
+        auditionScreen.getActors();
+    }
 }

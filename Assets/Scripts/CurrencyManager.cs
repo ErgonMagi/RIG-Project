@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class CurrencyManager : Singleton<CurrencyManager> {
 
@@ -12,11 +13,26 @@ public class CurrencyManager : Singleton<CurrencyManager> {
     public TextMeshProUGUI currencyOwned;
     public TextMeshProUGUI currencyChange;
 
+    public void OnEnable()
+    {
+        SceneManager.sceneLoaded += newScene;
+    }
+
+    public void OnDisable()
+    {
+        SceneManager.sceneLoaded -= newScene;
+    }
+
     public void setStartCurrency(int curr)
     {
         currency = curr;
         newCurrency = curr;
         currencyOwned.text = currency.ToString();
+    }
+
+    public void newScene(Scene scene, LoadSceneMode mode)
+    {
+        UpdateCurrency();
     }
 
     public void UpdateCurrency()

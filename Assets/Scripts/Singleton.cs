@@ -26,7 +26,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         if (instance != null)
         {
-            if(typeof(T) == typeof(GameController) || typeof(T) == typeof(NotificationManager))
+            if(typeof(T) == typeof(GameController) || typeof(T) == typeof(NotificationManager) || typeof(T) == typeof(ReputationManager) || typeof(T) == typeof(CurrencyManager))
             {
                 Destroy(instance.gameObject);
                 Instance = (T)this;

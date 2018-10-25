@@ -14,7 +14,7 @@ public class ComputerScreen : MonoBehaviour, IPointerClickHandler {
     public Camera rtCam;
     public Shader shader;
 
-    private bool unlocked = false;
+    private bool unlocked = true;
 
 	// Use this for initialization
 	void Start () {

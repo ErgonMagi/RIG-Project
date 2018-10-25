@@ -15,13 +15,7 @@ public class updateManagers : MonoBehaviour {
     public AuditionResultNotifications audResNots;
     public MovieResultNotifications movResNot;
 
-
-	// Use this for initialization
-	void Awake () {
-        
-    }
-
-    private void OnLevelWasLoaded(int level)
+    public void Start()
     {
         GameController.Instance.UpdateCameras(main, comp, file, lookAtComp);
         NotificationManager.Instance.UpdateReferences(notiBanner, notiMenu, retButton, quickNoti, quicknotitext, audResNots, movResNot);
